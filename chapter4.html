@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04 - Recursion</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div>
+    <p class="eyebrow">Programming Advanced</p>
+    <h1>04. Recursion</h1>
+    <p class="subtitle">Base case, recursive case en call stack</p>
+  </div>
+</header>
+<nav class="topnav">
+<a href="index.html">Home</a>
+<a href="chapter1.html">01</a>
+<a href="chapter2.html">02</a>
+<a href="chapter3.html">03</a>
+<a class="active" href="chapter4.html">04</a>
+<a href="chapter5.html">05</a>
+<a href="chapter6.html">06</a>
+<a href="chapter7.html">07</a>
+<a href="chapter8.html">08</a>
+<a href="chapter9.html">09</a>
+<a href="chapter10.html">10</a>
+<a href="chapter11.html">11</a>
+<a href="chapter12.html">12</a>
+<a href="chapter13.html">13</a>
+</nav>
+<main class="container">
+  <section class="panel">
+    <h2>Samenvatting</h2>
+    <p>Recursie betekent dat een functie zichzelf aanroept om een kleinere versie van hetzelfde probleem op te lossen.</p>
+<p>Elke recursieve functie moet minstens één base case hebben. Zonder base case blijf je calls opstapelen tot stack overflow.</p>
+<p>Recursie is geen aparte strategie, maar een implementatietechniek die vaak gebruikt wordt bij backtracking, divide &amp; conquer en sommige DP-oplossingen.</p>
+  </section>
+
+  <section class="grid two">
+    <article class="panel">
+      <h2>Wat moet je begrijpen?</h2>
+      <ul><li>Base case: stopconditie.</li>
+<li>Recursive case: roept zichzelf aan met kleiner probleem.</li>
+<li>Call stack: onthoudt actieve functieaanroepen.</li>
+<li>Stack overflow: te veel recursieve calls zonder stop.</li></ul>
+    </article>
+    <article class="panel">
+      <h2>Big O & complexiteit</h2>
+      <ul><li>Factorial recursion: O(n) time, O(n) stack space.</li>
+<li>Naive Fibonacci: O(2^n) time, O(n) stack space.</li>
+<li>Tail of simpele recursion met één call: vaak O(n).</li></ul>
+    </article>
+  </section>
+
+  <section class="panel">
+    <h2>C# voorbeeld</h2>
+    <pre><code>static int Factorial(int n)
+{
+    if (n &lt;= 1) return 1;
+    return n * Factorial(n - 1);
+}</code></pre>
+  </section>
+
+  <section class="panel warning">
+    <h2>Typische valkuilen</h2>
+    <ul><li>Base case vergeten.</li>
+<li>Probleem niet kleiner maken.</li>
+<li>Niet beseffen dat elke call geheugen gebruikt.</li>
+<li>Naïeve Fibonacci als efficiënt beschouwen.</li></ul>
+  </section>
+
+  <section class="panel">
+    <h2>Flashcards</h2>
+    <p>Klik op een kaart om het antwoord te tonen.</p>
+    <div class="flash-grid"><div class="card flashcard" tabindex="0">
+<button class="flash-question">Wat is een base case?</button>
+<div class="flash-answer">De stopconditie van een recursieve functie.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Wat gebeurt er zonder base case?</button>
+<div class="flash-answer">Infinite recursion en uiteindelijk stack overflow.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Is recursie een strategie?</button>
+<div class="flash-answer">Nee, het is een implementatietechniek.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Waarom is naïeve Fibonacci traag?</button>
+<div class="flash-answer">Omdat dezelfde subproblemen telkens opnieuw worden berekend.</div>
+</div></div>
+  </section>
+
+  <section class="panel">
+    <h2>Mini-quiz</h2>
+    <p>Klik op een antwoord. Je krijgt meteen feedback.</p>
+    <div class="quiz"><div class="quiz-question" data-answer="1">
+<p><strong>1. Wat moet elke recursieve functie hebben?</strong></p>
+<button class="quiz-option" data-index="0">Een array</button><button class="quiz-option" data-index="1">Een base case</button><button class="quiz-option" data-index="2">Een dictionary</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="2">
+<p><strong>2. Naive Fibonacci is meestal:</strong></p>
+<button class="quiz-option" data-index="0">O(n)</button><button class="quiz-option" data-index="1">O(log n)</button><button class="quiz-option" data-index="2">O(2^n)</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="1">
+<p><strong>3. De call stack werkt als:</strong></p>
+<button class="quiz-option" data-index="0">FIFO</button><button class="quiz-option" data-index="1">LIFO</button><button class="quiz-option" data-index="2">Random</button>
+<p class="quiz-feedback"></p>
+</div></div>
+  </section>
+
+  <div class="pager">
+    <a href="chapter3.html">← Vorige</a>
+    <a href="chapter5.html">Volgende →</a>
+  </div>
+</main>
+<footer>
+  <p>Gebaseerd op de PA Summary van Stephanie VDH.</p>
+  <p>Eigen Nederlandstalige, examengerichte herwerking voor studiegebruik.</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

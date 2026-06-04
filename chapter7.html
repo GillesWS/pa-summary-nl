@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>07 - Dynamic Programming</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div>
+    <p class="eyebrow">Programming Advanced</p>
+    <h1>07. Dynamic Programming</h1>
+    <p class="subtitle">Memoization, tabulation en overlapping subproblems</p>
+  </div>
+</header>
+<nav class="topnav">
+<a href="index.html">Home</a>
+<a href="chapter1.html">01</a>
+<a href="chapter2.html">02</a>
+<a href="chapter3.html">03</a>
+<a href="chapter4.html">04</a>
+<a href="chapter5.html">05</a>
+<a href="chapter6.html">06</a>
+<a class="active" href="chapter7.html">07</a>
+<a href="chapter8.html">08</a>
+<a href="chapter9.html">09</a>
+<a href="chapter10.html">10</a>
+<a href="chapter11.html">11</a>
+<a href="chapter12.html">12</a>
+<a href="chapter13.html">13</a>
+</nav>
+<main class="container">
+  <section class="panel">
+    <h2>Samenvatting</h2>
+    <p>Dynamic Programming optimaliseert oplossingen door resultaten van subproblemen op te slaan.</p>
+<p>DP gebruik je wanneer dezelfde subproblemen vaker terugkomen en wanneer een optimale oplossing kan worden opgebouwd uit optimale deeloplossingen.</p>
+<p>Memoization werkt top-down met recursie en cache. Tabulation werkt bottom-up met een tabel.</p>
+  </section>
+
+  <section class="grid two">
+    <article class="panel">
+      <h2>Wat moet je begrijpen?</h2>
+      <ul><li>Overlapping subproblems: dezelfde berekening komt terug.</li>
+<li>Optimal substructure: optimale oplossing bestaat uit optimale deeloplossingen.</li>
+<li>Memoization: recursie + cache.</li>
+<li>Tabulation: tabel van klein naar groot invullen.</li></ul>
+    </article>
+    <article class="panel">
+      <h2>Big O & complexiteit</h2>
+      <ul><li>Naive Fibonacci: O(2^n).</li>
+<li>Fibonacci memoization: O(n).</li>
+<li>Fibonacci tabulation: O(n).</li>
+<li>Knapsack DP: O(n * W).</li></ul>
+    </article>
+  </section>
+
+  <section class="panel">
+    <h2>C# voorbeeld</h2>
+    <pre><code>static int FibMemo(int n, int[] memo)
+{
+    if (n &lt;= 1) return n;
+    if (memo[n] != -1) return memo[n];
+
+    memo[n] = FibMemo(n - 1, memo) + FibMemo(n - 2, memo);
+    return memo[n];
+}</code></pre>
+  </section>
+
+  <section class="panel warning">
+    <h2>Typische valkuilen</h2>
+    <ul><li>Cache verkeerd initialiseren.</li>
+<li>DP gebruiken zonder overlappende subproblemen.</li>
+<li>Off-by-one fouten in tabellen.</li>
+<li>Vergeten dat DP vaak extra geheugen kost.</li></ul>
+  </section>
+
+  <section class="panel">
+    <h2>Flashcards</h2>
+    <p>Klik op een kaart om het antwoord te tonen.</p>
+    <div class="flash-grid"><div class="card flashcard" tabindex="0">
+<button class="flash-question">Wanneer gebruik je DP?</button>
+<div class="flash-answer">Bij overlapping subproblems en optimal substructure.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Wat is memoization?</button>
+<div class="flash-answer">Top-down recursie met cache.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Wat is tabulation?</button>
+<div class="flash-answer">Bottom-up tabel invullen.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Waarom is DP sneller dan naïeve recursie?</button>
+<div class="flash-answer">Omdat herhaalde berekeningen worden opgeslagen.</div>
+</div></div>
+  </section>
+
+  <section class="panel">
+    <h2>Mini-quiz</h2>
+    <p>Klik op een antwoord. Je krijgt meteen feedback.</p>
+    <div class="quiz"><div class="quiz-question" data-answer="0">
+<p><strong>1. DP is vooral nuttig bij:</strong></p>
+<button class="quiz-option" data-index="0">Overlapping subproblems</button><button class="quiz-option" data-index="1">Alleen sorted arrays</button><button class="quiz-option" data-index="2">Geen herhaling</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="1">
+<p><strong>2. Memoization is:</strong></p>
+<button class="quiz-option" data-index="0">Bottom-up</button><button class="quiz-option" data-index="1">Top-down</button><button class="quiz-option" data-index="2">Greedy</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="0">
+<p><strong>3. Knapsack DP is typisch:</strong></p>
+<button class="quiz-option" data-index="0">O(n * W)</button><button class="quiz-option" data-index="1">O(1)</button><button class="quiz-option" data-index="2">O(log n)</button>
+<p class="quiz-feedback"></p>
+</div></div>
+  </section>
+
+  <div class="pager">
+    <a href="chapter6.html">← Vorige</a>
+    <a href="chapter8.html">Volgende →</a>
+  </div>
+</main>
+<footer>
+  <p>Gebaseerd op de PA Summary van Stephanie VDH.</p>
+  <p>Eigen Nederlandstalige, examengerichte herwerking voor studiegebruik.</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

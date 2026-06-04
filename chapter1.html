@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01 - Introductie, Searching &amp; Big O</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div>
+    <p class="eyebrow">Programming Advanced</p>
+    <h1>01. Introductie, Searching &amp; Big O</h1>
+    <p class="subtitle">Algoritmes, lineair zoeken, binary search en complexiteit</p>
+  </div>
+</header>
+<nav class="topnav">
+<a href="index.html">Home</a>
+<a class="active" href="chapter1.html">01</a>
+<a href="chapter2.html">02</a>
+<a href="chapter3.html">03</a>
+<a href="chapter4.html">04</a>
+<a href="chapter5.html">05</a>
+<a href="chapter6.html">06</a>
+<a href="chapter7.html">07</a>
+<a href="chapter8.html">08</a>
+<a href="chapter9.html">09</a>
+<a href="chapter10.html">10</a>
+<a href="chapter11.html">11</a>
+<a href="chapter12.html">12</a>
+<a href="chapter13.html">13</a>
+</nav>
+<main class="container">
+  <section class="panel">
+    <h2>Samenvatting</h2>
+    <p>Een algoritme is een concreet stappenplan om een probleem op te lossen. In Programming Advanced is vooral belangrijk dat je niet enkel weet wat een algoritme is, maar dat je kunt uitleggen waarom de ene aanpak beter past dan de andere.</p>
+<p>Searching betekent dat je een waarde zoekt in een verzameling data. Lineair zoeken werkt altijd, maar controleert in het slechtste geval elk element. Binary search is veel sneller, maar mag alleen gebruikt worden wanneer de data gesorteerd is.</p>
+<p>Big O beschrijft hoe de tijd of het geheugengebruik groeit wanneer de input groter wordt. Je laat constanten en lagere termen weg, omdat Big O draait om groeigedrag.</p>
+  </section>
+
+  <section class="grid two">
+    <article class="panel">
+      <h2>Wat moet je begrijpen?</h2>
+      <ul><li>Lineair zoeken: O(n), geen gesorteerde input nodig.</li>
+<li>Binary search: O(log n), vereist gesorteerde input.</li>
+<li>Time complexity: aantal bewerkingen in functie van inputgrootte.</li>
+<li>Space complexity: extra geheugen in functie van inputgrootte.</li>
+<li>Volgorde: O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²) &lt; O(2^n).</li></ul>
+    </article>
+    <article class="panel">
+      <h2>Big O & complexiteit</h2>
+      <ul><li>Array index access: O(1)</li>
+<li>Eén lus over n elementen: O(n)</li>
+<li>Twee geneste lussen: O(n²)</li>
+<li>Telkens halveren: O(log n)</li>
+<li>Sorteren met efficiënte sort: vaak O(n log n)</li></ul>
+    </article>
+  </section>
+
+  <section class="panel">
+    <h2>C# voorbeeld</h2>
+    <pre><code>static int BinarySearch(int[] a, int target)
+{
+    int low = 0;
+    int high = a.Length - 1;
+
+    while (low &lt;= high)
+    {
+        int mid = low + (high - low) / 2;
+
+        if (a[mid] == target) return mid;
+        if (a[mid] &lt; target) low = mid + 1;
+        else high = mid - 1;
+    }
+
+    return -1;
+}</code></pre>
+  </section>
+
+  <section class="panel warning">
+    <h2>Typische valkuilen</h2>
+    <ul><li>Binary search gebruiken op ongesorteerde data.</li>
+<li>O(2n + 5) niet vereenvoudigen naar O(n).</li>
+<li>Exacte runtime verwarren met Big O.</li>
+<li>Best-case en worst-case door elkaar halen.</li></ul>
+  </section>
+
+  <section class="panel">
+    <h2>Flashcards</h2>
+    <p>Klik op een kaart om het antwoord te tonen.</p>
+    <div class="flash-grid"><div class="card flashcard" tabindex="0">
+<button class="flash-question">Wat is de Big O van lineair zoeken?</button>
+<div class="flash-answer">O(n), want je moet mogelijk elk element controleren.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Wanneer mag je binary search gebruiken?</button>
+<div class="flash-answer">Alleen wanneer de data gesorteerd is.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Wat betekent O(1)?</button>
+<div class="flash-answer">Constante tijd: de inputgrootte verandert de runtime niet merkbaar.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Waarom laten we constanten vallen in Big O?</button>
+<div class="flash-answer">Omdat Big O focust op groeigedrag bij grote input.</div>
+</div></div>
+  </section>
+
+  <section class="panel">
+    <h2>Mini-quiz</h2>
+    <p>Klik op een antwoord. Je krijgt meteen feedback.</p>
+    <div class="quiz"><div class="quiz-question" data-answer="1">
+<p><strong>1. Welke zoekmethode vereist gesorteerde data?</strong></p>
+<button class="quiz-option" data-index="0">Lineair zoeken</button><button class="quiz-option" data-index="1">Binary search</button><button class="quiz-option" data-index="2">Random search</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="2">
+<p><strong>2. Wat is de Big O van twee geneste lussen over n?</strong></p>
+<button class="quiz-option" data-index="0">O(n)</button><button class="quiz-option" data-index="1">O(log n)</button><button class="quiz-option" data-index="2">O(n²)</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="1">
+<p><strong>3. Wat is sneller bij grote input?</strong></p>
+<button class="quiz-option" data-index="0">O(n²)</button><button class="quiz-option" data-index="1">O(n)</button><button class="quiz-option" data-index="2">O(2^n)</button>
+<p class="quiz-feedback"></p>
+</div></div>
+  </section>
+
+  <div class="pager">
+    <a href="index.html">← Vorige</a>
+    <a href="chapter2.html">Volgende →</a>
+  </div>
+</main>
+<footer>
+  <p>Gebaseerd op de PA Summary van Stephanie VDH.</p>
+  <p>Eigen Nederlandstalige, examengerichte herwerking voor studiegebruik.</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

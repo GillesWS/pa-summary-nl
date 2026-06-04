@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>11 - Trees</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div>
+    <p class="eyebrow">Programming Advanced</p>
+    <h1>11. Trees</h1>
+    <p class="subtitle">Binary trees, BST en traversals</p>
+  </div>
+</header>
+<nav class="topnav">
+<a href="index.html">Home</a>
+<a href="chapter1.html">01</a>
+<a href="chapter2.html">02</a>
+<a href="chapter3.html">03</a>
+<a href="chapter4.html">04</a>
+<a href="chapter5.html">05</a>
+<a href="chapter6.html">06</a>
+<a href="chapter7.html">07</a>
+<a href="chapter8.html">08</a>
+<a href="chapter9.html">09</a>
+<a href="chapter10.html">10</a>
+<a class="active" href="chapter11.html">11</a>
+<a href="chapter12.html">12</a>
+<a href="chapter13.html">13</a>
+</nav>
+<main class="container">
+  <section class="panel">
+    <h2>Samenvatting</h2>
+    <p>Een tree is een speciale graph zonder cycles, met een hiërarchische structuur vanaf een root.</p>
+<p>Een binary tree heeft maximaal twee kinderen per node. Een binary search tree plaatst kleinere waarden links en grotere waarden rechts.</p>
+<p>Traversals bepalen in welke volgorde je nodes bezoekt: in-order, pre-order, post-order of level-order.</p>
+  </section>
+
+  <section class="grid two">
+    <article class="panel">
+      <h2>Wat moet je begrijpen?</h2>
+      <ul><li>Root: bovenste node.</li>
+<li>Leaf: node zonder kinderen.</li>
+<li>Height: langste pad naar een leaf.</li>
+<li>BST property: links kleiner, rechts groter.</li>
+<li>In-order traversal geeft sorted output bij BST.</li></ul>
+    </article>
+    <article class="panel">
+      <h2>Big O & complexiteit</h2>
+      <ul><li>BST search gemiddeld: O(log n).</li>
+<li>BST search slechtste geval: O(n).</li>
+<li>Traversal van alle nodes: O(n).</li>
+<li>Min/max in BST: O(h), waarbij h de hoogte is.</li></ul>
+    </article>
+  </section>
+
+  <section class="panel">
+    <h2>C# voorbeeld</h2>
+    <pre><code>static void InOrder(Node node)
+{
+    if (node == null) return;
+
+    InOrder(node.Left);
+    Console.WriteLine(node.Value);
+    InOrder(node.Right);
+}</code></pre>
+  </section>
+
+  <section class="panel warning">
+    <h2>Typische valkuilen</h2>
+    <ul><li>Denken dat een BST altijd O(log n) is.</li>
+<li>In-order, pre-order en post-order verwarren.</li>
+<li>Null-checks vergeten.</li>
+<li>Sorted input invoegen waardoor de tree kan degenereren.</li></ul>
+  </section>
+
+  <section class="panel">
+    <h2>Flashcards</h2>
+    <p>Klik op een kaart om het antwoord te tonen.</p>
+    <div class="flash-grid"><div class="card flashcard" tabindex="0">
+<button class="flash-question">Wat geeft in-order bij een BST?</button>
+<div class="flash-answer">Waarden in gesorteerde volgorde.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Wanneer wordt een BST slecht?</button>
+<div class="flash-answer">Bij ongebalanceerde/sorted inserts kan hij lijken op een linked list.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Minimum in BST vind je waar?</button>
+<div class="flash-answer">Helemaal links.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Maximum in BST vind je waar?</button>
+<div class="flash-answer">Helemaal rechts.</div>
+</div></div>
+  </section>
+
+  <section class="panel">
+    <h2>Mini-quiz</h2>
+    <p>Klik op een antwoord. Je krijgt meteen feedback.</p>
+    <div class="quiz"><div class="quiz-question" data-answer="0">
+<p><strong>1. BST property:</strong></p>
+<button class="quiz-option" data-index="0">Links kleiner, rechts groter</button><button class="quiz-option" data-index="1">Links groter, rechts kleiner</button><button class="quiz-option" data-index="2">Alles random</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="1">
+<p><strong>2. In-order is:</strong></p>
+<button class="quiz-option" data-index="0">Root-Left-Right</button><button class="quiz-option" data-index="1">Left-Root-Right</button><button class="quiz-option" data-index="2">Left-Right-Root</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="2">
+<p><strong>3. Worst-case BST search:</strong></p>
+<button class="quiz-option" data-index="0">O(1)</button><button class="quiz-option" data-index="1">O(log n)</button><button class="quiz-option" data-index="2">O(n)</button>
+<p class="quiz-feedback"></p>
+</div></div>
+  </section>
+
+  <div class="pager">
+    <a href="chapter10.html">← Vorige</a>
+    <a href="chapter12.html">Volgende →</a>
+  </div>
+</main>
+<footer>
+  <p>Gebaseerd op de PA Summary van Stephanie VDH.</p>
+  <p>Eigen Nederlandstalige, examengerichte herwerking voor studiegebruik.</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

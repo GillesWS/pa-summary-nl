@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>06 - Backtracking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div>
+    <p class="eyebrow">Programming Advanced</p>
+    <h1>06. Backtracking</h1>
+    <p class="subtitle">Keuzes maken, terugkeren en pruning</p>
+  </div>
+</header>
+<nav class="topnav">
+<a href="index.html">Home</a>
+<a href="chapter1.html">01</a>
+<a href="chapter2.html">02</a>
+<a href="chapter3.html">03</a>
+<a href="chapter4.html">04</a>
+<a href="chapter5.html">05</a>
+<a class="active" href="chapter6.html">06</a>
+<a href="chapter7.html">07</a>
+<a href="chapter8.html">08</a>
+<a href="chapter9.html">09</a>
+<a href="chapter10.html">10</a>
+<a href="chapter11.html">11</a>
+<a href="chapter12.html">12</a>
+<a href="chapter13.html">13</a>
+</nav>
+<main class="container">
+  <section class="panel">
+    <h2>Samenvatting</h2>
+    <p>Backtracking is systematisch proberen: maak een keuze, ga verder, en als het pad niet werkt, ga terug en probeer een andere keuze.</p>
+<p>Het past goed bij constraint problems zoals N-Queens, Sudoku, subsets, combinaties en permutaties.</p>
+<p>Pruning maakt backtracking sterker: je stopt vroeg met paden waarvan je al weet dat ze niet kunnen slagen.</p>
+  </section>
+
+  <section class="grid two">
+    <article class="panel">
+      <h2>Wat moet je begrijpen?</h2>
+      <ul><li>Decision problem: bestaat er een oplossing?</li>
+<li>Optimization problem: wat is de beste oplossing?</li>
+<li>Enumeration problem: geef alle oplossingen.</li>
+<li>Undo-stap: keuze terugdraaien na recursie.</li></ul>
+    </article>
+    <article class="panel">
+      <h2>Big O & complexiteit</h2>
+      <ul><li>Subsets: O(2^n).</li>
+<li>Permutaties: O(n!).</li>
+<li>Backtracking is vaak exponentieel, maar pruning kan de praktijk versnellen.</li></ul>
+    </article>
+  </section>
+
+  <section class="panel">
+    <h2>C# voorbeeld</h2>
+    <pre><code>static void Backtrack(int index, int[] items, List&lt;int&gt; chosen)
+{
+    if (index == items.Length)
+    {
+        Console.WriteLine(string.Join(&quot;,&quot;, chosen));
+        return;
+    }
+
+    chosen.Add(items[index]);
+    Backtrack(index + 1, items, chosen);
+    chosen.RemoveAt(chosen.Count - 1);
+
+    Backtrack(index + 1, items, chosen);
+}</code></pre>
+  </section>
+
+  <section class="panel warning">
+    <h2>Typische valkuilen</h2>
+    <ul><li>Vergeten de keuze ongedaan te maken.</li>
+<li>Visited/state niet resetten.</li>
+<li>Te weinig of foute pruning gebruiken.</li>
+<li>Backtracking verwarren met greedy.</li></ul>
+  </section>
+
+  <section class="panel">
+    <h2>Flashcards</h2>
+    <p>Klik op een kaart om het antwoord te tonen.</p>
+    <div class="flash-grid"><div class="card flashcard" tabindex="0">
+<button class="flash-question">Wat is backtracking?</button>
+<div class="flash-answer">Keuzes proberen, terugkeren bij falen, andere keuze proberen.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Hoeveel subsets zijn er bij n elementen?</button>
+<div class="flash-answer">2^n.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Waarom is recursie handig bij backtracking?</button>
+<div class="flash-answer">De call stack brengt je automatisch terug naar het vorige beslispunt.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Wat is pruning?</button>
+<div class="flash-answer">Onmogelijke of nutteloze paden vroeg stoppen.</div>
+</div></div>
+  </section>
+
+  <section class="panel">
+    <h2>Mini-quiz</h2>
+    <p>Klik op een antwoord. Je krijgt meteen feedback.</p>
+    <div class="quiz"><div class="quiz-question" data-answer="0">
+<p><strong>1. Backtracking past goed bij:</strong></p>
+<button class="quiz-option" data-index="0">Constraint problems</button><button class="quiz-option" data-index="1">Directe array access</button><button class="quiz-option" data-index="2">Alleen sorting</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="2">
+<p><strong>2. Aantal subsets van 4 elementen:</strong></p>
+<button class="quiz-option" data-index="0">4</button><button class="quiz-option" data-index="1">8</button><button class="quiz-option" data-index="2">16</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="0">
+<p><strong>3. Na recursie moet je vaak:</strong></p>
+<button class="quiz-option" data-index="0">Undo doen</button><button class="quiz-option" data-index="1">Sorteren</button><button class="quiz-option" data-index="2">Programma stoppen</button>
+<p class="quiz-feedback"></p>
+</div></div>
+  </section>
+
+  <div class="pager">
+    <a href="chapter5.html">← Vorige</a>
+    <a href="chapter7.html">Volgende →</a>
+  </div>
+</main>
+<footer>
+  <p>Gebaseerd op de PA Summary van Stephanie VDH.</p>
+  <p>Eigen Nederlandstalige, examengerichte herwerking voor studiegebruik.</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

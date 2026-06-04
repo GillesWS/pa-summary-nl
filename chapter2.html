@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02 - Sorting Algorithms</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div>
+    <p class="eyebrow">Programming Advanced</p>
+    <h1>02. Sorting Algorithms</h1>
+    <p class="subtitle">Bubble sort, selection sort, insertion sort en pruning</p>
+  </div>
+</header>
+<nav class="topnav">
+<a href="index.html">Home</a>
+<a href="chapter1.html">01</a>
+<a class="active" href="chapter2.html">02</a>
+<a href="chapter3.html">03</a>
+<a href="chapter4.html">04</a>
+<a href="chapter5.html">05</a>
+<a href="chapter6.html">06</a>
+<a href="chapter7.html">07</a>
+<a href="chapter8.html">08</a>
+<a href="chapter9.html">09</a>
+<a href="chapter10.html">10</a>
+<a href="chapter11.html">11</a>
+<a href="chapter12.html">12</a>
+<a href="chapter13.html">13</a>
+</nav>
+<main class="container">
+  <section class="panel">
+    <h2>Samenvatting</h2>
+    <p>Sorting betekent dat je data ordent, bijvoorbeeld van klein naar groot. Dat maakt zoeken, analyseren en verdere algoritmes vaak eenvoudiger.</p>
+<p>Bubble sort vergelijkt buren en wisselt ze om. Selection sort zoekt telkens het minimum. Insertion sort bouwt een gesorteerd deel op en voegt elk nieuw element op de juiste plaats in.</p>
+<p>Pruning betekent dat je onnodig werk stopt. Bij bubble sort kan een flag detecteren dat er geen swaps meer gebeuren, waardoor een gesorteerde lijst sneller klaar is.</p>
+  </section>
+
+  <section class="grid two">
+    <article class="panel">
+      <h2>Wat moet je begrijpen?</h2>
+      <ul><li>Bubble sort: adjacent swaps, O(n²) worst-case, O(n) best-case met flag.</li>
+<li>Selection sort: zoekt telkens minimum, altijd O(n²).</li>
+<li>Insertion sort: goed bij bijna gesorteerde data, O(n) best-case.</li>
+<li>Stable sorting: gelijke elementen behouden hun onderlinge volgorde.</li>
+<li>In-place sorting: gebruikt weinig extra geheugen.</li></ul>
+    </article>
+    <article class="panel">
+      <h2>Big O & complexiteit</h2>
+      <ul><li>Bubble sort: O(n²) worst/average, O(n) best met flag.</li>
+<li>Selection sort: altijd O(n²).</li>
+<li>Insertion sort: O(n²) worst, O(n) best.</li>
+<li>Space voor deze drie simpele sorts: O(1).</li></ul>
+    </article>
+  </section>
+
+  <section class="panel">
+    <h2>C# voorbeeld</h2>
+    <pre><code>static void InsertionSort(int[] a)
+{
+    for (int i = 1; i &lt; a.Length; i++)
+    {
+        int key = a[i];
+        int j = i - 1;
+
+        while (j &gt;= 0 &amp;&amp; a[j] &gt; key)
+        {
+            a[j + 1] = a[j];
+            j--;
+        }
+
+        a[j + 1] = key;
+    }
+}</code></pre>
+  </section>
+
+  <section class="panel warning">
+    <h2>Typische valkuilen</h2>
+    <ul><li>Selection sort als slim of adaptief beschouwen; dat is het niet.</li>
+<li>Vergeten dat insertion sort zeer goed kan zijn bij bijna gesorteerde data.</li>
+<li>De flag bij bubble sort verkeerd initialiseren.</li>
+<li>Stable en in-place verwarren.</li></ul>
+  </section>
+
+  <section class="panel">
+    <h2>Flashcards</h2>
+    <p>Klik op een kaart om het antwoord te tonen.</p>
+    <div class="flash-grid"><div class="card flashcard" tabindex="0">
+<button class="flash-question">Welke simpele sort is het meest adaptief?</button>
+<div class="flash-answer">Insertion sort.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Waarom is selection sort altijd traag?</button>
+<div class="flash-answer">Omdat het telkens het resterende deel blijft scannen.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Wat doet een bubble-sort flag?</button>
+<div class="flash-answer">Detecteren of er nog swaps gebeurden; zo niet, stoppen.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Wat is pruning?</button>
+<div class="flash-answer">Onnodig werk vermijden of vroeg stoppen.</div>
+</div></div>
+  </section>
+
+  <section class="panel">
+    <h2>Mini-quiz</h2>
+    <p>Klik op een antwoord. Je krijgt meteen feedback.</p>
+    <div class="quiz"><div class="quiz-question" data-answer="1">
+<p><strong>1. Welke sort heeft best-case O(n)?</strong></p>
+<button class="quiz-option" data-index="0">Selection sort</button><button class="quiz-option" data-index="1">Insertion sort</button><button class="quiz-option" data-index="2">Bogo sort</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="1">
+<p><strong>2. Welke sort zoekt telkens het minimum?</strong></p>
+<button class="quiz-option" data-index="0">Bubble</button><button class="quiz-option" data-index="1">Selection</button><button class="quiz-option" data-index="2">Insertion</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="1">
+<p><strong>3. Wat is pruning?</strong></p>
+<button class="quiz-option" data-index="0">Duplicaten verwijderen</button><button class="quiz-option" data-index="1">Onnodig werk overslaan</button><button class="quiz-option" data-index="2">Array kopiëren</button>
+<p class="quiz-feedback"></p>
+</div></div>
+  </section>
+
+  <div class="pager">
+    <a href="chapter1.html">← Vorige</a>
+    <a href="chapter3.html">Volgende →</a>
+  </div>
+</main>
+<footer>
+  <p>Gebaseerd op de PA Summary van Stephanie VDH.</p>
+  <p>Eigen Nederlandstalige, examengerichte herwerking voor studiegebruik.</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

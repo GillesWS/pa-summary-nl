@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10 - Greedy Algorithms</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div>
+    <p class="eyebrow">Programming Advanced</p>
+    <h1>10. Greedy Algorithms</h1>
+    <p class="subtitle">Lokale keuzes en global optimum</p>
+  </div>
+</header>
+<nav class="topnav">
+<a href="index.html">Home</a>
+<a href="chapter1.html">01</a>
+<a href="chapter2.html">02</a>
+<a href="chapter3.html">03</a>
+<a href="chapter4.html">04</a>
+<a href="chapter5.html">05</a>
+<a href="chapter6.html">06</a>
+<a href="chapter7.html">07</a>
+<a href="chapter8.html">08</a>
+<a href="chapter9.html">09</a>
+<a class="active" href="chapter10.html">10</a>
+<a href="chapter11.html">11</a>
+<a href="chapter12.html">12</a>
+<a href="chapter13.html">13</a>
+</nav>
+<main class="container">
+  <section class="panel">
+    <h2>Samenvatting</h2>
+    <p>Greedy bouwt een oplossing stap voor stap en kiest telkens wat op dat moment het beste lijkt.</p>
+<p>Greedy is snel en eenvoudig, maar werkt alleen optimaal als de greedy choice property geldig is.</p>
+<p>Activity selection is een klassiek voorbeeld waar greedy werkt: sorteer op eindtijd en kies telkens de activiteit die het vroegst eindigt.</p>
+  </section>
+
+  <section class="grid two">
+    <article class="panel">
+      <h2>Wat moet je begrijpen?</h2>
+      <ul><li>Local optimum: beste keuze nu.</li>
+<li>Global optimum: beste totale oplossing.</li>
+<li>Greedy choice property: lokale keuze kan deel zijn van optimale oplossing.</li>
+<li>Optimal substructure: optimale oplossing bestaat uit optimale deeloplossingen.</li></ul>
+    </article>
+    <article class="panel">
+      <h2>Big O & complexiteit</h2>
+      <ul><li>Vaak O(n log n) door sorteren.</li>
+<li>Na sorteren vaak O(n) voor selectie.</li>
+<li>Greedy gebruikt vaak weinig extra geheugen: O(1) of O(n) afhankelijk van output.</li></ul>
+    </article>
+  </section>
+
+  <section class="panel">
+    <h2>C# voorbeeld</h2>
+    <pre><code>// Activity selection idee:
+activities.Sort((a, b) =&gt; a.End.CompareTo(b.End));
+
+int lastEnd = int.MinValue;
+foreach (var act in activities)
+{
+    if (act.Start &gt;= lastEnd)
+    {
+        Console.WriteLine(act.Name);
+        lastEnd = act.End;
+    }
+}</code></pre>
+  </section>
+
+  <section class="panel warning">
+    <h2>Typische valkuilen</h2>
+    <ul><li>Aannemen dat greedy altijd optimaal is.</li>
+<li>Verkeerd sorteercriterium kiezen.</li>
+<li>Greedy gebruiken bij 0/1 knapsack en denken dat het altijd optimaal is.</li>
+<li>Geen tegenvoorbeeld kunnen geven.</li></ul>
+  </section>
+
+  <section class="panel">
+    <h2>Flashcards</h2>
+    <p>Klik op een kaart om het antwoord te tonen.</p>
+    <div class="flash-grid"><div class="card flashcard" tabindex="0">
+<button class="flash-question">Wat doet greedy?</button>
+<div class="flash-answer">Telkens de lokaal beste keuze maken.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Wanneer werkt greedy betrouwbaar?</button>
+<div class="flash-answer">Als de greedy choice property geldt.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Voorbeeld waar greedy kan falen?</button>
+<div class="flash-answer">Coin change met munten [4,3,1] en target 6.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Waarom activity selection sorteren op eindtijd?</button>
+<div class="flash-answer">Zo hou je maximaal ruimte over voor volgende activiteiten.</div>
+</div></div>
+  </section>
+
+  <section class="panel">
+    <h2>Mini-quiz</h2>
+    <p>Klik op een antwoord. Je krijgt meteen feedback.</p>
+    <div class="quiz"><div class="quiz-question" data-answer="1">
+<p><strong>1. Greedy kiest telkens:</strong></p>
+<button class="quiz-option" data-index="0">Alle combinaties</button><button class="quiz-option" data-index="1">De lokaal beste keuze</button><button class="quiz-option" data-index="2">Altijd de kleinste index</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="1">
+<p><strong>2. Activity selection sorteer je op:</strong></p>
+<button class="quiz-option" data-index="0">Starttijd</button><button class="quiz-option" data-index="1">Eindtijd</button><button class="quiz-option" data-index="2">Naam</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="1">
+<p><strong>3. Greedy is:</strong></p>
+<button class="quiz-option" data-index="0">Altijd optimaal</button><button class="quiz-option" data-index="1">Snel maar niet altijd optimaal</button><button class="quiz-option" data-index="2">Altijd exponentieel</button>
+<p class="quiz-feedback"></p>
+</div></div>
+  </section>
+
+  <div class="pager">
+    <a href="chapter9.html">← Vorige</a>
+    <a href="chapter11.html">Volgende →</a>
+  </div>
+</main>
+<footer>
+  <p>Gebaseerd op de PA Summary van Stephanie VDH.</p>
+  <p>Eigen Nederlandstalige, examengerichte herwerking voor studiegebruik.</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

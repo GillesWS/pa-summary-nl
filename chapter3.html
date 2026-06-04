@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03 - Data Structures</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div>
+    <p class="eyebrow">Programming Advanced</p>
+    <h1>03. Data Structures</h1>
+    <p class="subtitle">Arrays, linked lists, stacks en queues</p>
+  </div>
+</header>
+<nav class="topnav">
+<a href="index.html">Home</a>
+<a href="chapter1.html">01</a>
+<a href="chapter2.html">02</a>
+<a class="active" href="chapter3.html">03</a>
+<a href="chapter4.html">04</a>
+<a href="chapter5.html">05</a>
+<a href="chapter6.html">06</a>
+<a href="chapter7.html">07</a>
+<a href="chapter8.html">08</a>
+<a href="chapter9.html">09</a>
+<a href="chapter10.html">10</a>
+<a href="chapter11.html">11</a>
+<a href="chapter12.html">12</a>
+<a href="chapter13.html">13</a>
+</nav>
+<main class="container">
+  <section class="panel">
+    <h2>Samenvatting</h2>
+    <p>Een datastructuur bepaalt hoe data wordt opgeslagen en hoe snel je bepaalde operaties kunt uitvoeren.</p>
+<p>Arrays zijn sterk voor snelle index-access. Linked lists zijn flexibeler voor invoegen en verwijderen wanneer je de juiste node hebt. Stacks gebruiken LIFO, queues gebruiken FIFO.</p>
+<p>De juiste datastructuur kiezen is vaak belangrijker dan achteraf proberen je code sneller te maken.</p>
+  </section>
+
+  <section class="grid two">
+    <article class="panel">
+      <h2>Wat moet je begrijpen?</h2>
+      <ul><li>Array: vaste/contigue opslag, access O(1), search O(n).</li>
+<li>Linked list: nodes met verwijzingen, access/search O(n).</li>
+<li>Stack: Last In First Out, handig voor undo, recursion en DFS.</li>
+<li>Queue: First In First Out, handig voor BFS en wachtrijen.</li></ul>
+    </article>
+    <article class="panel">
+      <h2>Big O & complexiteit</h2>
+      <ul><li>Array access: O(1)</li>
+<li>Array search: O(n)</li>
+<li>Linked list access/search: O(n)</li>
+<li>Stack push/pop: O(1)</li>
+<li>Queue enqueue/dequeue: O(1)</li></ul>
+    </article>
+  </section>
+
+  <section class="panel">
+    <h2>C# voorbeeld</h2>
+    <pre><code>var stack = new Stack&lt;string&gt;();
+stack.Push(&quot;eerste&quot;);
+stack.Push(&quot;tweede&quot;);
+Console.WriteLine(stack.Pop()); // tweede
+
+var queue = new Queue&lt;string&gt;();
+queue.Enqueue(&quot;eerste&quot;);
+queue.Enqueue(&quot;tweede&quot;);
+Console.WriteLine(queue.Dequeue()); // eerste</code></pre>
+  </section>
+
+  <section class="panel warning">
+    <h2>Typische valkuilen</h2>
+    <ul><li>Stack en queue verwarren.</li>
+<li>Denken dat linked lists altijd sneller zijn.</li>
+<li>O(1) insert/delete claimen zonder dat je de node al hebt.</li>
+<li>Array insert/delete vergeten dat shifting nodig kan zijn.</li></ul>
+  </section>
+
+  <section class="panel">
+    <h2>Flashcards</h2>
+    <p>Klik op een kaart om het antwoord te tonen.</p>
+    <div class="flash-grid"><div class="card flashcard" tabindex="0">
+<button class="flash-question">Waarvoor staat LIFO?</button>
+<div class="flash-answer">Last In, First Out: stack.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Waarvoor staat FIFO?</button>
+<div class="flash-answer">First In, First Out: queue.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Welke structuur gebruik je voor BFS?</button>
+<div class="flash-answer">Queue.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Welke structuur past bij undo?</button>
+<div class="flash-answer">Stack.</div>
+</div></div>
+  </section>
+
+  <section class="panel">
+    <h2>Mini-quiz</h2>
+    <p>Klik op een antwoord. Je krijgt meteen feedback.</p>
+    <div class="quiz"><div class="quiz-question" data-answer="1">
+<p><strong>1. Welke datastructuur gebruikt LIFO?</strong></p>
+<button class="quiz-option" data-index="0">Queue</button><button class="quiz-option" data-index="1">Stack</button><button class="quiz-option" data-index="2">Array</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="0">
+<p><strong>2. Array index-access is meestal:</strong></p>
+<button class="quiz-option" data-index="0">O(1)</button><button class="quiz-option" data-index="1">O(n)</button><button class="quiz-option" data-index="2">O(log n)</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="0">
+<p><strong>3. Welke structuur past best bij BFS?</strong></p>
+<button class="quiz-option" data-index="0">Queue</button><button class="quiz-option" data-index="1">Stack</button><button class="quiz-option" data-index="2">BST</button>
+<p class="quiz-feedback"></p>
+</div></div>
+  </section>
+
+  <div class="pager">
+    <a href="chapter2.html">← Vorige</a>
+    <a href="chapter4.html">Volgende →</a>
+  </div>
+</main>
+<footer>
+  <p>Gebaseerd op de PA Summary van Stephanie VDH.</p>
+  <p>Eigen Nederlandstalige, examengerichte herwerking voor studiegebruik.</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>

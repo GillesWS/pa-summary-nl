@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>05 - Divide &amp; Conquer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div>
+    <p class="eyebrow">Programming Advanced</p>
+    <h1>05. Divide &amp; Conquer</h1>
+    <p class="subtitle">Divide, conquer, combine</p>
+  </div>
+</header>
+<nav class="topnav">
+<a href="index.html">Home</a>
+<a href="chapter1.html">01</a>
+<a href="chapter2.html">02</a>
+<a href="chapter3.html">03</a>
+<a href="chapter4.html">04</a>
+<a class="active" href="chapter5.html">05</a>
+<a href="chapter6.html">06</a>
+<a href="chapter7.html">07</a>
+<a href="chapter8.html">08</a>
+<a href="chapter9.html">09</a>
+<a href="chapter10.html">10</a>
+<a href="chapter11.html">11</a>
+<a href="chapter12.html">12</a>
+<a href="chapter13.html">13</a>
+</nav>
+<main class="container">
+  <section class="panel">
+    <h2>Samenvatting</h2>
+    <p>Divide &amp; Conquer splitst een probleem in kleinere gelijkaardige subproblemen, lost die apart op en combineert de resultaten.</p>
+<p>Bekende voorbeelden zijn binary search, merge sort, quick sort en Tower of Hanoi.</p>
+<p>Het verschil met gewone recursie is dat divide &amp; conquer vaak meerdere recursieve calls maakt en daarna resultaten samenbrengt.</p>
+  </section>
+
+  <section class="grid two">
+    <article class="panel">
+      <h2>Wat moet je begrijpen?</h2>
+      <ul><li>Divide: splits het probleem.</li>
+<li>Conquer: los subproblemen op.</li>
+<li>Combine: voeg resultaten samen.</li>
+<li>Quicksort doet partitionering vóór recursie; merge sort combineert na recursie.</li></ul>
+    </article>
+    <article class="panel">
+      <h2>Big O & complexiteit</h2>
+      <ul><li>Binary search: O(log n).</li>
+<li>Merge sort: O(n log n).</li>
+<li>Quicksort gemiddeld O(n log n), worst-case O(n²).</li>
+<li>Tower of Hanoi: O(2^n).</li></ul>
+    </article>
+  </section>
+
+  <section class="panel">
+    <h2>C# voorbeeld</h2>
+    <pre><code>static int SumDivide(int[] a, int left, int right)
+{
+    if (left &gt; right) return 0;
+    if (left == right) return a[left];
+
+    int mid = (left + right) / 2;
+    return SumDivide(a, left, mid) + SumDivide(a, mid + 1, right);
+}</code></pre>
+  </section>
+
+  <section class="panel warning">
+    <h2>Typische valkuilen</h2>
+    <ul><li>Combine-stap vergeten.</li>
+<li>D&amp;C gebruiken terwijl subproblemen sterk overlappen; dan is DP vaak beter.</li>
+<li>Geen duidelijke base case hebben.</li>
+<li>Quicksort altijd O(n log n) noemen zonder worst-case te vermelden.</li></ul>
+  </section>
+
+  <section class="panel">
+    <h2>Flashcards</h2>
+    <p>Klik op een kaart om het antwoord te tonen.</p>
+    <div class="flash-grid"><div class="card flashcard" tabindex="0">
+<button class="flash-question">Wat zijn de drie stappen van D&amp;C?</button>
+<div class="flash-answer">Divide, Conquer, Combine.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Welke search is D&amp;C?</button>
+<div class="flash-answer">Binary search.</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Wat is average Big O van quicksort?</button>
+<div class="flash-answer">O(n log n).</div>
+</div>
+<div class="card flashcard" tabindex="0">
+<button class="flash-question">Wanneer eerder DP dan D&amp;C?</button>
+<div class="flash-answer">Wanneer dezelfde subproblemen terugkomen.</div>
+</div></div>
+  </section>
+
+  <section class="panel">
+    <h2>Mini-quiz</h2>
+    <p>Klik op een antwoord. Je krijgt meteen feedback.</p>
+    <div class="quiz"><div class="quiz-question" data-answer="0">
+<p><strong>1. Welke hoort bij D&amp;C?</strong></p>
+<button class="quiz-option" data-index="0">Binary search</button><button class="quiz-option" data-index="1">Linear search</button><button class="quiz-option" data-index="2">Queue</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="1">
+<p><strong>2. Merge sort heeft typisch:</strong></p>
+<button class="quiz-option" data-index="0">O(n²)</button><button class="quiz-option" data-index="1">O(n log n)</button><button class="quiz-option" data-index="2">O(1)</button>
+<p class="quiz-feedback"></p>
+</div>
+<div class="quiz-question" data-answer="1">
+<p><strong>3. D&amp;C splitst problemen in:</strong></p>
+<button class="quiz-option" data-index="0">Grotere problemen</button><button class="quiz-option" data-index="1">Gelijkaardige subproblemen</button><button class="quiz-option" data-index="2">Willekeurige strings</button>
+<p class="quiz-feedback"></p>
+</div></div>
+  </section>
+
+  <div class="pager">
+    <a href="chapter4.html">← Vorige</a>
+    <a href="chapter6.html">Volgende →</a>
+  </div>
+</main>
+<footer>
+  <p>Gebaseerd op de PA Summary van Stephanie VDH.</p>
+  <p>Eigen Nederlandstalige, examengerichte herwerking voor studiegebruik.</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
