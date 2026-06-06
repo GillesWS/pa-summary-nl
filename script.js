@@ -1,33 +1,39 @@
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.flashcard').forEach(card => {
-    card.addEventListener('click', () => card.classList.toggle('open'));
-    card.addEventListener('keypress', event => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        card.classList.toggle('open');
-      }
-    });
+
+
+// ===== Mobile hamburger navigation =====
+document.addEventListener('DOMContentLoaded', function () {
+  const toggle = document.querySelector('.mobile-menu-toggle');
+  if (!toggle) return;
+
+  let backdrop = document.querySelector('.mobile-menu-backdrop');
+  if (!backdrop) {
+    backdrop = document.createElement('div');
+    backdrop.className = 'mobile-menu-backdrop';
+    document.body.appendChild(backdrop);
+  }
+
+  function setMenu(open) {
+    document.body.classList.toggle('mobile-menu-open', open);
+    toggle.classList.toggle('is-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    toggle.setAttribute('aria-label', open ? 'Menu sluiten' : 'Menu openen');
+  }
+
+  toggle.addEventListener('click', function () {
+    setMenu(!document.body.classList.contains('mobile-menu-open'));
   });
 
-  document.querySelectorAll('.quiz-question').forEach(question => {
-    const answer = Number(question.dataset.answer);
-    const feedback = question.querySelector('.quiz-feedback');
-    question.querySelectorAll('.quiz-option').forEach(button => {
-      button.addEventListener('click', () => {
-        question.querySelectorAll('.quiz-option').forEach(b => {
-          b.classList.remove('correct', 'wrong');
-          if (Number(b.dataset.index) === answer) b.classList.add('correct');
-        });
+  backdrop.addEventListener('click', function () {
+    setMenu(false);
+  });
 
-        if (Number(button.dataset.index) === answer) {
-          feedback.textContent = 'Correct!';
-          feedback.style.color = '#34d399';
-        } else {
-          button.classList.add('wrong');
-          feedback.textContent = 'Niet juist. Kijk naar het groene antwoord en herhaal de redenering.';
-          feedback.style.color = '#fb7185';
-        }
-      });
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') setMenu(false);
+  });
+
+  document.querySelectorAll('nav a, .navbar a, .navigation a, .chapters-nav a, .chapter-nav a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      setMenu(false);
     });
   });
 });
