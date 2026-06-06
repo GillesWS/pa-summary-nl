@@ -271,6 +271,32 @@
                 padding: 1rem;
             }
         }
+    
+
+        /* Mobiele indexverbeteringen */
+        @media (max-width: 768px) {
+            header {
+                margin-bottom: 1.5rem;
+            }
+
+            .chapter-tile {
+                border-radius: 16px;
+            }
+
+            .chapter-number {
+                padding: 1.25rem;
+                font-size: 2.1rem;
+            }
+
+            .chapter-info {
+                padding: 1rem;
+            }
+
+            .chapter-title {
+                font-size: 1.1rem;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -395,21 +421,24 @@
             const percentage = Math.round((completedCount / totalChapters) * 100);
 
             // Update UI
-            document.getElementById('completed-count').textContent = completedCount;
-            document.getElementById('progress-bar').style.width = percentage + '%';
-            document.getElementById('progress-percentage').textContent = percentage + '%';
+            const completedCountEl = document.getElementById('completed-count');
+            const progressBarEl = document.getElementById('progress-bar');
+            const progressPercentageEl = document.getElementById('progress-percentage');
+            const messageEl = document.getElementById('progress-message');
+            if (completedCountEl) completedCountEl.textContent = completedCount;
+            if (progressBarEl) progressBarEl.style.width = percentage + '%';
+            if (progressPercentageEl) progressPercentageEl.textContent = percentage + '%';
 
             // Update message based on progress
-            const messageEl = document.getElementById('progress-message');
-            if (completedCount === 0) {
+            if (messageEl && completedCount === 0) {
                 messageEl.textContent = 'Start je leertraject door het eerste hoofdstuk te bekijken!';
-            } else if (completedCount < 5) {
+            } else if (messageEl && completedCount < 5) {
                 messageEl.textContent = 'Goede start! Doe zo verder! 💪';
-            } else if (completedCount < 10) {
+            } else if (messageEl && completedCount < 10) {
                 messageEl.textContent = 'Je maakt uitstekende vooruitgang! 🚀';
-            } else if (completedCount < 13) {
+            } else if (messageEl && completedCount < 13) {
                 messageEl.textContent = 'Bijna klaar! Nog maar een paar hoofdstukken! 🎯';
-            } else {
+            } else if (messageEl) {
                 messageEl.textContent = 'Proficiat! Je hebt alle hoofdstukken voltooid! 🎉';
             }
 

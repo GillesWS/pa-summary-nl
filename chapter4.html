@@ -112,15 +112,182 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 768px) { .summary-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
+    
+
+        /* Mobielvriendelijke navigatie */
+        .menu-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.18);
+            color: white;
+            font-size: 1.6rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .menu-toggle:hover,
+        .menu-toggle:focus-visible {
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+        }
+
+        .mobile-menu {
+            display: none;
+            max-width: 1400px;
+            margin: 1rem auto 0;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+            overflow: hidden;
+        }
+
+        .mobile-menu.open {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.25rem;
+            padding: 0.75rem;
+            animation: slideDown 0.2s ease;
+        }
+
+        .mobile-menu a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0.9rem 1rem;
+            border-radius: 10px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .mobile-menu a:hover,
+        .mobile-menu a:focus-visible,
+        .mobile-menu a.current {
+            background: #eef5ff;
+            outline: none;
+        }
+
+        .mobile-menu a.current {
+            color: var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.8rem 1rem;
+            }
+
+            .navbar-content {
+                gap: 0.75rem;
+            }
+
+            .chapter-header {
+                font-size: 1rem !important;
+                line-height: 1.25;
+                max-width: calc(100vw - 90px);
+            }
+
+            .back-button {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: inline-flex;
+                flex: 0 0 auto;
+            }
+
+            .mobile-menu.open {
+                grid-template-columns: 1fr;
+                max-height: calc(100vh - 82px);
+                overflow-y: auto;
+            }
+
+            .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem;
+            }
+
+            .summary-card,
+            .quiz-section,
+            .quiz-question {
+                padding: 1rem !important;
+            }
+
+            .section-tabs {
+                top: 68px !important;
+                overflow-x: auto;
+                flex-wrap: nowrap !important;
+                gap: 0.4rem !important;
+                padding: 0.55rem 0.25rem !important;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+            }
+
+            .section-tab {
+                flex: 0 0 auto;
+                white-space: nowrap;
+                padding: 0.7rem 0.85rem !important;
+                font-size: 0.8rem !important;
+                letter-spacing: 0 !important;
+            }
+
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .code-block {
+                font-size: 0.78rem !important;
+                overflow-x: auto;
+            }
+
+            .option-label {
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .option-label input[type="radio"] {
+                flex: 0 0 auto;
+                margin-top: 0.2rem;
+            }
+        }
+
     </style>
 </head>
 <body>
 <nav class="navbar">
-<div class="navbar-content">
-<div class="chapter-header">Hoofdstuk 4: Recursie</div>
-<a class="back-button" href="index.html">← Terug naar hoofdstukken</a>
-</div>
-</nav>
+        <div class="navbar-content">
+            <div class="chapter-header">Hoofdstuk 4: Recursie</div>
+            <button class="menu-toggle" type="button" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-menu">☰</button>
+            <a href="index.html" class="back-button">← Terug naar hoofdstukken</a>
+        </div>
+        <div id="mobile-menu" class="mobile-menu" aria-label="Hoofdstuknavigatie">
+            <a href="index.html">🏠 Overzicht</a>
+            <a href="chapter1.html">01 Introductie & zoeken</a>
+            <a href="chapter2.html">02 Sorteeralgoritmen</a>
+            <a href="chapter3.html">03 Datastructuren</a>
+            <a href="chapter4.html" class="current">04 Recursie</a>
+            <a href="chapter5.html">05 Verdeel en heers</a>
+            <a href="chapter6.html">06 Backtracking</a>
+            <a href="chapter7.html">07 Dynamisch programmeren</a>
+            <a href="chapter8.html">08 Grafen</a>
+            <a href="chapter9.html">09 Gewogen grafen</a>
+            <a href="chapter10.html">10 Greedy-algoritmen</a>
+            <a href="chapter11.html">11 Bomen</a>
+            <a href="chapter12.html">12 Hashtabellen</a>
+            <a href="chapter13.html">13 Cursusherhaling</a>
+        </div>
+    </nav>
 <div class="container">
 </div>
 <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
@@ -679,5 +846,37 @@ END FUNCTION</div>
             }
         });
     </script>
+
+<script>
+        // Mobiel burgermenu
+        (function () {
+            const toggle = document.querySelector('.menu-toggle');
+            const menu = document.getElementById('mobile-menu');
+            if (!toggle || !menu) return;
+
+            toggle.addEventListener('click', function () {
+                const isOpen = menu.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', String(isOpen));
+                toggle.textContent = isOpen ? '×' : '☰';
+            });
+
+            menu.querySelectorAll('a').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    menu.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    toggle.textContent = '☰';
+                });
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    menu.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    toggle.textContent = '☰';
+                }
+            });
+        })();
+</script>
+
 </body>
 </html>

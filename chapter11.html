@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-
 <html lang="nl">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Hoofdstuk 11: Bomen - Programming Advanced</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 11: Trees - Programming Advanced</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #2d3561; --secondary: #4a90e2; --accent: #ff6b6b; --success: #51cf66; --warning: #ffd93d; --bg: #f8f9fa; --card: #ffffff; --text: #2c3e50; --text-light: #7f8c8d; }
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
@@ -121,130 +120,316 @@
             .option-label { padding: 0.75rem; }
             .code-block { font-size: 0.75rem; overflow-x: auto; }
         }
+    
+
+        /* Mobielvriendelijke navigatie */
+        .menu-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.18);
+            color: white;
+            font-size: 1.6rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .menu-toggle:hover,
+        .menu-toggle:focus-visible {
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+        }
+
+        .mobile-menu {
+            display: none;
+            max-width: 1400px;
+            margin: 1rem auto 0;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+            overflow: hidden;
+        }
+
+        .mobile-menu.open {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.25rem;
+            padding: 0.75rem;
+            animation: slideDown 0.2s ease;
+        }
+
+        .mobile-menu a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0.9rem 1rem;
+            border-radius: 10px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .mobile-menu a:hover,
+        .mobile-menu a:focus-visible,
+        .mobile-menu a.current {
+            background: #eef5ff;
+            outline: none;
+        }
+
+        .mobile-menu a.current {
+            color: var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.8rem 1rem;
+            }
+
+            .navbar-content {
+                gap: 0.75rem;
+            }
+
+            .chapter-header {
+                font-size: 1rem !important;
+                line-height: 1.25;
+                max-width: calc(100vw - 90px);
+            }
+
+            .back-button {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: inline-flex;
+                flex: 0 0 auto;
+            }
+
+            .mobile-menu.open {
+                grid-template-columns: 1fr;
+                max-height: calc(100vh - 82px);
+                overflow-y: auto;
+            }
+
+            .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem;
+            }
+
+            .summary-card,
+            .quiz-section,
+            .quiz-question {
+                padding: 1rem !important;
+            }
+
+            .section-tabs {
+                top: 68px !important;
+                overflow-x: auto;
+                flex-wrap: nowrap !important;
+                gap: 0.4rem !important;
+                padding: 0.55rem 0.25rem !important;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+            }
+
+            .section-tab {
+                flex: 0 0 auto;
+                white-space: nowrap;
+                padding: 0.7rem 0.85rem !important;
+                font-size: 0.8rem !important;
+                letter-spacing: 0 !important;
+            }
+
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .code-block {
+                font-size: 0.78rem !important;
+                overflow-x: auto;
+            }
+
+            .option-label {
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .option-label input[type="radio"] {
+                flex: 0 0 auto;
+                margin-top: 0.2rem;
+            }
+        }
+
     </style>
 </head>
 <body>
-<nav class="navbar">
-<div class="navbar-content">
-<div class="chapter-header">Hoofdstuk 11: Bomen</div>
-<a class="back-button" href="index.html">← Terug naar hoofdstukken</a>
-</div>
-</nav>
-<div class="container">
-</div>
-<div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
-<button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
-<button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-<button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
-</div>
-<div class="section-content active" id="summary">
-<div class="summary-grid">
-<div class="summary-card">
-<h3> Wat is een boom?</h3>
-<p><strong>Definitie:</strong> Een datastructuur verwant aan een graaf</p>
-<h4>Boomterminologie:</h4>
-<ul>
-<li><strong>Root-knoop:</strong> Bovenste knoop (start de boom)</li>
-<li><strong>Ouder:</strong> Knoop met kinderen</li>
-<li><strong>Blad:</strong> Knoop zonder kinderen</li>
-<li><strong>Broers/zussen:</strong> Knopen met dezelfde ouder</li>
-<li><strong>Hoogte:</strong> Aantal verbindingen van root naar diepste blad</li>
-<li><strong>Diepte:</strong> Aantal verbindingen van knoop naar root</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Types bomen</h3>
-<h4>Volledige binaire boom:</h4>
-<p>Elke knoop heeft 0 of 2 kinderen (nooit 1)</p>
-<h4>Complete binaire boom:</h4>
-<p>Alle niveaus gevuld behalve mogelijk het laatste, gevuld van links naar rechts</p>
-<h4>Perfecte binaire boom:</h4>
-<p>Alle interne knopen hebben 2 kinderen, alle bladeren zitten op hetzelfde niveau</p>
-<h4>Gebalanceerde boom:</h4>
-<p>Hoogteverschil tussen linker- en rechtersubboom ≤ 1</p>
-<h4>Gedegenereerde boom:</h4>
-<p>Elke knoop heeft slechts 1 kind (zoals een linked list)</p>
-<div class="highlight-box">Gedegenereerde bomen hebben O(n)-bewerkingen - slechtste geval!</div>
-</div>
-<div class="summary-card">
-<h3> Bomen in de praktijk</h3>
-<h4>Bestandssystemen:</h4>
-<p>Mappen en bestanden hiërarchisch georganiseerd</p>
-<h4>Organigrammen:</h4>
-<p>Bedrijfshiërarchie met CEO aan de root</p>
-<h4>Beslissingsbomen:</h4>
-<p>AI/ML voor classificatie en beslissingen</p>
-<h4>DOM (HTML):</h4>
-<p>Webpagina’s gestructureerd als boom van elementen</p>
-<h4>Stambomen:</h4>
-<p>Genealogie en afkomst bijhouden</p>
-<h4>Expressiebomen:</h4>
-<p>Wiskundige expressies: (3+5)*2</p>
-</div>
-<div class="summary-card">
-<h3> Binaire zoekboom (BST)</h3>
-<p><strong>Definitie:</strong> Binaire boom met ordeningseigenschap</p>
-<h4>BST-eigenschap:</h4>
-<ul>
-<li><strong>Linkersubboom:</strong> Alle waarden &lt; knoop</li>
-<li><strong>Rechtersubboom:</strong> Alle waarden &gt; knoop</li>
-<li>Beide subbomen zijn ook BST’s</li>
-</ul>
-<h4>Structuur:</h4>
-<div class="code-block">class Node {
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="chapter-header">Chapter 11: Trees</div>
+            <button class="menu-toggle" type="button" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-menu">☰</button>
+            <a href="index.html" class="back-button">← Back to Chapters</a>
+        </div>
+        <div id="mobile-menu" class="mobile-menu" aria-label="Hoofdstuknavigatie">
+            <a href="index.html">🏠 Overzicht</a>
+            <a href="chapter1.html">01 Introductie & zoeken</a>
+            <a href="chapter2.html">02 Sorteeralgoritmen</a>
+            <a href="chapter3.html">03 Datastructuren</a>
+            <a href="chapter4.html">04 Recursie</a>
+            <a href="chapter5.html">05 Verdeel en heers</a>
+            <a href="chapter6.html">06 Backtracking</a>
+            <a href="chapter7.html">07 Dynamisch programmeren</a>
+            <a href="chapter8.html">08 Grafen</a>
+            <a href="chapter9.html">09 Gewogen grafen</a>
+            <a href="chapter10.html">10 Greedy-algoritmen</a>
+            <a href="chapter11.html" class="current">11 Bomen</a>
+            <a href="chapter12.html">12 Hashtabellen</a>
+            <a href="chapter13.html">13 Cursusherhaling</a>
+        </div>
+    </nav>
+    <div class="container">
+        </div>
+        <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
+            <button class="section-tab active" onclick="switchSection('summary')">📚 Summary</button>
+            <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
+            <button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
+        </div>
+
+        <div id="summary" class="section-content active">
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h3> What is a Tree?</h3>
+                    <p><strong>Definition:</strong> A data structure related to a graph</p>
+                    <h4>Tree Terminology:</h4>
+                    <ul>
+                        <li><strong>Root node:</strong> Top node (starts the tree)</li>
+                        <li><strong>Parent:</strong> Node with children</li>
+                        <li><strong>Leaf:</strong> Node without children</li>
+                        <li><strong>Siblings:</strong> Nodes with same parent</li>
+                        <li><strong>Height:</strong> Number of edges from root to deepest leaf</li>
+                        <li><strong>Depth:</strong> Number of edges from node to root</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Types of Trees</h3>
+                    <h4>Full Binary Tree:</h4>
+                    <p>Every node has 0 or 2 children (never 1)</p>
+                    
+                    <h4>Complete Binary Tree:</h4>
+                    <p>All levels filled except possibly last, filled left to right</p>
+                    
+                    <h4>Perfect Binary Tree:</h4>
+                    <p>All internal nodes have 2 children, all leaves at same level</p>
+                    
+                    <h4>Balanced Tree:</h4>
+                    <p>Height difference between left and right subtrees ≤ 1</p>
+                    
+                    <h4>Degenerate Tree:</h4>
+                    <p>Each node has only 1 child (like a linked list)</p>
+                    <div class="highlight-box">Degenerate trees have O(n) operations - worst case!</div>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Trees in Real Life</h3>
+                    <h4>File Systems:</h4>
+                    <p>Folders and files organized hierarchically</p>
+                    
+                    <h4>Organization Charts:</h4>
+                    <p>Company hierarchy with CEO at root</p>
+                    
+                    <h4>Decision Trees:</h4>
+                    <p>AI/ML for classification and decisions</p>
+                    
+                    <h4>DOM (HTML):</h4>
+                    <p>Web pages structured as tree of elements</p>
+                    
+                    <h4>Family Trees:</h4>
+                    <p>Genealogy and ancestry tracking</p>
+                    
+                    <h4>Expression Trees:</h4>
+                    <p>Mathematical expressions: (3+5)*2</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Binary Search Tree (BST)</h3>
+                    <p><strong>Definition:</strong> Binary tree with ordering property</p>
+                    <h4>BST Property:</h4>
+                    <ul>
+                        <li><strong>Left subtree:</strong> All values < node</li>
+                        <li><strong>Right subtree:</strong> All values > node</li>
+                        <li>Both subtrees are also BSTs</li>
+                    </ul>
+                    <h4>Structure:</h4>
+                    <div class="code-block">class Node {
     int Value;
     Node Left;
     Node Right;
 }</div>
-</div>
-<div class="summary-card">
-<h3> Toevoegen aan BST</h3>
-<p><strong>Recursieve aanpak:</strong></p>
-<div class="code-block">Add(node, value):
+                </div>
+
+                <div class="summary-card">
+                    <h3> Adding to BST</h3>
+                    <p><strong>Recursive approach:</strong></p>
+                    <div class="code-block">Add(node, value):
   IF node is null:
     RETURN new Node(value)
   
-  IF value &lt; node.Value:
+  IF value < node.Value:
     node.Left = Add(node.Left, value)
   ELSE:
     node.Right = Add(node.Right, value)
   
   RETURN node</div>
-<p><strong>Complexiteit:</strong> O(h) waarbij h = hoogte<br/>Beste: O(log n), slechtste: O(n)</p>
-</div>
-<div class="summary-card">
-<h3> Zoeken in BST</h3>
-<div class="code-block">Search(node, value):
+                    <p><strong>Complexity:</strong> O(h) where h = height<br>Best: O(log n), Worst: O(n)</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Searching BST</h3>
+                    <div class="code-block">Search(node, value):
   IF node is null:
     RETURN false
   
   IF value == node.Value:
     RETURN true
   
-  IF value &lt; node.Value:
+  IF value < node.Value:
     RETURN Search(node.Left, value)
   ELSE:
     RETURN Search(node.Right, value)</div>
-<p><strong>Complexiteit:</strong> O(h) - hetzelfde als toevoegen</p>
-</div>
-<div class="summary-card">
-<h3> Boomtraversals</h3>
-<h4>In-order (links → root → rechts):</h4>
-<p>Bezoekt knopen in <strong>oplopende volgorde</strong></p>
-<p>Voorbeeld boom: 2, 3, 4, 5, 6, 7, 8</p>
-<p><strong>Gebruik:</strong> Gesorteerde data krijgen</p>
-<h4>Pre-order (root → links → rechts):</h4>
-<p>Bezoekt <strong>ouder vóór kinderen</strong></p>
-<p>Voorbeeld boom: 5, 3, 2, 4, 7, 6, 8</p>
-<p><strong>Gebruik:</strong> Bomen kopiëren/klonen</p>
-<h4>Post-order (links → rechts → root):</h4>
-<p>Bezoekt <strong>kinderen vóór ouder</strong></p>
-<p>Voorbeeld boom: 2, 4, 3, 6, 8, 7, 5</p>
-<p><strong>Gebruik:</strong> Bomen veilig verwijderen</p>
-</div>
-<div class="summary-card">
-<h3> Implementaties van traversals</h3>
-<div class="code-block">InOrder(node):
+                    <p><strong>Complexity:</strong> O(h) - same as add</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Tree Traversals</h3>
+                    <h4>In-Order (Left → Root → Right):</h4>
+                    <p>Visits nodes in <strong>ascending order</strong></p>
+                    <p>Example tree: 2, 3, 4, 5, 6, 7, 8</p>
+                    <p><strong>Use:</strong> Get sorted data</p>
+                    
+                    <h4>Pre-Order (Root → Left → Right):</h4>
+                    <p>Visits <strong>parent before children</strong></p>
+                    <p>Example tree: 5, 3, 2, 4, 7, 6, 8</p>
+                    <p><strong>Use:</strong> Copy/clone trees</p>
+                    
+                    <h4>Post-Order (Left → Right → Root):</h4>
+                    <p>Visits <strong>children before parent</strong></p>
+                    <p>Example tree: 2, 4, 3, 6, 8, 7, 5</p>
+                    <p><strong>Use:</strong> Delete trees safely</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Traversal Implementations</h3>
+                    <div class="code-block">InOrder(node):
   IF node is null: RETURN
   InOrder(node.Left)
   Print(node.Value)
@@ -261,325 +446,357 @@ PostOrder(node):
   PostOrder(node.Left)
   PostOrder(node.Right)
   Print(node.Value)</div>
-</div>
-<div class="summary-card">
-<h3> Wanneer gebruik je welke traversal?</h3>
-<h4>In-Order:</h4>
-<ul>
-<li>Data in gesorteerde volgorde krijgen</li>
-<li>BST-eigenschap valideren</li>
-</ul>
-<h4>Pre-Order:</h4>
-<ul>
-<li>Bomen kopiëren/klonen</li>
-<li>Boom maken vanuit traversal</li>
-<li>Ouder moet vóór kinderen komen</li>
-</ul>
-<h4>Post-Order:</h4>
-<ul>
-<li>Bomen verwijderen (verwijder kinderen eerst)</li>
-<li>Expressiebomen evalueren</li>
-<li>Kinderen moeten vóór ouder komen</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Min en max</h3>
-<h4>Minimum zoeken:</h4>
-<div class="code-block">FindMin(node):
+                </div>
+
+                <div class="summary-card">
+                    <h3> When to Use Which Traversal</h3>
+                    <h4>In-Order:</h4>
+                    <ul>
+                        <li>Getting data in sorted order</li>
+                        <li>Validating BST property</li>
+                    </ul>
+                    <h4>Pre-Order:</h4>
+                    <ul>
+                        <li>Copying/cloning trees</li>
+                        <li>Creating tree from traversal</li>
+                        <li>Need parent before children</li>
+                    </ul>
+                    <h4>Post-Order:</h4>
+                    <ul>
+                        <li>Deleting trees (delete children first)</li>
+                        <li>Evaluating expression trees</li>
+                        <li>Need children before parent</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Min and Max</h3>
+                    <h4>Find Minimum:</h4>
+                    <div class="code-block">FindMin(node):
   WHILE node.Left != null:
     node = node.Left
   RETURN node.Value</div>
-<p>Ga helemaal naar links!</p>
-<h4>Maximum zoeken:</h4>
-<div class="code-block">FindMax(node):
+                    <p>Go all the way left!</p>
+                    
+                    <h4>Find Maximum:</h4>
+                    <div class="code-block">FindMax(node):
   WHILE node.Right != null:
     node = node.Right
   RETURN node.Value</div>
-<p>Ga helemaal naar rechts!</p>
-</div>
-<div class="summary-card">
-<h3> Belangrijkste inzichten</h3>
-<ul>
-<li>Boom = datastructuur verwant aan een graaf</li>
-<li>Root = bovenste knoop, blad = geen kinderen, ouder = heeft kinderen</li>
-<li>Hoogte = verbindingen van root naar diepste blad</li>
-<li>Diepte = verbindingen van knoop naar root</li>
-<li>Gedegenereerde boom = elke knoop heeft 1 kind (slechtste geval)</li>
-<li>BST: links &lt; knoop &lt; rechts</li>
-<li>Bewerkingen: O(h)-complexiteit</li>
-<li>Gebalanceerd: O(log n), ongebalanceerd: O(n)</li>
-<li>In-order → gesorteerde uitvoer</li>
-<li>Pre-order → ouder eerst (kopiëren)</li>
-<li>Post-order → kinderen eerst (verwijderen)</li>
-<li>Min = meest links, max = meest rechts</li>
-<li>Praktijk: bestandssystemen, organigrammen, HTML DOM</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="section-content" id="flashcards">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>📇 Flashcards</h3>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is een boom?<span>▼</span></div><div class="flashcard-answer">Datastructuur verwant aan een graaf, start met een root-knoop</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Boomterminologie: root, ouder, blad?<span>▼</span></div><div class="flashcard-answer">Root=bovenste knoop, ouder=heeft kinderen, blad=geen kinderen</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Hoogte versus diepte?<span>▼</span></div><div class="flashcard-answer">Hoogte=verbindingen root→diepste blad, diepte=verbindingen knoop→root</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is een gedegenereerde boom?<span>▼</span></div><div class="flashcard-answer">Elke knoop heeft slechts 1 kind (zoals linked list, O(n)-bewerkingen)</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Voorbeelden van bomen in de praktijk?<span>▼</span></div><div class="flashcard-answer">Bestandssystemen, organigrammen, HTML DOM, stambomen, beslissingsbomen</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">BST-eigenschap?<span>▼</span></div><div class="flashcard-answer">Linkersubboom &lt; knoop &lt; rechtersubboom</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Complexiteit van BST-bewerkingen?<span>▼</span></div><div class="flashcard-answer">O(h) waarbij h=hoogte. Beste O(log n), slechtste O(n)</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">In-order traversal?<span>▼</span></div><div class="flashcard-answer">Links → root → rechts, geeft gesorteerde volgorde</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Pre-order traversal?<span>▼</span></div><div class="flashcard-answer">Root → links → rechts, ouder vóór kinderen</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Post-order traversal?<span>▼</span></div><div class="flashcard-answer">Links → rechts → root, kinderen vóór ouder</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wanneer gebruik je in-order?<span>▼</span></div><div class="flashcard-answer">Gesorteerde data uit BST krijgen</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wanneer gebruik je pre-order?<span>▼</span></div><div class="flashcard-answer">Bomen kopiëren/klonen - ouder moet eerst komen</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wanneer gebruik je post-order?<span>▼</span></div><div class="flashcard-answer">Bomen verwijderen - je moet kinderen eerst verwijderen</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Minimum vinden in BST?<span>▼</span></div><div class="flashcard-answer">Ga helemaal naar links</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Maximum vinden in BST?<span>▼</span></div><div class="flashcard-answer">Ga helemaal naar rechts</div></div>
-</div>
-</div>
-</div>
-<div class="section-content" id="quiz">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>✅ Quiz</h3>
-<form id="mcq-form">
-<div class="quiz-question">
-<div class="question-number">V1</div>
-<div class="question-text">Wat is een boom?</div>
-<div class="options">
-<label class="option-label"><input name="q1" required="" type="radio" value="0"/><span>Lineaire datastructuur</span></label>
-<label class="option-label"><input name="q1" required="" type="radio" value="1"/><span>Datastructuur verwant aan een graaf</span></label>
-<label class="option-label"><input name="q1" required="" type="radio" value="2"/><span>Sorteeralgoritme</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V2</div>
-<div class="question-text">Wat is een bladknoop?</div>
-<div class="options">
-<label class="option-label"><input name="q2" required="" type="radio" value="0"/><span>Root-knoop</span></label>
-<label class="option-label"><input name="q2" required="" type="radio" value="1"/><span>Knoop zonder kinderen</span></label>
-<label class="option-label"><input name="q2" required="" type="radio" value="2"/><span>Knoop met de meeste kinderen</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V3</div>
-<div class="question-text">Wat is boomhoogte?</div>
-<div class="options">
-<label class="option-label"><input name="q3" required="" type="radio" value="0"/><span>Aantal knopen</span></label>
-<label class="option-label"><input name="q3" required="" type="radio" value="1"/><span>Aantal verbindingen van root naar diepste blad</span></label>
-<label class="option-label"><input name="q3" required="" type="radio" value="2"/><span>Aantal verbindingen van knoop naar root</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V4</div>
-<div class="question-text">Wat is een gedegenereerd boom?</div>
-<div class="options">
-<label class="option-label"><input name="q4" required="" type="radio" value="0"/><span>Elke knoop heeft altijd 2 kinderen</span></label>
-<label class="option-label"><input name="q4" required="" type="radio" value="1"/><span>Elke knoop heeft slechts 1 kind</span></label>
-<label class="option-label"><input name="q4" required="" type="radio" value="2"/><span>Perfecte binaire boom</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V5</div>
-<div class="question-text">Wat is een praktijkvoorbeeld van bomen?</div>
-<div class="options">
-<label class="option-label"><input name="q5" required="" type="radio" value="0"/><span>Sorteren algoritmen</span></label>
-<label class="option-label"><input name="q5" required="" type="radio" value="1"/><span>HTML DOM</span></label>
-<label class="option-label"><input name="q5" required="" type="radio" value="2"/><span>Wachtrijen</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V6</div>
-<div class="question-text">Wat is de BST-eigenschap?</div>
-<div class="options">
-<label class="option-label"><input name="q6" required="" type="radio" value="0"/><span>Alle knopen dezelfde waarde</span></label>
-<label class="option-label"><input name="q6" required="" type="radio" value="1"/><span>Links &lt; knoop &lt; rechts</span></label>
-<label class="option-label"><input name="q6" required="" type="radio" value="2"/><span>Links &gt; knoop &gt; rechts</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V7</div>
-<div class="question-text">Complexiteit van zoeken in BST?</div>
-<div class="options">
-<label class="option-label"><input name="q7" required="" type="radio" value="0"/><span>O(1)</span></label>
-<label class="option-label"><input name="q7" required="" type="radio" value="1"/><span>O(n)</span></label>
-<label class="option-label"><input name="q7" required="" type="radio" value="2"/><span>O(n²)</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V8</div>
-<div class="question-text">In-order traversal bezoekt knopen in?</div>
-<div class="options">
-<label class="option-label"><input name="q8" required="" type="radio" value="0"/><span>Willekeurige volgorde</span></label>
-<label class="option-label"><input name="q8" required="" type="radio" value="1"/><span>Oplopende volgorde</span></label>
-<label class="option-label"><input name="q8" required="" type="radio" value="2"/><span>Aflopende volgorde</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V9</div>
-<div class="question-text">Volgorde van in-order traversal?</div>
-<div class="options">
-<label class="option-label"><input name="q9" required="" type="radio" value="0"/><span>Root → Links → Rechts</span></label>
-<label class="option-label"><input name="q9" required="" type="radio" value="1"/><span>Links → Root → Rechts</span></label>
-<label class="option-label"><input name="q9" required="" type="radio" value="2"/><span>Links → Rechts → Root</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V10</div>
-<div class="question-text">Volgorde van pre-order traversal?</div>
-<div class="options">
-<label class="option-label"><input name="q10" required="" type="radio" value="0"/><span>Root → Links → Rechts</span></label>
-<label class="option-label"><input name="q10" required="" type="radio" value="1"/><span>Links → Root → Rechts</span></label>
-<label class="option-label"><input name="q10" required="" type="radio" value="2"/><span>Links → Rechts → Root</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V11</div>
-<div class="question-text">Volgorde van post-order traversal?</div>
-<div class="options">
-<label class="option-label"><input name="q11" required="" type="radio" value="0"/><span>Root → Links → Rechts</span></label>
-<label class="option-label"><input name="q11" required="" type="radio" value="1"/><span>Links → Root → Rechts</span></label>
-<label class="option-label"><input name="q11" required="" type="radio" value="2"/><span>Links → Rechts → Root</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V12</div>
-<div class="question-text">Gegeven BST met root 5, linkerkind 3, rechterkind 7. In-order uitvoer?</div>
-<div class="options">
-<label class="option-label"><input name="q12" required="" type="radio" value="0"/><span>5, 3, 7</span></label>
-<label class="option-label"><input name="q12" required="" type="radio" value="1"/><span>3, 5, 7</span></label>
-<label class="option-label"><input name="q12" required="" type="radio" value="2"/><span>3, 7, 5</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V13</div>
-<div class="question-text">Dezelfde boom (root 5, links 3, rechts 7). Pre-order uitvoer?</div>
-<div class="options">
-<label class="option-label"><input name="q13" required="" type="radio" value="0"/><span>5, 3, 7</span></label>
-<label class="option-label"><input name="q13" required="" type="radio" value="1"/><span>3, 5, 7</span></label>
-<label class="option-label"><input name="q13" required="" type="radio" value="2"/><span>3, 7, 5</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V14</div>
-<div class="question-text">Dezelfde boom (root 5, links 3, rechts 7). Post-order uitvoer?</div>
-<div class="options">
-<label class="option-label"><input name="q14" required="" type="radio" value="0"/><span>5, 3, 7</span></label>
-<label class="option-label"><input name="q14" required="" type="radio" value="1"/><span>3, 5, 7</span></label>
-<label class="option-label"><input name="q14" required="" type="radio" value="2"/><span>3, 7, 5</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V15</div>
-<div class="question-text">Wanneer gebruik je in-order traversal?</div>
-<div class="options">
-<label class="option-label"><input name="q15" required="" type="radio" value="0"/><span>Boom verwijderen</span></label>
-<label class="option-label"><input name="q15" required="" type="radio" value="1"/><span>Gesorteerde data krijgen</span></label>
-<label class="option-label"><input name="q15" required="" type="radio" value="2"/><span>Boom kopiëren</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V16</div>
-<div class="question-text">Wanneer gebruik je pre-order traversal?</div>
-<div class="options">
-<label class="option-label"><input name="q16" required="" type="radio" value="0"/><span>Boom kopiëren</span></label>
-<label class="option-label"><input name="q16" required="" type="radio" value="1"/><span>Boom verwijderen</span></label>
-<label class="option-label"><input name="q16" required="" type="radio" value="2"/><span>Gesorteerde data krijgen</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V17</div>
-<div class="question-text">Wanneer gebruik je post-order traversal?</div>
-<div class="options">
-<label class="option-label"><input name="q17" required="" type="radio" value="0"/><span>Boom kopiëren</span></label>
-<label class="option-label"><input name="q17" required="" type="radio" value="1"/><span>Boom verwijderen</span></label>
-<label class="option-label"><input name="q17" required="" type="radio" value="2"/><span>Gesorteerde data krijgen</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V18</div>
-<div class="question-text">Hoe vind je het minimum in een BST?</div>
-<div class="options">
-<label class="option-label"><input name="q18" required="" type="radio" value="0"/><span>Ga helemaal naar links</span></label>
-<label class="option-label"><input name="q18" required="" type="radio" value="1"/><span>Ga helemaal naar rechts</span></label>
-<label class="option-label"><input name="q18" required="" type="radio" value="2"/><span>Controleer alleen root</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V19</div>
-<div class="question-text">Hoe vind je het maximum in een BST?</div>
-<div class="options">
-<label class="option-label"><input name="q19" required="" type="radio" value="0"/><span>Ga helemaal naar links</span></label>
-<label class="option-label"><input name="q19" required="" type="radio" value="1"/><span>Ga helemaal naar rechts</span></label>
-<label class="option-label"><input name="q19" required="" type="radio" value="2"/><span>Controleer alleen root</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V20</div>
-<div class="question-text">Waarde 4 toevoegen aan BST: root 5, links 3, rechts 7. Waar komt 4?</div>
-<div class="options">
-<label class="option-label"><input name="q20" required="" type="radio" value="0"/><span>Links van root</span></label>
-<label class="option-label"><input name="q20" required="" type="radio" value="1"/><span>Rechts van 3</span></label>
-<label class="option-label"><input name="q20" required="" type="radio" value="2"/><span>Rechts van root</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V21</div>
-<div class="question-text">Gegeven deze Add-code: wat gebeurt er voor waarde 6 in een boom met root 5?<br/><br/>
-<div class="code-block">Add(node, 6):
-  IF 6 &lt; 5: ga links
-  ELSE: ga rechts → ?</div></div>
-<div class="options">
-<label class="option-label"><input name="q21" required="" type="radio" value="0"/><span>Gaat naar de rechtersubboom</span></label>
-<label class="option-label"><input name="q21" required="" type="radio" value="1"/><span>Gaat naar de linkersubboom</span></label>
-<label class="option-label"><input name="q21" required="" type="radio" value="2"/><span>Vervangt root</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V22</div>
-<div class="question-text">Hoogte van een gebalanceerde BST voor n knopen?</div>
-<div class="options">
-<label class="option-label"><input name="q22" required="" type="radio" value="0"/><span>O(n)</span></label>
-<label class="option-label"><input name="q22" required="" type="radio" value="1"/><span>O(log n)</span></label>
-<label class="option-label"><input name="q22" required="" type="radio" value="2"/><span>O(1)</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V23</div>
-<div class="question-text">Slechtste-gevalhoogte van een ongebalanceerde BST?</div>
-<div class="options">
-<label class="option-label"><input name="q23" required="" type="radio" value="0"/><span>O(log n)</span></label>
-<label class="option-label"><input name="q23" required="" type="radio" value="1"/><span>O(n)</span></label>
-<label class="option-label"><input name="q23" required="" type="radio" value="2"/><span>O(1)</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V24</div>
-<div class="question-text">BST-zoekactie naar waarde 3 in boom [5,3,7,2,4]. Welk pad?</div>
-<div class="options">
-<label class="option-label"><input name="q24" required="" type="radio" value="0"/><span>5 → 3 gevonden</span></label>
-<label class="option-label"><input name="q24" required="" type="radio" value="1"/><span>5 → 7 → niet gevonden</span></label>
-<label class="option-label"><input name="q24" required="" type="radio" value="2"/><span>5 → 3 → 2 → niet gevonden</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V25</div>
-<div class="question-text">Welke traversal gebruik je om de BST-eigenschap te valideren?</div>
-<div class="options">
-<label class="option-label"><input name="q25" required="" type="radio" value="0"/><span>In-Order</span></label>
-<label class="option-label"><input name="q25" required="" type="radio" value="1"/><span>Pre-Order</span></label>
-<label class="option-label"><input name="q25" required="" type="radio" value="2"/><span>Post-Order</span></label>
-</div>
-</div>
-<button class="submit-quiz" type="submit">Quiz indienen</button>
-</form>
-<div id="mcq-result"></div>
-</div>
-</div>
-</div>
+                    <p>Go all the way right!</p>
+                </div>
 
-<script>
+                <div class="summary-card">
+                    <h3> Key Takeaways</h3>
+                    <ul>
+                        <li>Tree = data structure related to graph</li>
+                        <li>Root = top node, Leaf = no children, Parent = has children</li>
+                        <li>Height = edges from root to deepest leaf</li>
+                        <li>Depth = edges from node to root</li>
+                        <li>Degenerate tree = each node has 1 child (worst case)</li>
+                        <li>BST: left < node < right</li>
+                        <li>Operations: O(h) complexity</li>
+                        <li>Balanced: O(log n), Unbalanced: O(n)</li>
+                        <li>In-Order → sorted output</li>
+                        <li>Pre-Order → parent first (copy)</li>
+                        <li>Post-Order → children first (delete)</li>
+                        <li>Min = leftmost, Max = rightmost</li>
+                        <li>Real-life: file systems, org charts, HTML DOM</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="flashcards" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>📇 Flashcards</h3>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is a tree?<span>▼</span></div><div class="flashcard-answer">Data structure related to graph, starts with root node</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Tree terminology: root, parent, leaf?<span>▼</span></div><div class="flashcard-answer">Root=top node, Parent=has children, Leaf=no children</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Height vs Depth?<span>▼</span></div><div class="flashcard-answer">Height=edges root→deepest leaf, Depth=edges node→root</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is degenerate tree?<span>▼</span></div><div class="flashcard-answer">Each node has only 1 child (like linked list, O(n) operations)</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Real-life tree examples?<span>▼</span></div><div class="flashcard-answer">File systems, org charts, HTML DOM, family trees, decision trees</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">BST property?<span>▼</span></div><div class="flashcard-answer">Left subtree < node < Right subtree</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">BST operations complexity?<span>▼</span></div><div class="flashcard-answer">O(h) where h=height. Best O(log n), Worst O(n)</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">In-Order traversal?<span>▼</span></div><div class="flashcard-answer">Left → Root → Right, gives sorted order</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Pre-Order traversal?<span>▼</span></div><div class="flashcard-answer">Root → Left → Right, parent before children</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Post-Order traversal?<span>▼</span></div><div class="flashcard-answer">Left → Right → Root, children before parent</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">When use In-Order?<span>▼</span></div><div class="flashcard-answer">Get sorted data from BST</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">When use Pre-Order?<span>▼</span></div><div class="flashcard-answer">Copy/clone trees - need parent first</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">When use Post-Order?<span>▼</span></div><div class="flashcard-answer">Delete trees - must delete children first</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Find minimum in BST?<span>▼</span></div><div class="flashcard-answer">Go all the way left</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Find maximum in BST?<span>▼</span></div><div class="flashcard-answer">Go all the way right</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>✅ Quiz</h3>
+                    <form id="mcq-form">
+                        <div class="quiz-question">
+                            <div class="question-number">Q1</div>
+                            <div class="question-text">What is a tree?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q1" value="0" required><span>Linear data structure</span></label>
+                                <label class="option-label"><input type="radio" name="q1" value="1" required><span>Data structure related to graph</span></label>
+                                <label class="option-label"><input type="radio" name="q1" value="2" required><span>Sorting algorithm</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q2</div>
+                            <div class="question-text">What is a leaf node?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q2" value="0" required><span>Root node</span></label>
+                                <label class="option-label"><input type="radio" name="q2" value="1" required><span>Node without children</span></label>
+                                <label class="option-label"><input type="radio" name="q2" value="2" required><span>Node with most children</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q3</div>
+                            <div class="question-text">What is tree height?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q3" value="0" required><span>Number of nodes</span></label>
+                                <label class="option-label"><input type="radio" name="q3" value="1" required><span>Number of edges from root to deepest leaf</span></label>
+                                <label class="option-label"><input type="radio" name="q3" value="2" required><span>Number of edges from node to root</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q4</div>
+                            <div class="question-text">What is a degenerate tree?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q4" value="0" required><span>Each node always has 2 children</span></label>
+                                <label class="option-label"><input type="radio" name="q4" value="1" required><span>Each node has only 1 child</span></label>
+                                <label class="option-label"><input type="radio" name="q4" value="2" required><span>Perfect binary tree</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q5</div>
+                            <div class="question-text">Which is a real-life example of trees?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q5" value="0" required><span>Sorting algorithms</span></label>
+                                <label class="option-label"><input type="radio" name="q5" value="1" required><span>HTML DOM</span></label>
+                                <label class="option-label"><input type="radio" name="q5" value="2" required><span>Queues</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q6</div>
+                            <div class="question-text">What is the BST property?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q6" value="0" required><span>All nodes same value</span></label>
+                                <label class="option-label"><input type="radio" name="q6" value="1" required><span>Left < Node < Right</span></label>
+                                <label class="option-label"><input type="radio" name="q6" value="2" required><span>Left > Node > Right</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q7</div>
+                            <div class="question-text">BST search complexity?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q7" value="0" required><span>O(1)</span></label>
+                                <label class="option-label"><input type="radio" name="q7" value="1" required><span>O(n)</span></label>
+                                <label class="option-label"><input type="radio" name="q7" value="2" required><span>O(n²)</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q8</div>
+                            <div class="question-text">In-Order traversal visits nodes in?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q8" value="0" required><span>Random order</span></label>
+                                <label class="option-label"><input type="radio" name="q8" value="1" required><span>Ascending order</span></label>
+                                <label class="option-label"><input type="radio" name="q8" value="2" required><span>Descending order</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q9</div>
+                            <div class="question-text">In-Order traversal order?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q9" value="0" required><span>Root → Left → Right</span></label>
+                                <label class="option-label"><input type="radio" name="q9" value="1" required><span>Left → Root → Right</span></label>
+                                <label class="option-label"><input type="radio" name="q9" value="2" required><span>Left → Right → Root</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q10</div>
+                            <div class="question-text">Pre-Order traversal order?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q10" value="0" required><span>Root → Left → Right</span></label>
+                                <label class="option-label"><input type="radio" name="q10" value="1" required><span>Left → Root → Right</span></label>
+                                <label class="option-label"><input type="radio" name="q10" value="2" required><span>Left → Right → Root</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q11</div>
+                            <div class="question-text">Post-Order traversal order?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q11" value="0" required><span>Root → Left → Right</span></label>
+                                <label class="option-label"><input type="radio" name="q11" value="1" required><span>Left → Root → Right</span></label>
+                                <label class="option-label"><input type="radio" name="q11" value="2" required><span>Left → Right → Root</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q12</div>
+                            <div class="question-text">Given BST with root 5, left child 3, right child 7. In-Order output?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q12" value="0" required><span>5, 3, 7</span></label>
+                                <label class="option-label"><input type="radio" name="q12" value="1" required><span>3, 5, 7</span></label>
+                                <label class="option-label"><input type="radio" name="q12" value="2" required><span>3, 7, 5</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q13</div>
+                            <div class="question-text">Same tree (root 5, left 3, right 7). Pre-Order output?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q13" value="0" required><span>5, 3, 7</span></label>
+                                <label class="option-label"><input type="radio" name="q13" value="1" required><span>3, 5, 7</span></label>
+                                <label class="option-label"><input type="radio" name="q13" value="2" required><span>3, 7, 5</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q14</div>
+                            <div class="question-text">Same tree (root 5, left 3, right 7). Post-Order output?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q14" value="0" required><span>5, 3, 7</span></label>
+                                <label class="option-label"><input type="radio" name="q14" value="1" required><span>3, 5, 7</span></label>
+                                <label class="option-label"><input type="radio" name="q14" value="2" required><span>3, 7, 5</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q15</div>
+                            <div class="question-text">When to use In-Order traversal?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q15" value="0" required><span>Delete tree</span></label>
+                                <label class="option-label"><input type="radio" name="q15" value="1" required><span>Get sorted data</span></label>
+                                <label class="option-label"><input type="radio" name="q15" value="2" required><span>Copy tree</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q16</div>
+                            <div class="question-text">When to use Pre-Order traversal?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q16" value="0" required><span>Copy tree</span></label>
+                                <label class="option-label"><input type="radio" name="q16" value="1" required><span>Delete tree</span></label>
+                                <label class="option-label"><input type="radio" name="q16" value="2" required><span>Get sorted data</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q17</div>
+                            <div class="question-text">When to use Post-Order traversal?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q17" value="0" required><span>Copy tree</span></label>
+                                <label class="option-label"><input type="radio" name="q17" value="1" required><span>Delete tree</span></label>
+                                <label class="option-label"><input type="radio" name="q17" value="2" required><span>Get sorted data</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q18</div>
+                            <div class="question-text">How to find minimum in BST?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q18" value="0" required><span>Go all the way left</span></label>
+                                <label class="option-label"><input type="radio" name="q18" value="1" required><span>Go all the way right</span></label>
+                                <label class="option-label"><input type="radio" name="q18" value="2" required><span>Check root only</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q19</div>
+                            <div class="question-text">How to find maximum in BST?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q19" value="0" required><span>Go all the way left</span></label>
+                                <label class="option-label"><input type="radio" name="q19" value="1" required><span>Go all the way right</span></label>
+                                <label class="option-label"><input type="radio" name="q19" value="2" required><span>Check root only</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q20</div>
+                            <div class="question-text">Adding value 4 to BST: root 5, left 3, right 7. Where does 4 go?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q20" value="0" required><span>Left of root</span></label>
+                                <label class="option-label"><input type="radio" name="q20" value="1" required><span>Right of 3</span></label>
+                                <label class="option-label"><input type="radio" name="q20" value="2" required><span>Right of root</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q21</div>
+                            <div class="question-text">Given this Add code, what happens for value 6 in tree with root 5?<br><br>
+<div class="code-block">Add(node, 6):
+  IF 6 < 5: go left
+  ELSE: go right → ?</div></div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q21" value="0" required><span>Goes to right subtree</span></label>
+                                <label class="option-label"><input type="radio" name="q21" value="1" required><span>Goes to left subtree</span></label>
+                                <label class="option-label"><input type="radio" name="q21" value="2" required><span>Replaces root</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q22</div>
+                            <div class="question-text">Balanced BST height for n nodes?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q22" value="0" required><span>O(n)</span></label>
+                                <label class="option-label"><input type="radio" name="q22" value="1" required><span>O(log n)</span></label>
+                                <label class="option-label"><input type="radio" name="q22" value="2" required><span>O(1)</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q23</div>
+                            <div class="question-text">Unbalanced BST worst case height?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q23" value="0" required><span>O(log n)</span></label>
+                                <label class="option-label"><input type="radio" name="q23" value="1" required><span>O(n)</span></label>
+                                <label class="option-label"><input type="radio" name="q23" value="2" required><span>O(1)</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q24</div>
+                            <div class="question-text">BST Search for value 3 in tree [5,3,7,2,4]. Path taken?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q24" value="0" required><span>5 → 3 found</span></label>
+                                <label class="option-label"><input type="radio" name="q24" value="1" required><span>5 → 7 → not found</span></label>
+                                <label class="option-label"><input type="radio" name="q24" value="2" required><span>5 → 3 → 2 → not found</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q25</div>
+                            <div class="question-text">Which traversal would you use to validate BST property?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q25" value="0" required><span>In-Order</span></label>
+                                <label class="option-label"><input type="radio" name="q25" value="1" required><span>Pre-Order</span></label>
+                                <label class="option-label"><input type="radio" name="q25" value="2" required><span>Post-Order</span></label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-quiz">Submit Quiz</button>
+                    </form>
+                    <div id="mcq-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <script>
         // Quiz Configuration
         const QUIZ_CONFIG = {
             'chapter11-mcq': {
@@ -643,18 +860,18 @@ PostOrder(node):
             for (let i = 0; i < config.total; i++) {
                 const questionName = `${questionPrefix}${i + 1}`;
                 const userAnswer = parseInt(userAnswers[questionName]);
-                const juistAnswer = config.answers[i];
+                const correctAnswer = config.answers[i];
                 
                 form.querySelectorAll(`input[name="${questionName}"]`).forEach(input => {
                     const label = input.closest('.option-label');
                     const value = parseInt(input.value);
                     
-                    label.classList.remove('juist', 'injuist');
+                    label.classList.remove('correct', 'incorrect');
                     
-                    if (value === juistAnswer) {
-                        label.classList.add('juist');
-                    } else if (value === userAnswer && value !== juistAnswer) {
-                        label.classList.add('injuist');
+                    if (value === correctAnswer) {
+                        label.classList.add('correct');
+                    } else if (value === userAnswer && value !== correctAnswer) {
+                        label.classList.add('incorrect');
                     }
                     
                     input.disabled = true;
@@ -674,7 +891,7 @@ PostOrder(node):
                 resetBtn = document.createElement('button');
                 resetBtn.type = 'button';
                 resetBtn.className = 'reset-quiz';
-                resetBtn.textContent = '🔄 Quiz opnieuw starten';
+                resetBtn.textContent = '🔄 Reset Quiz';
                 resetBtn.onclick = function() { resetQuiz(formId, quizId); };
                 submitBtn.parentNode.insertBefore(resetBtn, submitBtn.nextSibling);
             }
@@ -693,7 +910,7 @@ PostOrder(node):
             
             // Remove all feedback styling
             form.querySelectorAll('.option-label').forEach(label => {
-                label.classList.remove('juist', 'injuist');
+                label.classList.remove('correct', 'incorrect');
             });
             
             // Re-enable all inputs
@@ -730,7 +947,7 @@ PostOrder(node):
             const formData = new FormData(form);
             const questionPrefix = quizId.includes('mcq') ? 'q' : quizId.includes('tf') ? 'tf' : 'code';
             
-            let juist = 0;
+            let correct = 0;
             const userAnswers = {};
             
             for (let i = 0; i < config.total; i++) {
@@ -739,14 +956,14 @@ PostOrder(node):
                 userAnswers[questionName] = selected;
                 
                 if (selected === config.answers[i]) {
-                    juist++;
+                    correct++;
                 }
             }
             
             // Save results
             saveQuizData(quizId, {
                 userAnswers: userAnswers,
-                score: juist,
+                score: correct,
                 total: config.total,
                 submitted: true,
                 timestamp: new Date().toISOString()
@@ -757,24 +974,24 @@ PostOrder(node):
             
             // Show result
             const resultId = formId.replace('-form', '-result');
-            showResult(resultId, juist, config.total);
+            showResult(resultId, correct, config.total);
         }
 
         // Show quiz result
-        function showResult(elementId, juist, total) {
-            const percentage = (juist / total) * 100;
+        function showResult(elementId, correct, total) {
+            const percentage = (correct / total) * 100;
             const resultDiv = document.getElementById(elementId);
             
             let resultClass, message;
             if (percentage >= 80) {
                 resultClass = 'excellent';
-                message = `🎉 Uitstekend! ${juist}/${total} juist (${percentage.toFixed(0)}%)`;
+                message = `🎉 Excellent! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
             } else if (percentage >= 60) {
                 resultClass = 'good';
-                message = `👍 Goed gedaan! ${juist}/${total} juist (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
+                message = `👍 Good job! ${correct}/${total} correct (${percentage.toFixed(0)}%). Review the concepts you missed.`;
             } else {
                 resultClass = 'needs-work';
-                message = `📚 ${juist}/${total} juist (${percentage.toFixed(0)}%). Bestudeer de samenvatting en probeer opnieuw!`;
+                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Study the summary and try again!`;
             }
             
             resultDiv.className = `quiz-result ${resultClass}`;
@@ -792,5 +1009,37 @@ PostOrder(node):
             }
         });
     </script>
+
+<script>
+        // Mobiel burgermenu
+        (function () {
+            const toggle = document.querySelector('.menu-toggle');
+            const menu = document.getElementById('mobile-menu');
+            if (!toggle || !menu) return;
+
+            toggle.addEventListener('click', function () {
+                const isOpen = menu.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', String(isOpen));
+                toggle.textContent = isOpen ? '×' : '☰';
+            });
+
+            menu.querySelectorAll('a').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    menu.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    toggle.textContent = '☰';
+                });
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    menu.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    toggle.textContent = '☰';
+                }
+            });
+        })();
+</script>
+
 </body>
 </html>

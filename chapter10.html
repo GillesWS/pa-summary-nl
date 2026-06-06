@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-
 <html lang="nl">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Hoofdstuk 10: Greedy - Programming Advanced</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 10: Greedy - Programming Advanced</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #2d3561; --secondary: #4a90e2; --accent: #ff6b6b; --success: #51cf66; --warning: #ffd93d; --bg: #f8f9fa; --card: #ffffff; --text: #2c3e50; --text-light: #7f8c8d; }
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
@@ -112,98 +111,271 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 768px) { .summary-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
+    
+
+        /* Mobielvriendelijke navigatie */
+        .menu-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.18);
+            color: white;
+            font-size: 1.6rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .menu-toggle:hover,
+        .menu-toggle:focus-visible {
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+        }
+
+        .mobile-menu {
+            display: none;
+            max-width: 1400px;
+            margin: 1rem auto 0;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+            overflow: hidden;
+        }
+
+        .mobile-menu.open {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.25rem;
+            padding: 0.75rem;
+            animation: slideDown 0.2s ease;
+        }
+
+        .mobile-menu a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 0.9rem 1rem;
+            border-radius: 10px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .mobile-menu a:hover,
+        .mobile-menu a:focus-visible,
+        .mobile-menu a.current {
+            background: #eef5ff;
+            outline: none;
+        }
+
+        .mobile-menu a.current {
+            color: var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.8rem 1rem;
+            }
+
+            .navbar-content {
+                gap: 0.75rem;
+            }
+
+            .chapter-header {
+                font-size: 1rem !important;
+                line-height: 1.25;
+                max-width: calc(100vw - 90px);
+            }
+
+            .back-button {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: inline-flex;
+                flex: 0 0 auto;
+            }
+
+            .mobile-menu.open {
+                grid-template-columns: 1fr;
+                max-height: calc(100vh - 82px);
+                overflow-y: auto;
+            }
+
+            .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem;
+            }
+
+            .summary-card,
+            .quiz-section,
+            .quiz-question {
+                padding: 1rem !important;
+            }
+
+            .section-tabs {
+                top: 68px !important;
+                overflow-x: auto;
+                flex-wrap: nowrap !important;
+                gap: 0.4rem !important;
+                padding: 0.55rem 0.25rem !important;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+            }
+
+            .section-tab {
+                flex: 0 0 auto;
+                white-space: nowrap;
+                padding: 0.7rem 0.85rem !important;
+                font-size: 0.8rem !important;
+                letter-spacing: 0 !important;
+            }
+
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .code-block {
+                font-size: 0.78rem !important;
+                overflow-x: auto;
+            }
+
+            .option-label {
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .option-label input[type="radio"] {
+                flex: 0 0 auto;
+                margin-top: 0.2rem;
+            }
+        }
+
     </style>
 </head>
 <body>
-<nav class="navbar">
-<div class="navbar-content">
-<div class="chapter-header">Hoofdstuk 10: Greedy-algoritmen</div>
-<a class="back-button" href="index.html">← Terug naar hoofdstukken</a>
-</div>
-</nav>
-<div class="container">
-</div>
-<div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
-<button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
-<button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-<button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
-</div>
-<div class="section-content active" id="summary">
-<div class="summary-grid">
-<div class="summary-card">
-<h3> Wat is greedy?</h3>
-<p><strong>Definitie:</strong> Bouw een oplossing door bij elke stap een lokaal optimale keuze te maken</p>
-<h4>Belangrijkste kenmerken:</h4>
-<ul>
-<li>Maak de beste keuze in de huidige stap</li>
-<li>Heroverweeg of wijzig keuzes nooit</li>
-<li>Hoop dat lokaal optimum → globaal optimum</li>
-<li>Bouw de oplossing stapsgewijs op</li>
-</ul>
-<div class="highlight-box"><strong>Niet altijd optimaal!</strong> Werkt alleen voor problemen met de greedy-choice property</div>
-</div>
-<div class="summary-card">
-<h3>️ Optimale substructuur</h3>
-<p><strong>Definitie:</strong> Een optimale oplossing bevat optimale oplossingen van deelproblemen</p>
-<h4>Basis van greedy &amp; DP:</h4>
-<ul>
-<li>Als het grote probleem optimaal is → moet elk deel optimaal zijn</li>
-<li>Kan optimale oplossingen stap voor stap opbouwen</li>
-<li>Deelproblemen kunnen onafhankelijk opgelost worden</li>
-</ul>
-<h4>Test:</h4>
-<p>Leidt een betere deeloplossing tot een betere totale oplossing? ✓ Heeft optimale substructuur</p>
-</div>
-<div class="summary-card">
-<h3> Activiteitenselectieprobleem</h3>
-<p><strong>Probleem:</strong> Plan het maximale aantal niet-overlappende activiteiten</p>
-<h4>Greedy-strategie:</h4>
-<div class="code-block">1. Sorteer activiteiten door finish tijd
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="chapter-header">Chapter 10: Greedy Algorithms</div>
+            <button class="menu-toggle" type="button" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-menu">☰</button>
+            <a href="index.html" class="back-button">← Back to Chapters</a>
+        </div>
+        <div id="mobile-menu" class="mobile-menu" aria-label="Hoofdstuknavigatie">
+            <a href="index.html">🏠 Overzicht</a>
+            <a href="chapter1.html">01 Introductie & zoeken</a>
+            <a href="chapter2.html">02 Sorteeralgoritmen</a>
+            <a href="chapter3.html">03 Datastructuren</a>
+            <a href="chapter4.html">04 Recursie</a>
+            <a href="chapter5.html">05 Verdeel en heers</a>
+            <a href="chapter6.html">06 Backtracking</a>
+            <a href="chapter7.html">07 Dynamisch programmeren</a>
+            <a href="chapter8.html">08 Grafen</a>
+            <a href="chapter9.html">09 Gewogen grafen</a>
+            <a href="chapter10.html" class="current">10 Greedy-algoritmen</a>
+            <a href="chapter11.html">11 Bomen</a>
+            <a href="chapter12.html">12 Hashtabellen</a>
+            <a href="chapter13.html">13 Cursusherhaling</a>
+        </div>
+    </nav>
+    <div class="container">
+        </div>
+        <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
+            <button class="section-tab active" onclick="switchSection('summary')">📚 Summary</button>
+            <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
+            <button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
+        </div>
+
+        <div id="summary" class="section-content active">
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h3> What is Greedy?</h3>
+                    <p><strong>Definition:</strong> Build solution by making locally optimal choice at each step</p>
+                    <h4>Key Characteristics:</h4>
+                    <ul>
+                        <li>Make best choice at current step</li>
+                        <li>Never reconsider or change choices</li>
+                        <li>Hope local optimum → global optimum</li>
+                        <li>Build solution incrementally</li>
+                    </ul>
+                    <div class="highlight-box"><strong>Not always optimal!</strong> Only works for problems with greedy choice property</div>
+                </div>
+
+                <div class="summary-card">
+                    <h3>️ Optimal Substructure</h3>
+                    <p><strong>Definition:</strong> Optimal solution contains optimal solutions to subproblems</p>
+                    <h4>Foundation of Greedy & DP:</h4>
+                    <ul>
+                        <li>If big problem optimal → each part must be optimal</li>
+                        <li>Can build optimal solutions step-by-step</li>
+                        <li>Subproblems can be solved independently</li>
+                    </ul>
+                    <h4>Test:</h4>
+                    <p>If better subproblem solution → better overall solution? ✓ Has optimal substructure</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Activity Selection Problem</h3>
+                    <p><strong>Problem:</strong> Schedule maximum number of non-overlapping activities</p>
+                    <h4>Greedy Strategy:</h4>
+                    <div class="code-block">1. Sort activities by finish time
 2. Pick first activity (ends soonest)
-3. Kies volgende activiteit dat start ≥ vorige finish
-4. Herhaal tot done</div>
-<h4>Voorbeeld:</h4>
-<p>Lessen: Art(9-10), Eng(9.5-10.5), Math(10-11), CS(10.5-11.5), Music(11-12)</p>
-<p>Oplossing: Art, Math, Music = 3 lessen ✓</p>
-<div class="highlight-box"><strong>Garandeert optimaal!</strong> Greedy werkt hier perfect</div>
-</div>
-<div class="summary-card">
-<h3> Muntwisselprobleem</h3>
-<p><strong>Probleem:</strong> Minimum aantal munten om het doelbedrag te maken</p>
-<h4>Greedy-aanpak:</h4>
-<ul>
-<li>Neem altijd de grootst mogelijke munt</li>
-<li>Herhaal tot het doel bereikt is</li>
-</ul>
-<h4>Voorbeeld (euromunten [50,20,10,5,2,1]):</h4>
-<p>Doel: 67 cent</p>
-<p>Oplossing: 50 + 10 + 5 + 2 = 4 munten ✓</p>
-<h4>⚠️ Belangrijk:</h4>
-<ul>
-<li><strong>Werkt:</strong> Canonieke systemen (euro, Amerikaanse munten)</li>
-<li><strong>Faalt:</strong> Niet-canoniek (bv. munten [4,3,1] voor doel 6)</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Waarom greedy gebruiken?</h3>
-<h4>Voordelen:</h4>
-<ul>
-<li><strong>Snel:</strong> Typisch O(n log n)</li>
-<li><strong>Eenvoudig:</strong> Makkelijk te implementeren</li>
-<li><strong>Efficiënt:</strong> Minder geheugen dan DP</li>
-<li><strong>Real-time:</strong> Snelle beslissingen</li>
-</ul>
-<h4>Wanneer gebruiken:</h4>
-<ul>
-<li>Probleem heeft de greedy-choice property</li>
-<li>Heeft optimale substructuur</li>
-<li>Lokale keuzes beïnvloeden de toekomst niet</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Wanneer greedy faalt</h3>
-<h4>Voorbeeld: pad-som</h4>
-<div class="code-block">Boom:
+3. Pick next activity that starts ≥ previous finish
+4. Repeat until done</div>
+                    <h4>Example:</h4>
+                    <p>Classes: Art(9-10), Eng(9.5-10.5), Math(10-11), CS(10.5-11.5), Music(11-12)</p>
+                    <p>Solution: Art, Math, Music = 3 classes ✓</p>
+                    <div class="highlight-box"><strong>Guarantees optimal!</strong> Greedy works perfectly here</div>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Coin Change Problem</h3>
+                    <p><strong>Problem:</strong> Minimum coins to make target amount</p>
+                    <h4>Greedy Approach:</h4>
+                    <ul>
+                        <li>Always take largest coin possible</li>
+                        <li>Repeat until target reached</li>
+                    </ul>
+                    <h4>Example (Euro coins [50,20,10,5,2,1]):</h4>
+                    <p>Target: 67 cents</p>
+                    <p>Solution: 50 + 10 + 5 + 2 = 4 coins ✓</p>
+                    <h4>⚠️ Important:</h4>
+                    <ul>
+                        <li><strong>Works:</strong> Canonical systems (Euro, US coins)</li>
+                        <li><strong>Fails:</strong> Non-canonical (e.g., coins [4,3,1] for target 6)</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Why Use Greedy?</h3>
+                    <h4>Advantages:</h4>
+                    <ul>
+                        <li><strong>Fast:</strong> Typically O(n log n)</li>
+                        <li><strong>Simple:</strong> Easy to implement</li>
+                        <li><strong>Efficient:</strong> Less memory than DP</li>
+                        <li><strong>Real-time:</strong> Quick decisions</li>
+                    </ul>
+                    <h4>When to Use:</h4>
+                    <ul>
+                        <li>Problem has greedy choice property</li>
+                        <li>Has optimal substructure</li>
+                        <li>Local choices don't affect future</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> When Greedy Fails</h3>
+                    <h4>Example: Path Sum</h4>
+                    <div class="code-block">Tree:
       40
      /  \
    29    25
@@ -211,219 +383,240 @@
 12      40
 
 Greedy: 40→29→12 = 81
-Optimaal: 40→25→40 = 105 ✗</div>
-<p>Greedy koos 29 (grotere directe keuze), maar miste een beter pad!</p>
-</div>
-<div class="summary-card">
-<h3>🆚 Greedy versus DP</h3>
-<h4>Greedy:</h4>
-<ul>
-<li>Maak één keuze per stap</li>
-<li>Heroverweeg nooit</li>
-<li>Sneller: O(n log n)</li>
-<li>Niet altijd optimaal</li>
-</ul>
-<h4>Dynamisch programmeren:</h4>
-<ul>
-<li>Bekijk alle deelproblemen</li>
-<li>Sla resultaten op, kan heroverwegen</li>
-<li>Trager: O(n²) of meer</li>
-<li>Garandeert optimaal</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Belangrijkste inzichten</h3>
-<ul>
-<li>Greedy = beste lokale keuze bij elke stap</li>
-<li>Vereist optimale substructuur</li>
-<li>Snel en eenvoudig: O(n log n)</li>
-<li>Niet altijd optimaal - alleen met de greedy-choice property</li>
-<li>Activiteitenselectie: sorteer op eindtijd</li>
-<li>Muntwissel: werkt voor canonieke systemen</li>
-<li>Voorbeelden: Dijkstra, Huffman-codering, Kruskal</li>
-<li>Verandert eerdere keuzes nooit</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="section-content" id="flashcards">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>📇 Flashcards</h3>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is een greedy-algoritme?<span>▼</span></div><div class="flashcard-answer">Maak bij elke stap een lokaal optimale keuze in de hoop op een globaal optimum</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Complexiteit van greedy?<span>▼</span></div><div class="flashcard-answer">Typisch O(n log n) - zeer efficiënt</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Strategie voor activiteitenselectie?<span>▼</span></div><div class="flashcard-answer">Sorteer op eindtijd en kies eerst wat het vroegst eindigt</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Optimale substructuur?<span>▼</span></div><div class="flashcard-answer">Optimaal oplossing bevat optimaal subproblem oplossingen</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Is greedy altijd optimaal?<span>▼</span></div><div class="flashcard-answer">Nee - alleen voor problemen met de greedy-choice property</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Muntwissel 67 cent?<span>▼</span></div><div class="flashcard-answer">50+10+5+2 = 4 munten (voor eurosysteem)</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Greedy versus DP?<span>▼</span></div><div class="flashcard-answer">Greedy: één keuze per stap. DP: alle deelproblemen</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Greedy-choice property?<span>▼</span></div><div class="flashcard-answer">Lokale optimale keuze leidt tot globale optimale oplossing</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wanneer faalt greedy?<span>▼</span></div><div class="flashcard-answer">Wanneer lokale keuzes toekomstige mogelijkheden negatief beïnvloeden</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Canoniek muntsysteem?<span>▼</span></div><div class="flashcard-answer">Standaard muntsystemen waarbij greedy werkt (euro, VS)</div></div>
-</div>
-</div>
-</div>
-<div class="section-content" id="quiz">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>✅ Quiz</h3>
-<form id="mcq-form">
-<div class="quiz-question">
-<div class="question-number">V1</div>
-<div class="question-text">Wat is een Greedy-algoritme?</div>
-<div class="options">
-<label class="option-label"><input name="q1" required="" type="radio" value="0"/><span>Maak de beste keuze voor het volledige traject </span></label>
-<label class="option-label"><input name="q1" required="" type="radio" value="1"/><span>Maak bij elke stap de beste lokale keuze</span></label>
-<label class="option-label"><input name="q1" required="" type="radio" value="2"/><span>Backtrack tot je de beste keuze vindt</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V2</div>
-<div class="question-text">Typische complexiteit van een greedy-algoritme?</div>
-<div class="options">
-<label class="option-label"><input name="q2" required="" type="radio" value="0"/><span>O(n)</span></label>
-<label class="option-label"><input name="q2" required="" type="radio" value="1"/><span>O(n log n)</span></label>
-<label class="option-label"><input name="q2" required="" type="radio" value="2"/><span>O(2^n)</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V3</div>
-<div class="question-text">Activiteitenselectieprobleem: waarop sorteer je activiteiten?</div>
-<div class="options">
-<label class="option-label"><input name="q3" required="" type="radio" value="0"/><span>Starttijd</span></label>
-<label class="option-label"><input name="q3" required="" type="radio" value="1"/><span>Eindtijd</span></label>
-<label class="option-label"><input name="q3" required="" type="radio" value="2"/><span>Duur</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V4</div>
-<div class="question-text">Wat is optimale substructuur?</div>
-<div class="options">
-<label class="option-label"><input name="q4" required="" type="radio" value="0"/><span>Geen recursie nodig</span></label>
-<label class="option-label"><input name="q4" required="" type="radio" value="1"/><span>Optimale deelprobleemoplossingen</span></label>
-<label class="option-label"><input name="q4" required="" type="radio" value="2"/><span>Gebruik altijd greedy</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V5</div>
-<div class="question-text">Vindt greedy altijd de optimale oplossing?</div>
-<div class="options">
-<label class="option-label"><input name="q5" required="" type="radio" value="0"/><span>Ja, altijd</span></label>
-<label class="option-label"><input name="q5" required="" type="radio" value="1"/><span>Nee</span></label>
-<label class="option-label"><input name="q5" required="" type="radio" value="2"/><span>Soms willekeurig</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V6</div>
-<div class="question-text">Muntwissel: 67 cent met [50,20,10,5,2,1]?</div>
-<div class="options">
-<label class="option-label"><input name="q6" required="" type="radio" value="0"/><span>5 coins</span></label>
-<label class="option-label"><input name="q6" required="" type="radio" value="1"/><span>4 coins</span></label>
-<label class="option-label"><input name="q6" required="" type="radio" value="2"/><span>3 coins</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V7</div>
-<div class="question-text">Garandeert activiteitenselectie de optimale oplossing?</div>
-<div class="options">
-<label class="option-label"><input name="q7" required="" type="radio" value="0"/><span>Ja</span></label>
-<label class="option-label"><input name="q7" required="" type="radio" value="1"/><span>Nee</span></label>
-<label class="option-label"><input name="q7" required="" type="radio" value="2"/><span>Soms</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V8</div>
-<div class="question-text">Greedy versus dynamisch programmeren?</div>
-<div class="options">
-<label class="option-label"><input name="q8" required="" type="radio" value="0"/><span>Greedy maakt één onomkeerbare keuze per stap, DP evalueert alle deelproblemen</span></label>
-<label class="option-label"><input name="q8" required="" type="radio" value="1"/><span>Greedy garandeert een optimale oplossing, DP geeft alleen benaderingen</span></label>
-<label class="option-label"><input name="q8" required="" type="radio" value="2"/><span>Beide slaan alle tussenresultaten op, maar greedy gebruikt minder geheugen</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V9</div>
-<div class="question-text">Gegeven deze activiteitenselectie-code, wat gebeurt er?<br/><br/>
-<div class="code-block">activities = [(9,10), (9.5,10.5), (10,11)]
-Sorteer op eindtijd
-Kies eerst: (9,10)
-Volgende die start &gt;= 10?</div></div>
-<div class="options">
-<label class="option-label"><input name="q9" required="" type="radio" value="0"/><span>Kies (10,11) - start om 10</span></label>
-<label class="option-label"><input name="q9" required="" type="radio" value="1"/><span>Kies (9.5,10.5) - overlapt</span></label>
-<label class="option-label"><input name="q9" required="" type="radio" value="2"/><span>Stop - geen activiteiten meer</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V10</div>
-<div class="question-text">Wat is de greedy-choice property?</div>
-<div class="options">
-<label class="option-label"><input name="q10" required="" type="radio" value="0"/><span>Lokaal optimale keuzes leiden tot een globaal optimale oplossing</span></label>
-<label class="option-label"><input name="q10" required="" type="radio" value="1"/><span>Bij elke stap de optie met maximale directe waarde kiezen</span></label>
-<label class="option-label"><input name="q10" required="" type="radio" value="2"/><span>Keuzes maken die het aantal deelproblemen minimaliseren</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V11</div>
-<div class="question-text">Wanneer faalt greedy?</div>
-<div class="options">
-<label class="option-label"><input name="q11" required="" type="radio" value="0"/><span>Wanneer lokaal optimale keuzes niet leiden tot een globaal optimum</span></label>
-<label class="option-label"><input name="q11" required="" type="radio" value="1"/><span>Wanneer het probleem overlappende deelproblemen heeft</span></label>
-<label class="option-label"><input name="q11" required="" type="radio" value="2"/><span>Wanneer de invoergrootte te groot is voor exponentiële tijd</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V12</div>
-<div class="question-text">Wat is een canoniek muntsysteem?</div>
-<div class="options">
-<label class="option-label"><input name="q12" required="" type="radio" value="0"/><span>Willekeurige munten</span></label>
-<label class="option-label"><input name="q12" required="" type="radio" value="1"/><span>Standaardsystemen waarbij greedy werkt (euro, VS)</span></label>
-<label class="option-label"><input name="q12" required="" type="radio" value="2"/><span>Niet-standaard munten</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V13</div>
-<div class="question-text">Hoe bouwt greedy oplossingen op?</div>
-<div class="options">
-<label class="option-label"><input name="q13" required="" type="radio" value="0"/><span>Alles ineens</span></label>
-<label class="option-label"><input name="q13" required="" type="radio" value="1"/><span>Stapsgewijs</span></label>
-<label class="option-label"><input name="q13" required="" type="radio" value="2"/><span>Door backtracking te gebruiken</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V14</div>
-<div class="question-text">Draait/wijzigt greedy eerdere keuzes?</div>
-<div class="options">
-<label class="option-label"><input name="q14" required="" type="radio" value="0"/><span>Ja, vaak</span></label>
-<label class="option-label"><input name="q14" required="" type="radio" value="1"/><span>Nee - keuzes zijn definitief</span></label>
-<label class="option-label"><input name="q14" required="" type="radio" value="2"/><span>Soms</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V15</div>
-<div class="question-text">Waarvan is Dijkstra een voorbeeld?</div>
-<div class="options">
-<label class="option-label"><input name="q15" required="" type="radio" value="0"/><span>Greedy-algoritme</span></label>
-<label class="option-label"><input name="q15" required="" type="radio" value="1"/><span>Dynamisch programmeren</span></label>
-<label class="option-label"><input name="q15" required="" type="radio" value="2"/><span>Backtracking</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">V16</div>
-<div class="question-text">Muntwissel: munten [4,3,1], doel 6. Wat geeft greedy?</div>
-<div class="options">
-<label class="option-label"><input name="q18" required="" type="radio" value="0"/><span>4+1+1 = 3 coins</span></label>
-<label class="option-label"><input name="q18" required="" type="radio" value="1"/><span>3+3 = 2 coins</span></label>
-<label class="option-label"><input name="q18" required="" type="radio" value="2"/><span>6×1 = 6 coins</span></label>
-</div>
-</div>
-<button class="submit-quiz" type="submit">Quiz indienen</button>
-</form>
-<div id="mcq-result"></div>
-</div>
-</div>
-</div>
+Optimal: 40→25→40 = 105 ✗</div>
+                    <p>Greedy chose 29 (larger immediate choice) but missed better path!</p>
+                </div>
 
-<script>
+                <div class="summary-card">
+                    <h3>🆚 Greedy vs DP</h3>
+                    <h4>Greedy:</h4>
+                    <ul>
+                        <li>Make one choice at each step</li>
+                        <li>Never reconsider</li>
+                        <li>Faster: O(n log n)</li>
+                        <li>Not always optimal</li>
+                    </ul>
+                    <h4>Dynamic Programming:</h4>
+                    <ul>
+                        <li>Consider all subproblems</li>
+                        <li>Store results, may reconsider</li>
+                        <li>Slower: O(n²) or more</li>
+                        <li>Guarantees optimal</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Key Takeaways</h3>
+                    <ul>
+                        <li>Greedy = best local choice each step</li>
+                        <li>Requires optimal substructure</li>
+                        <li>Fast and simple: O(n log n)</li>
+                        <li>Not always optimal - only with greedy choice property</li>
+                        <li>Activity Selection: sort by finish time</li>
+                        <li>Coin Change: works for canonical systems</li>
+                        <li>Examples: Dijkstra, Huffman coding, Kruskal's</li>
+                        <li>Never changes past choices</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="flashcards" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>📇 Flashcards</h3>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is greedy algorithm?<span>▼</span></div><div class="flashcard-answer">Make locally optimal choice at each step, hoping for global optimum</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Greedy complexity?<span>▼</span></div><div class="flashcard-answer">Typically O(n log n) - very efficient</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Activity Selection strategy?<span>▼</span></div><div class="flashcard-answer">Sort by finish time, pick earliest ending first</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Optimal substructure?<span>▼</span></div><div class="flashcard-answer">Optimal solution contains optimal subproblem solutions</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Greedy always optimal?<span>▼</span></div><div class="flashcard-answer">No - only for problems with greedy choice property</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Coin Change 67 cents?<span>▼</span></div><div class="flashcard-answer">50+10+5+2 = 4 coins (for Euro system)</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Greedy vs DP?<span>▼</span></div><div class="flashcard-answer">Greedy: one choice per step. DP: all subproblems</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Greedy choice property?<span>▼</span></div><div class="flashcard-answer">Local optimal choice leads to global optimal solution</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">When greedy fails?<span>▼</span></div><div class="flashcard-answer">When local choices affect future possibilities negatively</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Canonical coin system?<span>▼</span></div><div class="flashcard-answer">Standard coin systems where greedy works (Euro, US)</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>✅ Quiz</h3>
+                    <form id="mcq-form">
+                        <div class="quiz-question">
+                            <div class="question-number">Q1</div>
+                            <div class="question-text">What is a greedy algorithm?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q1" value="0" required><span>Make best choice for complete journey </span></label>
+                                <label class="option-label"><input type="radio" name="q1" value="1" required><span>Make best local choice at each step</span></label>
+                                <label class="option-label"><input type="radio" name="q1" value="2" required><span>Backtrack until you find the best choice</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q2</div>
+                            <div class="question-text">Typical greedy algorithm complexity?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q2" value="0" required><span>O(n)</span></label>
+                                <label class="option-label"><input type="radio" name="q2" value="1" required><span>O(n log n)</span></label>
+                                <label class="option-label"><input type="radio" name="q2" value="2" required><span>O(2^n)</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q3</div>
+                            <div class="question-text">Activity Selection Problem: sort activities by?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q3" value="0" required><span>Start time</span></label>
+                                <label class="option-label"><input type="radio" name="q3" value="1" required><span>Finish time</span></label>
+                                <label class="option-label"><input type="radio" name="q3" value="2" required><span>Duration</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q4</div>
+                            <div class="question-text">What is optimal substructure?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q4" value="0" required><span>No recursion needed</span></label>
+                                <label class="option-label"><input type="radio" name="q4" value="1" required><span>Optimal subproblem solutions</span></label>
+                                <label class="option-label"><input type="radio" name="q4" value="2" required><span>Always use greedy</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q5</div>
+                            <div class="question-text">Does greedy always find the optimal solution?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q5" value="0" required><span>Yes, always</span></label>
+                                <label class="option-label"><input type="radio" name="q5" value="1" required><span>No</span></label>
+                                <label class="option-label"><input type="radio" name="q5" value="2" required><span>Sometimes randomly</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q6</div>
+                            <div class="question-text">Coin Change: 67 cents using [50,20,10,5,2,1]?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q6" value="0" required><span>5 coins</span></label>
+                                <label class="option-label"><input type="radio" name="q6" value="1" required><span>4 coins</span></label>
+                                <label class="option-label"><input type="radio" name="q6" value="2" required><span>3 coins</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q7</div>
+                            <div class="question-text">Activity Selection guarantees optimal solution?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q7" value="0" required><span>Yes</span></label>
+                                <label class="option-label"><input type="radio" name="q7" value="1" required><span>No</span></label>
+                                <label class="option-label"><input type="radio" name="q7" value="2" required><span>Sometimes</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q8</div>
+                            <div class="question-text">Greedy vs Dynamic Programming?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q8" value="0" required><span>Greedy makes one irrevocable choice per step, DP evaluates all subproblems</span></label>
+                                <label class="option-label"><input type="radio" name="q8" value="1" required><span>Greedy guarantees optimal solution, DP only gives approximations</span></label>
+                                <label class="option-label"><input type="radio" name="q8" value="2" required><span>Both store all intermediate results, but Greedy uses less memory</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q9</div>
+                            <div class="question-text">Given this Activity Selection code, what happens?<br><br>
+<div class="code-block">activities = [(9,10), (9.5,10.5), (10,11)]
+Sort by finish time
+Pick first: (9,10)
+Next that starts >= 10?</div></div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q9" value="0" required><span>Pick (10,11) - starts at 10</span></label>
+                                <label class="option-label"><input type="radio" name="q9" value="1" required><span>Pick (9.5,10.5) - overlaps</span></label>
+                                <label class="option-label"><input type="radio" name="q9" value="2" required><span>Stop - no more activities</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q10</div>
+                            <div class="question-text">What is the greedy choice property?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q10" value="0" required><span>Locally optimal choices lead to globally optimal solution</span></label>
+                                <label class="option-label"><input type="radio" name="q10" value="1" required><span>Choosing the option with maximum immediate value at each step</span></label>
+                                <label class="option-label"><input type="radio" name="q10" value="2" required><span>Making choices that minimize the number of subproblems</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q11</div>
+                            <div class="question-text">When does greedy fail?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q11" value="0" required><span>When local optimal choices don't lead to global optimum</span></label>
+                                <label class="option-label"><input type="radio" name="q11" value="1" required><span>When the problem has overlapping subproblems</span></label>
+                                <label class="option-label"><input type="radio" name="q11" value="2" required><span>When the input size is too large for exponential time</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q12</div>
+                            <div class="question-text">What is a canonical coin system?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q12" value="0" required><span>Any random coins</span></label>
+                                <label class="option-label"><input type="radio" name="q12" value="1" required><span>Standard systems where greedy works (Euro, US)</span></label>
+                                <label class="option-label"><input type="radio" name="q12" value="2" required><span>Non-standard coins</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q13</div>
+                            <div class="question-text">How does greedy build solutions?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q13" value="0" required><span>All at once</span></label>
+                                <label class="option-label"><input type="radio" name="q13" value="1" required><span>Incrementally step-by-step</span></label>
+                                <label class="option-label"><input type="radio" name="q13" value="2" required><span>By using backtracking</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q14</div>
+                            <div class="question-text">Does greedy reverse/change past choices?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q14" value="0" required><span>Yes, frequently</span></label>
+                                <label class="option-label"><input type="radio" name="q14" value="1" required><span>No - choices are final</span></label>
+                                <label class="option-label"><input type="radio" name="q14" value="2" required><span>Sometimes</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q15</div>
+                            <div class="question-text">Dijkstra's algorithm is an example of?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q15" value="0" required><span>Greedy algorithm</span></label>
+                                <label class="option-label"><input type="radio" name="q15" value="1" required><span>Dynamic Programming</span></label>
+                                <label class="option-label"><input type="radio" name="q15" value="2" required><span>Backtracking</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q16</div>
+                            <div class="question-text">Coin Change: coins [4,3,1], target 6. What does greedy give?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q18" value="0" required><span>4+1+1 = 3 coins</span></label>
+                                <label class="option-label"><input type="radio" name="q18" value="1" required><span>3+3 = 2 coins</span></label>
+                                <label class="option-label"><input type="radio" name="q18" value="2" required><span>6×1 = 6 coins</span></label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-quiz">Submit Quiz</button>
+                    </form>
+                    <div id="mcq-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <script>
         // Quiz Configuration
         const QUIZ_CONFIG = {
             'chapter10-mcq': {
@@ -487,18 +680,18 @@ Volgende die start &gt;= 10?</div></div>
             for (let i = 0; i < config.total; i++) {
                 const questionName = `${questionPrefix}${i + 1}`;
                 const userAnswer = parseInt(userAnswers[questionName]);
-                const juistAnswer = config.answers[i];
+                const correctAnswer = config.answers[i];
                 
                 form.querySelectorAll(`input[name="${questionName}"]`).forEach(input => {
                     const label = input.closest('.option-label');
                     const value = parseInt(input.value);
                     
-                    label.classList.remove('juist', 'injuist');
+                    label.classList.remove('correct', 'incorrect');
                     
-                    if (value === juistAnswer) {
-                        label.classList.add('juist');
-                    } else if (value === userAnswer && value !== juistAnswer) {
-                        label.classList.add('injuist');
+                    if (value === correctAnswer) {
+                        label.classList.add('correct');
+                    } else if (value === userAnswer && value !== correctAnswer) {
+                        label.classList.add('incorrect');
                     }
                     
                     input.disabled = true;
@@ -518,7 +711,7 @@ Volgende die start &gt;= 10?</div></div>
                 resetBtn = document.createElement('button');
                 resetBtn.type = 'button';
                 resetBtn.className = 'reset-quiz';
-                resetBtn.textContent = '🔄 Quiz opnieuw starten';
+                resetBtn.textContent = '🔄 Reset Quiz';
                 resetBtn.onclick = function() { resetQuiz(formId, quizId); };
                 submitBtn.parentNode.insertBefore(resetBtn, submitBtn.nextSibling);
             }
@@ -537,7 +730,7 @@ Volgende die start &gt;= 10?</div></div>
             
             // Remove all feedback styling
             form.querySelectorAll('.option-label').forEach(label => {
-                label.classList.remove('juist', 'injuist');
+                label.classList.remove('correct', 'incorrect');
             });
             
             // Re-enable all inputs
@@ -574,7 +767,7 @@ Volgende die start &gt;= 10?</div></div>
             const formData = new FormData(form);
             const questionPrefix = quizId.includes('mcq') ? 'q' : quizId.includes('tf') ? 'tf' : 'code';
             
-            let juist = 0;
+            let correct = 0;
             const userAnswers = {};
             
             for (let i = 0; i < config.total; i++) {
@@ -583,14 +776,14 @@ Volgende die start &gt;= 10?</div></div>
                 userAnswers[questionName] = selected;
                 
                 if (selected === config.answers[i]) {
-                    juist++;
+                    correct++;
                 }
             }
             
             // Save results
             saveQuizData(quizId, {
                 userAnswers: userAnswers,
-                score: juist,
+                score: correct,
                 total: config.total,
                 submitted: true,
                 timestamp: new Date().toISOString()
@@ -601,24 +794,24 @@ Volgende die start &gt;= 10?</div></div>
             
             // Show result
             const resultId = formId.replace('-form', '-result');
-            showResult(resultId, juist, config.total);
+            showResult(resultId, correct, config.total);
         }
 
         // Show quiz result
-        function showResult(elementId, juist, total) {
-            const percentage = (juist / total) * 100;
+        function showResult(elementId, correct, total) {
+            const percentage = (correct / total) * 100;
             const resultDiv = document.getElementById(elementId);
             
             let resultClass, message;
             if (percentage >= 80) {
                 resultClass = 'excellent';
-                message = `🎉 Uitstekend! ${juist}/${total} juist (${percentage.toFixed(0)}%)`;
+                message = `🎉 Excellent! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
             } else if (percentage >= 60) {
                 resultClass = 'good';
-                message = `👍 Goed gedaan! ${juist}/${total} juist (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
+                message = `👍 Good job! ${correct}/${total} correct (${percentage.toFixed(0)}%). Review the concepts you missed.`;
             } else {
                 resultClass = 'needs-work';
-                message = `📚 ${juist}/${total} juist (${percentage.toFixed(0)}%). Bestudeer de samenvatting en probeer opnieuw!`;
+                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Study the summary and try again!`;
             }
             
             resultDiv.className = `quiz-result ${resultClass}`;
@@ -636,5 +829,37 @@ Volgende die start &gt;= 10?</div></div>
             }
         });
     </script>
+
+<script>
+        // Mobiel burgermenu
+        (function () {
+            const toggle = document.querySelector('.menu-toggle');
+            const menu = document.getElementById('mobile-menu');
+            if (!toggle || !menu) return;
+
+            toggle.addEventListener('click', function () {
+                const isOpen = menu.classList.toggle('open');
+                toggle.setAttribute('aria-expanded', String(isOpen));
+                toggle.textContent = isOpen ? '×' : '☰';
+            });
+
+            menu.querySelectorAll('a').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    menu.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    toggle.textContent = '☰';
+                });
+            });
+
+            document.addEventListener('keydown', function (event) {
+                if (event.key === 'Escape') {
+                    menu.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    toggle.textContent = '☰';
+                }
+            });
+        })();
+</script>
+
 </body>
 </html>
