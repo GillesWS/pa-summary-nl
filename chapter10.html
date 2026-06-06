@@ -261,13 +261,235 @@
             }
         }
 
+    
+
+        /* Telefoonvriendelijke verbeteringen */
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        @media (max-width: 900px) {
+            .navbar {
+                padding: 0.75rem 1rem !important;
+            }
+
+            .navbar-content {
+                display: grid !important;
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: center;
+                gap: 0.75rem;
+            }
+
+            .chapter-header {
+                font-size: 0.95rem !important;
+                line-height: 1.3 !important;
+                max-width: none !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .back-button {
+                display: none !important;
+            }
+
+            .menu-toggle {
+                display: inline-flex !important;
+                gap: 0.45rem;
+                width: auto !important;
+                min-width: 44px;
+                height: 42px;
+                padding: 0 0.8rem;
+                font-size: 1rem;
+                flex: 0 0 auto;
+            }
+
+            .menu-icon {
+                font-size: 1.25rem;
+                line-height: 1;
+            }
+
+            .menu-label {
+                font-size: 0.95rem;
+                font-weight: 700;
+            }
+
+            .mobile-menu-backdrop {
+                position: fixed;
+                inset: 0;
+                background: rgba(22, 29, 37, 0.42);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.25s ease;
+                z-index: 140;
+            }
+
+            body.menu-open .mobile-menu-backdrop {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .mobile-menu {
+                display: block !important;
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: min(86vw, 340px);
+                height: 100vh;
+                margin: 0 !important;
+                padding: 4.75rem 0.9rem 1rem !important;
+                border-radius: 18px 0 0 18px;
+                box-shadow: -10px 0 32px rgba(0, 0, 0, 0.18);
+                background: rgba(255, 255, 255, 0.99);
+                overflow-y: auto;
+                transform: translateX(100%);
+                transition: transform 0.25s ease;
+                z-index: 150;
+            }
+
+            .mobile-menu.open {
+                display: block !important;
+                transform: translateX(0);
+            }
+
+            .mobile-menu a {
+                display: block;
+                padding: 0.9rem 1rem;
+                margin-bottom: 0.35rem;
+                border-radius: 12px;
+            }
+
+            .container {
+                padding: 1rem !important;
+            }
+
+            .section-tabs {
+                top: 64px !important;
+                margin: 0 -1rem 1rem !important;
+                padding: 0.7rem 1rem !important;
+                border-bottom: none !important;
+                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+                background: rgba(255, 255, 255, 0.96) !important;
+                backdrop-filter: blur(8px);
+                gap: 0.5rem !important;
+                flex-wrap: nowrap !important;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+
+            .section-tabs::-webkit-scrollbar {
+                display: none;
+            }
+
+            .section-tab {
+                flex: 0 0 auto;
+                white-space: nowrap;
+                padding: 0.7rem 0.95rem !important;
+                font-size: 0.86rem !important;
+                letter-spacing: 0 !important;
+                text-transform: none !important;
+                border: 1px solid #e2e8f0;
+                border-bottom: none !important;
+                border-radius: 999px;
+                background: #f3f6fb;
+                color: var(--primary);
+            }
+
+            .section-tab.active {
+                background: var(--primary);
+                color: white;
+                border-color: var(--primary);
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+
+            .summary-card,
+            .quiz-section,
+            .quiz-question {
+                padding: 1rem !important;
+                border-radius: 14px;
+            }
+
+            .summary-card h3 {
+                font-size: 1.3rem !important;
+            }
+
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                border-radius: 12px;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.8rem !important;
+            }
+
+            .code-block {
+                font-size: 0.78rem !important;
+                padding: 0.85rem !important;
+            }
+
+            .flashcard-question,
+            .flashcard-answer {
+                padding: 1rem !important;
+            }
+
+            .option-label {
+                padding: 0.9rem !important;
+                align-items: flex-start !important;
+            }
+
+            .option-label.correct::after,
+            .option-label.incorrect::after {
+                display: block;
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chapter-header {
+                font-size: 0.88rem !important;
+            }
+
+            .menu-label {
+                display: none;
+            }
+
+            .menu-toggle {
+                padding: 0 0.7rem;
+            }
+
+            .container {
+                padding: 0.85rem !important;
+            }
+
+            .section-tabs {
+                top: 60px !important;
+                margin: 0 -0.85rem 1rem !important;
+                padding: 0.65rem 0.85rem !important;
+            }
+
+            .section-tab {
+                font-size: 0.82rem !important;
+                padding: 0.65rem 0.85rem !important;
+            }
+        }
+
     </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar-content">
             <div class="chapter-header">Chapter 10: Greedy Algorithms</div>
-            <button class="menu-toggle" type="button" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-menu">☰</button>
+            <button class="menu-toggle" type="button" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-menu"><span class="menu-icon">☰</span><span class="menu-label">Menu</span></button>
             <a href="index.html" class="back-button">← Back to Chapters</a>
         </div>
         <div id="mobile-menu" class="mobile-menu" aria-label="Hoofdstuknavigatie">
@@ -830,36 +1052,61 @@ Next that starts >= 10?</div></div>
         });
     </script>
 
+
 <script>
-        // Mobiel burgermenu
+        // Verbeterd mobiel menu
         (function () {
             const toggle = document.querySelector('.menu-toggle');
             const menu = document.getElementById('mobile-menu');
+            const backdrop = document.getElementById('mobile-menu-backdrop');
             if (!toggle || !menu) return;
 
+            const icon = toggle.querySelector('.menu-icon') || toggle;
+
+            function openMenu() {
+                menu.classList.add('open');
+                document.body.classList.add('menu-open');
+                toggle.setAttribute('aria-expanded', 'true');
+                if (icon) icon.textContent = '×';
+            }
+
+            function closeMenu() {
+                menu.classList.remove('open');
+                document.body.classList.remove('menu-open');
+                toggle.setAttribute('aria-expanded', 'false');
+                if (icon) icon.textContent = '☰';
+            }
+
             toggle.addEventListener('click', function () {
-                const isOpen = menu.classList.toggle('open');
-                toggle.setAttribute('aria-expanded', String(isOpen));
-                toggle.textContent = isOpen ? '×' : '☰';
+                if (menu.classList.contains('open')) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
             });
 
+            if (backdrop) {
+                backdrop.addEventListener('click', closeMenu);
+            }
+
             menu.querySelectorAll('a').forEach(function (link) {
-                link.addEventListener('click', function () {
-                    menu.classList.remove('open');
-                    toggle.setAttribute('aria-expanded', 'false');
-                    toggle.textContent = '☰';
-                });
+                link.addEventListener('click', closeMenu);
             });
 
             document.addEventListener('keydown', function (event) {
                 if (event.key === 'Escape') {
-                    menu.classList.remove('open');
-                    toggle.setAttribute('aria-expanded', 'false');
-                    toggle.textContent = '☰';
+                    closeMenu();
+                }
+            });
+
+            window.addEventListener('resize', function () {
+                if (window.innerWidth > 900) {
+                    closeMenu();
                 }
             });
         })();
 </script>
+
 
 </body>
 </html>
