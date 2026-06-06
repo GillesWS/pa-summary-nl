@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 8: Graphs - Programming Advanced</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hoofdstuk 8: Grafen - Programming Advanced</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #2d3561; --secondary: #4a90e2; --accent: #ff6b6b; --success: #51cf66; --warning: #ffd93d; --bg: #f8f9fa; }
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: #2c3e50; line-height: 1.6; }
@@ -111,257 +112,246 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-content">
-            <div class="chapter-header">Chapter 8: Graphs</div>
-            <a href="index.html" class="back-button">← Back</a>
-        </div>
-    </nav>
-    <div class="container">
-        <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
-            <button class="section-tab active" onclick="switchSection('summary')">📚 Summary</button>
-            <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-            <button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
-        </div>
-
-        <div id="summary" class="section-content active">
-            <div class="summary-grid">
-                <div class="summary-card">
-                    <h3> What are Graphs?</h3>
-                    <p><strong>Definition:</strong> Non-linear data structure with vertices (nodes) and edges (connections)</p>
-                    <h4>Components:</h4>
-                    <ul><li><strong>Vertices/Nodes:</strong> Points in graph</li><li><strong>Edges:</strong> Connections between vertices</li></ul>
-                    <h4>Types:</h4>
-                    <ul><li><strong>Directed:</strong> One-way edges</li><li><strong>Undirected:</strong> Two-way edges</li><li><strong>Weighted:</strong> Edges have costs</li><li><strong>Unweighted:</strong> All edges equal</li></ul>
-                </div>
-
-                <div class="summary-card">
-                    <h3>A lot of different graphs</h3>
-                    <h4>Types of Graphs:</h4>
-                    <ul>
-                        <li><strong>Undirected:</strong> Relationships are mutual (eg roads between cities)</li>
-                        <li><strong>Directed:</strong> Edges indicate a direction (like parents/children)</li>
-                        <li><strong>Disconnected:</strong> One or more nodes are not connected (like continents)</li>
-                        <li><strong>Acyclic:</strong> No cycles</li>
-                        <li><strong>Complete:</strong> Every node is connected to every other node</li>
-                        <li><strong>Weighted:</strong> Edges between nodes have a weight</li>
-                    </ul>
-                </div>
-
-
-
-                <div class="summary-card">
-                    <h3> DFS - Depth First Search</h3>
-                    <p><strong>Strategy:</strong> Go deep, explore one path completely before backtracking</p>
-                    <h4>Implementation:</h4>
-                    <ul><li>Use Stack (or recursion)</li><li>Track visited nodes</li><li>LIFO order</li></ul>
-                    <div class="code-block">DFS(node, visited):
-  mark node as visited
+<nav class="navbar">
+<div class="navbar-content">
+<div class="chapter-header">Hoofdstuk 8: Grafen</div>
+<a class="back-button" href="index.html">← Terug</a>
+</div>
+</nav>
+<div class="container">
+<div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
+<button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
+<button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
+<button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
+</div>
+<div class="section-content active" id="summary">
+<div class="summary-grid">
+<div class="summary-card">
+<h3> Wat zijn grafen?</h3>
+<p><strong>Definitie:</strong> Niet-lineaire datastructuur met vertices (knopen) en edges (verbindingen)</p>
+<h4>Onderdelen:</h4>
+<ul><li><strong>Vertices/knopen:</strong> Punten in de graaf</li><li><strong>Edges/verbindingen:</strong> Verbindingen tussen vertices</li></ul>
+<h4>Types:</h4>
+<ul><li><strong>Gericht:</strong> Verbindingen in één richting</li><li><strong>Ongericht:</strong> Verbindingen in twee richtingen</li><li><strong>Gewogen:</strong> Verbindingen hebben kosten</li><li><strong>Ongewogen:</strong> Alle verbindingen zijn gelijk</li></ul>
+</div>
+<div class="summary-card">
+<h3>Er bestaan veel verschillende grafen</h3>
+<h4>Types grafen:</h4>
+<ul>
+<li><strong>Ongericht:</strong> Relaties zijn wederzijds (bv. wegen tussen steden)</li>
+<li><strong>Gericht:</strong> Verbindingen geven een richting aan (zoals ouders/kinderen)</li>
+<li><strong>Niet-verbonden:</strong> Eén of meer knopen zijn niet verbonden (zoals continenten)</li>
+<li><strong>Acyclisch:</strong> Geen cycli</li>
+<li><strong>Compleet:</strong> Elke knoop is verbonden met elke andere knoop</li>
+<li><strong>Gewogen:</strong> Verbindingen tussen knopen hebben een gewicht</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> DFS - Depth-first search</h3>
+<p><strong>Strategie:</strong> Ga diep: verken één pad volledig voordat je backtrackt</p>
+<h4>Implementation:</h4>
+<ul><li>Gebruik een stack (of recursie)</li><li>Houd bezochte knopen bij</li><li>LIFO-volgorde</li></ul>
+<div class="code-block">DFS(node, visited):
+  markeer knoop as bezocht
   FOR each neighbor of node:
     IF neighbor not visited:
       DFS(neighbor, visited)</div>
-                    <p><strong>Complexity:</strong> O(V + E) where V=vertices, E=edges</p>
-                </div>
-
-                <div class="summary-card">
-                    <h3> BFS - Breadth First Search</h3>
-                    <p><strong>Strategy:</strong> Go wide, explore all neighbors before moving deeper</p>
-                    <h4>Implementation:</h4>
-                    <ul><li>Use Queue</li><li>Track visited nodes</li><li>FIFO order</li></ul>
-                    <div class="code-block">BFS(start):
-  queue = [start]
-  mark start as visited
+<p><strong>Complexiteit:</strong> O(V + E) where V=vertices, E=edges</p>
+</div>
+<div class="summary-card">
+<h3> BFS - Breadth-first search</h3>
+<p><strong>Strategie:</strong> Ga breed: verken alle buren voordat je dieper gaat</p>
+<h4>Implementation:</h4>
+<ul><li>Gebruik een wachtrij</li><li>Houd bezochte knopen bij</li><li>FIFO-volgorde</li></ul>
+<div class="code-block">BFS(start):
+  wachtrij = [start]
+  markeer start as bezocht
   WHILE queue not empty:
     node = dequeue()
     FOR each neighbor:
       IF not visited:
-        mark visited
+        markeer bezocht
         enqueue(neighbor)</div>
-                    <p><strong>Complexity:</strong> O(V + E)</p>
-                </div>
-
-                <div class="summary-card">
-                    <h3>🆚 DFS vs BFS</h3>
-                    <h4>DFS (Stack/Recursion):</h4>
-                    <ul><li><strong>+</strong> Less memory for deep graphs</li><li><strong>+</strong> Good for detecting cycles</li><li><strong>-</strong> Doesn't guarantee shortest path</li></ul>
-                    <h4>BFS (Queue):</h4>
-                    <ul><li><strong>+</strong> Finds shortest path (unweighted)</li><li><strong>+</strong> Level-by-level exploration</li><li><strong>-</strong> More memory for wide graphs</li></ul>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Graph Representations</h3>
-                    <h4>Adjacency Matrix:</h4>
-                    <ul><li>2D array [V][V]</li><li>Space: O(V²)</li><li>Check edge: O(1)</li><li>Good for dense graphs</li></ul>
-                    <h4>Adjacency List:</h4>
-                    <ul><li>Array of lists</li><li>Space: O(V + E)</li><li>Check edge: O(degree)</li><li>Good for sparse graphs</li></ul>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Key Takeaways</h3>
-                    <ul>
-                        <li>Graphs = vertices + edges</li>
-                        <li>DFS: Stack, go deep</li>
-                        <li>BFS: Queue, go wide</li>
-                        <li>BFS finds shortest path (unweighted)</li>
-                        <li>Both O(V + E) complexity</li>
-                        <li>Track visited to avoid infinite loops</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div id="flashcards" class="section-content">
-            <div class="quiz-container">
-                <div class="quiz-section">
-                    <h3>📇 Flashcards</h3>
-                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">What is a graph?<span>▼</span></div><div class="flashcard-answer">Data structure with vertices (nodes) and edges (connections)</div></div>
-                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">DFS data structure?<span>▼</span></div><div class="flashcard-answer">Stack (or recursion) - LIFO</div></div>
-                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">BFS data structure?<span>▼</span></div><div class="flashcard-answer">Queue - FIFO</div></div>
-                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">BFS finds shortest path?<span>▼</span></div><div class="flashcard-answer">Yes, for unweighted graphs</div></div>
-                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Graph traversal complexity?<span>▼</span></div><div class="flashcard-answer">O(V + E) for both DFS and BFS</div></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="quiz" class="section-content">
-            <div class="quiz-container">
-                <div class="quiz-section">
-                    <h3>✅ Quiz</h3>
-                    <form id="mcq-form">
-                        <div class="quiz-question">
-                            <div class="question-number">Q1</div>
-                            <div class="question-text">What is a graph?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q1" value="0" required><span>Linear data structure</span></label><label class="option-label"><input type="radio" name="q1" value="1" required><span>Collection of vertices and edges</span></label><label class="option-label"><input type="radio" name="q1" value="2" required><span>Sorting algorithm</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q2</div>
-                            <div class="question-text">DFS uses which data structure?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q2" value="0" required><span>Queue</span></label><label class="option-label"><input type="radio" name="q2" value="1" required><span>Stack</span></label><label class="option-label"><input type="radio" name="q2" value="2" required><span>Array</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q3</div>
-                            <div class="question-text">BFS uses which data structure?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q3" value="0" required><span>Stack</span></label><label class="option-label"><input type="radio" name="q3" value="1" required><span>Queue</span></label><label class="option-label"><input type="radio" name="q3" value="2" required><span>Tree</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q4</div>
-                            <div class="question-text">Time complexity of DFS?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q4" value="0" required><span>O(V)</span></label><label class="option-label"><input type="radio" name="q4" value="1" required><span>O(V + E)</span></label><label class="option-label"><input type="radio" name="q4" value="2" required><span>O(V²)</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q5</div>
-                            <div class="question-text">Which finds shortest path in unweighted graph?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q5" value="0" required><span>DFS</span></label><label class="option-label"><input type="radio" name="q5" value="1" required><span>BFS</span></label><label class="option-label"><input type="radio" name="q5" value="2" required><span>Neither</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q6</div>
-                            <div class="question-text">What is a vertex?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q6" value="0" required><span>Connection</span></label><label class="option-label"><input type="radio" name="q6" value="1" required><span>Node</span></label><label class="option-label"><input type="radio" name="q6" value="2" required><span>Algorithm</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q7</div>
-                            <div class="question-text">What is an edge?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q7" value="0" required><span>Node</span></label><label class="option-label"><input type="radio" name="q7" value="1" required><span>Connection between nodes</span></label><label class="option-label"><input type="radio" name="q7" value="2" required><span>Path</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q8</div>
-                            <div class="question-text">DFS explores:</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q8" value="0" required><span>Wide first</span></label><label class="option-label"><input type="radio" name="q8" value="1" required><span>Deep first</span></label><label class="option-label"><input type="radio" name="q8" value="2" required><span>Random</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q9</div>
-                            <div class="question-text">BFS explores:</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q9" value="0" required><span>Deep first</span></label><label class="option-label"><input type="radio" name="q9" value="1" required><span>Wide/level-by-level</span></label><label class="option-label"><input type="radio" name="q9" value="2" required><span>Random</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q10</div>
-                            <div class="question-text">Why track visited nodes?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q10" value="0" required><span>Speed</span></label><label class="option-label"><input type="radio" name="q10" value="1" required><span>Avoid infinite loops</span></label><label class="option-label"><input type="radio" name="q10" value="2" required><span>Save memory</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q11</div>
-                            <div class="question-text">Adjacency matrix space?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q11" value="0" required><span>O(V)</span></label><label class="option-label"><input type="radio" name="q11" value="1" required><span>O(E)</span></label><label class="option-label"><input type="radio" name="q11" value="2" required><span>O(V²)</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q12</div>
-                            <div class="question-text">Adjacency list space?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q12" value="0" required><span>O(V + E)</span></label><label class="option-label"><input type="radio" name="q12" value="1" required><span>O(V²)</span></label><label class="option-label"><input type="radio" name="q12" value="2" required><span>O(E²)</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q13</div>
-                            <div class="question-text">Given DFS code, what order?<br><div class="code-block">DFS(A):\n  visit A\n  DFS(B)\n  DFS(C)</div></div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q13" value="0" required><span>A,B,C</span></label><label class="option-label"><input type="radio" name="q13" value="1" required><span>A,C,B</span></label><label class="option-label"><input type="radio" name="q13" value="2" required><span>C,B,A</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q14</div>
-                            <div class="question-text">Directed graph means:</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q14" value="0" required><span>Two-way edges</span></label><label class="option-label"><input type="radio" name="q14" value="1" required><span>One-way edges</span></label><label class="option-label"><input type="radio" name="q14" value="2" required><span>No cycles</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q15</div>
-                            <div class="question-text">Undirected graph means:</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q15" value="0" required><span>Two-way edges</span></label><label class="option-label"><input type="radio" name="q15" value="1" required><span>One-way edges</span></label><label class="option-label"><input type="radio" name="q15" value="2" required><span>Weighted</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q16</div>
-                            <div class="question-text">Weighted graph has:</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q16" value="0" required><span>Directed edges</span></label><label class="option-label"><input type="radio" name="q16" value="1" required><span>Costs on edges</span></label><label class="option-label"><input type="radio" name="q16" value="2" required><span>No edges</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q17</div>
-                            <div class="question-text">DFS order: A→B→C, B→D?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q17" value="0" required><span>A,B,D,C</span></label><label class="option-label"><input type="radio" name="q17" value="1" required><span>A,B,C,D</span></label><label class="option-label"><input type="radio" name="q17" value="2" required><span>A,D,B,C</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q18</div>
-                            <div class="question-text">BFS starting at A, neighbors [B,C], B neighbors [D]?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q18" value="0" required><span>A,B,D,C</span></label><label class="option-label"><input type="radio" name="q18" value="1" required><span>A,B,C,D</span></label><label class="option-label"><input type="radio" name="q18" value="2" required><span>A,D,B,C</span></label>
-                            </div>
-                        </div>
-                        <button type="submit" class="submit-quiz">Submit</button>
-                    </form>
-                    <div id="mcq-result"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-        <script>
+<p><strong>Complexiteit:</strong> O(V + E)</p>
+</div>
+<div class="summary-card">
+<h3>🆚 DFS vs BFS</h3>
+<h4>DFS (stack/recursie):</h4>
+<ul><li><strong>+</strong> Minder geheugen voor diepe grafen</li><li><strong>+</strong> Goed om cycli te detecteren</li><li><strong>-</strong> Garandeert geen kortste pad</li></ul>
+<h4>BFS (wachtrij):</h4>
+<ul><li><strong>+</strong> Vindt het kortste pad (ongewogen)</li><li><strong>+</strong> Verkenning niveau per niveau</li><li><strong>-</strong> Meer geheugen voor brede grafen</li></ul>
+</div>
+<div class="summary-card">
+<h3> Graafrepresentaties</h3>
+<h4>Adjacentiematrix:</h4>
+<ul><li>2D-array [V][V]</li><li>Ruimte: O(V²)</li><li>Controleer verbinding: O(1)</li><li>Goed voor dense grafen</li></ul>
+<h4>Adjacentielijst:</h4>
+<ul><li>Array van lijsten</li><li>Ruimte: O(V + E)</li><li>Controleer verbinding: O(graad)</li><li>Goed voor sparse grafen</li></ul>
+</div>
+<div class="summary-card">
+<h3> Belangrijkste inzichten</h3>
+<ul>
+<li>Grafen = vertices + edges</li>
+<li>DFS: stack, ga diep</li>
+<li>BFS: wachtrij, ga breed</li>
+<li>BFS vindt het kortste pad (ongewogen)</li>
+<li>Beide hebben O(V + E)-complexiteit</li>
+<li>Houd visited bij om oneindige lussen te vermijden</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section-content" id="flashcards">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>📇 Flashcards</h3>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Wat is een graaf?<span>▼</span></div><div class="flashcard-answer">Datastructuur met vertices (knopen) en edges (verbindingen)</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Datastructuur voor DFS?<span>▼</span></div><div class="flashcard-answer">Stack (of recursie) - LIFO</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Datastructuur voor BFS?<span>▼</span></div><div class="flashcard-answer">Wachtrij - FIFO</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Vindt BFS het kortste pad?<span>▼</span></div><div class="flashcard-answer">Ja, voor ongewogen grafen</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Complexiteit van graaftraversal?<span>▼</span></div><div class="flashcard-answer">O(V + E) voor zowel DFS als BFS</div></div>
+</div>
+</div>
+</div>
+<div class="section-content" id="quiz">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>✅ Quiz</h3>
+<form id="mcq-form">
+<div class="quiz-question">
+<div class="question-number">V1</div>
+<div class="question-text">Wat is een graaf?</div>
+<div class="options">
+<label class="option-label"><input name="q1" required="" type="radio" value="0"/><span>Lineaire datastructuur</span></label><label class="option-label"><input name="q1" required="" type="radio" value="1"/><span>Verzameling van vertices en edges</span></label><label class="option-label"><input name="q1" required="" type="radio" value="2"/><span>Sorteeralgoritme</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V2</div>
+<div class="question-text">Welke datastructuur gebruikt DFS?</div>
+<div class="options">
+<label class="option-label"><input name="q2" required="" type="radio" value="0"/><span>Wachtrij</span></label><label class="option-label"><input name="q2" required="" type="radio" value="1"/><span>Stack</span></label><label class="option-label"><input name="q2" required="" type="radio" value="2"/><span>Array</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V3</div>
+<div class="question-text">Welke datastructuur gebruikt BFS?</div>
+<div class="options">
+<label class="option-label"><input name="q3" required="" type="radio" value="0"/><span>Stack</span></label><label class="option-label"><input name="q3" required="" type="radio" value="1"/><span>Wachtrij</span></label><label class="option-label"><input name="q3" required="" type="radio" value="2"/><span>Boom</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V4</div>
+<div class="question-text">Tijdcomplexiteit van DFS?</div>
+<div class="options">
+<label class="option-label"><input name="q4" required="" type="radio" value="0"/><span>O(V)</span></label><label class="option-label"><input name="q4" required="" type="radio" value="1"/><span>O(V + E)</span></label><label class="option-label"><input name="q4" required="" type="radio" value="2"/><span>O(V²)</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V5</div>
+<div class="question-text">Welke vindt het kortste pad in een ongewogen graaf?</div>
+<div class="options">
+<label class="option-label"><input name="q5" required="" type="radio" value="0"/><span>DFS</span></label><label class="option-label"><input name="q5" required="" type="radio" value="1"/><span>BFS</span></label><label class="option-label"><input name="q5" required="" type="radio" value="2"/><span>Geen van beide</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V6</div>
+<div class="question-text">Wat is een vertex?</div>
+<div class="options">
+<label class="option-label"><input name="q6" required="" type="radio" value="0"/><span>Verbinding</span></label><label class="option-label"><input name="q6" required="" type="radio" value="1"/><span>Knoop</span></label><label class="option-label"><input name="q6" required="" type="radio" value="2"/><span>Algoritme</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V7</div>
+<div class="question-text">Wat is een edge?</div>
+<div class="options">
+<label class="option-label"><input name="q7" required="" type="radio" value="0"/><span>Knoop</span></label><label class="option-label"><input name="q7" required="" type="radio" value="1"/><span>Verbinding tussen knopen</span></label><label class="option-label"><input name="q7" required="" type="radio" value="2"/><span>Pad</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V8</div>
+<div class="question-text">DFS verkent:</div>
+<div class="options">
+<label class="option-label"><input name="q8" required="" type="radio" value="0"/><span>Eerst breed</span></label><label class="option-label"><input name="q8" required="" type="radio" value="1"/><span>Eerst diep</span></label><label class="option-label"><input name="q8" required="" type="radio" value="2"/><span>Willekeurig</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V9</div>
+<div class="question-text">BFS verkent:</div>
+<div class="options">
+<label class="option-label"><input name="q9" required="" type="radio" value="0"/><span>Eerst diep</span></label><label class="option-label"><input name="q9" required="" type="radio" value="1"/><span>Breed/niveau per niveau</span></label><label class="option-label"><input name="q9" required="" type="radio" value="2"/><span>Willekeurig</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V10</div>
+<div class="question-text">Waarom houd je bezochte knopen bij?</div>
+<div class="options">
+<label class="option-label"><input name="q10" required="" type="radio" value="0"/><span>Snelheid</span></label><label class="option-label"><input name="q10" required="" type="radio" value="1"/><span>Oneindige lussen vermijden</span></label><label class="option-label"><input name="q10" required="" type="radio" value="2"/><span>Geheugen besparen</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V11</div>
+<div class="question-text">Ruimte van adjacentiematrix?</div>
+<div class="options">
+<label class="option-label"><input name="q11" required="" type="radio" value="0"/><span>O(V)</span></label><label class="option-label"><input name="q11" required="" type="radio" value="1"/><span>O(E)</span></label><label class="option-label"><input name="q11" required="" type="radio" value="2"/><span>O(V²)</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V12</div>
+<div class="question-text">Ruimte van adjacentielijst?</div>
+<div class="options">
+<label class="option-label"><input name="q12" required="" type="radio" value="0"/><span>O(V + E)</span></label><label class="option-label"><input name="q12" required="" type="radio" value="1"/><span>O(V²)</span></label><label class="option-label"><input name="q12" required="" type="radio" value="2"/><span>O(E²)</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V13</div>
+<div class="question-text">Given DFS code, wat volgorde?<br/><div class="code-block">DFS(A):\n  visit A\n  DFS(B)\n  DFS(C)</div></div>
+<div class="options">
+<label class="option-label"><input name="q13" required="" type="radio" value="0"/><span>A,B,C</span></label><label class="option-label"><input name="q13" required="" type="radio" value="1"/><span>A,C,B</span></label><label class="option-label"><input name="q13" required="" type="radio" value="2"/><span>C,B,A</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V14</div>
+<div class="question-text">Gerichte graaf betekent:</div>
+<div class="options">
+<label class="option-label"><input name="q14" required="" type="radio" value="0"/><span>Verbindingen in twee richtingen</span></label><label class="option-label"><input name="q14" required="" type="radio" value="1"/><span>Verbindingen in één richting</span></label><label class="option-label"><input name="q14" required="" type="radio" value="2"/><span>Geen cycli</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V15</div>
+<div class="question-text">Ongerichte graaf betekent:</div>
+<div class="options">
+<label class="option-label"><input name="q15" required="" type="radio" value="0"/><span>Verbindingen in twee richtingen</span></label><label class="option-label"><input name="q15" required="" type="radio" value="1"/><span>Verbindingen in één richting</span></label><label class="option-label"><input name="q15" required="" type="radio" value="2"/><span>Gewogen</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V16</div>
+<div class="question-text">Gewogen graaf heeft:</div>
+<div class="options">
+<label class="option-label"><input name="q16" required="" type="radio" value="0"/><span>Gericht verbindingen</span></label><label class="option-label"><input name="q16" required="" type="radio" value="1"/><span>Kosten op verbindingen</span></label><label class="option-label"><input name="q16" required="" type="radio" value="2"/><span>Geen verbindingen</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V17</div>
+<div class="question-text">DFS volgorde: A→B→C, B→D?</div>
+<div class="options">
+<label class="option-label"><input name="q17" required="" type="radio" value="0"/><span>A,B,D,C</span></label><label class="option-label"><input name="q17" required="" type="radio" value="1"/><span>A,B,C,D</span></label><label class="option-label"><input name="q17" required="" type="radio" value="2"/><span>A,D,B,C</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V18</div>
+<div class="question-text">BFS starting at A, buren [B,C], B buren [D]?</div>
+<div class="options">
+<label class="option-label"><input name="q18" required="" type="radio" value="0"/><span>A,B,D,C</span></label><label class="option-label"><input name="q18" required="" type="radio" value="1"/><span>A,B,C,D</span></label><label class="option-label"><input name="q18" required="" type="radio" value="2"/><span>A,D,B,C</span></label>
+</div>
+</div>
+<button class="submit-quiz" type="submit">Indienen</button>
+</form>
+<div id="mcq-result"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
         // Quiz Configuration
         const QUIZ_CONFIG = {
             'chapter8-mcq': {
@@ -425,18 +415,18 @@
             for (let i = 0; i < config.total; i++) {
                 const questionName = `${questionPrefix}${i + 1}`;
                 const userAnswer = parseInt(userAnswers[questionName]);
-                const correctAnswer = config.answers[i];
+                const juistAnswer = config.answers[i];
                 
                 form.querySelectorAll(`input[name="${questionName}"]`).forEach(input => {
                     const label = input.closest('.option-label');
                     const value = parseInt(input.value);
                     
-                    label.classList.remove('correct', 'incorrect');
+                    label.classList.remove('juist', 'injuist');
                     
-                    if (value === correctAnswer) {
-                        label.classList.add('correct');
-                    } else if (value === userAnswer && value !== correctAnswer) {
-                        label.classList.add('incorrect');
+                    if (value === juistAnswer) {
+                        label.classList.add('juist');
+                    } else if (value === userAnswer && value !== juistAnswer) {
+                        label.classList.add('injuist');
                     }
                     
                     input.disabled = true;
@@ -456,7 +446,7 @@
                 resetBtn = document.createElement('button');
                 resetBtn.type = 'button';
                 resetBtn.className = 'reset-quiz';
-                resetBtn.textContent = '🔄 Reset Quiz';
+                resetBtn.textContent = '🔄 Quiz opnieuw starten';
                 resetBtn.onclick = function() { resetQuiz(formId, quizId); };
                 submitBtn.parentNode.insertBefore(resetBtn, submitBtn.nextSibling);
             }
@@ -475,7 +465,7 @@
             
             // Remove all feedback styling
             form.querySelectorAll('.option-label').forEach(label => {
-                label.classList.remove('correct', 'incorrect');
+                label.classList.remove('juist', 'injuist');
             });
             
             // Re-enable all inputs
@@ -512,7 +502,7 @@
             const formData = new FormData(form);
             const questionPrefix = quizId.includes('mcq') ? 'q' : quizId.includes('tf') ? 'tf' : 'code';
             
-            let correct = 0;
+            let juist = 0;
             const userAnswers = {};
             
             for (let i = 0; i < config.total; i++) {
@@ -521,14 +511,14 @@
                 userAnswers[questionName] = selected;
                 
                 if (selected === config.answers[i]) {
-                    correct++;
+                    juist++;
                 }
             }
             
             // Save results
             saveQuizData(quizId, {
                 userAnswers: userAnswers,
-                score: correct,
+                score: juist,
                 total: config.total,
                 submitted: true,
                 timestamp: new Date().toISOString()
@@ -539,24 +529,24 @@
             
             // Show result
             const resultId = formId.replace('-form', '-result');
-            showResult(resultId, correct, config.total);
+            showResult(resultId, juist, config.total);
         }
 
         // Show quiz result
-        function showResult(elementId, correct, total) {
-            const percentage = (correct / total) * 100;
+        function showResult(elementId, juist, total) {
+            const percentage = (juist / total) * 100;
             const resultDiv = document.getElementById(elementId);
             
             let resultClass, message;
             if (percentage >= 80) {
                 resultClass = 'excellent';
-                message = `🎉 Excellent! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
+                message = `🎉 Uitstekend! ${juist}/${total} juist (${percentage.toFixed(0)}%)`;
             } else if (percentage >= 60) {
                 resultClass = 'good';
-                message = `👍 Good job! ${correct}/${total} correct (${percentage.toFixed(0)}%). Review the concepts you missed.`;
+                message = `👍 Goed gedaan! ${juist}/${total} juist (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
             } else {
                 resultClass = 'needs-work';
-                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Study the summary and try again!`;
+                message = `📚 ${juist}/${total} juist (${percentage.toFixed(0)}%). Bestudeer de samenvatting en probeer opnieuw!`;
             }
             
             resultDiv.className = `quiz-result ${resultClass}`;

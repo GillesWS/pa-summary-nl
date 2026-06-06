@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 5: Divide & Conquer - Programming Advanced</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hoofdstuk 5: Verdeel en heers - Programming Advanced</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #2d3561; --secondary: #4a90e2; --accent: #ff6b6b; --success: #51cf66; --warning: #ffd93d; --bg: #f8f9fa; --card: #ffffff; --text: #2c3e50; --text-light: #7f8c8d; }
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
@@ -114,57 +115,54 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-content">
-            <div class="chapter-header">Chapter 5: Divide & Conquer</div>
-            <a href="index.html" class="back-button">← Back to Chapters</a>
-        </div>
-    </nav>
-    <div class="container">
-        </div>
-        <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
-            <button class="section-tab active" onclick="switchSection('summary')">📚 Summary</button>
-            <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-            <button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
-        </div>
-
-        <div id="summary" class="section-content active">
-            <div class="summary-grid">
-                <div class="summary-card">
-                    <h3>️ What is Divide & Conquer?</h3>
-                    <p><strong>Definition:</strong> Algorithm design paradigm that breaks problems into smaller subproblems, solves them recursively, and combines results.</p>
-                    <h4>Three Steps:</h4>
-                    <ul>
-                        <li><strong>1. Divide:</strong> Break problem into smaller subproblems</li>
-                        <li><strong>2. Conquer:</strong> Solve each subproblem recursively</li>
-                        <li><strong>3. Combine:</strong> Merge solutions to get final result</li>
-                    </ul>
-                    <div class="highlight-box"><strong>Key Insight:</strong> Transform big problems into manageable pieces!</div>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Quick Sort</h3>
-                    <p><strong>Strategy:</strong> Pick pivot, partition around it, recursively sort partitions</p>
-                    <h4>Algorithm Steps:</h4>
-                    <ul>
-                        <li><strong>1. Pick pivot:</strong> Any element (first, last, random, median)</li>
-                        <li><strong>2. Partition:</strong> Elements < pivot | pivot | elements > pivot</li>
-                        <li><strong>3. Recursively sort:</strong> Both partitions</li>
-                        <li><strong>4. Combine:</strong> [sorted less] + [pivot] + [sorted greater]</li>
-                    </ul>
-                    <h4>Base Case:</h4>
-                    <p>Arrays with 0 or 1 element (already sorted)</p>
-                    <h4>Complexity:</h4>
-                    <ul>
-                        <li><strong>Best/Average:</strong> O(n log n)</li>
-                        <li><strong>Worst:</strong> O(n²) - poor pivot choices</li>
-                        <li><strong>Space:</strong> O(log n) - recursion stack</li>
-                    </ul>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Quick Sort Example</h3>
-                    <div class="code-block">Array: [12, 56, 34, 78, 23]
+<nav class="navbar">
+<div class="navbar-content">
+<div class="chapter-header">Hoofdstuk 5: Verdeel en heers</div>
+<a class="back-button" href="index.html">← Terug naar hoofdstukken</a>
+</div>
+</nav>
+<div class="container">
+</div>
+<div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
+<button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
+<button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
+<button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
+</div>
+<div class="section-content active" id="summary">
+<div class="summary-grid">
+<div class="summary-card">
+<h3>️ Wat is verdeel en heers?</h3>
+<p><strong>Definitie:</strong> Algoritmeontwerp-paradigma dat problemen opbreekt in kleinere deelproblemen, ze recursief oplost en de resultaten combineert.</p>
+<h4>Drie stappen:</h4>
+<ul>
+<li><strong>1. Verdeel:</strong> Breek het probleem op in kleinere deelproblemen</li>
+<li><strong>2. Heers:</strong> Los elk deelprobleem recursief op</li>
+<li><strong>3. Combineer:</strong> Voeg oplossingen samen om het eindresultaat te krijgen</li>
+</ul>
+<div class="highlight-box"><strong>Belangrijk inzicht:</strong> Verander grote problemen in beheersbare stukken!</div>
+</div>
+<div class="summary-card">
+<h3> Quick sort</h3>
+<p><strong>Strategie:</strong> Kies een pivot, partitioneer errond en sorteer de partities recursief</p>
+<h4>Algoritmestappen:</h4>
+<ul>
+<li><strong>1. Kies pivot:</strong> Elk element (eerste, laatste, willekeurig, mediaan)</li>
+<li><strong>2. Partitioneer:</strong> Elementen &lt; pivot | pivot | elementen &gt; pivot</li>
+<li><strong>3. Sorteer recursief:</strong> Beide partities</li>
+<li><strong>4. Combineer:</strong> [gesorteerd kleiner] + [pivot] + [gesorteerd groter]</li>
+</ul>
+<h4>Basiscase:</h4>
+<p>Arrays met 0 of 1 element (al gesorteerd)</p>
+<h4>Complexiteit:</h4>
+<ul>
+<li><strong>Beste/gemiddelde:</strong> O(n log n)</li>
+<li><strong>Slechtste:</strong> O(n²) - slechte pivotkeuzes</li>
+<li><strong>Ruimte:</strong> O(log n) - recursiestack</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> Quick Sorteer Voorbeeld</h3>
+<div class="code-block">Array: [12, 56, 34, 78, 23]
 
 1. Pivot = 12
    Less: []
@@ -174,157 +172,149 @@
    Less: [34, 23]
    Greater: [78]
 
-3. Continue recursively...
+3. Ga verder recursively...
 
 Final: [12, 23, 34, 56, 78]</div>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Tower of Hanoi</h3>
-                    <p><strong>Problem:</strong> Move stack of disks from source to destination following rules.</p>
-                    <h4>Rules:</h4>
-                    <ul>
-                        <li>Only one disk moved at a time</li>
-                        <li>No disk on top of smaller disk</li>
-                        <li>Use auxiliary peg as needed</li>
-                    </ul>
-                    <h4>Recursive Strategy:</h4>
-                    <div class="code-block">To move n disks from A to C using B:
+</div>
+<div class="summary-card">
+<h3> Tower of Hanoi</h3>
+<p><strong>Probleem:</strong> Verplaats een stapel schijven van bron naar bestemming volgens de regels.</p>
+<h4>Regels:</h4>
+<ul>
+<li>Slechts één schijf tegelijk verplaatsen</li>
+<li>Geen schijf bovenop een kleinere schijf</li>
+<li>Gebruik de hulppin indien nodig</li>
+</ul>
+<h4>Recursieve strategie:</h4>
+<div class="code-block">Naar move n disks van A naar C met B:
 
 1. Move n-1 disks from A to B (using C)
-2. Move disk n from A to C
+2. Move disk n van A naar C
 3. Move n-1 disks from B to C (using A)</div>
-                    <h4>Base Case:</h4>
-                    <p>n = 1: Simply move disk from source to destination</p>
-                    <div class="highlight-box"><strong>Elegance:</strong> Complex problem solved with simple recursive pattern!</div>
-                </div>
+<h4>Basiscase:</h4>
+<p>n = 1: verplaats de schijf gewoon van bron naar bestemming</p>
+<div class="highlight-box"><strong>Elegant:</strong> Complex probleem opgelost met een eenvoudig recursief patroon!</div>
+</div>
+<div class="summary-card">
+<h3> Tijdcomplexiteit van verdeel en heers</h3>
+<p><strong>Typisch patroon:</strong> O(n log n)</p>
+<h4>Waarom O(n log n)?</h4>
+<ul>
+<li><strong>Verdeel:</strong> Splits in twee → log n niveaus</li>
+<li><strong>Werk per niveau:</strong> O(n) totaal werk</li>
+<li><strong>Total:</strong> n × log n = O(n log n)</li>
+</ul>
+<h4>Prestatievergelijking (200 elementen):</h4>
+<div class="code-block">Bubble Sorteer:    19,900 operations
+Selection Sorteer: 19,900 operations  
+Insertion Sorteer: 11,037 operations
+Quick Sorteer:      1,999 operations ⚡</div>
+</div>
+<div class="summary-card">
+<h3> Klassieke voorbeelden van verdeel en heers</h3>
+<h4>1. Samenvoegen Sorteer:</h4>
+<p>Splits de array, sorteer de helften en voeg ze weer samen. Het werk gebeurt NA de recursie.</p>
+<h4>2. Quick Sorteer:</h4>
+<p>Partitioneer rond de pivot en sorteer de partities. Het werk gebeurt VOOR de recursie.</p>
+<h4>3. Binair zoeken:</h4>
+<p>Splits de gesorteerde array in twee en zoek in de relevante helft. O(log n)</p>
+<h4>4. Tower of Hanoi:</h4>
+<p>Verplaats n-1 schijven, verplaats schijf n en verplaats opnieuw n-1 schijven.</p>
+<h4>5. Array Multiplication:</h4>
+<p>Splits arrays, vermenigvuldig delen en combineer resultaten.</p>
+</div>
+<div class="summary-card">
+<h3> Divide versus conquer</h3>
+<h4>Divide-fase:</h4>
+<ul>
+<li>Probleem opbreken in deelproblemen</li>
+<li>Meestal O(1) of O(n) werk</li>
+<li>Voorbeeld: middenpunt vinden, partitioneren</li>
+</ul>
+<h4>Conquer-fase:</h4>
+<ul>
+<li>Deelproblemen recursief oplossen</li>
+<li>Blijft verdelen tot de basiscase</li>
+<li>Waar recursie gebeurt</li>
+</ul>
+<h4>Combineerfase:</h4>
+<ul>
+<li>Oplossingen samenvoegen</li>
+<li>Kan triviaal of complex zijn</li>
+<li>Voorbeeld: gesorteerde arrays samenvoegen</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> Belangrijkste inzichten</h3>
+<ul>
+<li>Drie stappen: verdeel, heers, combineer</li>
+<li>Breekt grote problemen op in kleinere stukken</li>
+<li>Gebruikt recursie om deelproblemen op te lossen</li>
+<li>Typische complexiteit: O(n log n)</li>
+<li>Quick sort: partitioneert en recurseert daarna</li>
+<li>Merge sort: recurseert en voegt daarna samen</li>
+<li>Binair zoeken: eenvoudigste voorbeeld van verdeel en heers</li>
+<li>Toren van Hanoi: elegante recursieve oplossing</li>
+<li>Veel sneller dan naïeve O(n²)-algoritmen!</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section-content" id="flashcards">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>📇 Flashcards</h3>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Three stappen of Verdeel en heers?<span>▼</span></div><div class="flashcard-answer">1. Verdeel 2. Heers 3. Combineer</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is Verdeel en heers?<span>▼</span></div><div class="flashcard-answer">Breek probleem in smaller subproblems, oplossen recursively, samenvoegen results</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Quick Sorteer tijdcomplexiteit?<span>▼</span></div><div class="flashcard-answer">O(n log n) average, O(n²) worst case</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Binair zoeken is voorbeeld of?<span>▼</span></div><div class="flashcard-answer">Verdeel en heers - splitst array in half repeatedly</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Typical D&amp;C tijdcomplexiteit?<span>▼</span></div><div class="flashcard-answer">O(n log n) for most divide and conquer algorithms</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Quick Sorteer base geval?<span>▼</span></div><div class="flashcard-answer">Arrays met 0 of 1 element (al gesorteerd)</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is pivot in Quick Sorteer?<span>▼</span></div><div class="flashcard-answer">Element chosen naar partitioneer array in less/greater groups</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Tower of Hanoi strategie?<span>▼</span></div><div class="flashcard-answer">Move n-1 disks, move disk n, move n-1 disks again</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Samenvoegen Sorteer divides in hoe many parts?<span>▼</span></div><div class="flashcard-answer">Two - splitst array in half</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Quick Sorteer vs Samenvoegen Sorteer?<span>▼</span></div><div class="flashcard-answer">Quick: work before recursion (partition). Merge: work after (merge)</div></div>
+</div>
+</div>
+</div>
+<div class="section-content" id="quiz">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>✅ Quiz</h3>
+<form id="mcq-form">
+<div class="quiz-question"><div class="question-number">V1</div><div class="question-text">Three stappen of Verdeel en heers?</div><div class="options">
+<label class="option-label"><input name="q1" required="" type="radio" value="0"/><span>Sorteer, Zoeken, Samenvoegen</span></label>
+<label class="option-label"><input name="q1" required="" type="radio" value="1"/><span>Verdeel, Heers, Combineer</span></label>
+<label class="option-label"><input name="q1" required="" type="radio" value="2"/><span>Splits, Process, Join</span></label>
+</div></div>
+<div class="quiz-question"><div class="question-number">V2</div><div class="question-text">Welke algoritme gebruikt Verdeel en heers?</div><div class="options">
+<label class="option-label"><input name="q2" required="" type="radio" value="0"/><span>Bubble sort</span></label>
+<label class="option-label"><input name="q2" required="" type="radio" value="1"/><span>Merge sort</span></label>
+<label class="option-label"><input name="q2" required="" type="radio" value="2"/><span>Insertion sort</span></label>
+</div></div>
+<div class="quiz-question"><div class="question-number">V3</div><div class="question-text">Binair zoeken is een voorbeeld of:</div><div class="options">
+<label class="option-label"><input name="q3" required="" type="radio" value="0"/><span>Greedy-algoritme</span></label>
+<label class="option-label"><input name="q3" required="" type="radio" value="1"/><span>Verdeel en heers</span></label>
+<label class="option-label"><input name="q3" required="" type="radio" value="2"/><span>Dynamisch programmeren</span></label>
+</div></div>
+<div class="quiz-question"><div class="question-number">V4</div><div class="question-text">Typical D&amp;C tijdcomplexiteit?</div><div class="options">
+<label class="option-label"><input name="q4" required="" type="radio" value="0"/><span>O(n)</span></label>
+<label class="option-label"><input name="q4" required="" type="radio" value="1"/><span>O(n log n)</span></label>
+<label class="option-label"><input name="q4" required="" type="radio" value="2"/><span>O(n²)</span></label>
+</div></div>
+<div class="quiz-question"><div class="question-number">V5</div><div class="question-text">Samenvoegen Sorteer divides array in hoe many parts?</div><div class="options">
+<label class="option-label"><input name="q5" required="" type="radio" value="0"/><span>One</span></label>
+<label class="option-label"><input name="q5" required="" type="radio" value="1"/><span>Two</span></label>
+<label class="option-label"><input name="q5" required="" type="radio" value="2"/><span>Three</span></label>
+</div></div>
+<button class="submit-quiz" type="submit">Indienen</button>
+</form>
+<div id="mcq-result"></div>
+</div>
+</div>
+</div>
 
-                <div class="summary-card">
-                    <h3> D&C Time Complexity</h3>
-                    <p><strong>Typical Pattern:</strong> O(n log n)</p>
-                    <h4>Why O(n log n)?</h4>
-                    <ul>
-                        <li><strong>Divide:</strong> Split in half → log n levels</li>
-                        <li><strong>Work per level:</strong> O(n) total work</li>
-                        <li><strong>Total:</strong> n × log n = O(n log n)</li>
-                    </ul>
-                    <h4>Performance Comparison (200 elements):</h4>
-                    <div class="code-block">Bubble Sort:    19,900 operations
-Selection Sort: 19,900 operations  
-Insertion Sort: 11,037 operations
-Quick Sort:      1,999 operations ⚡</div>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Classic D&C Examples</h3>
-                    <h4>1. Merge Sort:</h4>
-                    <p>Split array, sort halves, merge back together. Work happens AFTER recursion.</p>
-                    <h4>2. Quick Sort:</h4>
-                    <p>Partition around pivot, sort partitions. Work happens BEFORE recursion.</p>
-                    <h4>3. Binary Search:</h4>
-                    <p>Split sorted array in half, search relevant half. O(log n)</p>
-                    <h4>4. Tower of Hanoi:</h4>
-                    <p>Move n-1 disks, move disk n, move n-1 disks again.</p>
-                    <h4>5. Array Multiplication:</h4>
-                    <p>Split arrays, multiply parts, combine results.</p>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Divide vs Conquer</h3>
-                    <h4>Divide Phase:</h4>
-                    <ul>
-                        <li>Breaking problem into subproblems</li>
-                        <li>Usually O(1) or O(n) work</li>
-                        <li>Example: Finding midpoint, partitioning</li>
-                    </ul>
-                    <h4>Conquer Phase:</h4>
-                    <ul>
-                        <li>Solving subproblems recursively</li>
-                        <li>Keeps dividing until base case</li>
-                        <li>Where recursion happens</li>
-                    </ul>
-                    <h4>Combine Phase:</h4>
-                    <ul>
-                        <li>Merging solutions together</li>
-                        <li>May be trivial or complex</li>
-                        <li>Example: Merging sorted arrays</li>
-                    </ul>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Key Takeaways</h3>
-                    <ul>
-                        <li>Three steps: Divide, Conquer, Combine</li>
-                        <li>Breaks big problems into smaller pieces</li>
-                        <li>Uses recursion to solve subproblems</li>
-                        <li>Typical complexity: O(n log n)</li>
-                        <li>Quick Sort: partitions then recurses</li>
-                        <li>Merge Sort: recurses then merges</li>
-                        <li>Binary Search: simplest D&C example</li>
-                        <li>Tower of Hanoi: elegant recursive solution</li>
-                        <li>Much faster than naive O(n²) algorithms!</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div id="flashcards" class="section-content">
-            <div class="quiz-container">
-                <div class="quiz-section">
-                    <h3>📇 Flashcards</h3>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Three steps of Divide & Conquer?<span>▼</span></div><div class="flashcard-answer">1. Divide 2. Conquer 3. Combine</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is Divide & Conquer?<span>▼</span></div><div class="flashcard-answer">Break problem into smaller subproblems, solve recursively, merge results</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Quick Sort time complexity?<span>▼</span></div><div class="flashcard-answer">O(n log n) average, O(n²) worst case</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Binary Search is example of?<span>▼</span></div><div class="flashcard-answer">Divide & Conquer - splits array in half repeatedly</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Typical D&C time complexity?<span>▼</span></div><div class="flashcard-answer">O(n log n) for most divide and conquer algorithms</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Quick Sort base case?<span>▼</span></div><div class="flashcard-answer">Arrays with 0 or 1 element (already sorted)</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is pivot in Quick Sort?<span>▼</span></div><div class="flashcard-answer">Element chosen to partition array into less/greater groups</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Tower of Hanoi strategy?<span>▼</span></div><div class="flashcard-answer">Move n-1 disks, move disk n, move n-1 disks again</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Merge Sort divides into how many parts?<span>▼</span></div><div class="flashcard-answer">Two - splits array in half</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Quick Sort vs Merge Sort?<span>▼</span></div><div class="flashcard-answer">Quick: work before recursion (partition). Merge: work after (merge)</div></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="quiz" class="section-content">
-            <div class="quiz-container">
-                <div class="quiz-section">
-                    <h3>✅ Quiz</h3>
-                    <form id="mcq-form">
-                        <div class="quiz-question"><div class="question-number">Q1</div><div class="question-text">Three steps of Divide & Conquer?</div><div class="options">
-                            <label class="option-label"><input type="radio" name="q1" value="0" required><span>Sort, Search, Merge</span></label>
-                            <label class="option-label"><input type="radio" name="q1" value="1" required><span>Divide, Conquer, Combine</span></label>
-                            <label class="option-label"><input type="radio" name="q1" value="2" required><span>Split, Process, Join</span></label>
-                        </div></div>
-                        <div class="quiz-question"><div class="question-number">Q2</div><div class="question-text">Which algorithm uses Divide & Conquer?</div><div class="options">
-                            <label class="option-label"><input type="radio" name="q2" value="0" required><span>Bubble Sort</span></label>
-                            <label class="option-label"><input type="radio" name="q2" value="1" required><span>Merge Sort</span></label>
-                            <label class="option-label"><input type="radio" name="q2" value="2" required><span>Insertion Sort</span></label>
-                        </div></div>
-                        <div class="quiz-question"><div class="question-number">Q3</div><div class="question-text">Binary Search is an example of:</div><div class="options">
-                            <label class="option-label"><input type="radio" name="q3" value="0" required><span>Greedy Algorithm</span></label>
-                            <label class="option-label"><input type="radio" name="q3" value="1" required><span>Divide & Conquer</span></label>
-                            <label class="option-label"><input type="radio" name="q3" value="2" required><span>Dynamic Programming</span></label>
-                        </div></div>
-                        <div class="quiz-question"><div class="question-number">Q4</div><div class="question-text">Typical D&C time complexity?</div><div class="options">
-                            <label class="option-label"><input type="radio" name="q4" value="0" required><span>O(n)</span></label>
-                            <label class="option-label"><input type="radio" name="q4" value="1" required><span>O(n log n)</span></label>
-                            <label class="option-label"><input type="radio" name="q4" value="2" required><span>O(n²)</span></label>
-                        </div></div>
-                        <div class="quiz-question"><div class="question-number">Q5</div><div class="question-text">Merge Sort divides array into how many parts?</div><div class="options">
-                            <label class="option-label"><input type="radio" name="q5" value="0" required><span>One</span></label>
-                            <label class="option-label"><input type="radio" name="q5" value="1" required><span>Two</span></label>
-                            <label class="option-label"><input type="radio" name="q5" value="2" required><span>Three</span></label>
-                        </div></div>
-                        <button type="submit" class="submit-quiz">Submit</button>
-                    </form>
-                    <div id="mcq-result"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-        <script>
+<script>
         // Quiz Configuration
         const QUIZ_CONFIG = {
             'chapter5-mcq': {
@@ -388,18 +378,18 @@ Quick Sort:      1,999 operations ⚡</div>
             for (let i = 0; i < config.total; i++) {
                 const questionName = `${questionPrefix}${i + 1}`;
                 const userAnswer = parseInt(userAnswers[questionName]);
-                const correctAnswer = config.answers[i];
+                const juistAnswer = config.answers[i];
                 
                 form.querySelectorAll(`input[name="${questionName}"]`).forEach(input => {
                     const label = input.closest('.option-label');
                     const value = parseInt(input.value);
                     
-                    label.classList.remove('correct', 'incorrect');
+                    label.classList.remove('juist', 'injuist');
                     
-                    if (value === correctAnswer) {
-                        label.classList.add('correct');
-                    } else if (value === userAnswer && value !== correctAnswer) {
-                        label.classList.add('incorrect');
+                    if (value === juistAnswer) {
+                        label.classList.add('juist');
+                    } else if (value === userAnswer && value !== juistAnswer) {
+                        label.classList.add('injuist');
                     }
                     
                     input.disabled = true;
@@ -419,7 +409,7 @@ Quick Sort:      1,999 operations ⚡</div>
                 resetBtn = document.createElement('button');
                 resetBtn.type = 'button';
                 resetBtn.className = 'reset-quiz';
-                resetBtn.textContent = '🔄 Reset Quiz';
+                resetBtn.textContent = '🔄 Quiz opnieuw starten';
                 resetBtn.onclick = function() { resetQuiz(formId, quizId); };
                 submitBtn.parentNode.insertBefore(resetBtn, submitBtn.nextSibling);
             }
@@ -438,7 +428,7 @@ Quick Sort:      1,999 operations ⚡</div>
             
             // Remove all feedback styling
             form.querySelectorAll('.option-label').forEach(label => {
-                label.classList.remove('correct', 'incorrect');
+                label.classList.remove('juist', 'injuist');
             });
             
             // Re-enable all inputs
@@ -475,7 +465,7 @@ Quick Sort:      1,999 operations ⚡</div>
             const formData = new FormData(form);
             const questionPrefix = quizId.includes('mcq') ? 'q' : quizId.includes('tf') ? 'tf' : 'code';
             
-            let correct = 0;
+            let juist = 0;
             const userAnswers = {};
             
             for (let i = 0; i < config.total; i++) {
@@ -484,14 +474,14 @@ Quick Sort:      1,999 operations ⚡</div>
                 userAnswers[questionName] = selected;
                 
                 if (selected === config.answers[i]) {
-                    correct++;
+                    juist++;
                 }
             }
             
             // Save results
             saveQuizData(quizId, {
                 userAnswers: userAnswers,
-                score: correct,
+                score: juist,
                 total: config.total,
                 submitted: true,
                 timestamp: new Date().toISOString()
@@ -502,24 +492,24 @@ Quick Sort:      1,999 operations ⚡</div>
             
             // Show result
             const resultId = formId.replace('-form', '-result');
-            showResult(resultId, correct, config.total);
+            showResult(resultId, juist, config.total);
         }
 
         // Show quiz result
-        function showResult(elementId, correct, total) {
-            const percentage = (correct / total) * 100;
+        function showResult(elementId, juist, total) {
+            const percentage = (juist / total) * 100;
             const resultDiv = document.getElementById(elementId);
             
             let resultClass, message;
             if (percentage >= 80) {
                 resultClass = 'excellent';
-                message = `🎉 Excellent! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
+                message = `🎉 Uitstekend! ${juist}/${total} juist (${percentage.toFixed(0)}%)`;
             } else if (percentage >= 60) {
                 resultClass = 'good';
-                message = `👍 Good job! ${correct}/${total} correct (${percentage.toFixed(0)}%). Review the concepts you missed.`;
+                message = `👍 Goed gedaan! ${juist}/${total} juist (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
             } else {
                 resultClass = 'needs-work';
-                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Study the summary and try again!`;
+                message = `📚 ${juist}/${total} juist (${percentage.toFixed(0)}%). Bestudeer de samenvatting en probeer opnieuw!`;
             }
             
             resultDiv.className = `quiz-result ${resultClass}`;

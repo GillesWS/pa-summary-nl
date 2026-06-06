@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 6: Backtracking - Programming Advanced</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hoofdstuk 6: Backtracking - Programming Advanced</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #2d3561; --secondary: #4a90e2; --accent: #ff6b6b; --success: #51cf66; --warning: #ffd93d; --bg: #f8f9fa; --card: #ffffff; --text: #2c3e50; --text-light: #7f8c8d; }
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
@@ -114,71 +115,67 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-content">
-            <div class="chapter-header">Chapter 6: Backtracking</div>
-            <a href="index.html" class="back-button">← Back to Chapters</a>
-        </div>
-    </nav>
-    <div class="container">
-        </div>
-        <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
-            <button class="section-tab active" onclick="switchSection('summary')">📚 Summary</button>
-            <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-            <button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
-        </div>
-
-        <div id="summary" class="section-content active">
-            <div class="summary-grid">
-                <div class="summary-card">
-                    <h3> What is Backtracking?</h3>
-                    <p><strong>Definition:</strong> Systematic trial-and-error approach to explore all possible solutions.</p>
-                    <h4>Core Idea:</h4>
-                    <ul>
-                        <li>Try a choice → if works, continue deeper</li>
-                        <li>If fails → backtrack and try different choice</li>
-                        <li>Explore all possibilities until solution found</li>
-                    </ul>
-                    <div class="highlight-box"><strong>Key Insight:</strong> Systematic exploration with ability to undo choices!</div>
-                </div>
-
-                <div class="summary-card">
-                    <h3> N-Queens Problem</h3>
-                    <p><strong>Goal:</strong> Place N queens on N×N chessboard so no two queens threaten each other.</p>
-                    <h4>Constraints:</h4>
-                    <ul>
-                        <li>No two queens in same row</li>
-                        <li>No two queens in same column</li>
-                        <li>No two queens on same diagonal</li>
-                    </ul>
-                    <h4>Algorithm:</h4>
-                    <div class="code-block">1. Start in leftmost column
-2. If all queens placed → return true
-3. For each row in current column:
-   - If queen can be placed safely → mark it
-   - Recurse to place remaining queens
-   - If leads to solution → return true
-   - Else → unmark (backtrack) and try next row</div>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Subset Problem</h3>
-                    <p><strong>Goal:</strong> Generate all subsets of a given set.</p>
-                    <h4>Example:</h4>
-                    <p>Input: [1, 2, 3]<br>Output: {}, {1}, {2}, {3}, {1,2}, {1,3}, {2,3}, {1,2,3}</p>
-                    <h4>Backtracking Approach:</h4>
-                    <div class="code-block">1. Start with empty subset
-2. For each element:
-   - Include element (recurse)
-   - Exclude element (backtrack)</div>
-                    <h4>Number of Subsets:</h4>
-                    <p>For n elements: 2^n subsets (each element: include or exclude)</p>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Binary Approach (Subsets)</h3>
-                    <p><strong>Alternative:</strong> Use binary representation</p>
-                    <div class="code-block">For [1,2,3]:
+<nav class="navbar">
+<div class="navbar-content">
+<div class="chapter-header">Hoofdstuk 6: Backtracking</div>
+<a class="back-button" href="index.html">← Terug naar hoofdstukken</a>
+</div>
+</nav>
+<div class="container">
+</div>
+<div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
+<button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
+<button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
+<button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
+</div>
+<div class="section-content active" id="summary">
+<div class="summary-grid">
+<div class="summary-card">
+<h3> Wat is backtracking?</h3>
+<p><strong>Definitie:</strong> Systematische trial-and-error-aanpak om alle mogelijke oplossingen te verkennen.</p>
+<h4>Kernidee:</h4>
+<ul>
+<li>Probeer een keuze → als die werkt, ga dieper verder</li>
+<li>Als die faalt → backtrack en probeer een andere keuze</li>
+<li>Verken alle mogelijkheden tot een oplossing gevonden is</li>
+</ul>
+<div class="highlight-box"><strong>Belangrijk inzicht:</strong> Systematische verkenning met de mogelijkheid om keuzes ongedaan te maken!</div>
+</div>
+<div class="summary-card">
+<h3> N-Queens-probleem</h3>
+<p><strong>Doel:</strong> Plaats N koninginnen op een N×N-schaakbord zodat geen twee koninginnen elkaar bedreigen.</p>
+<h4>Beperkingen:</h4>
+<ul>
+<li>Geen twee koninginnen in dezelfde rij</li>
+<li>Geen twee koninginnen in dezelfde kolom</li>
+<li>Geen twee koninginnen op dezelfde diagonaal</li>
+</ul>
+<h4>Algoritme:</h4>
+<div class="code-block">1. Start in de meest linkse kolom
+2. Als alle koninginnen geplaatst zijn → return true
+3. Voor elke rij in de huidige kolom:
+   - Als de koningin veilig geplaatst kan worden → markeer dit
+   - Recurseer om de overige koninginnen te plaatsen
+   - Als dit tot een oplossing leidt → return true
+   - Anders → maak markering ongedaan (backtrack) en probeer de volgende rij</div>
+</div>
+<div class="summary-card">
+<h3> Subsetprobleem</h3>
+<p><strong>Doel:</strong> Genereer alle subsets van een gegeven set.</p>
+<h4>Voorbeeld:</h4>
+<p>Input: [1, 2, 3]<br/>Output: {}, {1}, {2}, {3}, {1,2}, {1,3}, {2,3}, {1,2,3}</p>
+<h4>Backtracking-aanpak:</h4>
+<div class="code-block">1. Start met een lege subset
+2. Voor elk element:
+   - Neem element op (recurseer)
+   - Sluit element uit (backtrack)</div>
+<h4>Aantal subsets:</h4>
+<p>Voor n elementen: 2^n subsets (elk element: opnemen of uitsluiten)</p>
+</div>
+<div class="summary-card">
+<h3> Binaire aanpak (subsets)</h3>
+<p><strong>Alternatief:</strong> Gebruik binaire representatie</p>
+<div class="code-block">Voor [1,2,3]:
 000 → {}
 001 → {3}
 010 → {2}
@@ -187,12 +184,11 @@
 101 → {1,3}
 110 → {1,2}
 111 → {1,2,3}</div>
-                    <p>Each bit represents include (1) or exclude (0)</p>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Backtracking Pattern</h3>
-                    <div class="code-block">FUNCTION Backtrack(state):
+<p>Elke bit betekent opnemen (1) of uitsluiten (0)</p>
+</div>
+<div class="summary-card">
+<h3> Backtracking-patroon</h3>
+<div class="code-block">FUNCTION Backtrack(state):
   IF is_solution(state) THEN
     add_to_results(state)
     RETURN
@@ -206,132 +202,123 @@
     END IF
   END FOR
 END FUNCTION</div>
-                    <h4>Key Components:</h4>
-                    <ul>
-                        <li><strong>Choice:</strong> What options do we have?</li>
-                        <li><strong>Constraint:</strong> What makes choice valid?</li>
-                        <li><strong>Goal:</strong> When have we found solution?</li>
-                    </ul>
-                </div>
-
-                <div class="summary-card">
-                    <h3> When to Use Backtracking</h3>
-                    <h4>Perfect For:</h4>
-                    <ul>
-                        <li><strong>Constraint problems:</strong> Sudoku, N-Queens</li>
-                        <li><strong>Permutations/Combinations:</strong> Generate all possibilities</li>
-                        <li><strong>Subset generation:</strong> All combinations of elements</li>
-                        <li><strong>Path finding:</strong> Mazes, puzzles</li>
-                        <li><strong>Game solving:</strong> Tic-tac-toe, chess moves</li>
-                    </ul>
-                    <h4>Characteristics:</h4>
-                    <ul>
-                        <li>No direct algorithm to solution</li>
-                        <li>Must explore multiple possibilities</li>
-                        <li>Need to try and potentially undo choices</li>
-                    </ul>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Optimization: Pruning</h3>
-                    <p><strong>Idea:</strong> Cut branches that can't lead to valid solution</p>
-                    <h4>Benefits:</h4>
-                    <ul>
-                        <li>Avoid exploring invalid paths early</li>
-                        <li>Dramatically reduce search space</li>
-                        <li>Make backtracking practical</li>
-                    </ul>
-                    <h4>Example - N-Queens:</h4>
-                    <p>Check if queen placement is safe BEFORE recursing (don't place if threatens existing queens)</p>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Key Takeaways</h3>
-                    <ul>
-                        <li>Backtracking = systematic trial and error</li>
-                        <li>Uses recursion to explore possibilities</li>
-                        <li>Make choice → recurse → undo if fails</li>
-                        <li>Essential for constraint satisfaction problems</li>
-                        <li>Pruning improves efficiency dramatically</li>
-                        <li>N-Queens: classic backtracking example</li>
-                        <li>Subsets: 2^n possibilities (include/exclude each)</li>
-                        <li>Pattern: choose → explore → backtrack</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div id="flashcards" class="section-content">
-            <div class="quiz-container">
-                <div class="quiz-section">
-                    <h3>📇 Flashcards</h3>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is backtracking?<span>▼</span></div><div class="flashcard-answer">Systematic trial-and-error approach: try choice → if works continue, if fails → undo and try different choice</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">N-Queens constraints?<span>▼</span></div><div class="flashcard-answer">No two queens in same row, column, or diagonal</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">How many subsets for n elements?<span>▼</span></div><div class="flashcard-answer">2^n subsets (each element: include or exclude)</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is pruning in backtracking?<span>▼</span></div><div class="flashcard-answer">Cutting branches that can't lead to valid solution early</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">When to use backtracking?<span>▼</span></div><div class="flashcard-answer">Constraint problems, permutations, combinations, path finding, puzzles</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Backtracking pattern steps?<span>▼</span></div><div class="flashcard-answer">1. Make choice 2. Recurse 3. Undo choice (backtrack)</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Subsets of [1,2]?<span>▼</span></div><div class="flashcard-answer">{}, {1}, {2}, {1,2} - total 2^2 = 4 subsets</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Backtracking uses which technique?<span>▼</span></div><div class="flashcard-answer">Recursion - to explore all possibilities systematically</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">N-Queens for 4×4 board?<span>▼</span></div><div class="flashcard-answer">2 solutions exist for 4-Queens problem</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Key advantage of backtracking?<span>▼</span></div><div class="flashcard-answer">Explores all possibilities systematically while avoiding unnecessary work through pruning</div></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="quiz" class="section-content">
-            <div class="quiz-container">
-                <div class="quiz-section">
-                    <h3>✅ Quiz</h3>
-                    <form id="mcq-form">
-                        <div class="quiz-question">
-                            <div class="question-number">Question 1</div>
-                            <div class="question-text">What is backtracking?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q1" value="0" required><span>Reversing a linked list</span></label>
-                                <label class="option-label"><input type="radio" name="q1" value="1" required><span>Trial-and-error to find solutions</span></label>
-                                <label class="option-label"><input type="radio" name="q1" value="2" required><span>Sorting algorithm</span></label>
-                                <label class="option-label"><input type="radio" name="q1" value="3" required><span>Graph traversal method</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Question 2</div>
-                            <div class="question-text">In N-Queens problem, what must be true?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q2" value="0" required><span>All queens in same row</span></label>
-                                <label class="option-label"><input type="radio" name="q2" value="1" required><span>No two queens threaten each other</span></label>
-                                <label class="option-label"><input type="radio" name="q2" value="2" required><span>Queens must be adjacent</span></label>
-                                <label class="option-label"><input type="radio" name="q2" value="3" required><span>Board must be 8×8</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Question 3</div>
-                            <div class="question-text">How many subsets does a set with 3 elements have?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q3" value="0" required><span>3</span></label>
-                                <label class="option-label"><input type="radio" name="q3" value="1" required><span>6</span></label>
-                                <label class="option-label"><input type="radio" name="q3" value="2" required><span>8</span></label>
-                                <label class="option-label"><input type="radio" name="q3" value="3" required><span>9</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Question 4</div>
-                            <div class="question-text">What is pruning in backtracking?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q4" value="0" required><span>Removing duplicates</span></label>
-                                <label class="option-label"><input type="radio" name="q4" value="1" required><span>Cutting branches that can't lead to valid solution</span></label>
-                                <label class="option-label"><input type="radio" name="q4" value="2" required><span>Sorting results</span></label>
-                                <label class="option-label"><input type="radio" name="q4" value="3" required><span>Optimizing memory</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Question 5</div>
-                            <div class="question-text">Given this backtracking pseudocode, what does it do?<br><br>
-                            <div class="code-block">FUNCTION Solve(row):
+<h4>Belangrijke onderdelen:</h4>
+<ul>
+<li><strong>Keuze:</strong> Welke opties hebben we?</li>
+<li><strong>Beperking:</strong> Wat maakt een keuze geldig?</li>
+<li><strong>Doel:</strong> Wanneer hebben we een oplossing gevonden?</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> Wanneer gebruik je backtracking?</h3>
+<h4>Perfect voor:</h4>
+<ul>
+<li><strong>Constraintproblemen:</strong> Sudoku, N-Queens</li>
+<li><strong>Permutaties/combinaties:</strong> Genereer alle mogelijkheden</li>
+<li><strong>Subsetgeneratie:</strong> Alle combinaties van elementen</li>
+<li><strong>Pad zoeken:</strong> Doolhoven, puzzels</li>
+<li><strong>Spellen oplossen:</strong> Boter-kaas-en-eieren, schaakzetten</li>
+</ul>
+<h4>Kenmerken:</h4>
+<ul>
+<li>Geen direct algoritme naar de oplossing</li>
+<li>Moet meerdere mogelijkheden verkennen</li>
+<li>Moet keuzes proberen en mogelijk ongedaan maken</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> Optimalisatie: pruning</h3>
+<p><strong>Idee:</strong> Knip takken weg die niet tot een geldige oplossing kunnen leiden</p>
+<h4>Voordelen:</h4>
+<ul>
+<li>Vermijd vroegtijdig het verkennen van ongeldige paden</li>
+<li>Verminder de zoekruimte drastisch</li>
+<li>Maak backtracking praktisch</li>
+</ul>
+<h4>Voorbeeld - N-Queens:</h4>
+<p>Controleer VOOR de recursie of de plaatsing van een koningin veilig is (plaats niet als ze bestaande koninginnen bedreigt)</p>
+</div>
+<div class="summary-card">
+<h3> Belangrijkste inzichten</h3>
+<ul>
+<li>Backtracking = systematische trial-and-error</li>
+<li>Gebruikt recursie om mogelijkheden te verkennen</li>
+<li>Maak keuze → recursie → maak ongedaan als het faalt</li>
+<li>Essentieel voor constraint satisfaction problems</li>
+<li>Pruning verbetert efficiëntie drastisch</li>
+<li>N-Queens: klassiek backtrackingvoorbeeld</li>
+<li>Subsets: 2^n mogelijkheden (elk opnemen/uitsluiten)</li>
+<li>Patroon: kies → verken → backtrack</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section-content" id="flashcards">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>📇 Flashcards</h3>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is backtracking?<span>▼</span></div><div class="flashcard-answer">Systematische trial-and-error-aanpak: probeer een keuze → als die werkt, ga verder; als die faalt → maak ongedaan en probeer een andere keuze</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Beperkingen bij N-Queens?<span>▼</span></div><div class="flashcard-answer">Geen twee koninginnen in dezelfde rij, kolom of diagonaal</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Hoeveel subsets voor n elementen?<span>▼</span></div><div class="flashcard-answer">2^n subsets (each element: include or exclude)</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is pruning bij backtracking?<span>▼</span></div><div class="flashcard-answer">Takken vroeg wegknippen die niet tot een geldige oplossing kunnen leiden</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wanneer gebruik je backtracking?<span>▼</span></div><div class="flashcard-answer">Constraintproblemen, permutaties, combinaties, pad zoeken, puzzels</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Stappen van het backtracking-patroon?<span>▼</span></div><div class="flashcard-answer">1. Maak keuze 2. Recurseer 3. Maak keuze ongedaan (backtrack)</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Subsets of [1,2]?<span>▼</span></div><div class="flashcard-answer">{}, {1}, {2}, {1,2} - total 2^2 = 4 subsets</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Welke techniek gebruikt backtracking?<span>▼</span></div><div class="flashcard-answer">Recursie - om alle mogelijkheden systematisch te verkennen</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">N-Queens voor 4×4 board?<span>▼</span></div><div class="flashcard-answer">2 oplossingen exist voor 4-Queens probleem</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Belangrijk voordeel van backtracking?<span>▼</span></div><div class="flashcard-answer">Verkent alle mogelijkheden systematisch en vermijdt onnodig werk via pruning</div></div>
+</div>
+</div>
+</div>
+<div class="section-content" id="quiz">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>✅ Quiz</h3>
+<form id="mcq-form">
+<div class="quiz-question">
+<div class="question-number">Vraag 1</div>
+<div class="question-text">Wat is backtracking?</div>
+<div class="options">
+<label class="option-label"><input name="q1" required="" type="radio" value="0"/><span>Reversing een linked lijst</span></label>
+<label class="option-label"><input name="q1" required="" type="radio" value="1"/><span>Trial-and-error om oplossingen te vinden</span></label>
+<label class="option-label"><input name="q1" required="" type="radio" value="2"/><span>Sorteeralgoritme</span></label>
+<label class="option-label"><input name="q1" required="" type="radio" value="3"/><span>Graaftraversal-methode</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 2</div>
+<div class="question-text">Wat moet waar zijn in het N-Queens-probleem?</div>
+<div class="options">
+<label class="option-label"><input name="q2" required="" type="radio" value="0"/><span>Alle queens in dezelfde rij</span></label>
+<label class="option-label"><input name="q2" required="" type="radio" value="1"/><span>Geen twee koninginnen bedreigen elkaar</span></label>
+<label class="option-label"><input name="q2" required="" type="radio" value="2"/><span>Koninginnen moeten naast elkaar staan</span></label>
+<label class="option-label"><input name="q2" required="" type="radio" value="3"/><span>Het bord moet 8×8 zijn</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 3</div>
+<div class="question-text">Hoeveel subsets doet een set met 3 elementen have?</div>
+<div class="options">
+<label class="option-label"><input name="q3" required="" type="radio" value="0"/><span>3</span></label>
+<label class="option-label"><input name="q3" required="" type="radio" value="1"/><span>6</span></label>
+<label class="option-label"><input name="q3" required="" type="radio" value="2"/><span>8</span></label>
+<label class="option-label"><input name="q3" required="" type="radio" value="3"/><span>9</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 4</div>
+<div class="question-text">Wat is pruning bij backtracking?</div>
+<div class="options">
+<label class="option-label"><input name="q4" required="" type="radio" value="0"/><span>Duplicaten verwijderen</span></label>
+<label class="option-label"><input name="q4" required="" type="radio" value="1"/><span>Cutting branches dat can't leiden naar geldig oplossing</span></label>
+<label class="option-label"><input name="q4" required="" type="radio" value="2"/><span>Sorteren results</span></label>
+<label class="option-label"><input name="q4" required="" type="radio" value="3"/><span>Optimizing geheugen</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 5</div>
+<div class="question-text">Given deze backtracking pseudocode, wat doet het doe?<br/><br/>
+<div class="code-block">FUNCTION Solve(row):
   IF row == N THEN return true
   FOR col = 0 to N-1:
     IF isSafe(row, col):
@@ -339,129 +326,118 @@ END FUNCTION</div>
       IF Solve(row + 1) THEN return true
       remove X from (row, col)
   RETURN false</div></div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q5" value="0" required><span>Solves N-Queens problem</span></label>
-                                <label class="option-label"><input type="radio" name="q5" value="1" required><span>Generates subsets</span></label>
-                                <label class="option-label"><input type="radio" name="q5" value="2" required><span>Solves Sudoku</span></label>
-                                <label class="option-label"><input type="radio" name="q5" value="3" required><span>Finds path in maze</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Question 6</div>
-                            <div class="question-text">Backtracking uses which programming technique?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q6" value="0" required><span>Iteration only</span></label>
-                                <label class="option-label"><input type="radio" name="q6" value="1" required><span>Recursion</span></label>
-                                <label class="option-label"><input type="radio" name="q6" value="2" required><span>Dynamic Programming</span></label>
-                                <label class="option-label"><input type="radio" name="q6" value="3" required><span>Greedy approach</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Question 7</div>
-                            <div class="question-text">For set [A, B], what are ALL subsets?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q7" value="0" required><span>{}, {A}, {B}, {A,B}</span></label>
-                                <label class="option-label"><input type="radio" name="q7" value="1" required><span>{A}, {B}, {A,B}</span></label>
-                                <label class="option-label"><input type="radio" name="q7" value="2" required><span>{}, {A,B}</span></label>
-                                <label class="option-label"><input type="radio" name="q7" value="3" required><span>{A}, {B}</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Question 8</div>
-                            <div class="question-text">In N-Queens, after placing a queen, what happens if no valid position exists for next queen?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q8" value="0" required><span>Program crashes</span></label>
-                                <label class="option-label"><input type="radio" name="q8" value="1" required><span>Remove queen and try different position</span></label>
-                                <label class="option-label"><input type="radio" name="q8" value="2" required><span>Skip that row</span></label>
-                                <label class="option-label"><input type="radio" name="q8" value="3" required><span>Start over from beginning</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Question 9</div>
-                            <div class="question-text">Binary representation 101 for set [1,2,3] represents which subset?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q9" value="0" required><span>{1,3}</span></label>
-                                <label class="option-label"><input type="radio" name="q9" value="1" required><span>{2}</span></label>
-                                <label class="option-label"><input type="radio" name="q9" value="2" required><span>{1,2}</span></label>
-                                <label class="option-label"><input type="radio" name="q9" value="3" required><span>{1,2,3}</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Question 10</div>
-                            <div class="question-text">Which problem is NOT typically solved with backtracking?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q10" value="0" required><span>Sudoku</span></label>
-                                <label class="option-label"><input type="radio" name="q10" value="1" required><span>Binary Search</span></label>
-                                <label class="option-label"><input type="radio" name="q10" value="2" required><span>N-Queens</span></label>
-                                <label class="option-label"><input type="radio" name="q10" value="3" required><span>Maze solving</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Question 11</div>
-                            <div class="question-text">Given this code, how many subsets will be generated?<br><br>
-                            <div class="code-block">GenerateSubsets([5, 10, 15])</div></div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q11" value="0" required><span>3</span></label>
-                                <label class="option-label"><input type="radio" name="q11" value="1" required><span>6</span></label>
-                                <label class="option-label"><input type="radio" name="q11" value="2" required><span>8</span></label>
-                                <label class="option-label"><input type="radio" name="q11" value="3" required><span>9</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Question 12</div>
-                            <div class="question-text">What is the key characteristic of backtracking?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q12" value="0" required><span>Always finds optimal solution</span></label>
-                                <label class="option-label"><input type="radio" name="q12" value="1" required><span>Ability to undo choices and try alternatives</span></label>
-                                <label class="option-label"><input type="radio" name="q12" value="2" required><span>Uses constant space</span></label>
-                                <label class="option-label"><input type="radio" name="q12" value="3" required><span>Linear time complexity</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Question 13</div>
-                            <div class="question-text">What does this backtracking pattern do?<br><br>
-                            <div class="code-block">FUNCTION Backtrack(current, remaining):
+<div class="options">
+<label class="option-label"><input name="q5" required="" type="radio" value="0"/><span>Lost op N-Queens probleem</span></label>
+<label class="option-label"><input name="q5" required="" type="radio" value="1"/><span>Generates subsets</span></label>
+<label class="option-label"><input name="q5" required="" type="radio" value="2"/><span>Lost op Sudoku</span></label>
+<label class="option-label"><input name="q5" required="" type="radio" value="3"/><span>Vindt pad in maze</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 6</div>
+<div class="question-text">Backtracking gebruikt welke programming technique?</div>
+<div class="options">
+<label class="option-label"><input name="q6" required="" type="radio" value="0"/><span>Iteratie alleen</span></label>
+<label class="option-label"><input name="q6" required="" type="radio" value="1"/><span>Recursie</span></label>
+<label class="option-label"><input name="q6" required="" type="radio" value="2"/><span>Dynamisch programmeren</span></label>
+<label class="option-label"><input name="q6" required="" type="radio" value="3"/><span>Greedy aanpak</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 7</div>
+<div class="question-text">Voor set [A, B], wat zijn ALLE subsets?</div>
+<div class="options">
+<label class="option-label"><input name="q7" required="" type="radio" value="0"/><span>{}, {A}, {B}, {A,B}</span></label>
+<label class="option-label"><input name="q7" required="" type="radio" value="1"/><span>{A}, {B}, {A,B}</span></label>
+<label class="option-label"><input name="q7" required="" type="radio" value="2"/><span>{}, {A,B}</span></label>
+<label class="option-label"><input name="q7" required="" type="radio" value="3"/><span>{A}, {B}</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 8</div>
+<div class="question-text">In N-Queens, na placing een queen, wat gebeurt als nee geldig position exists voor volgende queen?</div>
+<div class="options">
+<label class="option-label"><input name="q8" required="" type="radio" value="0"/><span>Program crashes</span></label>
+<label class="option-label"><input name="q8" required="" type="radio" value="1"/><span>Verwijder de koningin en probeer een andere positie</span></label>
+<label class="option-label"><input name="q8" required="" type="radio" value="2"/><span>Sla over dat rij</span></label>
+<label class="option-label"><input name="q8" required="" type="radio" value="3"/><span>Begin opnieuw vanaf het begin</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 9</div>
+<div class="question-text">Binary representation 101 voor set [1,2,3] represents welke subset?</div>
+<div class="options">
+<label class="option-label"><input name="q9" required="" type="radio" value="0"/><span>{1,3}</span></label>
+<label class="option-label"><input name="q9" required="" type="radio" value="1"/><span>{2}</span></label>
+<label class="option-label"><input name="q9" required="" type="radio" value="2"/><span>{1,2}</span></label>
+<label class="option-label"><input name="q9" required="" type="radio" value="3"/><span>{1,2,3}</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 10</div>
+<div class="question-text">Welk probleem wordt normaal NIET met backtracking opgelost?</div>
+<div class="options">
+<label class="option-label"><input name="q10" required="" type="radio" value="0"/><span>Sudoku</span></label>
+<label class="option-label"><input name="q10" required="" type="radio" value="1"/><span>Binair zoeken</span></label>
+<label class="option-label"><input name="q10" required="" type="radio" value="2"/><span>N-Queens</span></label>
+<label class="option-label"><input name="q10" required="" type="radio" value="3"/><span>Maze oplossen</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 11</div>
+<div class="question-text">Given deze code, hoe many subsets will zijn generated?<br/><br/>
+<div class="code-block">GenerateSubsets([5, 10, 15])</div></div>
+<div class="options">
+<label class="option-label"><input name="q11" required="" type="radio" value="0"/><span>3</span></label>
+<label class="option-label"><input name="q11" required="" type="radio" value="1"/><span>6</span></label>
+<label class="option-label"><input name="q11" required="" type="radio" value="2"/><span>8</span></label>
+<label class="option-label"><input name="q11" required="" type="radio" value="3"/><span>9</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 12</div>
+<div class="question-text">Wat is de sleutel characteristic of backtracking?</div>
+<div class="options">
+<label class="option-label"><input name="q12" required="" type="radio" value="0"/><span>Altijd vindt optimaal oplossing</span></label>
+<label class="option-label"><input name="q12" required="" type="radio" value="1"/><span>De mogelijkheid om keuzes ongedaan te maken en alternatieven te proberen</span></label>
+<label class="option-label"><input name="q12" required="" type="radio" value="2"/><span>Gebruikt constante ruimte</span></label>
+<label class="option-label"><input name="q12" required="" type="radio" value="3"/><span>Lineaire tijdcomplexiteit</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 13</div>
+<div class="question-text">Wat doet deze backtracking patroon doe?<br/><br/>
+<div class="code-block">FUNCTION Backtrack(current, remaining):
   IF remaining is empty:
-    add current to results
+    toevoegen huidige naar results
   ELSE:
-    Backtrack(current + first, rest)  // Include
-    Backtrack(current, rest)           // Exclude</div></div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q13" value="0" required><span>Generates all permutations</span></label>
-                                <label class="option-label"><input type="radio" name="q13" value="1" required><span>Generates all subsets</span></label>
-                                <label class="option-label"><input type="radio" name="q13" value="2" required><span>Solves N-Queens</span></label>
-                                <label class="option-label"><input type="radio" name="q13" value="3" required><span>Finds shortest path</span></label>
-                            </div>
-                        </div>
+    Backtrack(current + first, rest)  // Opnemen
+    Backtrack(current, rest)           // Uitsluiten</div></div>
+<div class="options">
+<label class="option-label"><input name="q13" required="" type="radio" value="0"/><span>Generates alle permutations</span></label>
+<label class="option-label"><input name="q13" required="" type="radio" value="1"/><span>Genereert alle subsets</span></label>
+<label class="option-label"><input name="q13" required="" type="radio" value="2"/><span>Lost op N-Queens</span></label>
+<label class="option-label"><input name="q13" required="" type="radio" value="3"/><span>Vindt shortest pad</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 14</div>
+<div class="question-text">Hoeveel subsets doet een lege set have?</div>
+<div class="options">
+<label class="option-label"><input name="q14" required="" type="radio" value="0"/><span>0</span></label>
+<label class="option-label"><input name="q14" required="" type="radio" value="1"/><span>1</span></label>
+<label class="option-label"><input name="q14" required="" type="radio" value="2"/><span>2</span></label>
+<label class="option-label"><input name="q14" required="" type="radio" value="3"/><span>Undefined</span></label>
+</div>
+</div>
+<button class="submit-quiz" type="submit">Quiz indienen</button>
+</form>
+<div id="mcq-result"></div>
+</div>
+</div>
+</div>
 
-                        <div class="quiz-question">
-                            <div class="question-number">Question 14</div>
-                            <div class="question-text">How many subsets does an empty set have?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q14" value="0" required><span>0</span></label>
-                                <label class="option-label"><input type="radio" name="q14" value="1" required><span>1</span></label>
-                                <label class="option-label"><input type="radio" name="q14" value="2" required><span>2</span></label>
-                                <label class="option-label"><input type="radio" name="q14" value="3" required><span>Undefined</span></label>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="submit-quiz">Submit Quiz</button>
-                    </form>
-                    <div id="mcq-result"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-        <script>
+<script>
         // Quiz Configuration
         const QUIZ_CONFIG = {
             'chapter6-mcq': {
@@ -525,18 +501,18 @@ END FUNCTION</div>
             for (let i = 0; i < config.total; i++) {
                 const questionName = `${questionPrefix}${i + 1}`;
                 const userAnswer = parseInt(userAnswers[questionName]);
-                const correctAnswer = config.answers[i];
+                const juistAnswer = config.answers[i];
                 
                 form.querySelectorAll(`input[name="${questionName}"]`).forEach(input => {
                     const label = input.closest('.option-label');
                     const value = parseInt(input.value);
                     
-                    label.classList.remove('correct', 'incorrect');
+                    label.classList.remove('juist', 'injuist');
                     
-                    if (value === correctAnswer) {
-                        label.classList.add('correct');
-                    } else if (value === userAnswer && value !== correctAnswer) {
-                        label.classList.add('incorrect');
+                    if (value === juistAnswer) {
+                        label.classList.add('juist');
+                    } else if (value === userAnswer && value !== juistAnswer) {
+                        label.classList.add('injuist');
                     }
                     
                     input.disabled = true;
@@ -556,7 +532,7 @@ END FUNCTION</div>
                 resetBtn = document.createElement('button');
                 resetBtn.type = 'button';
                 resetBtn.className = 'reset-quiz';
-                resetBtn.textContent = '🔄 Reset Quiz';
+                resetBtn.textContent = '🔄 Quiz opnieuw starten';
                 resetBtn.onclick = function() { resetQuiz(formId, quizId); };
                 submitBtn.parentNode.insertBefore(resetBtn, submitBtn.nextSibling);
             }
@@ -575,7 +551,7 @@ END FUNCTION</div>
             
             // Remove all feedback styling
             form.querySelectorAll('.option-label').forEach(label => {
-                label.classList.remove('correct', 'incorrect');
+                label.classList.remove('juist', 'injuist');
             });
             
             // Re-enable all inputs
@@ -612,7 +588,7 @@ END FUNCTION</div>
             const formData = new FormData(form);
             const questionPrefix = quizId.includes('mcq') ? 'q' : quizId.includes('tf') ? 'tf' : 'code';
             
-            let correct = 0;
+            let juist = 0;
             const userAnswers = {};
             
             for (let i = 0; i < config.total; i++) {
@@ -621,14 +597,14 @@ END FUNCTION</div>
                 userAnswers[questionName] = selected;
                 
                 if (selected === config.answers[i]) {
-                    correct++;
+                    juist++;
                 }
             }
             
             // Save results
             saveQuizData(quizId, {
                 userAnswers: userAnswers,
-                score: correct,
+                score: juist,
                 total: config.total,
                 submitted: true,
                 timestamp: new Date().toISOString()
@@ -639,24 +615,24 @@ END FUNCTION</div>
             
             // Show result
             const resultId = formId.replace('-form', '-result');
-            showResult(resultId, correct, config.total);
+            showResult(resultId, juist, config.total);
         }
 
         // Show quiz result
-        function showResult(elementId, correct, total) {
-            const percentage = (correct / total) * 100;
+        function showResult(elementId, juist, total) {
+            const percentage = (juist / total) * 100;
             const resultDiv = document.getElementById(elementId);
             
             let resultClass, message;
             if (percentage >= 80) {
                 resultClass = 'excellent';
-                message = `🎉 Excellent! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
+                message = `🎉 Uitstekend! ${juist}/${total} juist (${percentage.toFixed(0)}%)`;
             } else if (percentage >= 60) {
                 resultClass = 'good';
-                message = `👍 Good job! ${correct}/${total} correct (${percentage.toFixed(0)}%). Review the concepts you missed.`;
+                message = `👍 Goed gedaan! ${juist}/${total} juist (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
             } else {
                 resultClass = 'needs-work';
-                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Study the summary and try again!`;
+                message = `📚 ${juist}/${total} juist (${percentage.toFixed(0)}%). Bestudeer de samenvatting en probeer opnieuw!`;
             }
             
             resultDiv.className = `quiz-result ${resultClass}`;

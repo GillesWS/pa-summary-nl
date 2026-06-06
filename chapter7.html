@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 7: Dynamic Programming - Programming Advanced</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hoofdstuk 7: Dynamisch programmeren - Programming Advanced</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #2d3561; --secondary: #4a90e2; --accent: #ff6b6b; --success: #51cf66; --warning: #ffd93d; --bg: #f8f9fa; --card: #ffffff; --text: #2c3e50; --text-light: #7f8c8d; }
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
@@ -114,423 +115,392 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-content">
-            <div class="chapter-header">Chapter 7: Dynamic Programming</div>
-            <a href="index.html" class="back-button">← Back to Chapters</a>
-        </div>
-    </nav>
-    <div class="container">
-        </div>
-        <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
-            <button class="section-tab active" onclick="switchSection('summary')">📚 Summary</button>
-            <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-            <button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
-        </div>
-
-        <div id="summary" class="section-content active">
-            <div class="summary-grid">
-                <div class="summary-card">
-                    <h3> What is Dynamic Programming?</h3>
-                    <p><strong>Definition:</strong> Optimization technique for recursion by storing intermediate results.</p>
-                    <h4>Main Idea:</h4>
-                    <ul>
-                        <li>Store results of subproblems</li>
-                        <li>Reuse stored results instead of recalculating</li>
-                        <li>Transform exponential to polynomial time</li>
-                    </ul>
-                    <div class="highlight-box"><strong>Key Insight:</strong> Don't solve same problem twice!</div>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Top-Down: Memoization</h3>
-                    <p><strong>Approach:</strong> Start from top, store results as you go down</p>
-                    <h4>How it Works:</h4>
-                    <ul>
-                        <li>Use lookup table (array/dictionary)</li>
-                        <li>Check if result already computed</li>
-                        <li>If yes, return stored result</li>
-                        <li>If no, compute and store</li>
-                    </ul>
-                    <div class="code-block">int[] memo;
+<nav class="navbar">
+<div class="navbar-content">
+<div class="chapter-header">Hoofdstuk 7: Dynamisch programmeren</div>
+<a class="back-button" href="index.html">← Terug naar hoofdstukken</a>
+</div>
+</nav>
+<div class="container">
+</div>
+<div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
+<button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
+<button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
+<button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
+</div>
+<div class="section-content active" id="summary">
+<div class="summary-grid">
+<div class="summary-card">
+<h3> Wat is dynamisch programmeren?</h3>
+<p><strong>Definitie:</strong> Optimalisatietechniek voor recursie door tussentijdse resultaten op te slaan.</p>
+<h4>Hoofdidee:</h4>
+<ul>
+<li>Sla resultaten van deelproblemen op</li>
+<li>Hergebruik opgeslagen resultaten in plaats van opnieuw te berekenen</li>
+<li>Zet exponentiële tijd om naar polynomiale tijd</li>
+</ul>
+<div class="highlight-box"><strong>Belangrijk inzicht:</strong> Los hetzelfde probleem niet twee keer op!</div>
+</div>
+<div class="summary-card">
+<h3> Top-down: Memoization</h3>
+<p><strong>Aanpak:</strong> Start bovenaan en sla resultaten op terwijl je naar beneden gaat</p>
+<h4>Hoe het werkt:</h4>
+<ul>
+<li>Gebruik een lookup-tabel (array/dictionary)</li>
+<li>Controleer of het resultaat al berekend is</li>
+<li>Zo ja, geef het opgeslagen resultaat terug</li>
+<li>Zo nee, bereken en sla op</li>
+</ul>
+<div class="code-block">int[] memo;
 int FibMemo(int n) {
-  if (n <= 1) return n;
-  if (memo[n] > 0) return memo[n];
+  if (n &lt;= 1) return n;
+  if (memo[n] &gt; 0) return memo[n];
   memo[n] = FibMemo(n-1) + FibMemo(n-2);
   return memo[n];
 }</div>
-                    <p><strong>Complexity:</strong> O(n) time, O(n) space</p>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Bottom-Up: Tabulation</h3>
-                    <p><strong>Approach:</strong> Start from bottom, build up to solution</p>
-                    <h4>How it Works:</h4>
-                    <ul>
-                        <li>Fill table from smallest to largest</li>
-                        <li>No recursion needed</li>
-                        <li>Iterative approach</li>
-                    </ul>
-                    <div class="code-block">int FibTab(int n) {
+<p><strong>Complexiteit:</strong> O(n) tijd, O(n) ruimte</p>
+</div>
+<div class="summary-card">
+<h3> Bottom-up: tabulation</h3>
+<p><strong>Aanpak:</strong> Start onderaan en bouw op naar de oplossing</p>
+<h4>Hoe het werkt:</h4>
+<ul>
+<li>Vul de tabel van klein naar groot</li>
+<li>Geen recursie nodig</li>
+<li>Iteratieve aanpak</li>
+</ul>
+<div class="code-block">int FibTab(int n) {
   int[] tab = new int[n + 2];
   tab[0] = 0;
   tab[1] = 1;
-  for (int i = 2; i <= n; i++) {
+  for (int i = 2; i &lt;= n; i++) {
     tab[i] = tab[i-1] + tab[i-2];
   }
   return tab[n];
 }</div>
-                    <p><strong>Complexity:</strong> O(n) time, O(n) space</p>
-                </div>
-
-                <div class="summary-card">
-                    <h3>🆚 Memoization vs Tabulation</h3>
-                    <h4>Memoization (Top-Down):</h4>
-                    <ul>
-                        <li><strong>+</strong> Fill table on demand</li>
-                        <li><strong>+</strong> Natural recursive approach</li>
-                        <li><strong>+</strong> Only compute needed subproblems</li>
-                        <li><strong>-</strong> Recursion overhead</li>
-                    </ul>
-                    <h4>Tabulation (Bottom-Up):</h4>
-                    <ul>
-                        <li><strong>+</strong> No recursion overhead</li>
-                        <li><strong>+</strong> Usually faster</li>
-                        <li><strong>-</strong> Must know order</li>
-                        <li><strong>-</strong> Computes all subproblems</li>
-                    </ul>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Fibonacci Comparison</h3>
-                    <table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
-                        <tr style="background: var(--primary); color: white;">
-                            <th style="padding: 0.8rem; text-align: left;">Approach</th>
-                            <th style="padding: 0.8rem;">Time</th>
-                            <th style="padding: 0.8rem;">Space</th>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #e0e0e0;">
-                            <td style="padding: 0.8rem;"><strong>Naive Recursion</strong></td>
-                            <td style="padding: 0.8rem;">O(2^n)</td>
-                            <td style="padding: 0.8rem;">O(n)</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #e0e0e0;">
-                            <td style="padding: 0.8rem;"><strong>Memoization</strong></td>
-                            <td style="padding: 0.8rem;">O(n)</td>
-                            <td style="padding: 0.8rem;">O(n)</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid #e0e0e0;">
-                            <td style="padding: 0.8rem;"><strong>Tabulation</strong></td>
-                            <td style="padding: 0.8rem;">O(n)</td>
-                            <td style="padding: 0.8rem;">O(n)</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 0.8rem;"><strong>Iterative</strong></td>
-                            <td style="padding: 0.8rem;">O(n)</td>
-                            <td style="padding: 0.8rem;">O(1)</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="summary-card">
-                    <h3> When to Use DP</h3>
-                    <h4>Two Requirements:</h4>
-                    <ul>
-                        <li><strong>Overlapping Subproblems:</strong> Same problems solved multiple times</li>
-                        <li><strong>Optimal Substructure:</strong> Optimal solution contains optimal solutions to subproblems</li>
-                    </ul>
-                    <h4>Classic DP Problems:</h4>
-                    <ul>
-                        <li>Fibonacci sequence</li>
-                        <li>Knapsack problem</li>
-                        <li>Longest common subsequence</li>
-                        <li>Rod cutting</li>
-                        <li>Coin change</li>
-                    </ul>
-                </div>
-
-                <div class="summary-card">
-                    <h3>️ Rod Cutting Problem</h3>
-                    <p><strong>Problem:</strong> Cut rod of length n to maximize profit</p>
-                    <h4>Given:</h4>
-                    <ul>
-                        <li>Rod length n</li>
-                        <li>Price for each length (1 to n)</li>
-                    </ul>
-                    <h4>Goal:</h4>
-                    <p>Find optimal way to cut rod for maximum revenue</p>
-                    <div class="code-block">Example: n=4
+<p><strong>Complexiteit:</strong> O(n) tijd, O(n) ruimte</p>
+</div>
+<div class="summary-card">
+<h3>🆚 Memoization versus tabulation</h3>
+<h4>Memoization (top-down):</h4>
+<ul>
+<li><strong>+</strong> Vul de tabel wanneer nodig</li>
+<li><strong>+</strong> Natuurlijke recursieve aanpak</li>
+<li><strong>+</strong> Bereken alleen de nodige deelproblemen</li>
+<li><strong>-</strong> Recursie-overhead</li>
+</ul>
+<h4>Tabulation (bottom-up):</h4>
+<ul>
+<li><strong>+</strong> Geen recursie-overhead</li>
+<li><strong>+</strong> Meestal sneller</li>
+<li><strong>-</strong> Moet de volgorde kennen</li>
+<li><strong>-</strong> Berekent alle deelproblemen</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> Fibonacci-vergelijking</h3>
+<table style="width:100%; border-collapse: collapse; margin: 1rem 0;">
+<tr style="background: var(--primary); color: white;">
+<th style="padding: 0.8rem; text-align: left;">Aanpak</th>
+<th style="padding: 0.8rem;">Tijd</th>
+<th style="padding: 0.8rem;">Ruimte</th>
+</tr>
+<tr style="border-bottom: 1px solid #e0e0e0;">
+<td style="padding: 0.8rem;"><strong>Naïeve recursie</strong></td>
+<td style="padding: 0.8rem;">O(2^n)</td>
+<td style="padding: 0.8rem;">O(n)</td>
+</tr>
+<tr style="border-bottom: 1px solid #e0e0e0;">
+<td style="padding: 0.8rem;"><strong>Memoization</strong></td>
+<td style="padding: 0.8rem;">O(n)</td>
+<td style="padding: 0.8rem;">O(n)</td>
+</tr>
+<tr style="border-bottom: 1px solid #e0e0e0;">
+<td style="padding: 0.8rem;"><strong>Tabulation</strong></td>
+<td style="padding: 0.8rem;">O(n)</td>
+<td style="padding: 0.8rem;">O(n)</td>
+</tr>
+<tr>
+<td style="padding: 0.8rem;"><strong>Iteratief</strong></td>
+<td style="padding: 0.8rem;">O(n)</td>
+<td style="padding: 0.8rem;">O(1)</td>
+</tr>
+</table>
+</div>
+<div class="summary-card">
+<h3> Wanneer gebruik je DP</h3>
+<h4>Twee vereisten:</h4>
+<ul>
+<li><strong>Overlappende deelproblemen:</strong> Dezelfde problemen worden meerdere keren opgelost</li>
+<li><strong>Optimale substructuur:</strong> Een optimale oplossing bevat optimale oplossingen van deelproblemen</li>
+</ul>
+<h4>Klassieke DP-problemen:</h4>
+<ul>
+<li>Fibonacci-reeks</li>
+<li>Knapsackprobleem</li>
+<li>Langste gemeenschappelijke deelreeks</li>
+<li>Rod cutting</li>
+<li>Muntwissel</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3>️ Rod cutting-probleem</h3>
+<p><strong>Probleem:</strong> Snijd een staaf van lengte n om de winst te maximaliseren</p>
+<h4>Given:</h4>
+<ul>
+<li>Staaflengte n</li>
+<li>Prijs voor elke lengte (1 tot n)</li>
+</ul>
+<h4>Doel:</h4>
+<p>Vind de optimale manier om de staaf te snijden voor maximale opbrengst</p>
+<div class="code-block">Example: n=4
 Prices: [1, 5, 8, 9]
 Options:
 - No cuts: 9
 - Cut 1+3: 1+8=9
-- Cut 2+2: 5+5=10 ✓ (optimal)
+- Cut 2+2: 5+5=10 ✓ (optimaal)
 - Others...
 
 Formula: r(n) = max(price[i] + r(n-i)) for i=1 to n</div>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Key Takeaways</h3>
-                    <ul>
-                        <li>DP = optimization for recursion</li>
-                        <li>Store intermediate results to avoid recomputation</li>
-                        <li>Memoization: top-down with recursion</li>
-                        <li>Tabulation: bottom-up iterative</li>
-                        <li>Requires overlapping subproblems</li>
-                        <li>Requires optimal substructure</li>
-                        <li>Transforms O(2^n) to O(n)</li>
-                        <li>Trade space for time</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div id="flashcards" class="section-content">
-            <div class="quiz-container">
-                <div class="quiz-section">
-                    <h3>📇 Flashcards</h3>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is Dynamic Programming?<span>▼</span></div><div class="flashcard-answer">Optimization technique storing intermediate results to avoid recomputation</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Memoization vs Tabulation?<span>▼</span></div><div class="flashcard-answer">Memoization: top-down recursive. Tabulation: bottom-up iterative</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Two requirements for DP?<span>▼</span></div><div class="flashcard-answer">1) Overlapping subproblems 2) Optimal substructure</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Naive Fibonacci complexity?<span>▼</span></div><div class="flashcard-answer">O(2^n) - exponential time</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">DP Fibonacci complexity?<span>▼</span></div><div class="flashcard-answer">O(n) - linear time</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is memoization?<span>▼</span></div><div class="flashcard-answer">Top-down DP: store results in lookup table as computed</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is tabulation?<span>▼</span></div><div class="flashcard-answer">Bottom-up DP: iteratively fill table from base cases</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Overlapping subproblems?<span>▼</span></div><div class="flashcard-answer">Same subproblems solved multiple times (like Fib(2) in Fib(5))</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Optimal substructure?<span>▼</span></div><div class="flashcard-answer">Optimal solution contains optimal solutions of subproblems</div></div>
-                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Which is faster: memoization or tabulation?<span>▼</span></div><div class="flashcard-answer">Tabulation - no recursion overhead</div></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="quiz" class="section-content">
-            <div class="quiz-container">
-                <div class="quiz-section">
-                    <h3>✅ Quiz</h3>
-                    <form id="mcq-form">
-                        <div class="quiz-question">
-                            <div class="question-number">Q1</div>
-                            <div class="question-text">What is Dynamic Programming?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q1" value="0" required><span>A sorting algorithm</span></label>
-                                <label class="option-label"><input type="radio" name="q1" value="1" required><span>Optimization technique storing intermediate results</span></label>
-                                <label class="option-label"><input type="radio" name="q1" value="2" required><span>Graph traversal method</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q2</div>
-                            <div class="question-text">Time complexity of naive recursive Fibonacci?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q2" value="0" required><span>O(n)</span></label>
-                                <label class="option-label"><input type="radio" name="q2" value="1" required><span>O(n log n)</span></label>
-                                <label class="option-label"><input type="radio" name="q2" value="2" required><span>O(2^n)</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q3</div>
-                            <div class="question-text">Time complexity of DP Fibonacci?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q3" value="0" required><span>O(n)</span></label>
-                                <label class="option-label"><input type="radio" name="q3" value="1" required><span>O(2^n)</span></label>
-                                <label class="option-label"><input type="radio" name="q3" value="2" required><span>O(log n)</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q4</div>
-                            <div class="question-text">What is memoization?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q4" value="0" required><span>Top-down DP approach</span></label>
-                                <label class="option-label"><input type="radio" name="q4" value="1" required><span>Bottom-up DP approach</span></label>
-                                <label class="option-label"><input type="radio" name="q4" value="2" required><span>Sorting technique</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q5</div>
-                            <div class="question-text">What is tabulation?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q5" value="0" required><span>Top-down approach</span></label>
-                                <label class="option-label"><input type="radio" name="q5" value="1" required><span>Bottom-up iterative approach</span></label>
-                                <label class="option-label"><input type="radio" name="q5" value="2" required><span>Recursive only</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q6</div>
-                            <div class="question-text">Given this memoized code, what's returned for Fib(5)?<br><br>
+</div>
+<div class="summary-card">
+<h3> Belangrijkste inzichten</h3>
+<ul>
+<li>DP = optimalisatie voor recursie</li>
+<li>Sla tussentijdse resultaten op om herberekening te vermijden</li>
+<li>Memoization: top-down met recursie</li>
+<li>Tabulation: bottom-up iteratief</li>
+<li>Vereist overlappende deelproblemen</li>
+<li>Vereist optimale substructuur</li>
+<li>Zet O(2^n) om naar O(n)</li>
+<li>Ruil ruimte in voor tijd</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section-content" id="flashcards">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>📇 Flashcards</h3>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is dynamisch programmeren?<span>▼</span></div><div class="flashcard-answer">Optimalisatietechniek die tussentijdse resultaten opslaat om herberekening te vermijden</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Memoization versus tabulation?<span>▼</span></div><div class="flashcard-answer">Memoization: top-down recursief. Tabulation: bottom-up iteratief</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Twee vereisten voor DP?<span>▼</span></div><div class="flashcard-answer">1) Overlappende deelproblemen 2) Optimale substructuur</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Complexiteit van naïeve Fibonacci?<span>▼</span></div><div class="flashcard-answer">O(2^n) - exponentiële tijd</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Complexiteit van DP-Fibonacci?<span>▼</span></div><div class="flashcard-answer">O(n) - lineaire tijd</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is memoization?<span>▼</span></div><div class="flashcard-answer">Top-down DP: sla resultaten op in een lookup-tabel terwijl ze berekend worden</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is tabulation?<span>▼</span></div><div class="flashcard-answer">Bottom-up DP: vul de tabel iteratief vanaf de basiscases</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Overlappende deelproblemen?<span>▼</span></div><div class="flashcard-answer">Dezelfde deelproblemen worden meerdere keren opgelost (zoals Fib(2) in Fib(5))</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Optimale substructuur?<span>▼</span></div><div class="flashcard-answer">Een optimale oplossing bevat optimale oplossingen van deelproblemen</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is sneller: memoization of tabulation?<span>▼</span></div><div class="flashcard-answer">Tabulation - geen recursie-overhead</div></div>
+</div>
+</div>
+</div>
+<div class="section-content" id="quiz">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>✅ Quiz</h3>
+<form id="mcq-form">
+<div class="quiz-question">
+<div class="question-number">V1</div>
+<div class="question-text">Wat is dynamisch programmeren?</div>
+<div class="options">
+<label class="option-label"><input name="q1" required="" type="radio" value="0"/><span>Een sorteeralgoritme</span></label>
+<label class="option-label"><input name="q1" required="" type="radio" value="1"/><span>Optimalisatietechniek die tussentijdse resultaten opslaat</span></label>
+<label class="option-label"><input name="q1" required="" type="radio" value="2"/><span>Graaftraversal-methode</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V2</div>
+<div class="question-text">Tijdcomplexiteit van naïeve recursieve Fibonacci?</div>
+<div class="options">
+<label class="option-label"><input name="q2" required="" type="radio" value="0"/><span>O(n)</span></label>
+<label class="option-label"><input name="q2" required="" type="radio" value="1"/><span>O(n log n)</span></label>
+<label class="option-label"><input name="q2" required="" type="radio" value="2"/><span>O(2^n)</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V3</div>
+<div class="question-text">Tijdcomplexiteit van DP-Fibonacci?</div>
+<div class="options">
+<label class="option-label"><input name="q3" required="" type="radio" value="0"/><span>O(n)</span></label>
+<label class="option-label"><input name="q3" required="" type="radio" value="1"/><span>O(2^n)</span></label>
+<label class="option-label"><input name="q3" required="" type="radio" value="2"/><span>O(log n)</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V4</div>
+<div class="question-text">Wat is memoization?</div>
+<div class="options">
+<label class="option-label"><input name="q4" required="" type="radio" value="0"/><span>Top-down DP-aanpak</span></label>
+<label class="option-label"><input name="q4" required="" type="radio" value="1"/><span>Bottom-up DP-aanpak</span></label>
+<label class="option-label"><input name="q4" required="" type="radio" value="2"/><span>Sorteertechniek</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V5</div>
+<div class="question-text">Wat is tabulation?</div>
+<div class="options">
+<label class="option-label"><input name="q5" required="" type="radio" value="0"/><span>Top-down aanpak</span></label>
+<label class="option-label"><input name="q5" required="" type="radio" value="1"/><span>Bottom-up iteratieve aanpak</span></label>
+<label class="option-label"><input name="q5" required="" type="radio" value="2"/><span>Alleen recursief</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V6</div>
+<div class="question-text">Gegeven deze memoized code, wat wordt teruggegeven voor Fib(5)?<br/><br/>
 <div class="code-block">int[] memo = new int[100];
 int Fib(int n) {
-  if (n <= 1) return n;
+  if (n &lt;= 1) return n;
   if (memo[n] != 0) return memo[n];
   memo[n] = Fib(n-1) + Fib(n-2);
   return memo[n];
 }</div></div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q6" value="0" required><span>3</span></label>
-                                <label class="option-label"><input type="radio" name="q6" value="1" required><span>5</span></label>
-                                <label class="option-label"><input type="radio" name="q6" value="2" required><span>8</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q7</div>
-                            <div class="question-text">Two requirements for Dynamic Programming?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q7" value="0" required><span>Overlapping subproblems & Optimal substructure</span></label>
-                                <label class="option-label"><input type="radio" name="q7" value="1" required><span>Sorted data & Binary tree</span></label>
-                                <label class="option-label"><input type="radio" name="q7" value="2" required><span>Optimal substructure & Sorted data</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q8</div>
-                            <div class="question-text">What are overlapping subproblems?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q8" value="0" required><span>Same subproblems solved multiple times</span></label>
-                                <label class="option-label"><input type="radio" name="q8" value="1" required><span>Problems that can't be solved</span></label>
-                                <label class="option-label"><input type="radio" name="q8" value="2" required><span>Parallel processing</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q9</div>
-                            <div class="question-text">Which is generally faster?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q9" value="0" required><span>Memoization</span></label>
-                                <label class="option-label"><input type="radio" name="q9" value="1" required><span>Tabulation</span></label>
-                                <label class="option-label"><input type="radio" name="q9" value="2" required><span>Same speed</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q10</div>
-                            <div class="question-text">Space complexity of DP Fibonacci?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q10" value="0" required><span>O(1)</span></label>
-                                <label class="option-label"><input type="radio" name="q10" value="1" required><span>O(n)</span></label>
-                                <label class="option-label"><input type="radio" name="q10" value="2" required><span>O(n²)</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q11</div>
-                            <div class="question-text">What does this tabulation code compute?<br><br>
+<div class="options">
+<label class="option-label"><input name="q6" required="" type="radio" value="0"/><span>3</span></label>
+<label class="option-label"><input name="q6" required="" type="radio" value="1"/><span>5</span></label>
+<label class="option-label"><input name="q6" required="" type="radio" value="2"/><span>8</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V7</div>
+<div class="question-text">Twee vereisten voor dynamisch programmeren?</div>
+<div class="options">
+<label class="option-label"><input name="q7" required="" type="radio" value="0"/><span>Overlappende deelproblemen &amp; optimale substructuur</span></label>
+<label class="option-label"><input name="q7" required="" type="radio" value="1"/><span>Gesorteerde data &amp; binaire boom</span></label>
+<label class="option-label"><input name="q7" required="" type="radio" value="2"/><span>Optimale substructuur &amp; gesorteerde data</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V8</div>
+<div class="question-text">Wat zijn overlappende deelproblemen?</div>
+<div class="options">
+<label class="option-label"><input name="q8" required="" type="radio" value="0"/><span>Dezelfde deelproblemen worden meerdere keren opgelost</span></label>
+<label class="option-label"><input name="q8" required="" type="radio" value="1"/><span>Problemen die niet opgelost kunnen worden</span></label>
+<label class="option-label"><input name="q8" required="" type="radio" value="2"/><span>Parallelle verwerking</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V9</div>
+<div class="question-text">Wat is doorgaans sneller?</div>
+<div class="options">
+<label class="option-label"><input name="q9" required="" type="radio" value="0"/><span>Memoization</span></label>
+<label class="option-label"><input name="q9" required="" type="radio" value="1"/><span>Tabulation</span></label>
+<label class="option-label"><input name="q9" required="" type="radio" value="2"/><span>Dezelfde snelheid</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V10</div>
+<div class="question-text">Ruimtecomplexiteit van DP-Fibonacci?</div>
+<div class="options">
+<label class="option-label"><input name="q10" required="" type="radio" value="0"/><span>O(1)</span></label>
+<label class="option-label"><input name="q10" required="" type="radio" value="1"/><span>O(n)</span></label>
+<label class="option-label"><input name="q10" required="" type="radio" value="2"/><span>O(n²)</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V11</div>
+<div class="question-text">Wat berekent deze tabulation-code?<br/><br/>
 <div class="code-block">int[] dp = new int[n+1];
 dp[0] = 0; dp[1] = 1;
-for (int i = 2; i <= n; i++)
+for (int i = 2; i &lt;= n; i++)
   dp[i] = dp[i-1] + dp[i-2];
 return dp[n];</div></div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q11" value="0" required><span>Factorial</span></label>
-                                <label class="option-label"><input type="radio" name="q11" value="1" required><span>Fibonacci</span></label>
-                                <label class="option-label"><input type="radio" name="q11" value="2" required><span>Power</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q12</div>
-                            <div class="question-text">Memoization uses which approach?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q12" value="0" required><span>Iteration only</span></label>
-                                <label class="option-label"><input type="radio" name="q12" value="1" required><span>Recursion with lookup table</span></label>
-                                <label class="option-label"><input type="radio" name="q12" value="2" required><span>Greedy approach</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q13</div>
-                            <div class="question-text">In rod cutting with n=4 and prices [1,5,8,9], what's optimal cut?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q13" value="0" required><span>No cuts</span></label>
-                                <label class="option-label"><input type="radio" name="q13" value="1" required><span>2 cuts</span></label>
-                                <label class="option-label"><input type="radio" name="q13" value="2" required><span>4 cuts</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q14</div>
-                            <div class="question-text">What does DP trade?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q14" value="0" required><span>Space for time</span></label>
-                                <label class="option-label"><input type="radio" name="q14" value="1" required><span>Time for space</span></label>
-                                <label class="option-label"><input type="radio" name="q14" value="2" required><span>Neither</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q15</div>
-                            <div class="question-text">Which is NOT a DP problem?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q15" value="0" required><span>Fibonacci</span></label>
-                                <label class="option-label"><input type="radio" name="q15" value="1" required><span>Knapsack</span></label>
-                                <label class="option-label"><input type="radio" name="q15" value="2" required><span>Bubble Sort</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q16</div>
-                            <div class="question-text">How many times is Fib(2) computed in naive Fib(5)?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q16" value="0" required><span>1 time</span></label>
-                                <label class="option-label"><input type="radio" name="q16" value="1" required><span>2 times</span></label>
-                                <label class="option-label"><input type="radio" name="q16" value="2" required><span>3 times</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q17</div>
-                            <div class="question-text">How many times is Fib(2) computed with memoization in Fib(5)?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q17" value="0" required><span>1 time (stored after first)</span></label>
-                                <label class="option-label"><input type="radio" name="q17" value="1" required><span>3 times</span></label>
-                                <label class="option-label"><input type="radio" name="q17" value="2" required><span>5 times</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q18</div>
-                            <div class="question-text">Tabulation fills table in which order?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q18" value="0" required><span>Random</span></label>
-                                <label class="option-label"><input type="radio" name="q18" value="1" required><span>Bottom-up</span></label>
-                                <label class="option-label"><input type="radio" name="q18" value="2" required><span>Top-down</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q19</div>
-                            <div class="question-text">What's the main advantage of memoization?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q19" value="0" required><span>Only computes needed subproblems</span></label>
-                                <label class="option-label"><input type="radio" name="q19" value="1" required><span>Uses less space</span></label>
-                                <label class="option-label"><input type="radio" name="q19" value="2" required><span>Always faster</span></label>
-                            </div>
-                        </div>
-
-                        <div class="quiz-question">
-                            <div class="question-number">Q20</div>
-                            <div class="question-text">Given memo array after computing Fib(4), what's in memo[3]?<br><br>
+<div class="options">
+<label class="option-label"><input name="q11" required="" type="radio" value="0"/><span>Factorial</span></label>
+<label class="option-label"><input name="q11" required="" type="radio" value="1"/><span>Fibonacci</span></label>
+<label class="option-label"><input name="q11" required="" type="radio" value="2"/><span>Power</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V12</div>
+<div class="question-text">Memoization gebruikt welke aanpak?</div>
+<div class="options">
+<label class="option-label"><input name="q12" required="" type="radio" value="0"/><span>Iteratie alleen</span></label>
+<label class="option-label"><input name="q12" required="" type="radio" value="1"/><span>Recursie met lookup tabel</span></label>
+<label class="option-label"><input name="q12" required="" type="radio" value="2"/><span>Greedy aanpak</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V13</div>
+<div class="question-text">In rod cutting met n=4 en prices [1,5,8,9], what's optimaal cut?</div>
+<div class="options">
+<label class="option-label"><input name="q13" required="" type="radio" value="0"/><span>Nee cuts</span></label>
+<label class="option-label"><input name="q13" required="" type="radio" value="1"/><span>2 cuts</span></label>
+<label class="option-label"><input name="q13" required="" type="radio" value="2"/><span>4 cuts</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V14</div>
+<div class="question-text">Welke afweging maakt DP?</div>
+<div class="options">
+<label class="option-label"><input name="q14" required="" type="radio" value="0"/><span>Ruimte voor tijd</span></label>
+<label class="option-label"><input name="q14" required="" type="radio" value="1"/><span>Tijd voor ruimte</span></label>
+<label class="option-label"><input name="q14" required="" type="radio" value="2"/><span>Geen van beide</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V15</div>
+<div class="question-text">Welk probleem is GEEN DP-probleem?</div>
+<div class="options">
+<label class="option-label"><input name="q15" required="" type="radio" value="0"/><span>Fibonacci</span></label>
+<label class="option-label"><input name="q15" required="" type="radio" value="1"/><span>Knapsack</span></label>
+<label class="option-label"><input name="q15" required="" type="radio" value="2"/><span>Bubble sort</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V16</div>
+<div class="question-text">How many times is Fib(2) computed in naive Fib(5)?</div>
+<div class="options">
+<label class="option-label"><input name="q16" required="" type="radio" value="0"/><span>1 keer</span></label>
+<label class="option-label"><input name="q16" required="" type="radio" value="1"/><span>2 keer</span></label>
+<label class="option-label"><input name="q16" required="" type="radio" value="2"/><span>3 keer</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V17</div>
+<div class="question-text">How many times is Fib(2) computed with memoization in Fib(5)?</div>
+<div class="options">
+<label class="option-label"><input name="q17" required="" type="radio" value="0"/><span>1 keer (opgeslagen na de eerste keer)</span></label>
+<label class="option-label"><input name="q17" required="" type="radio" value="1"/><span>3 keer</span></label>
+<label class="option-label"><input name="q17" required="" type="radio" value="2"/><span>5 keer</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V18</div>
+<div class="question-text">In welke volgorde vult tabulation de tabel?</div>
+<div class="options">
+<label class="option-label"><input name="q18" required="" type="radio" value="0"/><span>Willekeurig</span></label>
+<label class="option-label"><input name="q18" required="" type="radio" value="1"/><span>Bottom-up</span></label>
+<label class="option-label"><input name="q18" required="" type="radio" value="2"/><span>Top-down</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V19</div>
+<div class="question-text">Wat is het belangrijkste voordeel van memoization?</div>
+<div class="options">
+<label class="option-label"><input name="q19" required="" type="radio" value="0"/><span>Berekent alleen de nodige deelproblemen</span></label>
+<label class="option-label"><input name="q19" required="" type="radio" value="1"/><span>Gebruikt minder ruimte</span></label>
+<label class="option-label"><input name="q19" required="" type="radio" value="2"/><span>Altijd sneller</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V20</div>
+<div class="question-text">Given memo array after computing Fib(4), what's in memo[3]?<br/><br/>
 <div class="code-block">Fibonacci: 0,1,1,2,3,5,8...</div></div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q20" value="0" required><span>1</span></label>
-                                <label class="option-label"><input type="radio" name="q20" value="1" required><span>2</span></label>
-                                <label class="option-label"><input type="radio" name="q20" value="2" required><span>3</span></label>
-                            </div>
-                        </div>
+<div class="options">
+<label class="option-label"><input name="q20" required="" type="radio" value="0"/><span>1</span></label>
+<label class="option-label"><input name="q20" required="" type="radio" value="1"/><span>2</span></label>
+<label class="option-label"><input name="q20" required="" type="radio" value="2"/><span>3</span></label>
+</div>
+</div>
+<button class="submit-quiz" type="submit">Quiz indienen</button>
+</form>
+<div id="mcq-result"></div>
+</div>
+</div>
+</div>
 
-                        <button type="submit" class="submit-quiz">Submit Quiz</button>
-                    </form>
-                    <div id="mcq-result"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-        <script>
+<script>
         // Quiz Configuration
         const QUIZ_CONFIG = {
             'chapter7-mcq': {
@@ -594,18 +564,18 @@ return dp[n];</div></div>
             for (let i = 0; i < config.total; i++) {
                 const questionName = `${questionPrefix}${i + 1}`;
                 const userAnswer = parseInt(userAnswers[questionName]);
-                const correctAnswer = config.answers[i];
+                const juistAnswer = config.answers[i];
                 
                 form.querySelectorAll(`input[name="${questionName}"]`).forEach(input => {
                     const label = input.closest('.option-label');
                     const value = parseInt(input.value);
                     
-                    label.classList.remove('correct', 'incorrect');
+                    label.classList.remove('juist', 'injuist');
                     
-                    if (value === correctAnswer) {
-                        label.classList.add('correct');
-                    } else if (value === userAnswer && value !== correctAnswer) {
-                        label.classList.add('incorrect');
+                    if (value === juistAnswer) {
+                        label.classList.add('juist');
+                    } else if (value === userAnswer && value !== juistAnswer) {
+                        label.classList.add('injuist');
                     }
                     
                     input.disabled = true;
@@ -625,7 +595,7 @@ return dp[n];</div></div>
                 resetBtn = document.createElement('button');
                 resetBtn.type = 'button';
                 resetBtn.className = 'reset-quiz';
-                resetBtn.textContent = '🔄 Reset Quiz';
+                resetBtn.textContent = '🔄 Quiz opnieuw starten';
                 resetBtn.onclick = function() { resetQuiz(formId, quizId); };
                 submitBtn.parentNode.insertBefore(resetBtn, submitBtn.nextSibling);
             }
@@ -644,7 +614,7 @@ return dp[n];</div></div>
             
             // Remove all feedback styling
             form.querySelectorAll('.option-label').forEach(label => {
-                label.classList.remove('correct', 'incorrect');
+                label.classList.remove('juist', 'injuist');
             });
             
             // Re-enable all inputs
@@ -681,7 +651,7 @@ return dp[n];</div></div>
             const formData = new FormData(form);
             const questionPrefix = quizId.includes('mcq') ? 'q' : quizId.includes('tf') ? 'tf' : 'code';
             
-            let correct = 0;
+            let juist = 0;
             const userAnswers = {};
             
             for (let i = 0; i < config.total; i++) {
@@ -690,14 +660,14 @@ return dp[n];</div></div>
                 userAnswers[questionName] = selected;
                 
                 if (selected === config.answers[i]) {
-                    correct++;
+                    juist++;
                 }
             }
             
             // Save results
             saveQuizData(quizId, {
                 userAnswers: userAnswers,
-                score: correct,
+                score: juist,
                 total: config.total,
                 submitted: true,
                 timestamp: new Date().toISOString()
@@ -708,24 +678,24 @@ return dp[n];</div></div>
             
             // Show result
             const resultId = formId.replace('-form', '-result');
-            showResult(resultId, correct, config.total);
+            showResult(resultId, juist, config.total);
         }
 
         // Show quiz result
-        function showResult(elementId, correct, total) {
-            const percentage = (correct / total) * 100;
+        function showResult(elementId, juist, total) {
+            const percentage = (juist / total) * 100;
             const resultDiv = document.getElementById(elementId);
             
             let resultClass, message;
             if (percentage >= 80) {
                 resultClass = 'excellent';
-                message = `🎉 Excellent! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
+                message = `🎉 Uitstekend! ${juist}/${total} juist (${percentage.toFixed(0)}%)`;
             } else if (percentage >= 60) {
                 resultClass = 'good';
-                message = `👍 Good job! ${correct}/${total} correct (${percentage.toFixed(0)}%). Review the concepts you missed.`;
+                message = `👍 Goed gedaan! ${juist}/${total} juist (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
             } else {
                 resultClass = 'needs-work';
-                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Study the summary and try again!`;
+                message = `📚 ${juist}/${total} juist (${percentage.toFixed(0)}%). Bestudeer de samenvatting en probeer opnieuw!`;
             }
             
             resultDiv.className = `quiz-result ${resultClass}`;
