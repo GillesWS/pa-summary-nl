@@ -1,11 +1,11 @@
-html
-<html lang="nl">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Hoofdstuk 2: Sorteren Algoritmes - Programming Advanced</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Sorting Algorithms - Programming Advanced</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #2d3561; --secondary: #4a90e2; --accent: #ff6b6b; --success: #51cf66; --warning: #ffd93d; --bg: #f8f9fa; --card: #ffffff; --text: #2c3e50; --text-light: #7f8c8d; }
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
@@ -66,7 +66,7 @@ html
         }
 
         .option-label.incorrect::after {
-            content: '✗ Fout';
+            content: '✗ Incorrect';
             margin-left: auto;
             color: var(--accent);
             font-weight: 700;
@@ -116,236 +116,234 @@ html
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 768px) { .summary-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
     </style>
-<!-- MOBILE MENU PATCH -->
-
-<style>
-@media (max-width: 768px) {
-  .mobile-menu-toggle { display:flex!important; }
-  body.mobile-menu-open { overflow:hidden; }
-  .chapters-grid, .grid, .cards-grid { grid-template-columns: 1fr!important; }
-  table, pre { max-width:100%; overflow-x:auto; }
-}
-.mobile-menu-toggle{display:none;position:fixed;top:14px;right:14px;z-index:9999;width:48px;height:44px;border:1px solid rgba(255,255,255,.55);border-radius:12px;background:linear-gradient(135deg,#2f3f78,#4a90e2);box-shadow:0 8px 24px rgba(0,0,0,.22);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}.mobile-menu-toggle span{display:block;width:23px;height:3px;border-radius:999px;background:#fff;transition:.2s}.mobile-menu-toggle.is-open span:nth-child(1){transform:translateY(8px) rotate(45deg)}.mobile-menu-toggle.is-open span:nth-child(2){opacity:0}.mobile-menu-toggle.is-open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
-@media (max-width:768px){.chapter-header .back-btn,.back-btn{margin-right:58px}.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}.tab-button{white-space:nowrap}}
-</style>
-
 </head>
 <body>
-<button class="mobile-menu-toggle" type="button" aria-label="Menu openen"><span></span><span></span><span></span></button>
-<nav class="navbar">
-<div class="navbar-content">
-<div class="chapter-header">Hoofdstuk 2: Sorteren Algoritmes</div>
-<a class="back-button" href="index.html">← Terug naar hoofdstukken</a>
-</div>
-</nav>
-<div class="container">
-</div>
-<div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
-<button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
-<button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-<button class="section-tab" onclick="switchSection('quiz')">✅ Meerkeuze</button>
-<button class="section-tab" onclick="switchSection('tf')">⭕ Waar/Niet waar</button>
-</div>
- SAMENVATTING 
-<div class="section-content active" id="summary">
-<div class="summary-grid">
-<div class="summary-card">
-<h3> Waarom sorteren belangrijk is</h3>
-<p><strong>Definitie:</strong> Items ordenen in een specifieke volgorde (oplopend/aflopend)</p>
-<h4>Belangrijkste voordelen:</h4>
-<ul>
-<li><strong>Sneller zoeken:</strong> Maakt binary search O(log n) mogelijk</li>
-<li><strong>Data-analyse:</strong> Patronen worden zichtbaar</li>
-<li><strong>Voorwaarden:</strong> Veel algoritmes hebben gesorteerde input nodig</li>
-<li><strong>Presentatie:</strong> Mensen verkiezen geordende data</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Bubble sort</h3>
-<p><strong>Strategie:</strong> Wissel herhaaldelijk aangrenzende elementen als ze fout staan</p>
-<div class="code-block">FOR i = 0 TO n-2:
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="chapter-header">Chapter 2: Sorting Algorithms</div>
+            <a href="index.html" class="back-button">← Back to Chapters</a>
+        </div>
+    </nav>
+    <div class="container">
+        </div>
+        <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
+            <button class="section-tab active" onclick="switchSection('summary')">📚 Summary</button>
+            <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
+            <button class="section-tab" onclick="switchSection('quiz')">✅ Multiple Choice</button>
+            <button class="section-tab" onclick="switchSection('tf')">⭕ True/False</button>
+        </div>
+
+        <!-- SUMMARY -->
+        <div id="summary" class="section-content active">
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h3> Why Sorting Matters</h3>
+                    <p><strong>Definition:</strong> Organizing items in specific order (ascending/descending)</p>
+                    <h4>Key Benefits:</h4>
+                    <ul>
+                        <li><strong>Faster Searching:</strong> Enables binary search O(log n)</li>
+                        <li><strong>Data Analysis:</strong> Patterns become visible</li>
+                        <li><strong>Prerequisites:</strong> Many algorithms need sorted input</li>
+                        <li><strong>Presentation:</strong> Humans prefer organized data</li>
+                    </ul>
+                </div>
+                
+                <div class="summary-card">
+                    <h3> Bubble Sort</h3>
+                    <p><strong>Strategy:</strong> Repeatedly swap adjacent elements if out of order</p>
+                    <div class="code-block">FOR i = 0 TO n-2:
   FOR j = 0 TO n-2-i:
-    IF A[j] &gt; A[j+1]:
+    IF A[j] > A[j+1]:
       Swap A[j], A[j+1]</div>
-<h4>Complexiteit:</h4>
-<ul>
-<li><strong>Tijd:</strong> O(n²) worst-case, O(n) best-case met flag</li>
-<li><strong>Geheugen:</strong> O(1)</li>
-<li><strong>Stabiel:</strong> Ja</li>
-</ul>
-<div class="highlight-box"><strong>Optimalisatie:</strong> Gebruik een flag - als er geen swaps zijn in een pass, stop vroeg!</div>
-</div>
-<div class="summary-card">
-<h3> Selection sort</h3>
-<p><strong>Strategie:</strong> Zoek het minimum en plaats het vooraan</p>
-<div class="code-block">FOR i = 0 TO n-2:
+                    <h4>Complexity:</h4>
+                    <ul>
+                        <li><strong>Time:</strong> O(n²) worst, O(n) best with flag</li>
+                        <li><strong>Space:</strong> O(1)</li>
+                        <li><strong>Stable:</strong> Yes</li>
+                    </ul>
+                    <div class="highlight-box"><strong>Optimization:</strong> Use flag - if no swaps in pass, stop early!</div>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Selection Sort</h3>
+                    <p><strong>Strategy:</strong> Find minimum, place at beginning</p>
+                    <div class="code-block">FOR i = 0 TO n-2:
   minIdx = i
   FOR j = i+1 TO n-1:
-    IF A[j] &lt; A[minIdx]:
+    IF A[j] < A[minIdx]:
       minIdx = j
   Swap A[i], A[minIdx]</div>
-<h4>Complexiteit:</h4>
-<ul>
-<li><strong>Tijd:</strong> Altijd O(n²) - geen betere best-case!</li>
-<li><strong>Geheugen:</strong> O(1)</li>
-<li><strong>Stabiel:</strong> Nee</li>
-</ul>
-<div class="highlight-box"><strong>Zwakte:</strong> Doet altijd maximaal werk. Vermijden!</div>
-</div>
-<div class="summary-card">
-<h3> Insertion sort</h3>
-<p><strong>Strategie:</strong> Bouw de gesorteerde array één element per keer op. De "menselijke manier"!</p>
-<div class="code-block">FOR i = 1 TO n-1:
+                    <h4>Complexity:</h4>
+                    <ul>
+                        <li><strong>Time:</strong> Always O(n²) - no best case!</li>
+                        <li><strong>Space:</strong> O(1)</li>
+                        <li><strong>Stable:</strong> No</li>
+                    </ul>
+                    <div class="highlight-box"><strong>Weakness:</strong> Always does maximum work. Avoid!</div>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Insertion Sort</h3>
+                    <p><strong>Strategy:</strong> Build sorted array one element at a time. The "human way"!</p>
+                    <div class="code-block">FOR i = 1 TO n-1:
   key = A[i]
   j = i-1
-  WHILE j &gt;= 0 AND A[j] &gt; key:
+  WHILE j >= 0 AND A[j] > key:
     A[j+1] = A[j]
     j--
   A[j+1] = key</div>
-<h4>Complexiteit:</h4>
-<ul>
-<li><strong>Tijd:</strong> O(n²) worst-case, O(n) best-case</li>
-<li><strong>Geheugen:</strong> O(1)</li>
-<li><strong>Stabiel:</strong> Ja</li>
-</ul>
-<div class="highlight-box"><strong>Meest intelligent!</strong> Past zich aan gedeeltelijk gesorteerde data aan</div>
-</div>
-<div class="summary-card">
-<h3> Vergelijkingstabel</h3>
-<table class="comparison-table">
-<tr><th>Algoritme</th><th>Best</th><th>Gem.</th><th>Worst</th><th>Geheugen</th><th>Stabiel</th></tr>
-<tr><td><strong>Bubble</strong></td><td>O(n)*</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>✓</td></tr>
-<tr><td><strong>Selection</strong></td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>✗</td></tr>
-<tr><td><strong>Insertion</strong></td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>✓</td></tr>
-<tr><td><strong>Merge</strong></td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n)</td><td>✓</td></tr>
-<tr><td><strong>Quick</strong></td><td>O(n log n)</td><td>O(n log n)</td><td>O(n²)</td><td>O(log n)</td><td>✗</td></tr>
-</table>
-<p style="font-size: 0.85rem;">* Met flag-optimalisatie</p>
-</div>
-<div class="summary-card">
-<h3> Pruning</h3>
-<p><strong>Definitie:</strong> Onnodig werk wegknippen</p>
-<h4>Technieken:</h4>
-<ul>
-<li><strong>Vroeg stoppen:</strong> Stop wanneer het doel bereikt is</li>
-<li><strong>Flags:</strong> Hou de status bij van iets klaar is</li>
-<li><strong>Bounds checking:</strong> Sla onmogelijke bereiken over</li>
-</ul>
-<div class="highlight-box"><strong>Voorbeeld:</strong> Flag in Bubble Sort → O(n²) naar O(n) voor gesorteerde data!</div>
-</div>
-<div class="summary-card">
-<h3> Belangrijkste inzichten</h3>
-<ul>
-<li>Alle drie basis-sorteeralgoritmes zijn O(n²)</li>
-<li>Insertion sort is het slimst - past zich aan de data aan</li>
-<li>Selection sort is altijd traag - vermijden!</li>
-<li>Bubble sort kan geoptimaliseerd worden met flags</li>
-<li>Alle drie sorteren in-place: O(1) geheugen</li>
-<li>Pruning = slimmer werken, niet harder</li>
-<li>Stabiliteit behoudt de volgorde van gelijke elementen</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Performance (1000 elementen)</h3>
-<table class="comparison-table">
-<tr><th>Algoritme</th><th>Random</th><th>Gesorteerd</th></tr>
-<tr><td>Bubble (geen flag)</td><td>499,500</td><td>499,500</td></tr>
-<tr><td>Bubble (flag)</td><td>499,500</td><td>999</td></tr>
-<tr><td>Selection</td><td>499,500</td><td>499,500</td></tr>
-<tr><td>Insertion</td><td>250,904</td><td>999</td></tr>
-</table>
-</div>
-</div>
-</div>
- FLASHCARDS 
-<div class="section-content" id="flashcards">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>📇 Flashcards - klik om te tonen</h3>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Tijdscomplexiteit van Bubble Sort?<span>▼</span></div><div class="flashcard-answer">O(n²) worst/average-case, O(n) beste case met flag optimalisatie</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Hoe werkt Bubble Sort?<span>▼</span></div><div class="flashcard-answer">Wisselt herhaaldelijk aangrenzende elementen als ze fout in de juiste volgorde, "bubbling" de grootste element naar het einde</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Complexiteit van Selection Sort?<span>▼</span></div><div class="flashcard-answer">Altijd O(n²) - geen betere best-case! Doet altijd maximaal werkt</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Hoe werkt Selection Sort?<span>▼</span></div><div class="flashcard-answer">Finds de minimum element en places it at de beginning, repeats voor remaining array</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Insertion Sort beste case?<span>▼</span></div><div class="flashcard-answer">O(n) voor gesorteerd of nearly gesorteerde data</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Hoe werkt Insertion Sort?<span>▼</span></div><div class="flashcard-answer">Builds gesorteerd array one element at een tijd door inserting elke element into its juiste plaats - de "menselijke manier"!</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is pruning?<span>▼</span></div><div class="flashcard-answer">Onnodig werk wegknippen naar make algoritmes smarter en more efficiënt</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is een flag?<span>▼</span></div><div class="flashcard-answer">Boolean variable used naar track state/status en control lus termination</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is stable sorteren?<span>▼</span></div><div class="flashcard-answer">Behoudt de relatief volgorde van gelijke elementen van de oorspronkelijke array</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Most intelligent basic sort?<span>▼</span></div><div class="flashcard-answer">Insertion Sort - adapts naar partially gesorteerde data met natural early stopping</div></div>
-</div>
-</div>
-</div>
- MULTIPLE Keuze 
-<div class="section-content" id="quiz">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>✅ Meerkeuzequiz</h3>
-<form id="mcq-form">
-<div class="quiz-question"><div class="question-number">Vraag 1</div><div class="question-text">Best-case tijdscomplexiteit van Insertion Sort?</div><div class="options">
-<label class="option-label"><input name="q1" required="" type="radio" value="0"/><span>O(1)</span></label>
-<label class="option-label"><input name="q1" required="" type="radio" value="1"/><span>O(n)</span></label>
-<label class="option-label"><input name="q1" required="" type="radio" value="2"/><span>O(n²)</span></label>
-</div></div>
-<div class="quiz-question"><div class="question-number">Vraag 2</div><div class="question-text">Welk sorteeralgoritme gebruikt divide en conquer?</div><div class="options">
-<label class="option-label"><input name="q2" required="" type="radio" value="0"/><span>Bubble sort</span></label>
-<label class="option-label"><input name="q2" required="" type="radio" value="1"/><span>Merge sort</span></label>
-<label class="option-label"><input name="q2" required="" type="radio" value="2"/><span>Selection sort</span></label>
-</div></div>
-<div class="quiz-question"><div class="question-number">Vraag 3</div><div class="question-text">Wat betekent "stabiel sorteren"?</div><div class="options">
-<label class="option-label"><input name="q3" required="" type="radio" value="0"/><span>Snel algoritme</span></label>
-<label class="option-label"><input name="q3" required="" type="radio" value="1"/><span>Behoudt de relatieve volgorde van gelijke elementen</span></label>
-<label class="option-label"><input name="q3" required="" type="radio" value="2"/><span>Gebruikt constant geheugen</span></label>
-</div></div>
-<div class="quiz-question"><div class="question-number">Vraag 4</div><div class="question-text">Welke sort doet altijd maximaal werk (geen best-case winst)?</div><div class="options">
-<label class="option-label"><input name="q4" required="" type="radio" value="0"/><span>Bubble sort</span></label>
-<label class="option-label"><input name="q4" required="" type="radio" value="1"/><span>Selection sort</span></label>
-<label class="option-label"><input name="q4" required="" type="radio" value="2"/><span>Insertion sort</span></label>
-</div></div>
-<div class="quiz-question"><div class="question-number">Vraag 5</div><div class="question-text">Wat is pruning in algoritmes?</div><div class="options">
-<label class="option-label"><input name="q5" required="" type="radio" value="0"/><span>Duplicaten verwijderen</span></label>
-<label class="option-label"><input name="q5" required="" type="radio" value="1"/><span>Onnodig werk wegknippen</span></label>
-<label class="option-label"><input name="q5" required="" type="radio" value="2"/><span>De array sorteren</span></label>
-</div></div>
-<button class="submit-quiz" type="submit">Quiz indienen</button>
-</form>
-<div id="mcq-result"></div>
-</div>
-</div>
-</div>
- TRUE/FALSE 
-<div class="section-content" id="tf">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>⭕ Waar of niet waar</h3>
-<form id="tf-form">
-<div class="quiz-question"><div class="question-number">Vraag 1</div><div class="question-text">Bubble Sort kan O(n) best-case halen met flag-optimalisatie.</div><div class="options">
-<label class="option-label"><input name="tf1" required="" type="radio" value="0"/><span>Waar</span></label>
-<label class="option-label"><input name="tf1" required="" type="radio" value="1"/><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question"><div class="question-number">Vraag 2</div><div class="question-text">Selection Sort is altijd O(n²), zelfs voor gesorteerde data.</div><div class="options">
-<label class="option-label"><input name="tf2" required="" type="radio" value="0"/><span>Waar</span></label>
-<label class="option-label"><input name="tf2" required="" type="radio" value="1"/><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question"><div class="question-number">Vraag 3</div><div class="question-text">Insertion Sort adapts naar partially gesorteerde data.</div><div class="options">
-<label class="option-label"><input name="tf3" required="" type="radio" value="0"/><span>Waar</span></label>
-<label class="option-label"><input name="tf3" required="" type="radio" value="1"/><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question"><div class="question-number">Vraag 4</div><div class="question-text">Alle three basic sorts have O(1) geheugencomplexiteit.</div><div class="options">
-<label class="option-label"><input name="tf4" required="" type="radio" value="0"/><span>Waar</span></label>
-<label class="option-label"><input name="tf4" required="" type="radio" value="1"/><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question"><div class="question-number">Vraag 5</div><div class="question-text">Selection Sort is een stable sorteren algoritme.</div><div class="options">
-<label class="option-label"><input name="tf5" required="" type="radio" value="0"/><span>Waar</span></label>
-<label class="option-label"><input name="tf5" required="" type="radio" value="1"/><span>Niet waar</span></label>
-</div></div>
-<button class="submit-quiz" type="submit">Quiz indienen</button>
-</form>
-<div id="tf-result"></div>
-</div>
-</div>
-</div>
+                    <h4>Complexity:</h4>
+                    <ul>
+                        <li><strong>Time:</strong> O(n²) worst, O(n) best</li>
+                        <li><strong>Space:</strong> O(1)</li>
+                        <li><strong>Stable:</strong> Yes</li>
+                    </ul>
+                    <div class="highlight-box"><strong>Most Intelligent!</strong> Adapts to partially sorted data</div>
+                </div>
 
-<script>
+                <div class="summary-card">
+                    <h3> Comparison Table</h3>
+                    <table class="comparison-table">
+                        <tr><th>Algorithm</th><th>Best</th><th>Avg</th><th>Worst</th><th>Space</th><th>Stable</th></tr>
+                        <tr><td><strong>Bubble</strong></td><td>O(n)*</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>✓</td></tr>
+                        <tr><td><strong>Selection</strong></td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>✗</td></tr>
+                        <tr><td><strong>Insertion</strong></td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>✓</td></tr>
+                        <tr><td><strong>Merge</strong></td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n)</td><td>✓</td></tr>
+                        <tr><td><strong>Quick</strong></td><td>O(n log n)</td><td>O(n log n)</td><td>O(n²)</td><td>O(log n)</td><td>✗</td></tr>
+                    </table>
+                    <p style="font-size: 0.85rem;">* With flag optimization</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Pruning</h3>
+                    <p><strong>Definition:</strong> Cutting away unnecessary work</p>
+                    <h4>Techniques:</h4>
+                    <ul>
+                        <li><strong>Early Termination:</strong> Stop when goal reached</li>
+                        <li><strong>Flags:</strong> Track completion status</li>
+                        <li><strong>Bounds Checking:</strong> Skip impossible ranges</li>
+                    </ul>
+                    <div class="highlight-box"><strong>Example:</strong> Flag in Bubble Sort → O(n²) to O(n) for sorted data!</div>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Key Takeaways</h3>
+                    <ul>
+                        <li>All three basic sorts are O(n²)</li>
+                        <li>Insertion Sort most intelligent - adapts to data</li>
+                        <li>Selection Sort always slow - avoid!</li>
+                        <li>Bubble Sort can be optimized with flags</li>
+                        <li>All sort in-place: O(1) space</li>
+                        <li>Pruning = work smarter not harder</li>
+                        <li>Stability preserves order of equal elements</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Performance (1000 elements)</h3>
+                    <table class="comparison-table">
+                        <tr><th>Algorithm</th><th>Random</th><th>Sorted</th></tr>
+                        <tr><td>Bubble (no flag)</td><td>499,500</td><td>499,500</td></tr>
+                        <tr><td>Bubble (flag)</td><td>499,500</td><td>999</td></tr>
+                        <tr><td>Selection</td><td>499,500</td><td>499,500</td></tr>
+                        <tr><td>Insertion</td><td>250,904</td><td>999</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- FLASHCARDS -->
+        <div id="flashcards" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>📇 Flashcards - Click to Reveal</h3>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Time complexity of Bubble Sort?<span>▼</span></div><div class="flashcard-answer">O(n²) worst/average case, O(n) best case with flag optimization</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">How does Bubble Sort work?<span>▼</span></div><div class="flashcard-answer">Repeatedly swaps adjacent elements if they're out of order, "bubbling" the largest element to the end</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Selection Sort complexity?<span>▼</span></div><div class="flashcard-answer">Always O(n²) - no best case! Always does maximum work</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">How does Selection Sort work?<span>▼</span></div><div class="flashcard-answer">Finds the minimum element and places it at the beginning, repeats for remaining array</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Insertion Sort best case?<span>▼</span></div><div class="flashcard-answer">O(n) for sorted or nearly sorted data</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">How does Insertion Sort work?<span>▼</span></div><div class="flashcard-answer">Builds sorted array one element at a time by inserting each element into its correct position - the "human way"!</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is pruning?<span>▼</span></div><div class="flashcard-answer">Cutting away unnecessary work to make algorithms smarter and more efficient</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is a flag?<span>▼</span></div><div class="flashcard-answer">Boolean variable used to track state/status and control loop termination</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is stable sorting?<span>▼</span></div><div class="flashcard-answer">Maintains the relative order of equal elements from the original array</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Most intelligent basic sort?<span>▼</span></div><div class="flashcard-answer">Insertion Sort - adapts to partially sorted data with natural early stopping</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MULTIPLE CHOICE -->
+        <div id="quiz" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>✅ Multiple Choice Quiz</h3>
+                    <form id="mcq-form">
+                        <div class="quiz-question"><div class="question-number">Q1</div><div class="question-text">Best-case time complexity of Insertion Sort?</div><div class="options">
+                            <label class="option-label"><input type="radio" name="q1" value="0" required><span>O(1)</span></label>
+                            <label class="option-label"><input type="radio" name="q1" value="1" required><span>O(n)</span></label>
+                            <label class="option-label"><input type="radio" name="q1" value="2" required><span>O(n²)</span></label>
+                        </div></div>
+                        <div class="quiz-question"><div class="question-number">Q2</div><div class="question-text">Which sorting algorithm uses divide and conquer?</div><div class="options">
+                            <label class="option-label"><input type="radio" name="q2" value="0" required><span>Bubble Sort</span></label>
+                            <label class="option-label"><input type="radio" name="q2" value="1" required><span>Merge Sort</span></label>
+                            <label class="option-label"><input type="radio" name="q2" value="2" required><span>Selection Sort</span></label>
+                        </div></div>
+                        <div class="quiz-question"><div class="question-number">Q3</div><div class="question-text">What does 'stable sorting' mean?</div><div class="options">
+                            <label class="option-label"><input type="radio" name="q3" value="0" required><span>Fast algorithm</span></label>
+                            <label class="option-label"><input type="radio" name="q3" value="1" required><span>Maintains relative order of equal elements</span></label>
+                            <label class="option-label"><input type="radio" name="q3" value="2" required><span>Uses constant space</span></label>
+                        </div></div>
+                        <div class="quiz-question"><div class="question-number">Q4</div><div class="question-text">Which sort always does maximum work (no best case)?</div><div class="options">
+                            <label class="option-label"><input type="radio" name="q4" value="0" required><span>Bubble Sort</span></label>
+                            <label class="option-label"><input type="radio" name="q4" value="1" required><span>Selection Sort</span></label>
+                            <label class="option-label"><input type="radio" name="q4" value="2" required><span>Insertion Sort</span></label>
+                        </div></div>
+                        <div class="quiz-question"><div class="question-number">Q5</div><div class="question-text">What is pruning in algorithms?</div><div class="options">
+                            <label class="option-label"><input type="radio" name="q5" value="0" required><span>Removing duplicates</span></label>
+                            <label class="option-label"><input type="radio" name="q5" value="1" required><span>Cutting away unnecessary work</span></label>
+                            <label class="option-label"><input type="radio" name="q5" value="2" required><span>Sorting the array</span></label>
+                        </div></div>
+                        <button type="submit" class="submit-quiz">Submit Quiz</button>
+                    </form>
+                    <div id="mcq-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRUE/FALSE -->
+        <div id="tf" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>⭕ True or False</h3>
+                    <form id="tf-form">
+                        <div class="quiz-question"><div class="question-number">Q1</div><div class="question-text">Bubble Sort can achieve O(n) best-case with flag optimization.</div><div class="options">
+                            <label class="option-label"><input type="radio" name="tf1" value="0" required><span>True</span></label>
+                            <label class="option-label"><input type="radio" name="tf1" value="1" required><span>False</span></label>
+                        </div></div>
+                        <div class="quiz-question"><div class="question-number">Q2</div><div class="question-text">Selection Sort is always O(n²), even for sorted data.</div><div class="options">
+                            <label class="option-label"><input type="radio" name="tf2" value="0" required><span>True</span></label>
+                            <label class="option-label"><input type="radio" name="tf2" value="1" required><span>False</span></label>
+                        </div></div>
+                        <div class="quiz-question"><div class="question-number">Q3</div><div class="question-text">Insertion Sort adapts to partially sorted data.</div><div class="options">
+                            <label class="option-label"><input type="radio" name="tf3" value="0" required><span>True</span></label>
+                            <label class="option-label"><input type="radio" name="tf3" value="1" required><span>False</span></label>
+                        </div></div>
+                        <div class="quiz-question"><div class="question-number">Q4</div><div class="question-text">All three basic sorts have O(1) space complexity.</div><div class="options">
+                            <label class="option-label"><input type="radio" name="tf4" value="0" required><span>True</span></label>
+                            <label class="option-label"><input type="radio" name="tf4" value="1" required><span>False</span></label>
+                        </div></div>
+                        <div class="quiz-question"><div class="question-number">Q5</div><div class="question-text">Selection Sort is a stable sorting algorithm.</div><div class="options">
+                            <label class="option-label"><input type="radio" name="tf5" value="0" required><span>True</span></label>
+                            <label class="option-label"><input type="radio" name="tf5" value="1" required><span>False</span></label>
+                        </div></div>
+                        <button type="submit" class="submit-quiz">Submit Quiz</button>
+                    </form>
+                    <div id="tf-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <script>
         // Quiz Configuration
         const QUIZ_CONFIG = {
             'chapter2-mcq': {
@@ -537,13 +535,13 @@ html
             let resultClass, message;
             if (percentage >= 80) {
                 resultClass = 'excellent';
-                message = `🎉 Uitstekend! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
+                message = `🎉 Excellent! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
             } else if (percentage >= 60) {
                 resultClass = 'good';
-                message = `👍 Goed gedaan! ${correct}/${total} correct (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
+                message = `👍 Good job! ${correct}/${total} correct (${percentage.toFixed(0)}%). Review the concepts you missed.`;
             } else {
                 resultClass = 'needs-work';
-                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Bestudeer de dezelfdenvatting en probeer opnieuw!`;
+                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Study the summary and try again!`;
             }
             
             resultDiv.className = `quiz-result ${resultClass}`;
@@ -560,7 +558,7 @@ html
                 restoreAnswers('mcq-form', 'chapter2-mcq');
             }
             
-            // Waar/Niet waar Quiz
+            // True/False Quiz
             const tfForm = document.getElementById('tf-form');
             if (tfForm) {
                 tfForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'tf-form', 'chapter2-tf'));
@@ -568,15 +566,5 @@ html
             }
         });
     </script>
-<div class="source-note" style="text-align:center;margin:30px auto;color:#6b7280;font-size:0.95rem;">Gebaseerd op de PA Samenvatting van Stephanie VDH.</div>
-
-<script>
-document.addEventListener('DOMContentLoaded',function(){
-  const btn=document.querySelector('.mobile-menu-toggle');
-  if(!btn) return;
-  btn.addEventListener('click',function(){document.body.classList.toggle('mobile-menu-open');btn.classList.toggle('is-open');});
-});
-</script>
-
 </body>
 </html>

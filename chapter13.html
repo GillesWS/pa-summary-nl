@@ -1,11 +1,11 @@
-html
-<html lang="nl">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Chapter 13: Recap - Programming Advanced</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 13: Recap - Programming Advanced</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #2d3561; --secondary: #4a90e2; --accent: #ff6b6b; --success: #51cf66; --warning: #ffd93d; --bg: #f8f9fa; }
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: #2c3e50; line-height: 1.6; }
@@ -65,7 +65,7 @@ html
         }
 
         .option-label.incorrect::after {
-            content: '✗ Fout';
+            content: '✗ Incorrect';
             margin-left: auto;
             color: var(--accent);
             font-weight: 700;
@@ -116,309 +116,303 @@ html
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 768px) { .summary-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } .quiz-section { padding: 1.5rem; } }
     </style>
-<!-- MOBILE MENU PATCH -->
-
-<style>
-@media (max-width: 768px) {
-  .mobile-menu-toggle { display:flex!important; }
-  body.mobile-menu-open { overflow:hidden; }
-  .chapters-grid, .grid, .cards-grid { grid-template-columns: 1fr!important; }
-  table, pre { max-width:100%; overflow-x:auto; }
-}
-.mobile-menu-toggle{display:none;position:fixed;top:14px;right:14px;z-index:9999;width:48px;height:44px;border:1px solid rgba(255,255,255,.55);border-radius:12px;background:linear-gradient(135deg,#2f3f78,#4a90e2);box-shadow:0 8px 24px rgba(0,0,0,.22);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}.mobile-menu-toggle span{display:block;width:23px;height:3px;border-radius:999px;background:#fff;transition:.2s}.mobile-menu-toggle.is-open span:nth-child(1){transform:translateY(8px) rotate(45deg)}.mobile-menu-toggle.is-open span:nth-child(2){opacity:0}.mobile-menu-toggle.is-open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
-@media (max-width:768px){.chapter-header .back-btn,.back-btn{margin-right:58px}.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}.tab-button{white-space:nowrap}}
-</style>
-
 </head>
 <body>
-<button class="mobile-menu-toggle" type="button" aria-label="Menu openen"><span></span><span></span><span></span></button>
-<nav class="navbar">
-<div class="navbar-content">
-<div class="chapter-header">Chapter 13: Recap</div>
-<a class="back-button" href="index.html">← Back</a>
-</div>
-</nav>
-<div class="container">
-<div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
-<button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
-<button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-<button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
-</div>
-<div class="section-content active" id="summary">
-<div class="summary-grid">
-<div class="summary-card">
-<h3> Data Structures Samenvatting</h3>
-<table>
-<tr><th>Structure</th><th>Toegang</th><th>Zoeken</th><th>Best Voor</th></tr>
-<tr><td><strong>Array</strong></td><td>O(1)</td><td>O(n)</td><td>Fixed grootte, snel toegang</td></tr>
-<tr><td><strong>LinkedList</strong></td><td>O(n)</td><td>O(n)</td><td>Frequent insert/delete</td></tr>
-<tr><td><strong>Stack</strong></td><td>O(1)</td><td>-</td><td>LIFO, recursie</td></tr>
-<tr><td><strong>Queue</strong></td><td>O(1)</td><td>-</td><td>FIFO, BFS</td></tr>
-<tr><td><strong>Hash Tabel</strong></td><td>O(1)</td><td>O(1)</td><td>Key-value lookup</td></tr>
-<tr><td><strong>BST</strong></td><td>O(log n)</td><td>O(log n)</td><td>Gesorteerd data</td></tr>
-</table>
-</div>
-<div class="summary-card">
-<h3> Strategie Samenvatting</h3>
-<table>
-<tr><th>Strategie</th><th>Tijd</th><th>Gebruik Wanneer</th></tr>
-<tr><td><strong>Greedy</strong></td><td>O(n log n)</td><td>Local keuzes werkt</td></tr>
-<tr><td><strong>Backtracking</strong></td><td>Exponentieel</td><td>Constraint problemen</td></tr>
-<tr><td><strong>Divide &amp; Conquer</strong></td><td>O(n log n)</td><td>Recursief splitting</td></tr>
-<tr><td><strong>Dynamic Programming</strong></td><td>O(n²)</td><td>Overlapping subproblemen</td></tr>
-</table>
-</div>
-<div class="summary-card">
-<h3> Problem-Solving Framework</h3>
-<h4>1. Analysis:</h4>
-<ul><li>Input grootte?</li><li>Constraints?</li><li>Perfect oplossing needed?</li></ul>
-<h4>2. Strategie Selection:</h4>
-<ul><li>Overlapping subproblemen? → DP</li><li>Local keuzes optimal? → Greedy</li><li>Nodig hebben alle oplossingen? → Backtracking</li></ul>
-<h4>3. Data Structure Keuze:</h4>
-<ul><li>Frequent lookups? → HashMap</li><li>Must stay gesorteerd? → Tree</li><li>Many insert/delete? → LinkedList</li></ul>
-</div>
-<div class="summary-card">
-<h3> Knapsack Probleem Example</h3>
-<p><strong>Probleem:</strong> 4 items, capacity 10kg, maximize waarde</p>
-<h4>Approaches:</h4>
-<ul>
-<li><strong>Greedy:</strong> Snel: but suboptimal</li>
-<li><strong>Brute Force:</strong> O(2^n) - tries alle combinations</li>
-<li><strong>Backtracking:</strong> Prune invalid branches</li>
-<li><strong>DP:</strong> Optimal En efficiënt</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Key Concepts</h3>
-<ul>
-<li><strong>Recursie:</strong> Implementation tool, not strategie</li>
-<li><strong>Pruning:</strong> Cut unnecessary branches</li>
-<li><strong>Complexiteit:</strong> Analyze tijd en geheugen</li>
-<li><strong>Trade-offs:</strong> Speed vs accuracy, geheugen vs tijd</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Course Highlights</h3>
-<ul>
-<li>Data structures organize data efficiently</li>
-<li>Algoritmes oplossen problemen systematically</li>
-<li>Choose rechts tool voor de job</li>
-<li>Analyze before implementing</li>
-<li>Start simple, optimize when needed</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="section-content" id="flashcards">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>📇 Flashcards</h3>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Best data structure voor lookups?<span>▼</span></div><div class="flashcard-answer">Hash Tabel - O(1)</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Best voor gesorteerde data?<span>▼</span></div><div class="flashcard-answer">Binary Zoeken Tree</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">LIFO data structure?<span>▼</span></div><div class="flashcard-answer">Stack</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">FIFO data structure?<span>▼</span></div><div class="flashcard-answer">Queue</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Wanneer gebruik DP?<span>▼</span></div><div class="flashcard-answer">Overlapping subproblemen + optimal substructure</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Wanneer gebruik Greedy?<span>▼</span></div><div class="flashcard-answer">Local optimal keuzes lead naar global optimum</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Wanneer gebruik Backtracking?<span>▼</span></div><div class="flashcard-answer">Constraint problemen, nodig hebben alle oplossingen</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Recursie is?<span>▼</span></div><div class="flashcard-answer">Implementation tool, not een strategie</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Array toegang tijd?<span>▼</span></div><div class="flashcard-answer">O(1) - constante tijd</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Binary Zoeken tijd?<span>▼</span></div><div class="flashcard-answer">O(log n)</div></div>
-</div>
-</div>
-</div>
-<div class="section-content" id="quiz">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>✅ Quiz</h3>
-<form id="mcq-form">
-<div class="quiz-question">
-<div class="question-number">Vraag 1</div>
-<div class="question-text">Hash Tabel complexiteit?</div>
-<div class="options">
-<label class="option-label"><input name="q1" required="" type="radio" value="0"/><span>O(n)</span></label>
-<label class="option-label"><input name="q1" required="" type="radio" value="1"/><span>O(1)</span></label>
-<label class="option-label"><input name="q1" required="" type="radio" value="2"/><span>O(log n)</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 2</div>
-<div class="question-text">Best structure voor frequent insert/delete?</div>
-<div class="options">
-<label class="option-label"><input name="q2" required="" type="radio" value="0"/><span>Array</span></label>
-<label class="option-label"><input name="q2" required="" type="radio" value="1"/><span>LinkedList</span></label>
-<label class="option-label"><input name="q2" required="" type="radio" value="2"/><span>Stack</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 3</div>
-<div class="question-text">LIFO structure?</div>
-<div class="options">
-<label class="option-label"><input name="q3" required="" type="radio" value="0"/><span>Queue</span></label>
-<label class="option-label"><input name="q3" required="" type="radio" value="1"/><span>Stack</span></label>
-<label class="option-label"><input name="q3" required="" type="radio" value="2"/><span>Tree</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 4</div>
-<div class="question-text">FIFO structure?</div>
-<div class="options">
-<label class="option-label"><input name="q4" required="" type="radio" value="0"/><span>Stack</span></label>
-<label class="option-label"><input name="q4" required="" type="radio" value="1"/><span>Queue</span></label>
-<label class="option-label"><input name="q4" required="" type="radio" value="2"/><span>Array</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 5</div>
-<div class="question-text">BST zoeken complexiteit?</div>
-<div class="options">
-<label class="option-label"><input name="q5" required="" type="radio" value="0"/><span>O(1)</span></label>
-<label class="option-label"><input name="q5" required="" type="radio" value="1"/><span>O(n)</span></label>
-<label class="option-label"><input name="q5" required="" type="radio" value="2"/><span>O(log n)</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 6</div>
-<div class="question-text">Wanneer gebruik Dynamic Programming?</div>
-<div class="options">
-<label class="option-label"><input name="q6" required="" type="radio" value="0"/><span>Random problemen</span></label>
-<label class="option-label"><input name="q6" required="" type="radio" value="1"/><span>Overlapping subproblemen</span></label>
-<label class="option-label"><input name="q6" required="" type="radio" value="2"/><span>Gesorteerd data</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 7</div>
-<div class="question-text">Wanneer gebruik Greedy?</div>
-<div class="options">
-<label class="option-label"><input name="q7" required="" type="radio" value="0"/><span>Altijd</span></label>
-<label class="option-label"><input name="q7" required="" type="radio" value="1"/><span>Local keuzes lead naar global optimum</span></label>
-<label class="option-label"><input name="q7" required="" type="radio" value="2"/><span>Nooit</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 8</div>
-<div class="question-text">Backtracking gebruikt?</div>
-<div class="options">
-<label class="option-label"><input name="q8" required="" type="radio" value="0"/><span>Iteration</span></label>
-<label class="option-label"><input name="q8" required="" type="radio" value="1"/><span>Recursie</span></label>
-<label class="option-label"><input name="q8" required="" type="radio" value="2"/><span>Sorteren</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 9</div>
-<div class="question-text">Array toegang tijd?</div>
-<div class="options">
-<label class="option-label"><input name="q9" required="" type="radio" value="0"/><span>O(1)</span></label>
-<label class="option-label"><input name="q9" required="" type="radio" value="1"/><span>O(n)</span></label>
-<label class="option-label"><input name="q9" required="" type="radio" value="2"/><span>O(log n)</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 10</div>
-<div class="question-text">Welke is NOT een strategie?</div>
-<div class="options">
-<label class="option-label"><input name="q10" required="" type="radio" value="0"/><span>Greedy</span></label>
-<label class="option-label"><input name="q10" required="" type="radio" value="1"/><span>Backtracking</span></label>
-<label class="option-label"><input name="q10" required="" type="radio" value="2"/><span>Recursie</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q11</div>
-<div class="question-text">Knapsack: Greedy gives?</div>
-<div class="options">
-<label class="option-label"><input name="q11" required="" type="radio" value="0"/><span>Optimal oplossing</span></label>
-<label class="option-label"><input name="q11" required="" type="radio" value="1"/><span>Snel: but suboptimal</span></label>
-<label class="option-label"><input name="q11" required="" type="radio" value="2"/><span>Slowest oplossing</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q12</div>
-<div class="question-text">Divide &amp; Conquer complexiteit?</div>
-<div class="options">
-<label class="option-label"><input name="q12" required="" type="radio" value="0"/><span>O(n)</span></label>
-<label class="option-label"><input name="q12" required="" type="radio" value="1"/><span>O(n log n)</span></label>
-<label class="option-label"><input name="q12" required="" type="radio" value="2"/><span>O(2^n)</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q13</div>
-<div class="question-text">Best voor key-value pairs?</div>
-<div class="options">
-<label class="option-label"><input name="q13" required="" type="radio" value="0"/><span>Array</span></label>
-<label class="option-label"><input name="q13" required="" type="radio" value="1"/><span>Hash Tabel</span></label>
-<label class="option-label"><input name="q13" required="" type="radio" value="2"/><span>Stack</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q14</div>
-<div class="question-text">In-Order traversal gives?</div>
-<div class="options">
-<label class="option-label"><input name="q14" required="" type="radio" value="0"/><span>Random volgorde</span></label>
-<label class="option-label"><input name="q14" required="" type="radio" value="1"/><span>Gesorteerd data</span></label>
-<label class="option-label"><input name="q14" required="" type="radio" value="2"/><span>Reverse volgorde</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q15</div>
-<div class="question-text">Load factor &gt; 0.7 means?</div>
-<div class="options">
-<label class="option-label"><input name="q15" required="" type="radio" value="0"/><span>Verwijderen items</span></label>
-<label class="option-label"><input name="q15" required="" type="radio" value="1"/><span>Resize hash tabel</span></label>
-<label class="option-label"><input name="q15" required="" type="radio" value="2"/><span>Do nothing</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q16</div>
-<div class="question-text">Pruning is?</div>
-<div class="options">
-<label class="option-label"><input name="q16" required="" type="radio" value="0"/><span>Adding branches</span></label>
-<label class="option-label"><input name="q16" required="" type="radio" value="1"/><span>Cutting unnecessary branches</span></label>
-<label class="option-label"><input name="q16" required="" type="radio" value="2"/><span>Sorteren</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q17</div>
-<div class="question-text">Binary Zoeken vereist?</div>
-<div class="options">
-<label class="option-label"><input name="q17" required="" type="radio" value="0"/><span>Any array</span></label>
-<label class="option-label"><input name="q17" required="" type="radio" value="1"/><span>Gesorteerd array</span></label>
-<label class="option-label"><input name="q17" required="" type="radio" value="2"/><span>Hash tabel</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q18</div>
-<div class="question-text">Naive Fibonacci complexiteit?</div>
-<div class="options">
-<label class="option-label"><input name="q18" required="" type="radio" value="0"/><span>O(n)</span></label>
-<label class="option-label"><input name="q18" required="" type="radio" value="1"/><span>O(2^n)</span></label>
-<label class="option-label"><input name="q18" required="" type="radio" value="2"/><span>O(log n)</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q19</div>
-<div class="question-text">DP Fibonacci complexiteit?</div>
-<div class="options">
-<label class="option-label"><input name="q19" required="" type="radio" value="0"/><span>O(2^n)</span></label>
-<label class="option-label"><input name="q19" required="" type="radio" value="1"/><span>O(n)</span></label>
-<label class="option-label"><input name="q19" required="" type="radio" value="2"/><span>O(1)</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q20</div>
-<div class="question-text">Main DP requirements?</div>
-<div class="options">
-<label class="option-label"><input name="q20" required="" type="radio" value="0"/><span>Recursief structure en memoization capability</span></label>
-<label class="option-label"><input name="q20" required="" type="radio" value="1"/><span>Overlapping subproblemen en optimal substructure</span></label>
-<label class="option-label"><input name="q20" required="" type="radio" value="2"/><span>Divide en conquer met independent subproblemen</span></label>
-</div>
-</div>
-<button class="submit-quiz" type="submit">Indienen Final Quiz</button>
-</form>
-<div id="mcq-result"></div>
-</div>
-</div>
-</div>
-</div>
-<script>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="chapter-header">Chapter 13: Recap</div>
+            <a href="index.html" class="back-button">← Back</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
+            <button class="section-tab active" onclick="switchSection('summary')">📚 Summary</button>
+            <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
+            <button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
+        </div>
+
+        <div id="summary" class="section-content active">
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h3> Data Structures Summary</h3>
+                    <table>
+                        <tr><th>Structure</th><th>Access</th><th>Search</th><th>Best For</th></tr>
+                        <tr><td><strong>Array</strong></td><td>O(1)</td><td>O(n)</td><td>Fixed size, fast access</td></tr>
+                        <tr><td><strong>LinkedList</strong></td><td>O(n)</td><td>O(n)</td><td>Frequent insert/delete</td></tr>
+                        <tr><td><strong>Stack</strong></td><td>O(1)</td><td>-</td><td>LIFO, recursion</td></tr>
+                        <tr><td><strong>Queue</strong></td><td>O(1)</td><td>-</td><td>FIFO, BFS</td></tr>
+                        <tr><td><strong>Hash Table</strong></td><td>O(1)</td><td>O(1)</td><td>Key-value lookup</td></tr>
+                        <tr><td><strong>BST</strong></td><td>O(log n)</td><td>O(log n)</td><td>Sorted data</td></tr>
+                    </table>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Strategy Summary</h3>
+                    <table>
+                        <tr><th>Strategy</th><th>Time</th><th>Use When</th></tr>
+                        <tr><td><strong>Greedy</strong></td><td>O(n log n)</td><td>Local choices work</td></tr>
+                        <tr><td><strong>Backtracking</strong></td><td>Exponential</td><td>Constraint problems</td></tr>
+                        <tr><td><strong>Divide & Conquer</strong></td><td>O(n log n)</td><td>Recursive splitting</td></tr>
+                        <tr><td><strong>Dynamic Programming</strong></td><td>O(n²)</td><td>Overlapping subproblems</td></tr>
+                    </table>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Problem-Solving Framework</h3>
+                    <h4>1. Analysis:</h4>
+                    <ul><li>Input size?</li><li>Constraints?</li><li>Perfect solution needed?</li></ul>
+                    <h4>2. Strategy Selection:</h4>
+                    <ul><li>Overlapping subproblems? → DP</li><li>Local choices optimal? → Greedy</li><li>Need all solutions? → Backtracking</li></ul>
+                    <h4>3. Data Structure Choice:</h4>
+                    <ul><li>Frequent lookups? → HashMap</li><li>Must stay sorted? → Tree</li><li>Many insert/delete? → LinkedList</li></ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Knapsack Problem Example</h3>
+                    <p><strong>Problem:</strong> 4 items, capacity 10kg, maximize value</p>
+                    <h4>Approaches:</h4>
+                    <ul>
+                        <li><strong>Greedy:</strong> Fast but suboptimal</li>
+                        <li><strong>Brute Force:</strong> O(2^n) - tries all combinations</li>
+                        <li><strong>Backtracking:</strong> Prune invalid branches</li>
+                        <li><strong>DP:</strong> Optimal AND efficient</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Key Concepts</h3>
+                    <ul>
+                        <li><strong>Recursion:</strong> Implementation tool, not strategy</li>
+                        <li><strong>Pruning:</strong> Cut unnecessary branches</li>
+                        <li><strong>Complexity:</strong> Analyze time and space</li>
+                        <li><strong>Trade-offs:</strong> Speed vs accuracy, space vs time</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Course Highlights</h3>
+                    <ul>
+                        <li>Data structures organize data efficiently</li>
+                        <li>Algorithms solve problems systematically</li>
+                        <li>Choose right tool for the job</li>
+                        <li>Analyze before implementing</li>
+                        <li>Start simple, optimize when needed</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="flashcards" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>📇 Flashcards</h3>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Best data structure for lookups?<span>▼</span></div><div class="flashcard-answer">Hash Table - O(1)</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Best for sorted data?<span>▼</span></div><div class="flashcard-answer">Binary Search Tree</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">LIFO data structure?<span>▼</span></div><div class="flashcard-answer">Stack</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">FIFO data structure?<span>▼</span></div><div class="flashcard-answer">Queue</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">When use DP?<span>▼</span></div><div class="flashcard-answer">Overlapping subproblems + optimal substructure</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">When use Greedy?<span>▼</span></div><div class="flashcard-answer">Local optimal choices lead to global optimum</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">When use Backtracking?<span>▼</span></div><div class="flashcard-answer">Constraint problems, need all solutions</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Recursion is?<span>▼</span></div><div class="flashcard-answer">Implementation tool, not a strategy</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Array access time?<span>▼</span></div><div class="flashcard-answer">O(1) - constant time</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Binary Search time?<span>▼</span></div><div class="flashcard-answer">O(log n)</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>✅ Quiz</h3>
+                    <form id="mcq-form">
+                        <div class="quiz-question">
+                            <div class="question-number">Q1</div>
+                            <div class="question-text">Hash Table complexity?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q1" value="0" required><span>O(n)</span></label>
+                                <label class="option-label"><input type="radio" name="q1" value="1" required><span>O(1)</span></label>
+                                <label class="option-label"><input type="radio" name="q1" value="2" required><span>O(log n)</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q2</div>
+                            <div class="question-text">Best structure for frequent insert/delete?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q2" value="0" required><span>Array</span></label>
+                                <label class="option-label"><input type="radio" name="q2" value="1" required><span>LinkedList</span></label>
+                                <label class="option-label"><input type="radio" name="q2" value="2" required><span>Stack</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q3</div>
+                            <div class="question-text">LIFO structure?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q3" value="0" required><span>Queue</span></label>
+                                <label class="option-label"><input type="radio" name="q3" value="1" required><span>Stack</span></label>
+                                <label class="option-label"><input type="radio" name="q3" value="2" required><span>Tree</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q4</div>
+                            <div class="question-text">FIFO structure?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q4" value="0" required><span>Stack</span></label>
+                                <label class="option-label"><input type="radio" name="q4" value="1" required><span>Queue</span></label>
+                                <label class="option-label"><input type="radio" name="q4" value="2" required><span>Array</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q5</div>
+                            <div class="question-text">BST search complexity?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q5" value="0" required><span>O(1)</span></label>
+                                <label class="option-label"><input type="radio" name="q5" value="1" required><span>O(n)</span></label>
+                                <label class="option-label"><input type="radio" name="q5" value="2" required><span>O(log n)</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q6</div>
+                            <div class="question-text">When use Dynamic Programming?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q6" value="0" required><span>Random problems</span></label>
+                                <label class="option-label"><input type="radio" name="q6" value="1" required><span>Overlapping subproblems</span></label>
+                                <label class="option-label"><input type="radio" name="q6" value="2" required><span>Sorted data</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q7</div>
+                            <div class="question-text">When use Greedy?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q7" value="0" required><span>Always</span></label>
+                                <label class="option-label"><input type="radio" name="q7" value="1" required><span>Local choices lead to global optimum</span></label>
+                                <label class="option-label"><input type="radio" name="q7" value="2" required><span>Never</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q8</div>
+                            <div class="question-text">Backtracking uses?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q8" value="0" required><span>Iteration</span></label>
+                                <label class="option-label"><input type="radio" name="q8" value="1" required><span>Recursion</span></label>
+                                <label class="option-label"><input type="radio" name="q8" value="2" required><span>Sorting</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q9</div>
+                            <div class="question-text">Array access time?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q9" value="0" required><span>O(1)</span></label>
+                                <label class="option-label"><input type="radio" name="q9" value="1" required><span>O(n)</span></label>
+                                <label class="option-label"><input type="radio" name="q9" value="2" required><span>O(log n)</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q10</div>
+                            <div class="question-text">Which is NOT a strategy?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q10" value="0" required><span>Greedy</span></label>
+                                <label class="option-label"><input type="radio" name="q10" value="1" required><span>Backtracking</span></label>
+                                <label class="option-label"><input type="radio" name="q10" value="2" required><span>Recursion</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q11</div>
+                            <div class="question-text">Knapsack: Greedy gives?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q11" value="0" required><span>Optimal solution</span></label>
+                                <label class="option-label"><input type="radio" name="q11" value="1" required><span>Fast but suboptimal</span></label>
+                                <label class="option-label"><input type="radio" name="q11" value="2" required><span>Slowest solution</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q12</div>
+                            <div class="question-text">Divide & Conquer complexity?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q12" value="0" required><span>O(n)</span></label>
+                                <label class="option-label"><input type="radio" name="q12" value="1" required><span>O(n log n)</span></label>
+                                <label class="option-label"><input type="radio" name="q12" value="2" required><span>O(2^n)</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q13</div>
+                            <div class="question-text">Best for key-value pairs?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q13" value="0" required><span>Array</span></label>
+                                <label class="option-label"><input type="radio" name="q13" value="1" required><span>Hash Table</span></label>
+                                <label class="option-label"><input type="radio" name="q13" value="2" required><span>Stack</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q14</div>
+                            <div class="question-text">In-Order traversal gives?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q14" value="0" required><span>Random order</span></label>
+                                <label class="option-label"><input type="radio" name="q14" value="1" required><span>Sorted data</span></label>
+                                <label class="option-label"><input type="radio" name="q14" value="2" required><span>Reverse order</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q15</div>
+                            <div class="question-text">Load factor > 0.7 means?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q15" value="0" required><span>Delete items</span></label>
+                                <label class="option-label"><input type="radio" name="q15" value="1" required><span>Resize hash table</span></label>
+                                <label class="option-label"><input type="radio" name="q15" value="2" required><span>Do nothing</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q16</div>
+                            <div class="question-text">Pruning is?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q16" value="0" required><span>Adding branches</span></label>
+                                <label class="option-label"><input type="radio" name="q16" value="1" required><span>Cutting unnecessary branches</span></label>
+                                <label class="option-label"><input type="radio" name="q16" value="2" required><span>Sorting</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q17</div>
+                            <div class="question-text">Binary Search requires?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q17" value="0" required><span>Any array</span></label>
+                                <label class="option-label"><input type="radio" name="q17" value="1" required><span>Sorted array</span></label>
+                                <label class="option-label"><input type="radio" name="q17" value="2" required><span>Hash table</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q18</div>
+                            <div class="question-text">Naive Fibonacci complexity?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q18" value="0" required><span>O(n)</span></label>
+                                <label class="option-label"><input type="radio" name="q18" value="1" required><span>O(2^n)</span></label>
+                                <label class="option-label"><input type="radio" name="q18" value="2" required><span>O(log n)</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q19</div>
+                            <div class="question-text">DP Fibonacci complexity?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q19" value="0" required><span>O(2^n)</span></label>
+                                <label class="option-label"><input type="radio" name="q19" value="1" required><span>O(n)</span></label>
+                                <label class="option-label"><input type="radio" name="q19" value="2" required><span>O(1)</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q20</div>
+                            <div class="question-text">Main DP requirements?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q20" value="0" required><span>Recursive structure and memoization capability</span></label>
+                                <label class="option-label"><input type="radio" name="q20" value="1" required><span>Overlapping subproblems and optimal substructure</span></label>
+                                <label class="option-label"><input type="radio" name="q20" value="2" required><span>Divide and conquer with independent subproblems</span></label>
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-quiz">Submit Final Quiz</button>
+                    </form>
+                    <div id="mcq-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <script>
         // Quiz Configuration
         const QUIZ_CONFIG = {
             'chapter13-mcq': {
@@ -607,13 +601,13 @@ html
             let resultClass, message;
             if (percentage >= 80) {
                 resultClass = 'excellent';
-                message = `🎉 Uitstekend! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
+                message = `🎉 Excellent! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
             } else if (percentage >= 60) {
                 resultClass = 'good';
-                message = `👍 Goed gedaan! ${correct}/${total} correct (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
+                message = `👍 Good job! ${correct}/${total} correct (${percentage.toFixed(0)}%). Review the concepts you missed.`;
             } else {
                 resultClass = 'needs-work';
-                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Bestudeer de dezelfdenvatting en probeer opnieuw!`;
+                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Study the summary and try again!`;
             }
             
             resultDiv.className = `quiz-result ${resultClass}`;
@@ -631,15 +625,5 @@ html
             }
         });
     </script>
-<div class="source-note" style="text-align:center;margin:30px auto;color:#6b7280;font-size:0.95rem;">Gebaseerd op de PA Samenvatting van Stephanie VDH.</div>
-
-<script>
-document.addEventListener('DOMContentLoaded',function(){
-  const btn=document.querySelector('.mobile-menu-toggle');
-  if(!btn) return;
-  btn.addEventListener('click',function(){document.body.classList.toggle('mobile-menu-open');btn.classList.toggle('is-open');});
-});
-</script>
-
 </body>
 </html>

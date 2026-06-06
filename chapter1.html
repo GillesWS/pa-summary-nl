@@ -1,11 +1,11 @@
-html
-<html lang="nl">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Hoofdstuk 1: Introductie &amp; Searching - Programming Advanced</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Introduction & Searching - Programming Advanced</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -139,7 +139,7 @@ html
             display: block;
         }
 
-        /* Samenvatting Styles */
+        /* Summary Styles */
         .summary-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -312,7 +312,7 @@ html
         }
 
         .option-label.incorrect::after {
-            content: '✗ Fout';
+            content: '✗ Incorrect';
             margin-left: auto;
             color: var(--accent);
             font-weight: 700;
@@ -471,140 +471,146 @@ html
             }
         }
     </style>
-<!-- MOBILE MENU PATCH -->
-
-<style>
-@media (max-width: 768px) {
-  .mobile-menu-toggle { display:flex!important; }
-  body.mobile-menu-open { overflow:hidden; }
-  .chapters-grid, .grid, .cards-grid { grid-template-columns: 1fr!important; }
-  table, pre { max-width:100%; overflow-x:auto; }
-}
-.mobile-menu-toggle{display:none;position:fixed;top:14px;right:14px;z-index:9999;width:48px;height:44px;border:1px solid rgba(255,255,255,.55);border-radius:12px;background:linear-gradient(135deg,#2f3f78,#4a90e2);box-shadow:0 8px 24px rgba(0,0,0,.22);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}.mobile-menu-toggle span{display:block;width:23px;height:3px;border-radius:999px;background:#fff;transition:.2s}.mobile-menu-toggle.is-open span:nth-child(1){transform:translateY(8px) rotate(45deg)}.mobile-menu-toggle.is-open span:nth-child(2){opacity:0}.mobile-menu-toggle.is-open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
-@media (max-width:768px){.chapter-header .back-btn,.back-btn{margin-right:58px}.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}.tab-button{white-space:nowrap}}
-</style>
-
 </head>
 <body>
-<button class="mobile-menu-toggle" type="button" aria-label="Menu openen"><span></span><span></span><span></span></button>
-<nav class="navbar">
-<div class="navbar-content">
-<div class="chapter-header">Hoofdstuk 1: Introductie &amp; Searching</div>
-<a class="back-button" href="index.html">← Terug naar hoofdstukken</a>
-</div>
-</nav>
-<div class="container">
-</div>
-<div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
-<button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
-<button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-<button class="section-tab" onclick="switchSection('multiple-choice')">✅ Meerkeuze</button>
-<button class="section-tab" onclick="switchSection('true-false')">⭕ Waar/Niet waar</button>
-<button class="section-tab" onclick="switchSection('code-analysis')">💻 Code-analyse</button>
-</div>
- SAMENVATTING SECTIE 
-<div class="section-content active" id="summary">
-<div class="summary-grid">
-<div class="summary-card">
-<h3> Algoritmes Fundamentals</h3>
-<p><strong>Definitie:</strong> Een reeks stap-voor-stap instructies om een specifiek probleem op te lossen.</p>
-<h4>Waarom de keuze van algoritme belangrijk is:</h4>
-<ul>
-<li><strong>Efficiency:</strong> Uitvoeringssnelheid</li>
-<li><strong>Geheugen:</strong> Geheugengebruik</li>
-<li><strong>Kost:</strong> Operationele kosten</li>
-<li><strong>User Experience:</strong> App-performance</li>
-<li><strong>Scalability:</strong> Schaalbaarheid/groeimogelijkheid</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Vergelijking van zoekmethodes</h3>
-<table class="comparison-table">
-<tr>
-<th>Methode</th>
-<th>Tijd</th>
-<th>Gesorteerd?</th>
-</tr>
-<tr>
-<td><strong>Lineair zoeken</strong></td>
-<td>O(n)</td>
-<td>Nee</td>
-</tr>
-<tr>
-<td><strong>Binary search</strong></td>
-<td>O(log n)</td>
-<td><strong>JA ✓</strong></td>
-</tr>
-</table>
-<h4>Voor 1.000.000 elementen:</h4>
-<ul>
-<li>Lineair: 1.000.000 bewerkingen (17 min)</li>
-<li>Binary: 20 bewerkingen (20 ms)</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Hiërarchie van Big O-notatie</h3>
-<div class="code-block">
-O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²) &lt; O(n³)
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="chapter-header">Chapter 1: Introduction & Searching</div>
+            <a href="index.html" class="back-button">← Back to Chapters</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        </div>
+
+        <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
+            <button class="section-tab active" onclick="switchSection('summary')">📚 Summary</button>
+            <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
+            <button class="section-tab" onclick="switchSection('multiple-choice')">✅ Multiple Choice</button>
+            <button class="section-tab" onclick="switchSection('true-false')">⭕ True/False</button>
+            <button class="section-tab" onclick="switchSection('code-analysis')">💻 Code Analysis</button>
+        </div>
+
+        <!-- SUMMARY SECTION -->
+        <div id="summary" class="section-content active">
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h3> Algorithms Fundamentals</h3>
+                    <p><strong>Definition:</strong> A set of step-by-step instructions to solve a specific problem.</p>
+                    
+                    <h4>Why Algorithm Choice Matters:</h4>
+                    <ul>
+                        <li><strong>Efficiency:</strong> Speed of execution</li>
+                        <li><strong>Space:</strong> Memory usage</li>
+                        <li><strong>Cost:</strong> Operational expenses</li>
+                        <li><strong>User Experience:</strong> App performance</li>
+                        <li><strong>Scalability:</strong> Growth capability</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Search Methods Comparison</h3>
+                    <table class="comparison-table">
+                        <tr>
+                            <th>Method</th>
+                            <th>Time</th>
+                            <th>Sorted?</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Linear Search</strong></td>
+                            <td>O(n)</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Binary Search</strong></td>
+                            <td>O(log n)</td>
+                            <td><strong>YES ✓</strong></td>
+                        </tr>
+                    </table>
+                    
+                    <h4>For 1,000,000 elements:</h4>
+                    <ul>
+                        <li>Linear: 1,000,000 operations (17 min)</li>
+                        <li>Binary: 20 operations (20 ms)</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Big O Notation Hierarchy</h3>
+                    <div class="code-block">
+O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(n³)
  ↑       ↑         ↑         ↑           ↑        ↑
-Best  Uitstekend   Goed    Redelijk    Aanvaardbaar  Slecht
+Best  Excellent   Good    Decent    Acceptable  Bad
                     </div>
-<h4>Veelvoorkomende complexiteiten:</h4>
-<ul>
-<li><strong>O(1):</strong> Array-toegang, wiskundige bewerkingen</li>
-<li><strong>O(log n):</strong> Binary search</li>
-<li><strong>O(n):</strong> Eén lus, lineair zoeken</li>
-<li><strong>O(n²):</strong> Geneste lussen, bubble sort</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Snelle gids voor logaritmen</h3>
-<p><strong>Formule:</strong> log₂(x) = y ⟺ 2^y = x</p>
-<div class="highlight-box">
-<strong>Veelvoorkomende waarden:</strong><br/>
-                        log₂(8) = 3 (omdat 2³ = 8)<br/>
-                        log₂(16) = 4 (omdat 2⁴ = 16)<br/>
-                        log₂(1024) = 10 (omdat 2¹⁰ = 1024)
+                    
+                    <h4>Common Complexities:</h4>
+                    <ul>
+                        <li><strong>O(1):</strong> Array access, math operations</li>
+                        <li><strong>O(log n):</strong> Binary search</li>
+                        <li><strong>O(n):</strong> Single loop, linear search</li>
+                        <li><strong>O(n²):</strong> Nested loops, bubble sort</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Logarithms Quick Guide</h3>
+                    <p><strong>Formula:</strong> log₂(x) = y ⟺ 2^y = x</p>
+                    
+                    <div class="highlight-box">
+                        <strong>Common Values:</strong><br>
+                        log₂(8) = 3 (because 2³ = 8)<br>
+                        log₂(16) = 4 (because 2⁴ = 16)<br>
+                        log₂(1024) = 10 (because 2¹⁰ = 1024)
                     </div>
-<p><strong>Waarom basis 2?</strong> In computerwetenschappen is alles binair!</p>
-</div>
-<div class="summary-card">
-<h3>⏱️ Tijdscomplexiteit vs geheugencomplexiteit</h3>
-<h4>Tijdscomplexiteit:</h4>
-<p>Hoe lang duurt het? Meet het aantal bewerkingen.</p>
-<h4>Geheugencomplexiteit:</h4>
-<p>Hoeveel geheugen gebruikt het? Meet de geheugenallocatie.</p>
-<div class="highlight-box">
-<strong>Time-space tradeoff:</strong> Het ene optimaliseren vergroot vaak het andere. Kies op basis van je constraints!
+                    
+                    <p><strong>Why base 2?</strong> Computer science is binary!</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3>⏱️ Time vs Space Complexity</h3>
+                    
+                    <h4>Time Complexity:</h4>
+                    <p>How long does it take? Measures number of operations.</p>
+                    
+                    <h4>Space Complexity:</h4>
+                    <p>How much memory does it use? Measures memory allocation.</p>
+                    
+                    <div class="highlight-box">
+                        <strong>Time-Space Tradeoff:</strong> Optimizing one often increases the other. Choose based on your constraints!
                     </div>
-</div>
-<div class="summary-card">
-<h3> Regels om Big O te berekenen</h3>
-<h4>1. Laat constanten weg</h4>
-<div class="code-block">O(2n) → O(n)
+                </div>
+
+                <div class="summary-card">
+                    <h3> Big O Calculation Rules</h3>
+                    
+                    <h4>1. Drop Constants</h4>
+                    <div class="code-block">O(2n) → O(n)
 O(500) → O(1)</div>
-<h4>2. Laat lagere termen weg</h4>
-<div class="code-block">O(n² + n) → O(n²)
+                    
+                    <h4>2. Drop Lower-Order Terms</h4>
+                    <div class="code-block">O(n² + n) → O(n²)
 O(n log n + n) → O(n log n)</div>
-<h4>3. Veelvoorkomende patronen</h4>
-<ul>
-<li>Eén lus → O(n)</li>
-<li>Geneste lussen → O(n²)</li>
-<li>Elke stap halveren → O(log n)</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Binary search pseudocode</h3>
-<div class="code-block">Functie BinarySearch(array, doel):
+                    
+                    <h4>3. Common Patterns</h4>
+                    <ul>
+                        <li>Single loop → O(n)</li>
+                        <li>Nested loops → O(n²)</li>
+                        <li>Halving each step → O(log n)</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Binary Search Pseudocode</h3>
+                    <div class="code-block">FUNCTION BinarySearch(array, target):
   low = 0
   high = length(array) - 1
   
-  WHILE low &lt;= high:
+  WHILE low <= high:
     mid = (low + high) / 2
     
-    IF array[mid] == doel THEN
+    IF array[mid] == target THEN
       RETURN mid
-    ELSE IF array[mid] &lt; doel THEN
+    ELSE IF array[mid] < target THEN
       low = mid + 1
     ELSE
       high = mid - 1
@@ -612,694 +618,740 @@ O(n log n + n) → O(n log n)</div>
   END WHILE
   
   RETURN -1
-END Functie</div>
-<p><strong>Vereiste:</strong> De array MOET gesorteerd zijn!</p>
-</div>
-<div class="summary-card">
-<h3> Belangrijkste inzichten</h3>
-<ul>
-<li>Binary search is VEEL sneller dan lineair zoeken (O(log n) vs O(n))</li>
-<li>Big O focust op groeisnelheid, niet op exacte tijd</li>
-<li>Binary search vereist gesorteerde data</li>
-<li>Voor 1 miljoen elementen: lineair = 17 min, binary = 20 ms</li>
-<li>Time-space tradeoffs bestaan in alle algoritmes</li>
-<li>Laat constanten en lagere termen weg in Big O</li>
-</ul>
-</div>
-</div>
-</div>
- FLASHCARDS SECTIE 
-<div class="section-content" id="flashcards">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>📇 Flashcards - klik om het antwoord te tonen</h3>
-<div class="flashcard" onclick="toggleFlashcard(this)">
-<div class="flashcard-question">
-                            Wat is een algoritme?
+END FUNCTION</div>
+                    <p><strong>Requirement:</strong> Array MUST be sorted!</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Key Takeaways</h3>
+                    <ul>
+                        <li>Binary search is MUCH faster than linear (O(log n) vs O(n))</li>
+                        <li>Big O focuses on growth rate, not exact time</li>
+                        <li>Binary search requires sorted data</li>
+                        <li>For 1M elements: Linear = 17 min, Binary = 20 ms</li>
+                        <li>Time-space tradeoffs exist in all algorithms</li>
+                        <li>Drop constants and lower-order terms in Big O</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- FLASHCARDS SECTION -->
+        <div id="flashcards" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>📇 Flashcards - Click to Reveal Answer</h3>
+                    
+                    <div class="flashcard" onclick="toggleFlashcard(this)">
+                        <div class="flashcard-question">
+                            What is an algorithm?
                             <span>▼</span>
-</div>
-<div class="flashcard-answer">
-                            Een reeks stap-voor-stap instructies om een specifiek probleem op te lossen
                         </div>
-</div>
-<div class="flashcard" onclick="toggleFlashcard(this)">
-<div class="flashcard-question">
-                            Wat is de tijdscomplexiteit van binary search?
-                            <span>▼</span>
-</div>
-<div class="flashcard-answer">
-                            O(log n) - logaritmische tijd
+                        <div class="flashcard-answer">
+                            A set of step-by-step instructions to solve a specific problem
                         </div>
-</div>
-<div class="flashcard" onclick="toggleFlashcard(this)">
-<div class="flashcard-question">
-                            Wat is de belangrijkste voorwaarde voor binary search?
+                    </div>
+
+                    <div class="flashcard" onclick="toggleFlashcard(this)">
+                        <div class="flashcard-question">
+                            What is the time complexity of binary search?
                             <span>▼</span>
-</div>
-<div class="flashcard-answer">
-                            De lijst MOET gesorteerd zijn
                         </div>
-</div>
-<div class="flashcard" onclick="toggleFlashcard(this)">
-<div class="flashcard-question">
-                            Waaraan is log₂(64) gelijk?
-                            <span>▼</span>
-</div>
-<div class="flashcard-answer">
-                            6 (omdat 2⁶ = 64)
+                        <div class="flashcard-answer">
+                            O(log n) - logarithmic time
                         </div>
-</div>
-<div class="flashcard" onclick="toggleFlashcard(this)">
-<div class="flashcard-question">
-                            Wat is O(1)-complexiteit?
+                    </div>
+
+                    <div class="flashcard" onclick="toggleFlashcard(this)">
+                        <div class="flashcard-question">
+                            What is the key precondition for binary search?
                             <span>▼</span>
-</div>
-<div class="flashcard-answer">
-                            Constante tijd - hangt niet af van de inputgrootte. Voorbeeld: array[0]
                         </div>
-</div>
-<div class="flashcard" onclick="toggleFlashcard(this)">
-<div class="flashcard-question">
-                            Wat is de tijdscomplexiteit van array-toegang via index?
-                            <span>▼</span>
-</div>
-<div class="flashcard-answer">
-                            O(1) - constante tijd
+                        <div class="flashcard-answer">
+                            The list MUST be sorted
                         </div>
-</div>
-<div class="flashcard" onclick="toggleFlashcard(this)">
-<div class="flashcard-question">
-                            Tijdscomplexiteit van twee geneste for-lussen (0 tot n)?
+                    </div>
+
+                    <div class="flashcard" onclick="toggleFlashcard(this)">
+                        <div class="flashcard-question">
+                            What does log₂(64) equal?
                             <span>▼</span>
-</div>
-<div class="flashcard-answer">
-                            O(n²) - kwadratische tijd
                         </div>
-</div>
-<div class="flashcard" onclick="toggleFlashcard(this)">
-<div class="flashcard-question">
-                            Waarom gebruiken we logaritmen met basis 2 in computerwetenschappen?
-                            <span>▼</span>
-</div>
-<div class="flashcard-answer">
-                            Alles in computerwetenschappen is binair (basis 2)
+                        <div class="flashcard-answer">
+                            6 (because 2⁶ = 64)
                         </div>
-</div>
-<div class="flashcard" onclick="toggleFlashcard(this)">
-<div class="flashcard-question">
-                            Wat is een time-space tradeoff?
+                    </div>
+
+                    <div class="flashcard" onclick="toggleFlashcard(this)">
+                        <div class="flashcard-question">
+                            What is O(1) complexity?
                             <span>▼</span>
-</div>
-<div class="flashcard-answer">
-                            Het ene optimaliseren (tijd van geheugen) vergroot vaak het andere
                         </div>
-</div>
-<div class="flashcard" onclick="toggleFlashcard(this)">
-<div class="flashcard-question">
-                            Vereenvoudig: O(5n² + 3n + 7)
-                            <span>▼</span>
-</div>
-<div class="flashcard-answer">
-                            O(n²) - laat constanten en lagere termen weg
+                        <div class="flashcard-answer">
+                            Constant time - doesn't depend on input size. Example: array[0]
                         </div>
-</div>
-<div class="flashcard" onclick="toggleFlashcard(this)">
-<div class="flashcard-question">
-                            Hoeveel bewerkingen heeft binary search ongeveer nodig voor 1.000.000 elementen (worst-case)?
+                    </div>
+
+                    <div class="flashcard" onclick="toggleFlashcard(this)">
+                        <div class="flashcard-question">
+                            What is the time complexity of accessing an array element by index?
                             <span>▼</span>
-</div>
-<div class="flashcard-answer">
-                            Ongeveer 20 bewerkingen (log₂(1,000,000) ≈ 20)
                         </div>
-</div>
-<div class="flashcard" onclick="toggleFlashcard(this)">
-<div class="flashcard-question">
-                            Wat stelt Big O-notatie voor?
-                            <span>▼</span>
-</div>
-<div class="flashcard-answer">
-                            Een high-level inzicht in de complexiteit van een algoritme wanneer de inputgrootte groeit
+                        <div class="flashcard-answer">
+                            O(1) - constant time
                         </div>
-</div>
-<div class="flashcard" onclick="toggleFlashcard(this)">
-<div class="flashcard-question">
-                            Wat is geheugencomplexiteit?
+                    </div>
+
+                    <div class="flashcard" onclick="toggleFlashcard(this)">
+                        <div class="flashcard-question">
+                            Time complexity of two nested for loops (0 to n)?
                             <span>▼</span>
-</div>
-<div class="flashcard-answer">
-                            De hoeveelheid geheugen die een algoritme gebruikt in verhouding tot de inputgrootte
                         </div>
-</div>
-<div class="flashcard" onclick="toggleFlashcard(this)">
-<div class="flashcard-question">
-                            Rangschik van snel naar traag: O(n), O(1), O(log n), O(n²)
+                        <div class="flashcard-answer">
+                            O(n²) - quadratic time
+                        </div>
+                    </div>
+
+                    <div class="flashcard" onclick="toggleFlashcard(this)">
+                        <div class="flashcard-question">
+                            Why do we use base 2 logarithms in computer science?
                             <span>▼</span>
-</div>
-<div class="flashcard-answer">
+                        </div>
+                        <div class="flashcard-answer">
+                            Everything in computer science is binary (base 2)
+                        </div>
+                    </div>
+
+                    <div class="flashcard" onclick="toggleFlashcard(this)">
+                        <div class="flashcard-question">
+                            What is time-space tradeoff?
+                            <span>▼</span>
+                        </div>
+                        <div class="flashcard-answer">
+                            Optimizing one (time or space) often increases the other
+                        </div>
+                    </div>
+
+                    <div class="flashcard" onclick="toggleFlashcard(this)">
+                        <div class="flashcard-question">
+                            Simplify: O(5n² + 3n + 7)
+                            <span>▼</span>
+                        </div>
+                        <div class="flashcard-answer">
+                            O(n²) - drop constants and lower-order terms
+                        </div>
+                    </div>
+
+                    <div class="flashcard" onclick="toggleFlashcard(this)">
+                        <div class="flashcard-question">
+                            How many operations does binary search need for 1,000,000 elements (worst case)?
+                            <span>▼</span>
+                        </div>
+                        <div class="flashcard-answer">
+                            Approximately 20 operations (log₂(1,000,000) ≈ 20)
+                        </div>
+                    </div>
+
+                    <div class="flashcard" onclick="toggleFlashcard(this)">
+                        <div class="flashcard-question">
+                            What does Big O notation represent?
+                            <span>▼</span>
+                        </div>
+                        <div class="flashcard-answer">
+                            High-level understanding of algorithm's complexity as input size grows
+                        </div>
+                    </div>
+
+                    <div class="flashcard" onclick="toggleFlashcard(this)">
+                        <div class="flashcard-question">
+                            What is space complexity?
+                            <span>▼</span>
+                        </div>
+                        <div class="flashcard-answer">
+                            Amount of memory an algorithm uses relative to input size
+                        </div>
+                    </div>
+
+                    <div class="flashcard" onclick="toggleFlashcard(this)">
+                        <div class="flashcard-question">
+                            Order these from fastest to slowest: O(n), O(1), O(log n), O(n²)
+                            <span>▼</span>
+                        </div>
+                        <div class="flashcard-answer">
                             O(1), O(log n), O(n), O(n²)
                         </div>
-</div>
-<div class="flashcard" onclick="toggleFlashcard(this)">
-<div class="flashcard-question">
-                            Wat is een logaritme?
+                    </div>
+
+                    <div class="flashcard" onclick="toggleFlashcard(this)">
+                        <div class="flashcard-question">
+                            What is a logarithm?
                             <span>▼</span>
-</div>
-<div class="flashcard-answer">
-                            De inverse functie van machtsverheffing: log_b(x) = y ⟺ b^y = x
                         </div>
-</div>
-</div>
-</div>
-</div>
- MEERKEUZE SECTIE 
-<div class="section-content" id="multiple-choice">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>✅ Meerkeuzequiz</h3>
-<form id="mcq-form">
-<div class="quiz-question">
-<div class="question-number">Vraag 1</div>
-<div class="question-text">Wat is de tijdscomplexiteit van binary search?</div>
-<div class="options">
-<label class="option-label">
-<input name="q1" required="" type="radio" value="0"/>
-<span>O(1)</span>
-</label>
-<label class="option-label">
-<input name="q1" required="" type="radio" value="1"/>
-<span>O(n)</span>
-</label>
-<label class="option-label">
-<input name="q1" required="" type="radio" value="2"/>
-<span>O(log n)</span>
-</label>
-<label class="option-label">
-<input name="q1" required="" type="radio" value="3"/>
-<span>O(n²)</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 2</div>
-<div class="question-text">Welke zoekmethode vereist dat de data gesorteerd is?</div>
-<div class="options">
-<label class="option-label">
-<input name="q2" required="" type="radio" value="0"/>
-<span>Lineair zoeken</span>
-</label>
-<label class="option-label">
-<input name="q2" required="" type="radio" value="1"/>
-<span>Binary search</span>
-</label>
-<label class="option-label">
-<input name="q2" required="" type="radio" value="2"/>
-<span>Beide</span>
-</label>
-<label class="option-label">
-<input name="q2" required="" type="radio" value="3"/>
-<span>Geen van beide</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 3</div>
-<div class="question-text">Hoeveel vergelijkingen heeft binary search ongeveer nodig in het slechtste geval voor een array van 1.000.000 elementen?</div>
-<div class="options">
-<label class="option-label">
-<input name="q3" required="" type="radio" value="0"/>
-<span>10</span>
-</label>
-<label class="option-label">
-<input name="q3" required="" type="radio" value="1"/>
-<span>20</span>
-</label>
-<label class="option-label">
-<input name="q3" required="" type="radio" value="2"/>
-<span>1,000</span>
-</label>
-<label class="option-label">
-<input name="q3" required="" type="radio" value="3"/>
-<span>1,000,000</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 4</div>
-<div class="question-text">Wat is de tijdscomplexiteit van een element in een array opvragen via index?</div>
-<div class="options">
-<label class="option-label">
-<input name="q4" required="" type="radio" value="0"/>
-<span>O(1)</span>
-</label>
-<label class="option-label">
-<input name="q4" required="" type="radio" value="1"/>
-<span>O(n)</span>
-</label>
-<label class="option-label">
-<input name="q4" required="" type="radio" value="2"/>
-<span>O(log n)</span>
-</label>
-<label class="option-label">
-<input name="q4" required="" type="radio" value="3"/>
-<span>O(n²)</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 5</div>
-<div class="question-text">Twee geneste for-lussen die elk van 0 tot n lopen hebben tijdscomplexiteit:</div>
-<div class="options">
-<label class="option-label">
-<input name="q5" required="" type="radio" value="0"/>
-<span>O(n)</span>
-</label>
-<label class="option-label">
-<input name="q5" required="" type="radio" value="1"/>
-<span>O(log n)</span>
-</label>
-<label class="option-label">
-<input name="q5" required="" type="radio" value="2"/>
-<span>O(n²)</span>
-</label>
-<label class="option-label">
-<input name="q5" required="" type="radio" value="3"/>
-<span>O(2n)</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 6</div>
-<div class="question-text">Waaraan is log₂(64) gelijk?</div>
-<div class="options">
-<label class="option-label">
-<input name="q6" required="" type="radio" value="0"/>
-<span>4</span>
-</label>
-<label class="option-label">
-<input name="q6" required="" type="radio" value="1"/>
-<span>6</span>
-</label>
-<label class="option-label">
-<input name="q6" required="" type="radio" value="2"/>
-<span>8</span>
-</label>
-<label class="option-label">
-<input name="q6" required="" type="radio" value="3"/>
-<span>32</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 7</div>
-<div class="question-text">Welke tijdscomplexiteit is het snelst?</div>
-<div class="options">
-<label class="option-label">
-<input name="q7" required="" type="radio" value="0"/>
-<span>O(n log n)</span>
-</label>
-<label class="option-label">
-<input name="q7" required="" type="radio" value="1"/>
-<span>O(n)</span>
-</label>
-<label class="option-label">
-<input name="q7" required="" type="radio" value="2"/>
-<span>O(log n)</span>
-</label>
-<label class="option-label">
-<input name="q7" required="" type="radio" value="3"/>
-<span>O(1)</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 8</div>
-<div class="question-text">Lineair zoeken heeft tijdscomplexiteit O(n). Dit betekent:</div>
-<div class="options">
-<label class="option-label">
-<input name="q8" required="" type="radio" value="0"/>
-<span>Het duurt altijd n seconden</span>
-</label>
-<label class="option-label">
-<input name="q8" required="" type="radio" value="1"/>
-<span>De runtime groeit evenredig met de inputgrootte</span>
-</label>
-<label class="option-label">
-<input name="q8" required="" type="radio" value="2"/>
-<span>Het is sneller dan O(log n)</span>
-</label>
-<label class="option-label">
-<input name="q8" required="" type="radio" value="3"/>
-<span>Het vereist gesorteerde data</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 9</div>
-<div class="question-text">Wat is geheugencomplexiteit?</div>
-<div class="options">
-<label class="option-label">
-<input name="q9" required="" type="radio" value="0"/>
-<span>Hoe lang een algoritme duurt</span>
-</label>
-<label class="option-label">
-<input name="q9" required="" type="radio" value="1"/>
-<span>Hoeveel geheugen een algoritme gebruikt</span>
-</label>
-<label class="option-label">
-<input name="q9" required="" type="radio" value="2"/>
-<span>Aantal regels code</span>
-</label>
-<label class="option-label">
-<input name="q9" required="" type="radio" value="3"/>
-<span>Grootte van de input</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 10</div>
-<div class="question-text">Wat is de vereenvoudigde Big O van: O(5n² + 3n + 7)?</div>
-<div class="options">
-<label class="option-label">
-<input name="q10" required="" type="radio" value="0"/>
-<span>O(5n²)</span>
-</label>
-<label class="option-label">
-<input name="q10" required="" type="radio" value="1"/>
-<span>O(n²)</span>
-</label>
-<label class="option-label">
-<input name="q10" required="" type="radio" value="2"/>
-<span>O(n)</span>
-</label>
-<label class="option-label">
-<input name="q10" required="" type="radio" value="3"/>
-<span>O(8n²)</span>
-</label>
-</div>
-</div>
-<button class="submit-quiz" type="submit">Quiz indienen</button>
-</form>
-<div id="mcq-result"></div>
-</div>
-</div>
-</div>
- WAAR/NIET WAAR SECTIE 
-<div class="section-content" id="true-false">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>⭕ Waar of niet waar-quiz</h3>
-<form id="tf-form">
-<div class="quiz-question">
-<div class="question-number">Vraag 1</div>
-<div class="question-text">Binary search werkt op zowel gesorteerde als ongesorteerde arrays.</div>
-<div class="options">
-<label class="option-label">
-<input name="tf1" required="" type="radio" value="0"/>
-<span>Waar</span>
-</label>
-<label class="option-label">
-<input name="tf1" required="" type="radio" value="1"/>
-<span>Niet waar</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 2</div>
-<div class="question-text">O(log n) is sneller dan O(n).</div>
-<div class="options">
-<label class="option-label">
-<input name="tf2" required="" type="radio" value="0"/>
-<span>Waar</span>
-</label>
-<label class="option-label">
-<input name="tf2" required="" type="radio" value="1"/>
-<span>Niet waar</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 3</div>
-<div class="question-text">Big O-notatie vertelt de exacte runtime in seconden.</div>
-<div class="options">
-<label class="option-label">
-<input name="tf3" required="" type="radio" value="0"/>
-<span>Waar</span>
-</label>
-<label class="option-label">
-<input name="tf3" required="" type="radio" value="1"/>
-<span>Niet waar</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 4</div>
-<div class="question-text">Een array-element via index opvragen is O(1).</div>
-<div class="options">
-<label class="option-label">
-<input name="tf4" required="" type="radio" value="0"/>
-<span>Waar</span>
-</label>
-<label class="option-label">
-<input name="tf4" required="" type="radio" value="1"/>
-<span>Niet waar</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 5</div>
-<div class="question-text">Geheugencomplexiteit meet hoeveel geheugen een algoritme gebruikt.</div>
-<div class="options">
-<label class="option-label">
-<input name="tf5" required="" type="radio" value="0"/>
-<span>Waar</span>
-</label>
-<label class="option-label">
-<input name="tf5" required="" type="radio" value="1"/>
-<span>Niet waar</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 6</div>
-<div class="question-text">Geneste lussen leiden altijd tot O(n²)-complexiteit.</div>
-<div class="options">
-<label class="option-label">
-<input name="tf6" required="" type="radio" value="0"/>
-<span>Waar</span>
-</label>
-<label class="option-label">
-<input name="tf6" required="" type="radio" value="1"/>
-<span>Niet waar</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 7</div>
-<div class="question-text">log₂(16) = 4</div>
-<div class="options">
-<label class="option-label">
-<input name="tf7" required="" type="radio" value="0"/>
-<span>Waar</span>
-</label>
-<label class="option-label">
-<input name="tf7" required="" type="radio" value="1"/>
-<span>Niet waar</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 8</div>
-<div class="question-text">De brute-force methode probeert elke mogelijkheid.</div>
-<div class="options">
-<label class="option-label">
-<input name="tf8" required="" type="radio" value="0"/>
-<span>Waar</span>
-</label>
-<label class="option-label">
-<input name="tf8" required="" type="radio" value="1"/>
-<span>Niet waar</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 9</div>
-<div class="question-text">Constanten weglaten in Big O betekent O(5n) becomes O(n).</div>
-<div class="options">
-<label class="option-label">
-<input name="tf9" required="" type="radio" value="0"/>
-<span>Waar</span>
-</label>
-<label class="option-label">
-<input name="tf9" required="" type="radio" value="1"/>
-<span>Niet waar</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 10</div>
-<div class="question-text">Voor 1000 elementen, lineair zoeken slechtste case heeft nodig 1000 bewerkingen.</div>
-<div class="options">
-<label class="option-label">
-<input name="tf10" required="" type="radio" value="0"/>
-<span>Waar</span>
-</label>
-<label class="option-label">
-<input name="tf10" required="" type="radio" value="1"/>
-<span>Niet waar</span>
-</label>
-</div>
-</div>
-<button class="submit-quiz" type="submit">Quiz indienen</button>
-</form>
-<div id="tf-result"></div>
-</div>
-</div>
-</div>
- CODE-ANALYSE SECTIE 
-<div class="section-content" id="code-analysis">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>💻 Code-analysequiz</h3>
-<form id="code-form">
-<div class="quiz-question">
-<div class="question-number">Vraag 1</div>
-<div class="question-text">Wat is de tijdscomplexiteit van deze code?</div>
-<div class="code-block">int max = array[0];
-voor (int i = 1; i &lt; n; i++) {
-    if (array[i] &gt; max) {
+                        <div class="flashcard-answer">
+                            The inverse function of exponentiation: log_b(x) = y ⟺ b^y = x
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MULTIPLE CHOICE SECTION -->
+        <div id="multiple-choice" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>✅ Multiple Choice Quiz</h3>
+                    <form id="mcq-form">
+                        <div class="quiz-question">
+                            <div class="question-number">Question 1</div>
+                            <div class="question-text">What is the time complexity of binary search?</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="q1" value="0" required>
+                                    <span>O(1)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q1" value="1" required>
+                                    <span>O(n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q1" value="2" required>
+                                    <span>O(log n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q1" value="3" required>
+                                    <span>O(n²)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 2</div>
+                            <div class="question-text">Which search method requires the data to be sorted?</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="q2" value="0" required>
+                                    <span>Linear search</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q2" value="1" required>
+                                    <span>Binary search</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q2" value="2" required>
+                                    <span>Both</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q2" value="3" required>
+                                    <span>Neither</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 3</div>
+                            <div class="question-text">For an array of 1,000,000 elements, approximately how many comparisons does binary search need in the worst case?</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="q3" value="0" required>
+                                    <span>10</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q3" value="1" required>
+                                    <span>20</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q3" value="2" required>
+                                    <span>1,000</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q3" value="3" required>
+                                    <span>1,000,000</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 4</div>
+                            <div class="question-text">What is the time complexity of accessing an element in an array by its index?</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="q4" value="0" required>
+                                    <span>O(1)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q4" value="1" required>
+                                    <span>O(n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q4" value="2" required>
+                                    <span>O(log n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q4" value="3" required>
+                                    <span>O(n²)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 5</div>
+                            <div class="question-text">Two nested for loops, each iterating from 0 to n, have time complexity of:</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="q5" value="0" required>
+                                    <span>O(n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q5" value="1" required>
+                                    <span>O(log n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q5" value="2" required>
+                                    <span>O(n²)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q5" value="3" required>
+                                    <span>O(2n)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 6</div>
+                            <div class="question-text">What does log₂(64) equal?</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="q6" value="0" required>
+                                    <span>4</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q6" value="1" required>
+                                    <span>6</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q6" value="2" required>
+                                    <span>8</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q6" value="3" required>
+                                    <span>32</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 7</div>
+                            <div class="question-text">Which is the fastest time complexity?</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="q7" value="0" required>
+                                    <span>O(n log n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q7" value="1" required>
+                                    <span>O(n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q7" value="2" required>
+                                    <span>O(log n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q7" value="3" required>
+                                    <span>O(1)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 8</div>
+                            <div class="question-text">Linear search has time complexity O(n). This means:</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="q8" value="0" required>
+                                    <span>It always takes n seconds</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q8" value="1" required>
+                                    <span>Runtime grows proportionally to input size</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q8" value="2" required>
+                                    <span>It's faster than O(log n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q8" value="3" required>
+                                    <span>It requires sorted data</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 9</div>
+                            <div class="question-text">What is space complexity?</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="q9" value="0" required>
+                                    <span>How long an algorithm takes</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q9" value="1" required>
+                                    <span>Amount of memory an algorithm uses</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q9" value="2" required>
+                                    <span>Number of lines of code</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q9" value="3" required>
+                                    <span>Size of the input</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 10</div>
+                            <div class="question-text">What is the simplified Big O of: O(5n² + 3n + 7)?</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="q10" value="0" required>
+                                    <span>O(5n²)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q10" value="1" required>
+                                    <span>O(n²)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q10" value="2" required>
+                                    <span>O(n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="q10" value="3" required>
+                                    <span>O(8n²)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-quiz">Submit Quiz</button>
+                    </form>
+                    <div id="mcq-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRUE/FALSE SECTION -->
+        <div id="true-false" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>⭕ True or False Quiz</h3>
+                    <form id="tf-form">
+                        <div class="quiz-question">
+                            <div class="question-number">Question 1</div>
+                            <div class="question-text">Binary search works on both sorted and unsorted arrays.</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="tf1" value="0" required>
+                                    <span>True</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="tf1" value="1" required>
+                                    <span>False</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 2</div>
+                            <div class="question-text">O(log n) is faster than O(n).</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="tf2" value="0" required>
+                                    <span>True</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="tf2" value="1" required>
+                                    <span>False</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 3</div>
+                            <div class="question-text">Big O notation tells us the exact runtime in seconds.</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="tf3" value="0" required>
+                                    <span>True</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="tf3" value="1" required>
+                                    <span>False</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 4</div>
+                            <div class="question-text">Accessing an array element by index is O(1).</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="tf4" value="0" required>
+                                    <span>True</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="tf4" value="1" required>
+                                    <span>False</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 5</div>
+                            <div class="question-text">Space complexity measures how much memory an algorithm uses.</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="tf5" value="0" required>
+                                    <span>True</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="tf5" value="1" required>
+                                    <span>False</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 6</div>
+                            <div class="question-text">Nested loops always result in O(n²) complexity.</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="tf6" value="0" required>
+                                    <span>True</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="tf6" value="1" required>
+                                    <span>False</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 7</div>
+                            <div class="question-text">log₂(16) = 4</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="tf7" value="0" required>
+                                    <span>True</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="tf7" value="1" required>
+                                    <span>False</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 8</div>
+                            <div class="question-text">The brute force method tries every possibility.</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="tf8" value="0" required>
+                                    <span>True</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="tf8" value="1" required>
+                                    <span>False</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 9</div>
+                            <div class="question-text">Dropping constants in Big O means O(5n) becomes O(n).</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="tf9" value="0" required>
+                                    <span>True</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="tf9" value="1" required>
+                                    <span>False</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 10</div>
+                            <div class="question-text">For 1000 elements, linear search worst case needs 1000 operations.</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="tf10" value="0" required>
+                                    <span>True</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="tf10" value="1" required>
+                                    <span>False</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-quiz">Submit Quiz</button>
+                    </form>
+                    <div id="tf-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CODE ANALYSIS SECTION -->
+        <div id="code-analysis" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>💻 Code Analysis Quiz</h3>
+                    <form id="code-form">
+                        <div class="quiz-question">
+                            <div class="question-number">Question 1</div>
+                            <div class="question-text">What is the time complexity of this code?</div>
+                            <div class="code-block">int max = array[0];
+for (int i = 1; i < n; i++) {
+    if (array[i] > max) {
         max = array[i];
     }
 }</div>
-<div class="options">
-<label class="option-label">
-<input name="code1" required="" type="radio" value="0"/>
-<span>O(1)</span>
-</label>
-<label class="option-label">
-<input name="code1" required="" type="radio" value="1"/>
-<span>O(n)</span>
-</label>
-<label class="option-label">
-<input name="code1" required="" type="radio" value="2"/>
-<span>O(n²)</span>
-</label>
-<label class="option-label">
-<input name="code1" required="" type="radio" value="3"/>
-<span>O(log n)</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 2</div>
-<div class="question-text">Wat is de tijdscomplexiteit van deze geneste lus?</div>
-<div class="code-block">voor (int i = 0; i &lt; n; i++) {
-    voor (int j = 0; j &lt; n; j++) {
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="code1" value="0" required>
+                                    <span>O(1)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="code1" value="1" required>
+                                    <span>O(n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="code1" value="2" required>
+                                    <span>O(n²)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="code1" value="3" required>
+                                    <span>O(log n)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 2</div>
+                            <div class="question-text">What is the time complexity of this nested loop?</div>
+                            <div class="code-block">for (int i = 0; i < n; i++) {
+    for (int j = 0; j < n; j++) {
         System.out.println(i + j);
     }
 }</div>
-<div class="options">
-<label class="option-label">
-<input name="code2" required="" type="radio" value="0"/>
-<span>O(n)</span>
-</label>
-<label class="option-label">
-<input name="code2" required="" type="radio" value="1"/>
-<span>O(n²)</span>
-</label>
-<label class="option-label">
-<input name="code2" required="" type="radio" value="2"/>
-<span>O(2n)</span>
-</label>
-<label class="option-label">
-<input name="code2" required="" type="radio" value="3"/>
-<span>O(log n)</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 3</div>
-<div class="question-text">Wat is de geheugencomplexiteit van een kopie van een array maken?</div>
-<div class="code-block">int[] copy = new int[n];
-voor (int i = 0; i &lt; n; i++) {
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="code2" value="0" required>
+                                    <span>O(n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="code2" value="1" required>
+                                    <span>O(n²)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="code2" value="2" required>
+                                    <span>O(2n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="code2" value="3" required>
+                                    <span>O(log n)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 3</div>
+                            <div class="question-text">What is the space complexity of creating a copy of an array?</div>
+                            <div class="code-block">int[] copy = new int[n];
+for (int i = 0; i < n; i++) {
     copy[i] = array[i];
 }</div>
-<div class="options">
-<label class="option-label">
-<input name="code3" required="" type="radio" value="0"/>
-<span>O(1)</span>
-</label>
-<label class="option-label">
-<input name="code3" required="" type="radio" value="1"/>
-<span>O(n)</span>
-</label>
-<label class="option-label">
-<input name="code3" required="" type="radio" value="2"/>
-<span>O(n²)</span>
-</label>
-<label class="option-label">
-<input name="code3" required="" type="radio" value="3"/>
-<span>O(log n)</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 4</div>
-<div class="question-text">Wat is de tijdscomplexiteit van deze lus?</div>
-<div class="code-block">voor (int i = 0; i &lt; n/2; i++) {
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="code3" value="0" required>
+                                    <span>O(1)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="code3" value="1" required>
+                                    <span>O(n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="code3" value="2" required>
+                                    <span>O(n²)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="code3" value="3" required>
+                                    <span>O(log n)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 4</div>
+                            <div class="question-text">What is the time complexity of this loop?</div>
+                            <div class="code-block">for (int i = 0; i < n/2; i++) {
     sum += array[i];
 }</div>
-<div class="options">
-<label class="option-label">
-<input name="code4" required="" type="radio" value="0"/>
-<span>O(n/2)</span>
-</label>
-<label class="option-label">
-<input name="code4" required="" type="radio" value="1"/>
-<span>O(n)</span>
-</label>
-<label class="option-label">
-<input name="code4" required="" type="radio" value="2"/>
-<span>O(1)</span>
-</label>
-<label class="option-label">
-<input name="code4" required="" type="radio" value="3"/>
-<span>O(log n)</span>
-</label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 5</div>
-<div class="question-text">Wat is de tijdscomplexiteit van deze code?</div>
-<div class="code-block">int x = array[5];
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="code4" value="0" required>
+                                    <span>O(n/2)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="code4" value="1" required>
+                                    <span>O(n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="code4" value="2" required>
+                                    <span>O(1)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="code4" value="3" required>
+                                    <span>O(log n)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 5</div>
+                            <div class="question-text">What is the time complexity of this code?</div>
+                            <div class="code-block">int x = array[5];
 int y = x + 10;
 return y;</div>
-<div class="options">
-<label class="option-label">
-<input name="code5" required="" type="radio" value="0"/>
-<span>O(1)</span>
-</label>
-<label class="option-label">
-<input name="code5" required="" type="radio" value="1"/>
-<span>O(n)</span>
-</label>
-<label class="option-label">
-<input name="code5" required="" type="radio" value="2"/>
-<span>O(5)</span>
-</label>
-<label class="option-label">
-<input name="code5" required="" type="radio" value="3"/>
-<span>O(3)</span>
-</label>
-</div>
-</div>
-<button class="submit-quiz" type="submit">Quiz indienen</button>
-</form>
-<div id="code-result"></div>
-</div>
-</div>
-</div>
+                            <div class="options">
+                                <label class="option-label">
+                                    <input type="radio" name="code5" value="0" required>
+                                    <span>O(1)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="code5" value="1" required>
+                                    <span>O(n)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="code5" value="2" required>
+                                    <span>O(5)</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" name="code5" value="3" required>
+                                    <span>O(3)</span>
+                                </label>
+                            </div>
+                        </div>
 
-<script>
+                        <button type="submit" class="submit-quiz">Submit Quiz</button>
+                    </form>
+                    <div id="code-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <script>
         // Quiz Configuration
         const QUIZ_CONFIG = {
             'chapter1-mcq': {
@@ -1500,13 +1552,13 @@ return y;</div>
             let resultClass, message;
             if (percentage >= 80) {
                 resultClass = 'excellent';
-                message = `🎉 Uitstekend! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
+                message = `🎉 Excellent! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
             } else if (percentage >= 60) {
                 resultClass = 'good';
-                message = `👍 Goed gedaan! ${correct}/${total} correct (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
+                message = `👍 Good job! ${correct}/${total} correct (${percentage.toFixed(0)}%). Review the concepts you missed.`;
             } else {
                 resultClass = 'needs-work';
-                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Bestudeer de dezelfdenvatting en probeer opnieuw!`;
+                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Study the summary and try again!`;
             }
             
             resultDiv.className = `quiz-result ${resultClass}`;
@@ -1523,7 +1575,7 @@ return y;</div>
                 restoreAnswers('mcq-form', 'chapter1-mcq');
             }
             
-            // Waar/Niet waar Quiz
+            // True/False Quiz
             const tfForm = document.getElementById('tf-form');
             if (tfForm) {
                 tfForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'tf-form', 'chapter1-tf'));
@@ -1538,15 +1590,5 @@ return y;</div>
             }
         });
     </script>
-<div class="source-note" style="text-align:center;margin:30px auto;color:#6b7280;font-size:0.95rem;">Gebaseerd op de PA Samenvatting van Stephanie VDH.</div>
-
-<script>
-document.addEventListener('DOMContentLoaded',function(){
-  const btn=document.querySelector('.mobile-menu-toggle');
-  if(!btn) return;
-  btn.addEventListener('click',function(){document.body.classList.toggle('mobile-menu-open');btn.classList.toggle('is-open');});
-});
-</script>
-
 </body>
 </html>

@@ -1,11 +1,11 @@
-html
-<html lang="nl">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Hoofdstuk 9: Weighted Graphs - Programming Advanced</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Weighted Graphs - Programming Advanced</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #2d3561; --secondary: #4a90e2; --accent: #ff6b6b; --success: #51cf66; --warning: #ffd93d; --bg: #f8f9fa; }
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: #2c3e50; line-height: 1.6; }
@@ -60,7 +60,7 @@ html
         }
 
         .option-label.incorrect::after {
-            content: '✗ Fout';
+            content: '✗ Incorrect';
             margin-left: auto;
             color: var(--accent);
             font-weight: 700;
@@ -110,231 +110,224 @@ html
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 768px) { .summary-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
     </style>
-<!-- MOBILE MENU PATCH -->
-
-<style>
-@media (max-width: 768px) {
-  .mobile-menu-toggle { display:flex!important; }
-  body.mobile-menu-open { overflow:hidden; }
-  .chapters-grid, .grid, .cards-grid { grid-template-columns: 1fr!important; }
-  table, pre { max-width:100%; overflow-x:auto; }
-}
-.mobile-menu-toggle{display:none;position:fixed;top:14px;right:14px;z-index:9999;width:48px;height:44px;border:1px solid rgba(255,255,255,.55);border-radius:12px;background:linear-gradient(135deg,#2f3f78,#4a90e2);box-shadow:0 8px 24px rgba(0,0,0,.22);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}.mobile-menu-toggle span{display:block;width:23px;height:3px;border-radius:999px;background:#fff;transition:.2s}.mobile-menu-toggle.is-open span:nth-child(1){transform:translateY(8px) rotate(45deg)}.mobile-menu-toggle.is-open span:nth-child(2){opacity:0}.mobile-menu-toggle.is-open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
-@media (max-width:768px){.chapter-header .back-btn,.back-btn{margin-right:58px}.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}.tab-button{white-space:nowrap}}
-</style>
-
 </head>
 <body>
-<button class="mobile-menu-toggle" type="button" aria-label="Menu openen"><span></span><span></span><span></span></button>
-<nav class="navbar">
-<div class="navbar-content">
-<div class="chapter-header">Hoofdstuk 9: Weighted Graphs &amp; Dijkstra</div>
-<a class="back-button" href="index.html">← Back</a>
-</div>
-</nav>
-<div class="container">
-<div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
-<button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
-<button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-<button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
-</div>
-<div class="section-content active" id="summary">
-<div class="summary-grid">
-<div class="summary-card">
-<h3>️ Weighted Graphs</h3>
-<p><strong>Definitie:</strong> Graphs where edges have costs/weights</p>
-<h4>Voorbeelden:</h4>
-<ul><li>Road networks (afstanden)</li><li>Flight routes (kosten)</li><li>Network latency (tijd)</li></ul>
-</div>
-<div class="summary-card">
-<h3> Dijkstra's Algoritme</h3>
-<p><strong>Purpose:</strong> Find kortste pad van source naar alle nodes</p>
-<p><strong>Created door:</strong> Edsger Dijkstra (1956)</p>
-<div class="code-block">1. Initialize afstanden naar ∞ (source=0)
-2. Pick unvisited node met min afstand
-3. Voor elke neighbor: relax edge
-4. Mark huidige als visited
-5. Repeat until alle visited</div>
-<p><strong>Complexiteit:</strong> O(V²) of O((V+E)log V) met min-heap</p>
-</div>
-<div class="summary-card">
-<h3> Heuristics</h3>
-<p><strong>Definitie:</strong> Rule van thumb voor snel approximate oplossingen</p>
-<h4>Trade-off:</h4>
-<ul><li>Speed vs Accuracy</li><li>Goed enough vs Perfect</li></ul>
-</div>
-<div class="summary-card">
-<h3> Belangrijkste inzichten</h3>
-<ul><li>Weighted graphs have kosten on edges</li><li>Dijkstra finds kortste paths</li><li>Gebruikt greedy approach</li><li>Only werkt met non-negative gewichten</li><li>Priority queue optimizes</li></ul>
-</div>
-</div>
-</div>
-<div class="summary-card">
-<h3>Heuristics in graph problemen</h3>
-<h4>Kortste Queue Heuristic:</h4>
-<p><strong>"Pick de Line Dat Looks Fastest"</strong></p>
-<ul>
-<li><strong>Real-life:</strong> Network routing pad least traffic, picking kortste line at market</li>
-<li><strong>Probleem:</strong> Doesn't account voor different processing speeds van elke "lane"</li>
-</ul>
-<h4>Frequency-Based Heuristic:</h4>
-<p><strong>"Popular Routes Zijn Usually Goed"</strong></p>
-<ul>
-<li><strong>Real-life:</strong> Social media "People you may know", following most-used hiking trail</li>
-<li><strong>Probleem:</strong> Popular doesn't altijd mean optimal voor your specifiek situation</li>
-</ul>
-<h4>Avoid Congestion Heuristic:</h4>
-<p><strong>"Stay Away van Busy Areas"</strong></p>
-<ul>
-<li><strong>Real-life:</strong> Taking back roads naar avoid highway traffic, shopping during off-peak hours</li>
-<li><strong>Probleem:</strong> "Busy" areas might be sneller of better despite de crowds</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3>Problemen met simple heuristics</h3>
-<h4>De Local Optimum Probleem:</h4>
-<ul>
-<li><strong>Hill climbing:</strong> Heuristic finds een "pretty good" oplossing but misses de "beste" oplossing</li>
-<li><strong>Nee backtracking:</strong> Once you make een keuze, you can't undo it</li>
-<li><strong>Tunnel vision:</strong> Focusing on immediate gains instead van long-term optimal pad</li>
-</ul>
-<h4>De Information Probleem:</h4>
-<ul>
-<li><strong>Incomplete data:</strong> Heuristics werkt met limited information</li>
-<li><strong>Changing conditions:</strong> Traffic, weather, of network conditions change constantly</li>
-<li><strong>Context missing:</strong> Een route might be short but dangerous, crowded, of expensive</li>
-</ul>
-</div>
-<div class="section-content" id="flashcards">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>📇 Flashcards</h3>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Wat is Dijkstra's algoritme?<span>▼</span></div><div class="flashcard-answer">Finds kortste pad van source naar alle nodes in weighted graph</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Dijkstra's complexiteit?<span>▼</span></div><div class="flashcard-answer">O(V²) of O((V+E)log V) met priority queue</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Wat is heuristic?<span>▼</span></div><div class="flashcard-answer">Rule van thumb voor snel approximate oplossingen</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Dijkstra werkt met?<span>▼</span></div><div class="flashcard-answer">Non-negative gewichten alleen</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Wat is relaxation?<span>▼</span></div><div class="flashcard-answer">Updating afstand if shorter pad found</div></div>
-</div>
-</div>
-</div>
-<div class="section-content" id="quiz">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>✅ Quiz</h3>
-<form id="mcq-form">
-<div class="quiz-question">
-<div class="question-number">Vraag 1</div>
-<div class="question-text">Wat is Dijkstra's algoritme?</div>
-<div class="options">
-<label class="option-label"><input name="q1" required="" type="radio" value="0"/><span>Sorteren algoritme</span></label><label class="option-label"><input name="q1" required="" type="radio" value="1"/><span>Kortste pad algoritme voor weighted graphs</span></label><label class="option-label"><input name="q1" required="" type="radio" value="2"/><span>Binary search</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 2</div>
-<div class="question-text">Wat is een heuristic?</div>
-<div class="options">
-<label class="option-label"><input name="q2" required="" type="radio" value="0"/><span>Exacte algoritme</span></label><label class="option-label"><input name="q2" required="" type="radio" value="1"/><span>Rule van thumb</span></label><label class="option-label"><input name="q2" required="" type="radio" value="2"/><span>Sorteren methode</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 3</div>
-<div class="question-text">Dijkstra's tijdscomplexiteit?</div>
-<div class="options">
-<label class="option-label"><input name="q3" required="" type="radio" value="0"/><span>O(V²) of O((V+E)log V) met min-heap</span></label><label class="option-label"><input name="q3" required="" type="radio" value="1"/><span>O(n)</span></label><label class="option-label"><input name="q3" required="" type="radio" value="2"/><span>O(2^n)</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 4</div>
-<div class="question-text">What doet Dijkstra track?</div>
-<div class="options">
-<label class="option-label"><input name="q4" required="" type="radio" value="0"/><span>Visited nodes alleen</span></label><label class="option-label"><input name="q4" required="" type="radio" value="1"/><span>Kortste afstand van source naar elke node</span></label><label class="option-label"><input name="q4" required="" type="radio" value="2"/><span>Longest pad</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 5</div>
-<div class="question-text">Dijkstra werkt on graphs met:</div>
-<div class="options">
-<label class="option-label"><input name="q5" required="" type="radio" value="0"/><span>Negative gewichten</span></label><label class="option-label"><input name="q5" required="" type="radio" value="1"/><span>Non-negative gewichten alleen</span></label><label class="option-label"><input name="q5" required="" type="radio" value="2"/><span>Any gewichten</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 6</div>
-<div class="question-text">What data structure optimizes Dijkstra?</div>
-<div class="options">
-<label class="option-label"><input name="q6" required="" type="radio" value="0"/><span>Stack</span></label><label class="option-label"><input name="q6" required="" type="radio" value="1"/><span>Queue</span></label><label class="option-label"><input name="q6" required="" type="radio" value="2"/><span>Array alleen</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 7</div>
-<div class="question-text">Dijkstra initializes afstanden naar:</div>
-<div class="options">
-<label class="option-label"><input name="q7" required="" type="radio" value="0"/><span>0</span></label><label class="option-label"><input name="q7" required="" type="radio" value="1"/><span>Infinity (except source=0)</span></label><label class="option-label"><input name="q7" required="" type="radio" value="2"/><span>-1</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 8</div>
-<div class="question-text">In Dijkstra, visited nodes zijn:</div>
-<div class="options">
-<label class="option-label"><input name="q8" required="" type="radio" value="0"/><span>Revisited</span></label><label class="option-label"><input name="q8" required="" type="radio" value="1"/><span>Nooit revisited</span></label><label class="option-label"><input name="q8" required="" type="radio" value="2"/><span>Randomly checked</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 9</div>
-<div class="question-text">Greedy keuze in Dijkstra?</div>
-<div class="options">
-<label class="option-label"><input name="q9" required="" type="radio" value="0"/><span>Random node</span></label><label class="option-label"><input name="q9" required="" type="radio" value="1"/><span>Node met minimum huidige afstand</span></label><label class="option-label"><input name="q9" required="" type="radio" value="2"/><span>Largest node</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 10</div>
-<div class="question-text">Given afstanden [Een:0, B:7, C:9], which node visits next?</div>
-<div class="options">
-<label class="option-label"><input name="q10" required="" type="radio" value="0"/><span>Een</span></label><label class="option-label"><input name="q10" required="" type="radio" value="1"/><span>B</span></label><label class="option-label"><input name="q10" required="" type="radio" value="2"/><span>C</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q11</div>
-<div class="question-text">Dijkstra guarantees kortste pad?</div>
-<div class="options">
-<label class="option-label"><input name="q11" required="" type="radio" value="0"/><span>Altijd voor non-negative gewichten</span></label><label class="option-label"><input name="q11" required="" type="radio" value="1"/><span>Nooit</span></label><label class="option-label"><input name="q11" required="" type="radio" value="2"/><span>Only voor directed graphs</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q12</div>
-<div class="question-text">Wat is relaxation in Dijkstra?</div>
-<div class="options">
-<label class="option-label"><input name="q12" required="" type="radio" value="0"/><span>Verwijderen nodes</span></label><label class="option-label"><input name="q12" required="" type="radio" value="1"/><span>Updating afstand if shorter pad found</span></label><label class="option-label"><input name="q12" required="" type="radio" value="2"/><span>Adding edges</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q13</div>
-<div class="question-text">Weighted graph has:</div>
-<div class="options">
-<label class="option-label"><input name="q13" required="" type="radio" value="0"/><span>Kosten on edges</span></label><label class="option-label"><input name="q13" required="" type="radio" value="1"/><span>Nee edges</span></label><label class="option-label"><input name="q13" required="" type="radio" value="2"/><span>Only directed edges</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q14</div>
-<div class="question-text">Wanneer was Dijkstra's algoritme invented?</div>
-<div class="options">
-<label class="option-label"><input name="q14" required="" type="radio" value="0"/><span>1946</span></label><label class="option-label"><input name="q14" required="" type="radio" value="1"/><span>1956</span></label><label class="option-label"><input name="q14" required="" type="radio" value="2"/><span>1966</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q15</div>
-<div class="question-text">Dijkstra vs BFS?</div>
-<div class="options">
-<label class="option-label"><input name="q15" required="" type="radio" value="0"/><span>BFS voor unweighted, Dijkstra voor weighted</span></label><label class="option-label"><input name="q15" required="" type="radio" value="1"/><span>Same algoritme</span></label><label class="option-label"><input name="q15" required="" type="radio" value="2"/><span>BFS is sneller</span></label>
-</div>
-</div>
-<button class="submit-quiz" type="submit">Indienen</button>
-</form>
-<div id="mcq-result"></div>
-</div>
-</div>
-</div>
-</div>
-<script>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="chapter-header">Chapter 9: Weighted Graphs & Dijkstra</div>
+            <a href="index.html" class="back-button">← Back</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
+            <button class="section-tab active" onclick="switchSection('summary')">📚 Summary</button>
+            <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
+            <button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
+        </div>
+
+        <div id="summary" class="section-content active">
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h3>️ Weighted Graphs</h3>
+                    <p><strong>Definition:</strong> Graphs where edges have costs/weights</p>
+                    <h4>Examples:</h4>
+                    <ul><li>Road networks (distances)</li><li>Flight routes (costs)</li><li>Network latency (time)</li></ul>
+                </div>
+                <div class="summary-card">
+                    <h3> Dijkstra's Algorithm</h3>
+                    <p><strong>Purpose:</strong> Find shortest path from source to all nodes</p>
+                    <p><strong>Created by:</strong> Edsger Dijkstra (1956)</p>
+                    <div class="code-block">1. Initialize distances to ∞ (source=0)
+2. Pick unvisited node with min distance
+3. For each neighbor: relax edge
+4. Mark current as visited
+5. Repeat until all visited</div>
+                    <p><strong>Complexity:</strong> O(V²) or O((V+E)log V) with min-heap</p>
+                </div>
+                <div class="summary-card">
+                    <h3> Heuristics</h3>
+                    <p><strong>Definition:</strong> Rule of thumb for fast approximate solutions</p>
+                    <h4>Trade-off:</h4>
+                    <ul><li>Speed vs Accuracy</li><li>Good enough vs Perfect</li></ul>
+                </div>
+                <div class="summary-card">
+                    <h3> Key Takeaways</h3>
+                    <ul><li>Weighted graphs have costs on edges</li><li>Dijkstra finds shortest paths</li><li>Uses greedy approach</li><li>Only works with non-negative weights</li><li>Priority queue optimizes</li></ul>
+                </div>
+            </div>
+        </div>
+
+                <div class="summary-card">
+                    <h3>Heuristics in graph problems</h3>
+                    <h4>Shortest Queue Heuristic:</h4>
+                    <p><strong>"Pick the Line That Looks Fastest"</strong></p>
+                    <ul>
+                        <li><strong>Real-life:</strong> Network routing path least traffic, picking shortest line at market</li>
+                        <li><strong>Problem:</strong> Doesn't account for different processing speeds of each "lane"</li>
+                    </ul>
+                    <h4>Frequency-Based Heuristic:</h4>
+                    <p><strong>"Popular Routes Are Usually Good"</strong></p>
+                    <ul>
+                        <li><strong>Real-life:</strong> Social media "People you may know", following most-used hiking trail</li>
+                        <li><strong>Problem:</strong> Popular doesn't always mean optimal for your specific situation</li>
+                    </ul>
+                    <h4>Avoid Congestion Heuristic:</h4>
+                    <p><strong>"Stay Away from Busy Areas"</strong></p>
+                    <ul>
+                        <li><strong>Real-life:</strong> Taking back roads to avoid highway traffic, shopping during off-peak hours</li>
+                        <li><strong>Problem:</strong> "Busy" areas might be faster or better despite the crowds</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3>Problems with simple heuristics</h3>
+                    <h4>The Local Optimum Problem:</h4>
+                    <ul>
+                        <li><strong>Hill climbing:</strong> Heuristic finds a "pretty good" solution but misses the "best" solution</li>
+                        <li><strong>No backtracking:</strong> Once you make a choice, you can't undo it</li>
+                        <li><strong>Tunnel vision:</strong> Focusing on immediate gains instead of long-term optimal path</li>
+                    </ul>
+                    <h4>The Information Problem:</h4>
+                    <ul>
+                        <li><strong>Incomplete data:</strong> Heuristics work with limited information</li>
+                        <li><strong>Changing conditions:</strong> Traffic, weather, or network conditions change constantly</li>
+                        <li><strong>Context missing:</strong> A route might be short but dangerous, crowded, or expensive</li>
+                    </ul>
+                </div>
+
+
+
+        <div id="flashcards" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>📇 Flashcards</h3>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">What is Dijkstra's algorithm?<span>▼</span></div><div class="flashcard-answer">Finds shortest path from source to all nodes in weighted graph</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Dijkstra's complexity?<span>▼</span></div><div class="flashcard-answer">O(V²) or O((V+E)log V) with priority queue</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">What is heuristic?<span>▼</span></div><div class="flashcard-answer">Rule of thumb for fast approximate solutions</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Dijkstra works with?<span>▼</span></div><div class="flashcard-answer">Non-negative weights only</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">What is relaxation?<span>▼</span></div><div class="flashcard-answer">Updating distance if shorter path found</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>✅ Quiz</h3>
+                    <form id="mcq-form">
+                        <div class="quiz-question">
+                            <div class="question-number">Q1</div>
+                            <div class="question-text">What is Dijkstra's algorithm?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q1" value="0" required><span>Sorting algorithm</span></label><label class="option-label"><input type="radio" name="q1" value="1" required><span>Shortest path algorithm for weighted graphs</span></label><label class="option-label"><input type="radio" name="q1" value="2" required><span>Binary search</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q2</div>
+                            <div class="question-text">What is a heuristic?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q2" value="0" required><span>Exact algorithm</span></label><label class="option-label"><input type="radio" name="q2" value="1" required><span>Rule of thumb</span></label><label class="option-label"><input type="radio" name="q2" value="2" required><span>Sorting method</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q3</div>
+                            <div class="question-text">Dijkstra's time complexity?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q3" value="0" required><span>O(V²) or O((V+E)log V) with min-heap</span></label><label class="option-label"><input type="radio" name="q3" value="1" required><span>O(n)</span></label><label class="option-label"><input type="radio" name="q3" value="2" required><span>O(2^n)</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q4</div>
+                            <div class="question-text">What does Dijkstra track?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q4" value="0" required><span>Visited nodes only</span></label><label class="option-label"><input type="radio" name="q4" value="1" required><span>Shortest distance from source to each node</span></label><label class="option-label"><input type="radio" name="q4" value="2" required><span>Longest path</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q5</div>
+                            <div class="question-text">Dijkstra works on graphs with:</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q5" value="0" required><span>Negative weights</span></label><label class="option-label"><input type="radio" name="q5" value="1" required><span>Non-negative weights only</span></label><label class="option-label"><input type="radio" name="q5" value="2" required><span>Any weights</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q6</div>
+                            <div class="question-text">What data structure optimizes Dijkstra?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q6" value="0" required><span>Stack</span></label><label class="option-label"><input type="radio" name="q6" value="1" required><span>Queue</span></label><label class="option-label"><input type="radio" name="q6" value="2" required><span>Array only</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q7</div>
+                            <div class="question-text">Dijkstra initializes distances to:</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q7" value="0" required><span>0</span></label><label class="option-label"><input type="radio" name="q7" value="1" required><span>Infinity (except source=0)</span></label><label class="option-label"><input type="radio" name="q7" value="2" required><span>-1</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q8</div>
+                            <div class="question-text">In Dijkstra, visited nodes are:</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q8" value="0" required><span>Revisited</span></label><label class="option-label"><input type="radio" name="q8" value="1" required><span>Never revisited</span></label><label class="option-label"><input type="radio" name="q8" value="2" required><span>Randomly checked</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q9</div>
+                            <div class="question-text">Greedy choice in Dijkstra?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q9" value="0" required><span>Random node</span></label><label class="option-label"><input type="radio" name="q9" value="1" required><span>Node with minimum current distance</span></label><label class="option-label"><input type="radio" name="q9" value="2" required><span>Largest node</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q10</div>
+                            <div class="question-text">Given distances [A:0, B:7, C:9], which node visits next?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q10" value="0" required><span>A</span></label><label class="option-label"><input type="radio" name="q10" value="1" required><span>B</span></label><label class="option-label"><input type="radio" name="q10" value="2" required><span>C</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q11</div>
+                            <div class="question-text">Dijkstra guarantees shortest path?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q11" value="0" required><span>Always for non-negative weights</span></label><label class="option-label"><input type="radio" name="q11" value="1" required><span>Never</span></label><label class="option-label"><input type="radio" name="q11" value="2" required><span>Only for directed graphs</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q12</div>
+                            <div class="question-text">What is relaxation in Dijkstra?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q12" value="0" required><span>Removing nodes</span></label><label class="option-label"><input type="radio" name="q12" value="1" required><span>Updating distance if shorter path found</span></label><label class="option-label"><input type="radio" name="q12" value="2" required><span>Adding edges</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q13</div>
+                            <div class="question-text">Weighted graph has:</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q13" value="0" required><span>Costs on edges</span></label><label class="option-label"><input type="radio" name="q13" value="1" required><span>No edges</span></label><label class="option-label"><input type="radio" name="q13" value="2" required><span>Only directed edges</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q14</div>
+                            <div class="question-text">When was Dijkstra's algorithm invented?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q14" value="0" required><span>1946</span></label><label class="option-label"><input type="radio" name="q14" value="1" required><span>1956</span></label><label class="option-label"><input type="radio" name="q14" value="2" required><span>1966</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q15</div>
+                            <div class="question-text">Dijkstra vs BFS?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q15" value="0" required><span>BFS for unweighted, Dijkstra for weighted</span></label><label class="option-label"><input type="radio" name="q15" value="1" required><span>Same algorithm</span></label><label class="option-label"><input type="radio" name="q15" value="2" required><span>BFS is faster</span></label>
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-quiz">Submit</button>
+                    </form>
+                    <div id="mcq-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <script>
         // Quiz Configuration
         const QUIZ_CONFIG = {
             'chapter9-mcq': {
@@ -523,13 +516,13 @@ html
             let resultClass, message;
             if (percentage >= 80) {
                 resultClass = 'excellent';
-                message = `🎉 Uitstekend! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
+                message = `🎉 Excellent! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
             } else if (percentage >= 60) {
                 resultClass = 'good';
-                message = `👍 Goed gedaan! ${correct}/${total} correct (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
+                message = `👍 Good job! ${correct}/${total} correct (${percentage.toFixed(0)}%). Review the concepts you missed.`;
             } else {
                 resultClass = 'needs-work';
-                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Bestudeer de dezelfdenvatting en probeer opnieuw!`;
+                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Study the summary and try again!`;
             }
             
             resultDiv.className = `quiz-result ${resultClass}`;
@@ -547,15 +540,5 @@ html
             }
         });
     </script>
-<div class="source-note" style="text-align:center;margin:30px auto;color:#6b7280;font-size:0.95rem;">Gebaseerd op de PA Samenvatting van Stephanie VDH.</div>
-
-<script>
-document.addEventListener('DOMContentLoaded',function(){
-  const btn=document.querySelector('.mobile-menu-toggle');
-  if(!btn) return;
-  btn.addEventListener('click',function(){document.body.classList.toggle('mobile-menu-open');btn.classList.toggle('is-open');});
-});
-</script>
-
 </body>
 </html>

@@ -1,11 +1,11 @@
-html
-<html lang="nl">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Hoofdstuk 4: Recursie - Programming Advanced</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Recursion - Programming Advanced</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #2d3561; --secondary: #4a90e2; --accent: #ff6b6b; --success: #51cf66; --warning: #ffd93d; --bg: #f8f9fa; --card: #ffffff; --text: #2c3e50; --text-light: #7f8c8d; }
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
@@ -62,7 +62,7 @@ html
         }
 
         .option-label.incorrect::after {
-            content: '✗ Fout';
+            content: '✗ Incorrect';
             margin-left: auto;
             color: var(--accent);
             font-weight: 700;
@@ -112,374 +112,386 @@ html
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 768px) { .summary-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
     </style>
-<!-- MOBILE MENU PATCH -->
-
-<style>
-@media (max-width: 768px) {
-  .mobile-menu-toggle { display:flex!important; }
-  body.mobile-menu-open { overflow:hidden; }
-  .chapters-grid, .grid, .cards-grid { grid-template-columns: 1fr!important; }
-  table, pre { max-width:100%; overflow-x:auto; }
-}
-.mobile-menu-toggle{display:none;position:fixed;top:14px;right:14px;z-index:9999;width:48px;height:44px;border:1px solid rgba(255,255,255,.55);border-radius:12px;background:linear-gradient(135deg,#2f3f78,#4a90e2);box-shadow:0 8px 24px rgba(0,0,0,.22);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}.mobile-menu-toggle span{display:block;width:23px;height:3px;border-radius:999px;background:#fff;transition:.2s}.mobile-menu-toggle.is-open span:nth-child(1){transform:translateY(8px) rotate(45deg)}.mobile-menu-toggle.is-open span:nth-child(2){opacity:0}.mobile-menu-toggle.is-open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
-@media (max-width:768px){.chapter-header .back-btn,.back-btn{margin-right:58px}.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}.tab-button{white-space:nowrap}}
-</style>
-
 </head>
 <body>
-<button class="mobile-menu-toggle" type="button" aria-label="Menu openen"><span></span><span></span><span></span></button>
-<nav class="navbar">
-<div class="navbar-content">
-<div class="chapter-header">Hoofdstuk 4: Recursie</div>
-<a class="back-button" href="index.html">← Terug naar hoofdstukken</a>
-</div>
-</nav>
-<div class="container">
-</div>
-<div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
-<button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
-<button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-<button class="section-tab" onclick="switchSection('quiz')">✅ Comprehensive Quiz</button>
-</div>
-<div class="section-content active" id="summary">
-<div class="summary-grid">
-<div class="summary-card">
-<h3> Wat is Recursie?</h3>
-<p><strong>Definitie:</strong> Een functie dat calls itself naar oplossen kleiner instances van de dezelfde probleem.</p>
-<h4>Key Components:</h4>
-<ul>
-<li><strong>Base Case:</strong> Termination condition (no recursie)</li>
-<li><strong>Recursief Case:</strong> Probleem divided into kleiner instances</li>
-</ul>
-<div class="highlight-box"><strong>Belangrijk:</strong> Zonder base case → infinite recursie → stack overflow!</div>
-</div>
-<div class="summary-card">
-<h3> Base Case</h3>
-<p><strong>Purpose:</strong> Stops de recursie</p>
-<h4>Characteristics:</h4>
-<ul>
-<li>Simplest form van de probleem</li>
-<li>Can be solved directly zonder recursie</li>
-<li>Essential voor termination</li>
-</ul>
-<h4>Voorbeelden:</h4>
-<ul>
-<li><strong>Factorial:</strong> 0! = 1 of 1! = 1</li>
-<li><strong>Fibonacci:</strong> F(0)=0, F(1)=1</li>
-<li><strong>Array:</strong> Empty array of single element</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Recursief Case</h3>
-<p><strong>Purpose:</strong> Breaks probleem into kleiner subproblemen</p>
-<h4>How it Werkt:</h4>
-<ul>
-<li>Calls itself met modified parameters</li>
-<li>Elke call moves closer naar base case</li>
-<li>Combines results van recursief calls</li>
-</ul>
-<h4>Example - Factorial:</h4>
-<div class="code-block">n! = n × (n-1)!
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="chapter-header">Chapter 4: Recursion</div>
+            <a href="index.html" class="back-button">← Back to Chapters</a>
+        </div>
+    </nav>
+    <div class="container">
+        </div>
+        <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
+            <button class="section-tab active" onclick="switchSection('summary')">📚 Summary</button>
+            <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
+            <button class="section-tab" onclick="switchSection('quiz')">✅ Comprehensive Quiz</button>
+        </div>
+
+        <div id="summary" class="section-content active">
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h3> What is Recursion?</h3>
+                    <p><strong>Definition:</strong> A function that calls itself to solve smaller instances of the same problem.</p>
+                    <h4>Key Components:</h4>
+                    <ul>
+                        <li><strong>Base Case:</strong> Termination condition (no recursion)</li>
+                        <li><strong>Recursive Case:</strong> Problem divided into smaller instances</li>
+                    </ul>
+                    <div class="highlight-box"><strong>Important:</strong> Without base case → infinite recursion → stack overflow!</div>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Base Case</h3>
+                    <p><strong>Purpose:</strong> Stops the recursion</p>
+                    <h4>Characteristics:</h4>
+                    <ul>
+                        <li>Simplest form of the problem</li>
+                        <li>Can be solved directly without recursion</li>
+                        <li>Essential for termination</li>
+                    </ul>
+                    <h4>Examples:</h4>
+                    <ul>
+                        <li><strong>Factorial:</strong> 0! = 1 or 1! = 1</li>
+                        <li><strong>Fibonacci:</strong> F(0)=0, F(1)=1</li>
+                        <li><strong>Array:</strong> Empty array or single element</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Recursive Case</h3>
+                    <p><strong>Purpose:</strong> Breaks problem into smaller subproblems</p>
+                    <h4>How it Works:</h4>
+                    <ul>
+                        <li>Calls itself with modified parameters</li>
+                        <li>Each call moves closer to base case</li>
+                        <li>Combines results from recursive calls</li>
+                    </ul>
+                    <h4>Example - Factorial:</h4>
+                    <div class="code-block">n! = n × (n-1)!
 5! = 5 × 4!
    = 5 × 4 × 3!
    = 5 × 4 × 3 × 2!
    = 5 × 4 × 3 × 2 × 1!
    = 5 × 4 × 3 × 2 × 1
    = 120</div>
-</div>
-<div class="summary-card">
-<h3> Call Stack</h3>
-<p><strong>Definitie:</strong> Geheugen structure storing functie calls</p>
-<h4>How Recursie Gebruikt Stack:</h4>
-<ul>
-<li>Elke recursief call added naar stack</li>
-<li>Stack grows met depth van recursie</li>
-<li>Base case triggers unwinding</li>
-<li>Functies complete in reverse volgorde (LIFO)</li>
-</ul>
-<h4>Stack Overflow:</h4>
-<ul>
-<li>Too many recursief calls</li>
-<li>Nee base case of nooit reached</li>
-<li>Stack geheugen exhausted</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Classic Voorbeeld: Factorial</h3>
-<div class="code-block">Functie Factorial(n):
-  IF n &lt;= 1 THEN
+                </div>
+
+                <div class="summary-card">
+                    <h3> Call Stack</h3>
+                    <p><strong>Definition:</strong> Memory structure storing function calls</p>
+                    <h4>How Recursion Uses Stack:</h4>
+                    <ul>
+                        <li>Each recursive call added to stack</li>
+                        <li>Stack grows with depth of recursion</li>
+                        <li>Base case triggers unwinding</li>
+                        <li>Functions complete in reverse order (LIFO)</li>
+                    </ul>
+                    <h4>Stack Overflow:</h4>
+                    <ul>
+                        <li>Too many recursive calls</li>
+                        <li>No base case or never reached</li>
+                        <li>Stack memory exhausted</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Classic Example: Factorial</h3>
+                    <div class="code-block">FUNCTION Factorial(n):
+  IF n <= 1 THEN
     RETURN 1          // Base case
   ELSE
-    RETURN n × Factorial(n-1)  // Recursief case
+    RETURN n × Factorial(n-1)  // Recursive case
   END IF
-END Functie</div>
-<h4>Trace voor Factorial(5):</h4>
-<div class="code-block">Factorial(5)
+END FUNCTION</div>
+                    <h4>Trace for Factorial(5):</h4>
+                    <div class="code-block">Factorial(5)
   = 5 × Factorial(4)
   = 5 × 4 × Factorial(3)
   = 5 × 4 × 3 × Factorial(2)
   = 5 × 4 × 3 × 2 × Factorial(1)
   = 5 × 4 × 3 × 2 × 1
   = 120</div>
-</div>
-<div class="summary-card">
-<h3> Fibonacci Sequence</h3>
-<p><strong>Definitie:</strong> Elke number is sum van vorige two</p>
-<div class="code-block">Functie Fibonacci(n):
-  IF n &lt;= 0 THEN
+                </div>
+
+                <div class="summary-card">
+                    <h3> Fibonacci Sequence</h3>
+                    <p><strong>Definition:</strong> Each number is sum of previous two</p>
+                    <div class="code-block">FUNCTION Fibonacci(n):
+  IF n <= 0 THEN
     RETURN 0          // Base case 1
   ELSE IF n == 1 THEN
     RETURN 1          // Base case 2
   ELSE
-    RETURN Fibonacci(n-1) + Fibonacci(n-2)  // Recursief
+    RETURN Fibonacci(n-1) + Fibonacci(n-2)  // Recursive
   END IF
-END Functie</div>
-<h4>Sequence:</h4>
-<p>0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55...</p>
-<div class="highlight-box"><strong>Note:</strong> Naive Fibonacci is inefficient - O(2ⁿ). Gebruik Dynamic Programming voor optimalisatie!</div>
-</div>
-<div class="summary-card">
-<h3> Waarom Gebruik Recursie?</h3>
-<h4>Best Voor:</h4>
-<ul>
-<li><strong>Tree bewerkingen:</strong> Traversals, zoeken</li>
-<li><strong>File systems:</strong> Navigating directories</li>
-<li><strong>Mathematical definitions:</strong> Factorial, Fibonacci</li>
-<li><strong>Divide &amp; Conquer:</strong> Merge sort, quick sort</li>
-<li><strong>Backtracking:</strong> Mazes, Sudoku, N-Queens</li>
-</ul>
-<h4>Voordelen:</h4>
-<ul>
-<li>Code mirrors probleem structure</li>
-<li>Natural elegance voor recursief problemen</li>
-<li>Easier naar understand dan iterative equivalent</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Belangrijkste inzichten</h3>
-<ul>
-<li>Recursie = functie calling itself</li>
-<li>Must have base case(s) naar terminate</li>
-<li>Recursief case moves toward base case</li>
-<li>Gebruikt call stack (LIFO)</li>
-<li>Perfect voor tree-like of genest structures</li>
-<li>Can be less efficiënt dan iteration</li>
-<li>Zonder base case → stack overflow</li>
-<li>Love it of hate it - powerful technique!</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="section-content" id="flashcards">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>📇 Flashcards</h3>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is recursie?<span>▼</span></div><div class="flashcard-answer">Een functie dat calls itself naar oplossen kleiner instances van de dezelfde probleem</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is een base case?<span>▼</span></div><div class="flashcard-answer">Termination condition dat stops recursie - simplest form solved zonder recursie</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What happens zonder base case?<span>▼</span></div><div class="flashcard-answer">Infinite recursie leading naar stack overflow</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is 5! (factorial)?<span>▼</span></div><div class="flashcard-answer">120 (5 × 4 × 3 × 2 × 1)</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Where zijn recursief calls stored?<span>▼</span></div><div class="flashcard-answer">On de call stack (LIFO structure)</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is tail recursie?<span>▼</span></div><div class="flashcard-answer">Recursief call is de last operation in functie</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Fibonacci base cases?<span>▼</span></div><div class="flashcard-answer">F(0) = 0 en F(1) = 1</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wanneer naar gebruik recursie?<span>▼</span></div><div class="flashcard-answer">Wanneer probleem has natural recursief structure (trees, divide &amp; conquer, backtracking)</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is stack overflow?<span>▼</span></div><div class="flashcard-answer">Too many recursief calls exhaust stack geheugen</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is 4!?<span>▼</span></div><div class="flashcard-answer">24 (4 × 3 × 2 × 1)</div></div>
-</div>
-</div>
-</div>
-<div class="section-content" id="quiz">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>✅ Quiz</h3>
-<form id="mcq-form">
-<div class="quiz-question">
-<div class="question-number">Vraag 1</div>
-<div class="question-text">Wat is essential voor elke recursief functie?</div>
-<div class="options">
-<label class="option-label"><input name="q1" required="" type="radio" value="0"/><span>Lus</span></label>
-<label class="option-label"><input name="q1" required="" type="radio" value="1"/><span>Base case</span></label>
-<label class="option-label"><input name="q1" required="" type="radio" value="2"/><span>Array</span></label>
-<label class="option-label"><input name="q1" required="" type="radio" value="3"/><span>Global variable</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 2</div>
-<div class="question-text">What happens zonder een base case in recursie?</div>
-<div class="options">
-<label class="option-label"><input name="q2" required="" type="radio" value="0"/><span>Runs sneller</span></label>
-<label class="option-label"><input name="q2" required="" type="radio" value="1"/><span>Stack overflow</span></label>
-<label class="option-label"><input name="q2" required="" type="radio" value="2"/><span>Syntax error</span></label>
-<label class="option-label"><input name="q2" required="" type="radio" value="3"/><span>Nothing happens</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 3</div>
-<div class="question-text">Given deze functie, what doet Factorial(4) return?<br/><br/>
-<div class="code-block">functie Factorial(n) {
-  if (n &lt;= 1) return 1;
+END FUNCTION</div>
+                    <h4>Sequence:</h4>
+                    <p>0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55...</p>
+                    <div class="highlight-box"><strong>Note:</strong> Naive Fibonacci is inefficient - O(2ⁿ). Use Dynamic Programming for optimization!</div>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Why Use Recursion?</h3>
+                    <h4>Best For:</h4>
+                    <ul>
+                        <li><strong>Tree operations:</strong> Traversals, search</li>
+                        <li><strong>File systems:</strong> Navigating directories</li>
+                        <li><strong>Mathematical definitions:</strong> Factorial, Fibonacci</li>
+                        <li><strong>Divide & Conquer:</strong> Merge sort, quick sort</li>
+                        <li><strong>Backtracking:</strong> Mazes, Sudoku, N-Queens</li>
+                    </ul>
+                    <h4>Advantages:</h4>
+                    <ul>
+                        <li>Code mirrors problem structure</li>
+                        <li>Natural elegance for recursive problems</li>
+                        <li>Easier to understand than iterative equivalent</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Key Takeaways</h3>
+                    <ul>
+                        <li>Recursion = function calling itself</li>
+                        <li>Must have base case(s) to terminate</li>
+                        <li>Recursive case moves toward base case</li>
+                        <li>Uses call stack (LIFO)</li>
+                        <li>Perfect for tree-like or nested structures</li>
+                        <li>Can be less efficient than iteration</li>
+                        <li>Without base case → stack overflow</li>
+                        <li>Love it or hate it - powerful technique!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="flashcards" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>📇 Flashcards</h3>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is recursion?<span>▼</span></div><div class="flashcard-answer">A function that calls itself to solve smaller instances of the same problem</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is a base case?<span>▼</span></div><div class="flashcard-answer">Termination condition that stops recursion - simplest form solved without recursion</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What happens without base case?<span>▼</span></div><div class="flashcard-answer">Infinite recursion leading to stack overflow</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is 5! (factorial)?<span>▼</span></div><div class="flashcard-answer">120 (5 × 4 × 3 × 2 × 1)</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Where are recursive calls stored?<span>▼</span></div><div class="flashcard-answer">On the call stack (LIFO structure)</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is tail recursion?<span>▼</span></div><div class="flashcard-answer">Recursive call is the last operation in function</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Fibonacci base cases?<span>▼</span></div><div class="flashcard-answer">F(0) = 0 and F(1) = 1</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">When to use recursion?<span>▼</span></div><div class="flashcard-answer">When problem has natural recursive structure (trees, divide & conquer, backtracking)</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is stack overflow?<span>▼</span></div><div class="flashcard-answer">Too many recursive calls exhaust stack memory</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is 4!?<span>▼</span></div><div class="flashcard-answer">24 (4 × 3 × 2 × 1)</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>✅ Quiz</h3>
+                    <form id="mcq-form">
+                        <div class="quiz-question">
+                            <div class="question-number">Question 1</div>
+                            <div class="question-text">What is essential for every recursive function?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q1" value="0" required><span>Loop</span></label>
+                                <label class="option-label"><input type="radio" name="q1" value="1" required><span>Base case</span></label>
+                                <label class="option-label"><input type="radio" name="q1" value="2" required><span>Array</span></label>
+                                <label class="option-label"><input type="radio" name="q1" value="3" required><span>Global variable</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 2</div>
+                            <div class="question-text">What happens without a base case in recursion?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q2" value="0" required><span>Runs faster</span></label>
+                                <label class="option-label"><input type="radio" name="q2" value="1" required><span>Stack overflow</span></label>
+                                <label class="option-label"><input type="radio" name="q2" value="2" required><span>Syntax error</span></label>
+                                <label class="option-label"><input type="radio" name="q2" value="3" required><span>Nothing happens</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 3</div>
+                            <div class="question-text">Given this function, what does Factorial(4) return?<br><br>
+                            <div class="code-block">function Factorial(n) {
+  if (n <= 1) return 1;
   return n * Factorial(n - 1);
 }</div></div>
-<div class="options">
-<label class="option-label"><input name="q3" required="" type="radio" value="0"/><span>12</span></label>
-<label class="option-label"><input name="q3" required="" type="radio" value="1"/><span>24</span></label>
-<label class="option-label"><input name="q3" required="" type="radio" value="2"/><span>120</span></label>
-<label class="option-label"><input name="q3" required="" type="radio" value="3"/><span>4</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 4</div>
-<div class="question-text">Where zijn recursief functie calls stored?</div>
-<div class="options">
-<label class="option-label"><input name="q4" required="" type="radio" value="0"/><span>Heap</span></label>
-<label class="option-label"><input name="q4" required="" type="radio" value="1"/><span>Stack</span></label>
-<label class="option-label"><input name="q4" required="" type="radio" value="2"/><span>Queue</span></label>
-<label class="option-label"><input name="q4" required="" type="radio" value="3"/><span>Array</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 5</div>
-<div class="question-text">Given deze functie, what doet Mystery(5) return?<br/><br/>
-<div class="code-block">functie Mystery(n) {
-  if (n &lt;= 0) return 0;
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q3" value="0" required><span>12</span></label>
+                                <label class="option-label"><input type="radio" name="q3" value="1" required><span>24</span></label>
+                                <label class="option-label"><input type="radio" name="q3" value="2" required><span>120</span></label>
+                                <label class="option-label"><input type="radio" name="q3" value="3" required><span>4</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 4</div>
+                            <div class="question-text">Where are recursive function calls stored?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q4" value="0" required><span>Heap</span></label>
+                                <label class="option-label"><input type="radio" name="q4" value="1" required><span>Stack</span></label>
+                                <label class="option-label"><input type="radio" name="q4" value="2" required><span>Queue</span></label>
+                                <label class="option-label"><input type="radio" name="q4" value="3" required><span>Array</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 5</div>
+                            <div class="question-text">Given this function, what does Mystery(5) return?<br><br>
+                            <div class="code-block">function Mystery(n) {
+  if (n <= 0) return 0;
   return n + Mystery(n - 1);
 }</div></div>
-<div class="options">
-<label class="option-label"><input name="q5" required="" type="radio" value="0"/><span>5</span></label>
-<label class="option-label"><input name="q5" required="" type="radio" value="1"/><span>10</span></label>
-<label class="option-label"><input name="q5" required="" type="radio" value="2"/><span>15</span></label>
-<label class="option-label"><input name="q5" required="" type="radio" value="3"/><span>25</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 6</div>
-<div class="question-text">Wat is tail recursie?</div>
-<div class="options">
-<label class="option-label"><input name="q6" required="" type="radio" value="0"/><span>Recursief call is at de end van de functie</span></label>
-<label class="option-label"><input name="q6" required="" type="radio" value="1"/><span>Functie has two recursief calls</span></label>
-<label class="option-label"><input name="q6" required="" type="radio" value="2"/><span>Functie has no base case</span></label>
-<label class="option-label"><input name="q6" required="" type="radio" value="3"/><span>Functie calls itself at de beginning</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 7</div>
-<div class="question-text">Given deze Fibonacci functie, what doet Fib(5) return?<br/><br/>
-<div class="code-block">functie Fib(n) {
-  if (n &lt;= 0) return 0;
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q5" value="0" required><span>5</span></label>
+                                <label class="option-label"><input type="radio" name="q5" value="1" required><span>10</span></label>
+                                <label class="option-label"><input type="radio" name="q5" value="2" required><span>15</span></label>
+                                <label class="option-label"><input type="radio" name="q5" value="3" required><span>25</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 6</div>
+                            <div class="question-text">What is tail recursion?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q6" value="0" required><span>Recursive call is at the end of the function</span></label>
+                                <label class="option-label"><input type="radio" name="q6" value="1" required><span>Function has two recursive calls</span></label>
+                                <label class="option-label"><input type="radio" name="q6" value="2" required><span>Function has no base case</span></label>
+                                <label class="option-label"><input type="radio" name="q6" value="3" required><span>Function calls itself at the beginning</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 7</div>
+                            <div class="question-text">Given this Fibonacci function, what does Fib(5) return?<br><br>
+                            <div class="code-block">function Fib(n) {
+  if (n <= 0) return 0;
   if (n == 1) return 1;
   return Fib(n - 1) + Fib(n - 2);
 }</div></div>
-<div class="options">
-<label class="option-label"><input name="q7" required="" type="radio" value="0"/><span>3</span></label>
-<label class="option-label"><input name="q7" required="" type="radio" value="1"/><span>5</span></label>
-<label class="option-label"><input name="q7" required="" type="radio" value="2"/><span>8</span></label>
-<label class="option-label"><input name="q7" required="" type="radio" value="3"/><span>13</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 8</div>
-<div class="question-text">Wat is de base case in de Fibonacci sequence?</div>
-<div class="options">
-<label class="option-label"><input name="q8" required="" type="radio" value="0"/><span>F(0) = 0 en F(1) = 1</span></label>
-<label class="option-label"><input name="q8" required="" type="radio" value="1"/><span>F(1) = 1 en F(2) = 2</span></label>
-<label class="option-label"><input name="q8" required="" type="radio" value="2"/><span>F(0) = 1</span></label>
-<label class="option-label"><input name="q8" required="" type="radio" value="3"/><span>F(n) = F(n-1)</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 9</div>
-<div class="question-text">Given deze functie, what doet Power(2, 3) return?<br/><br/>
-<div class="code-block">functie Power(base, exp) {
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q7" value="0" required><span>3</span></label>
+                                <label class="option-label"><input type="radio" name="q7" value="1" required><span>5</span></label>
+                                <label class="option-label"><input type="radio" name="q7" value="2" required><span>8</span></label>
+                                <label class="option-label"><input type="radio" name="q7" value="3" required><span>13</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 8</div>
+                            <div class="question-text">What is the base case in the Fibonacci sequence?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q8" value="0" required><span>F(0) = 0 and F(1) = 1</span></label>
+                                <label class="option-label"><input type="radio" name="q8" value="1" required><span>F(1) = 1 and F(2) = 2</span></label>
+                                <label class="option-label"><input type="radio" name="q8" value="2" required><span>F(0) = 1</span></label>
+                                <label class="option-label"><input type="radio" name="q8" value="3" required><span>F(n) = F(n-1)</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 9</div>
+                            <div class="question-text">Given this function, what does Power(2, 3) return?<br><br>
+                            <div class="code-block">function Power(base, exp) {
   if (exp == 0) return 1;
   return base * Power(base, exp - 1);
 }</div></div>
-<div class="options">
-<label class="option-label"><input name="q9" required="" type="radio" value="0"/><span>5</span></label>
-<label class="option-label"><input name="q9" required="" type="radio" value="1"/><span>6</span></label>
-<label class="option-label"><input name="q9" required="" type="radio" value="2"/><span>8</span></label>
-<label class="option-label"><input name="q9" required="" type="radio" value="3"/><span>9</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 10</div>
-<div class="question-text">Welke data structure is used naar manage recursief functie calls?</div>
-<div class="options">
-<label class="option-label"><input name="q10" required="" type="radio" value="0"/><span>Queue</span></label>
-<label class="option-label"><input name="q10" required="" type="radio" value="1"/><span>Stack</span></label>
-<label class="option-label"><input name="q10" required="" type="radio" value="2"/><span>Hash Tabel</span></label>
-<label class="option-label"><input name="q10" required="" type="radio" value="3"/><span>Binary Tree</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 11</div>
-<div class="question-text">Given deze functie, what doet CountDown(3) print?<br/><br/>
-<div class="code-block">functie CountDown(n) {
-  if (n &lt;= 0) return;
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q9" value="0" required><span>5</span></label>
+                                <label class="option-label"><input type="radio" name="q9" value="1" required><span>6</span></label>
+                                <label class="option-label"><input type="radio" name="q9" value="2" required><span>8</span></label>
+                                <label class="option-label"><input type="radio" name="q9" value="3" required><span>9</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 10</div>
+                            <div class="question-text">Which data structure is used to manage recursive function calls?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q10" value="0" required><span>Queue</span></label>
+                                <label class="option-label"><input type="radio" name="q10" value="1" required><span>Stack</span></label>
+                                <label class="option-label"><input type="radio" name="q10" value="2" required><span>Hash Table</span></label>
+                                <label class="option-label"><input type="radio" name="q10" value="3" required><span>Binary Tree</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 11</div>
+                            <div class="question-text">Given this function, what does CountDown(3) print?<br><br>
+                            <div class="code-block">function CountDown(n) {
+  if (n <= 0) return;
   print(n);
   CountDown(n - 1);
 }</div></div>
-<div class="options">
-<label class="option-label"><input name="q11" required="" type="radio" value="0"/><span>3 2 1</span></label>
-<label class="option-label"><input name="q11" required="" type="radio" value="1"/><span>1 2 3</span></label>
-<label class="option-label"><input name="q11" required="" type="radio" value="2"/><span>3 alleen</span></label>
-<label class="option-label"><input name="q11" required="" type="radio" value="3"/><span>0 1 2 3</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 12</div>
-<div class="question-text">Given deze functie, what doet Length([1, 2, 3]) return?<br/><br/>
-<div class="code-block">functie Length(arr) {
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q11" value="0" required><span>3 2 1</span></label>
+                                <label class="option-label"><input type="radio" name="q11" value="1" required><span>1 2 3</span></label>
+                                <label class="option-label"><input type="radio" name="q11" value="2" required><span>3 only</span></label>
+                                <label class="option-label"><input type="radio" name="q11" value="3" required><span>0 1 2 3</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 12</div>
+                            <div class="question-text">Given this function, what does Length([1, 2, 3]) return?<br><br>
+                            <div class="code-block">function Length(arr) {
   if (arr.length == 0) return 0;
   return 1 + Length(arr.slice(1));
 }</div></div>
-<div class="options">
-<label class="option-label"><input name="q12" required="" type="radio" value="0"/><span>0</span></label>
-<label class="option-label"><input name="q12" required="" type="radio" value="1"/><span>1</span></label>
-<label class="option-label"><input name="q12" required="" type="radio" value="2"/><span>3</span></label>
-<label class="option-label"><input name="q12" required="" type="radio" value="3"/><span>6</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 13</div>
-<div class="question-text">Wat is de tijdscomplexiteit van naive recursief Fibonacci?</div>
-<div class="options">
-<label class="option-label"><input name="q13" required="" type="radio" value="0"/><span>O(n)</span></label>
-<label class="option-label"><input name="q13" required="" type="radio" value="1"/><span>O(n log n)</span></label>
-<label class="option-label"><input name="q13" required="" type="radio" value="2"/><span>O(2^n)</span></label>
-<label class="option-label"><input name="q13" required="" type="radio" value="3"/><span>O(log n)</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 14</div>
-<div class="question-text">Given deze functie, what doet Double(4) return?<br/><br/>
-<div class="code-block">functie Double(n) {
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q12" value="0" required><span>0</span></label>
+                                <label class="option-label"><input type="radio" name="q12" value="1" required><span>1</span></label>
+                                <label class="option-label"><input type="radio" name="q12" value="2" required><span>3</span></label>
+                                <label class="option-label"><input type="radio" name="q12" value="3" required><span>6</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 13</div>
+                            <div class="question-text">What is the time complexity of naive recursive Fibonacci?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q13" value="0" required><span>O(n)</span></label>
+                                <label class="option-label"><input type="radio" name="q13" value="1" required><span>O(n log n)</span></label>
+                                <label class="option-label"><input type="radio" name="q13" value="2" required><span>O(2^n)</span></label>
+                                <label class="option-label"><input type="radio" name="q13" value="3" required><span>O(log n)</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Question 14</div>
+                            <div class="question-text">Given this function, what does Double(4) return?<br><br>
+                            <div class="code-block">function Double(n) {
   if (n == 0) return 0;
   return 2 + Double(n - 1);
 }</div></div>
-<div class="options">
-<label class="option-label"><input name="q14" required="" type="radio" value="0"/><span>4</span></label>
-<label class="option-label"><input name="q14" required="" type="radio" value="1"/><span>8</span></label>
-<label class="option-label"><input name="q14" required="" type="radio" value="2"/><span>16</span></label>
-<label class="option-label"><input name="q14" required="" type="radio" value="3"/><span>2</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 15</div>
-<div class="question-text">Wanneer is recursie preferred over iteration?</div>
-<div class="options">
-<label class="option-label"><input name="q15" required="" type="radio" value="0"/><span>Wanneer probleem has natural recursief structure</span></label>
-<label class="option-label"><input name="q15" required="" type="radio" value="1"/><span>Altijd - recursie is altijd better</span></label>
-<label class="option-label"><input name="q15" required="" type="radio" value="2"/><span>Nooit - iteration is altijd better</span></label>
-<label class="option-label"><input name="q15" required="" type="radio" value="3"/><span>Only voor mathematical functies</span></label>
-</div>
-</div>
-<button class="submit-quiz" type="submit">Quiz indienen</button>
-</form>
-<div id="mcq-result"></div>
-</div>
-</div>
-</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q14" value="0" required><span>4</span></label>
+                                <label class="option-label"><input type="radio" name="q14" value="1" required><span>8</span></label>
+                                <label class="option-label"><input type="radio" name="q14" value="2" required><span>16</span></label>
+                                <label class="option-label"><input type="radio" name="q14" value="3" required><span>2</span></label>
+                            </div>
+                        </div>
 
-<script>
+                        <div class="quiz-question">
+                            <div class="question-number">Question 15</div>
+                            <div class="question-text">When is recursion preferred over iteration?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q15" value="0" required><span>When problem has natural recursive structure</span></label>
+                                <label class="option-label"><input type="radio" name="q15" value="1" required><span>Always - recursion is always better</span></label>
+                                <label class="option-label"><input type="radio" name="q15" value="2" required><span>Never - iteration is always better</span></label>
+                                <label class="option-label"><input type="radio" name="q15" value="3" required><span>Only for mathematical functions</span></label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-quiz">Submit Quiz</button>
+                    </form>
+                    <div id="mcq-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <script>
         // Quiz Configuration
         const QUIZ_CONFIG = {
             'chapter4-mcq': {
@@ -668,13 +680,13 @@ END Functie</div>
             let resultClass, message;
             if (percentage >= 80) {
                 resultClass = 'excellent';
-                message = `🎉 Uitstekend! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
+                message = `🎉 Excellent! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
             } else if (percentage >= 60) {
                 resultClass = 'good';
-                message = `👍 Goed gedaan! ${correct}/${total} correct (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
+                message = `👍 Good job! ${correct}/${total} correct (${percentage.toFixed(0)}%). Review the concepts you missed.`;
             } else {
                 resultClass = 'needs-work';
-                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Bestudeer de dezelfdenvatting en probeer opnieuw!`;
+                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Study the summary and try again!`;
             }
             
             resultDiv.className = `quiz-result ${resultClass}`;
@@ -692,15 +704,5 @@ END Functie</div>
             }
         });
     </script>
-<div class="source-note" style="text-align:center;margin:30px auto;color:#6b7280;font-size:0.95rem;">Gebaseerd op de PA Samenvatting van Stephanie VDH.</div>
-
-<script>
-document.addEventListener('DOMContentLoaded',function(){
-  const btn=document.querySelector('.mobile-menu-toggle');
-  if(!btn) return;
-  btn.addEventListener('click',function(){document.body.classList.toggle('mobile-menu-open');btn.classList.toggle('is-open');});
-});
-</script>
-
 </body>
 </html>

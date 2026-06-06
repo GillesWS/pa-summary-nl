@@ -1,11 +1,11 @@
-html
-<html lang="nl">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Hoofdstuk 12: Hash tables - Programming Advanced</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 12: Hash Tables - Programming Advanced</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #2d3561; --secondary: #4a90e2; --accent: #ff6b6b; --success: #51cf66; --warning: #ffd93d; --bg: #f8f9fa; }
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: #2c3e50; line-height: 1.6; }
@@ -60,7 +60,7 @@ html
         }
 
         .option-label.incorrect::after {
-            content: '✗ Fout';
+            content: '✗ Incorrect';
             margin-left: auto;
             color: var(--accent);
             font-weight: 700;
@@ -111,237 +111,234 @@ html
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 768px) { .summary-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } .quiz-section { padding: 1.5rem; } }
     </style>
-<!-- MOBILE MENU PATCH -->
-
-<style>
-@media (max-width: 768px) {
-  .mobile-menu-toggle { display:flex!important; }
-  body.mobile-menu-open { overflow:hidden; }
-  .chapters-grid, .grid, .cards-grid { grid-template-columns: 1fr!important; }
-  table, pre { max-width:100%; overflow-x:auto; }
-}
-.mobile-menu-toggle{display:none;position:fixed;top:14px;right:14px;z-index:9999;width:48px;height:44px;border:1px solid rgba(255,255,255,.55);border-radius:12px;background:linear-gradient(135deg,#2f3f78,#4a90e2);box-shadow:0 8px 24px rgba(0,0,0,.22);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}.mobile-menu-toggle span{display:block;width:23px;height:3px;border-radius:999px;background:#fff;transition:.2s}.mobile-menu-toggle.is-open span:nth-child(1){transform:translateY(8px) rotate(45deg)}.mobile-menu-toggle.is-open span:nth-child(2){opacity:0}.mobile-menu-toggle.is-open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
-@media (max-width:768px){.chapter-header .back-btn,.back-btn{margin-right:58px}.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}.tab-button{white-space:nowrap}}
-</style>
-
 </head>
 <body>
-<button class="mobile-menu-toggle" type="button" aria-label="Menu openen"><span></span><span></span><span></span></button>
-<nav class="navbar">
-<div class="navbar-content">
-<div class="chapter-header">Hoofdstuk 12: Hash tables</div>
-<a class="back-button" href="index.html">← Back</a>
-</div>
-</nav>
-<div class="container">
-<div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
-<button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
-<button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-<button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
-</div>
-<div class="section-content active" id="summary">
-<div class="summary-grid">
-<div class="summary-card">
-<h3>#️⃣ Hash Functie</h3>
-<p><strong>Definitie:</strong> Maps strings naar numbers (keys naar array indices)</p>
-<h4>Requirements:</h4>
-<ul><li>Consistent: dezelfde input → dezelfde output</li><li>Maps different inputs naar different numbers</li><li>Knows array grootte, returns valid indices</li></ul>
-</div>
-<div class="summary-card">
-<h3>️ Hash Tabel</h3>
-<p><strong>Formule:</strong> Hash Functie + Array = Hash Tabel</p>
-<p>Maps keys naar waarden gebruik van hash functie naar compute index</p>
-<h4>Also known als:</h4>
-<p>Hash maps, dictionaries, associative arrays</p>
-<div class="highlight-box"><strong>Speed:</strong> O(1) gemiddelde - instant lookup!</div>
-</div>
-<div class="summary-card">
-<h3> Complexiteit Vergelijking</h3>
-<ul><li><strong>Array/Linked Lijst:</strong> O(n) zoeken</li><li><strong>Gesorteerd Array:</strong> O(log n) zoeken</li><li><strong>Hash Tabel:</strong> O(1) zoeken ✓</li></ul>
-</div>
-<div class="summary-card">
-<h3> Collisions</h3>
-<p><strong>Probleem:</strong> Two keys map naar dezelfde index</p>
-<h4>Birthday Paradox:</h4>
-<p>Met 23 people: 50% chance van dezelfde birthday<br/>Met 60 people: 99% chance!</p>
-<p>Collisions zijn MORE likely dan you think!</p>
-</div>
-<div class="summary-card">
-<h3> Load Factor</h3>
-<p><strong>Formule:</strong> items / grootte</p>
-<p><strong>Rule:</strong> Resize when load factor &gt; 0.7</p>
-<h4>Tabel Grootte:</h4>
-<ul><li>1.3 × max keys</li><li>Should be prime number</li></ul>
-</div>
-<div class="summary-card">
-<h3> Belangrijkste inzichten</h3>
-<ul><li>Hash tabel = O(1) lookups</li><li>Hash functie maps keys naar indices</li><li>Collisions happen often</li><li>Load factor &gt; 0.7 → resize</li><li>Real-life: contacts, logins, file systems</li></ul>
-</div>
-</div>
-</div>
-<div class="section-content" id="flashcards">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>📇 Flashcards</h3>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Wat is hash functie?<span>▼</span></div><div class="flashcard-answer">Maps strings/keys naar numbers/array indices</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Hash tabel formula?<span>▼</span></div><div class="flashcard-answer">Hash Functie + Array = Hash Tabel</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Hash tabel complexiteit?<span>▼</span></div><div class="flashcard-answer">O(1) gemiddelde voor zoeken, invoegen, verwijderen</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">What zijn collisions?<span>▼</span></div><div class="flashcard-answer">Two keys mapping naar dezelfde index</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Load factor formula?<span>▼</span></div><div class="flashcard-answer">items / tabel grootte</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Wanneer naar resize?<span>▼</span></div><div class="flashcard-answer">Load factor &gt; 0.7</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Hash tabel grootte rule?<span>▼</span></div><div class="flashcard-answer">1.3 × max keys, should be prime</div></div>
-<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Birthday paradox?<span>▼</span></div><div class="flashcard-answer">23 people: 50% dezelfde birthday</div></div>
-</div>
-</div>
-</div>
-<div class="section-content" id="quiz">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>✅ Quiz</h3>
-<form id="mcq-form">
-<div class="quiz-question">
-<div class="question-number">Vraag 1</div>
-<div class="question-text">Wat is een hash functie?</div>
-<div class="options">
-<label class="option-label"><input name="q1" required="" type="radio" value="0"/><span>Een functie dat encrypts data voor security</span></label>
-<label class="option-label"><input name="q1" required="" type="radio" value="1"/><span>Een functie dat maps keys naar array indices</span></label>
-<label class="option-label"><input name="q1" required="" type="radio" value="2"/><span>Een functie dat compresses data naar reduce storage</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 2</div>
-<div class="question-text">Hash tabel complexiteit?</div>
-<div class="options">
-<label class="option-label"><input name="q2" required="" type="radio" value="0"/><span>O(n)</span></label>
-<label class="option-label"><input name="q2" required="" type="radio" value="1"/><span>O(1)</span></label>
-<label class="option-label"><input name="q2" required="" type="radio" value="2"/><span>O(log n)</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 3</div>
-<div class="question-text">Wat is een collision?</div>
-<div class="options">
-<label class="option-label"><input name="q3" required="" type="radio" value="0"/><span>Two keys map naar dezelfde index</span></label>
-<label class="option-label"><input name="q3" required="" type="radio" value="1"/><span>Hash functie error</span></label>
-<label class="option-label"><input name="q3" required="" type="radio" value="2"/><span>Array overflow</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 4</div>
-<div class="question-text">Hash functie requirements?</div>
-<div class="options">
-<label class="option-label"><input name="q4" required="" type="radio" value="0"/><span>Must distribute waarden uniformly naar minimize collisions</span></label>
-<label class="option-label"><input name="q4" required="" type="radio" value="1"/><span>Must be consistent: dezelfde input altijd produces dezelfde output</span></label>
-<label class="option-label"><input name="q4" required="" type="radio" value="2"/><span>Must be reversible naar retrieve original keys</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 5</div>
-<div class="question-text">Load factor formula?</div>
-<div class="options">
-<label class="option-label"><input name="q5" required="" type="radio" value="0"/><span>grootte / items</span></label>
-<label class="option-label"><input name="q5" required="" type="radio" value="1"/><span>items / grootte</span></label>
-<label class="option-label"><input name="q5" required="" type="radio" value="2"/><span>items × grootte</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 6</div>
-<div class="question-text">Wanneer resize hash tabel?</div>
-<div class="options">
-<label class="option-label"><input name="q6" required="" type="radio" value="0"/><span>Load factor &gt; 0.5</span></label>
-<label class="option-label"><input name="q6" required="" type="radio" value="1"/><span>Load factor &gt; 0.7</span></label>
-<label class="option-label"><input name="q6" required="" type="radio" value="2"/><span>Load factor &gt; 1</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 7</div>
-<div class="question-text">Hash tabel grootte should be?</div>
-<div class="options">
-<label class="option-label"><input name="q7" required="" type="radio" value="0"/><span>Even number</span></label>
-<label class="option-label"><input name="q7" required="" type="radio" value="1"/><span>Power van 2</span></label>
-<label class="option-label"><input name="q7" required="" type="radio" value="2"/><span>Prime number × 1.3 keys</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 8</div>
-<div class="question-text">Birthday paradox: 23 people?</div>
-<div class="options">
-<label class="option-label"><input name="q8" required="" type="radio" value="0"/><span>10% dezelfde birthday</span></label>
-<label class="option-label"><input name="q8" required="" type="radio" value="1"/><span>50% dezelfde birthday</span></label>
-<label class="option-label"><input name="q8" required="" type="radio" value="2"/><span>90% dezelfde birthday</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 9</div>
-<div class="question-text">Hash tabel also called?</div>
-<div class="options">
-<label class="option-label"><input name="q9" required="" type="radio" value="0"/><span>Linked lijst</span></label>
-<label class="option-label"><input name="q9" required="" type="radio" value="1"/><span>Dictionary</span></label>
-<label class="option-label"><input name="q9" required="" type="radio" value="2"/><span>Tree</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Vraag 10</div>
-<div class="question-text">Array zoeken complexiteit?</div>
-<div class="options">
-<label class="option-label"><input name="q10" required="" type="radio" value="0"/><span>O(1)</span></label>
-<label class="option-label"><input name="q10" required="" type="radio" value="1"/><span>O(n)</span></label>
-<label class="option-label"><input name="q10" required="" type="radio" value="2"/><span>O(log n)</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q11</div>
-<div class="question-text">Waarom gebruik hash tables?</div>
-<div class="options">
-<label class="option-label"><input name="q11" required="" type="radio" value="0"/><span>Naar maintain data in gesorteerd volgorde voor efficiënt range queries</span></label>
-<label class="option-label"><input name="q11" required="" type="radio" value="1"/><span>Naar achieve O(1) average-case lookup, invoegen, en verwijderen</span></label>
-<label class="option-label"><input name="q11" required="" type="radio" value="2"/><span>Naar minimize geheugen usage door compressing key-value pairs</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q12</div>
-<div class="question-text">What doet hash functie return?</div>
-<div class="options">
-<label class="option-label"><input name="q12" required="" type="radio" value="0"/><span>String</span></label>
-<label class="option-label"><input name="q12" required="" type="radio" value="1"/><span>Array index</span></label>
-<label class="option-label"><input name="q12" required="" type="radio" value="2"/><span>Boolean</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q13</div>
-<div class="question-text">Collisions zijn?</div>
-<div class="options">
-<label class="option-label"><input name="q13" required="" type="radio" value="0"/><span>Rare</span></label>
-<label class="option-label"><input name="q13" required="" type="radio" value="1"/><span>More veelvoorkomend dan expected</span></label>
-<label class="option-label"><input name="q13" required="" type="radio" value="2"/><span>Impossible</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q14</div>
-<div class="question-text">Hash tabel real-life gebruik?</div>
-<div class="options">
-<label class="option-label"><input name="q14" required="" type="radio" value="0"/><span>Storing file system hierarchy met parent-child relationships</span></label>
-<label class="option-label"><input name="q14" required="" type="radio" value="1"/><span>Snel: contact name-to-phone-number lookup in your phone</span></label>
-<label class="option-label"><input name="q14" required="" type="radio" value="2"/><span>Caching DNS records naar speed up website name resolution</span></label>
-</div>
-</div>
-<div class="quiz-question">
-<div class="question-number">Q15</div>
-<div class="question-text">Load factor 0.8 means?</div>
-<div class="options">
-<label class="option-label"><input name="q15" required="" type="radio" value="0"/><span>80% full, should resize</span></label>
-<label class="option-label"><input name="q15" required="" type="radio" value="1"/><span>8 items</span></label>
-<label class="option-label"><input name="q15" required="" type="radio" value="2"/><span>80% empty</span></label>
-</div>
-</div>
-<button class="submit-quiz" type="submit">Indienen</button>
-</form>
-<div id="mcq-result"></div>
-</div>
-</div>
-</div>
-</div>
-<script>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="chapter-header">Chapter 12: Hash Tables</div>
+            <a href="index.html" class="back-button">← Back</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
+            <button class="section-tab active" onclick="switchSection('summary')">📚 Summary</button>
+            <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
+            <button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
+        </div>
+
+        <div id="summary" class="section-content active">
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h3>#️⃣ Hash Function</h3>
+                    <p><strong>Definition:</strong> Maps strings to numbers (keys to array indices)</p>
+                    <h4>Requirements:</h4>
+                    <ul><li>Consistent: same input → same output</li><li>Maps different inputs to different numbers</li><li>Knows array size, returns valid indices</li></ul>
+                </div>
+                <div class="summary-card">
+                    <h3>️ Hash Table</h3>
+                    <p><strong>Formula:</strong> Hash Function + Array = Hash Table</p>
+                    <p>Maps keys to values using hash function to compute index</p>
+                    <h4>Also known as:</h4>
+                    <p>Hash maps, dictionaries, associative arrays</p>
+                    <div class="highlight-box"><strong>Speed:</strong> O(1) average - instant lookup!</div>
+                </div>
+                <div class="summary-card">
+                    <h3> Complexity Comparison</h3>
+                    <ul><li><strong>Array/Linked List:</strong> O(n) search</li><li><strong>Sorted Array:</strong> O(log n) search</li><li><strong>Hash Table:</strong> O(1) search ✓</li></ul>
+                </div>
+                <div class="summary-card">
+                    <h3> Collisions</h3>
+                    <p><strong>Problem:</strong> Two keys map to same index</p>
+                    <h4>Birthday Paradox:</h4>
+                    <p>With 23 people: 50% chance of same birthday<br>With 60 people: 99% chance!</p>
+                    <p>Collisions are MORE likely than you think!</p>
+                </div>
+                <div class="summary-card">
+                    <h3> Load Factor</h3>
+                    <p><strong>Formula:</strong> items / size</p>
+                    <p><strong>Rule:</strong> Resize when load factor > 0.7</p>
+                    <h4>Table Size:</h4>
+                    <ul><li>1.3 × max keys</li><li>Should be prime number</li></ul>
+                </div>
+                <div class="summary-card">
+                    <h3> Key Takeaways</h3>
+                    <ul><li>Hash table = O(1) lookups</li><li>Hash function maps keys to indices</li><li>Collisions happen often</li><li>Load factor > 0.7 → resize</li><li>Real-life: contacts, logins, file systems</li></ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="flashcards" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>📇 Flashcards</h3>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">What is hash function?<span>▼</span></div><div class="flashcard-answer">Maps strings/keys to numbers/array indices</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Hash table formula?<span>▼</span></div><div class="flashcard-answer">Hash Function + Array = Hash Table</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Hash table complexity?<span>▼</span></div><div class="flashcard-answer">O(1) average for search, insert, delete</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">What are collisions?<span>▼</span></div><div class="flashcard-answer">Two keys mapping to same index</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Load factor formula?<span>▼</span></div><div class="flashcard-answer">items / table size</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">When to resize?<span>▼</span></div><div class="flashcard-answer">Load factor > 0.7</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Hash table size rule?<span>▼</span></div><div class="flashcard-answer">1.3 × max keys, should be prime</div></div>
+                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Birthday paradox?<span>▼</span></div><div class="flashcard-answer">23 people: 50% same birthday</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>✅ Quiz</h3>
+                    <form id="mcq-form">
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q1</div>
+                            <div class="question-text">What is a hash function?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q1" value="0" required><span>A function that encrypts data for security</span></label>
+                                <label class="option-label"><input type="radio" name="q1" value="1" required><span>A function that maps keys to array indices</span></label>
+                                <label class="option-label"><input type="radio" name="q1" value="2" required><span>A function that compresses data to reduce storage</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q2</div>
+                            <div class="question-text">Hash table complexity?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q2" value="0" required><span>O(n)</span></label>
+                                <label class="option-label"><input type="radio" name="q2" value="1" required><span>O(1)</span></label>
+                                <label class="option-label"><input type="radio" name="q2" value="2" required><span>O(log n)</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q3</div>
+                            <div class="question-text">What is a collision?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q3" value="0" required><span>Two keys map to same index</span></label>
+                                <label class="option-label"><input type="radio" name="q3" value="1" required><span>Hash function error</span></label>
+                                <label class="option-label"><input type="radio" name="q3" value="2" required><span>Array overflow</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q4</div>
+                            <div class="question-text">Hash function requirements?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q4" value="0" required><span>Must distribute values uniformly to minimize collisions</span></label>
+                                <label class="option-label"><input type="radio" name="q4" value="1" required><span>Must be consistent: same input always produces same output</span></label>
+                                <label class="option-label"><input type="radio" name="q4" value="2" required><span>Must be reversible to retrieve original keys</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q5</div>
+                            <div class="question-text">Load factor formula?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q5" value="0" required><span>size / items</span></label>
+                                <label class="option-label"><input type="radio" name="q5" value="1" required><span>items / size</span></label>
+                                <label class="option-label"><input type="radio" name="q5" value="2" required><span>items × size</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q6</div>
+                            <div class="question-text">When resize hash table?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q6" value="0" required><span>Load factor > 0.5</span></label>
+                                <label class="option-label"><input type="radio" name="q6" value="1" required><span>Load factor > 0.7</span></label>
+                                <label class="option-label"><input type="radio" name="q6" value="2" required><span>Load factor > 1</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q7</div>
+                            <div class="question-text">Hash table size should be?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q7" value="0" required><span>Even number</span></label>
+                                <label class="option-label"><input type="radio" name="q7" value="1" required><span>Power of 2</span></label>
+                                <label class="option-label"><input type="radio" name="q7" value="2" required><span>Prime number × 1.3 keys</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q8</div>
+                            <div class="question-text">Birthday paradox: 23 people?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q8" value="0" required><span>10% same birthday</span></label>
+                                <label class="option-label"><input type="radio" name="q8" value="1" required><span>50% same birthday</span></label>
+                                <label class="option-label"><input type="radio" name="q8" value="2" required><span>90% same birthday</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q9</div>
+                            <div class="question-text">Hash table also called?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q9" value="0" required><span>Linked list</span></label>
+                                <label class="option-label"><input type="radio" name="q9" value="1" required><span>Dictionary</span></label>
+                                <label class="option-label"><input type="radio" name="q9" value="2" required><span>Tree</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q10</div>
+                            <div class="question-text">Array search complexity?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q10" value="0" required><span>O(1)</span></label>
+                                <label class="option-label"><input type="radio" name="q10" value="1" required><span>O(n)</span></label>
+                                <label class="option-label"><input type="radio" name="q10" value="2" required><span>O(log n)</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q11</div>
+                            <div class="question-text">Why use hash tables?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q11" value="0" required><span>To maintain data in sorted order for efficient range queries</span></label>
+                                <label class="option-label"><input type="radio" name="q11" value="1" required><span>To achieve O(1) average-case lookup, insert, and delete</span></label>
+                                <label class="option-label"><input type="radio" name="q11" value="2" required><span>To minimize memory usage by compressing key-value pairs</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q12</div>
+                            <div class="question-text">What does hash function return?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q12" value="0" required><span>String</span></label>
+                                <label class="option-label"><input type="radio" name="q12" value="1" required><span>Array index</span></label>
+                                <label class="option-label"><input type="radio" name="q12" value="2" required><span>Boolean</span></label>
+                            </div>
+                        </div>
+                        <div class="quiz-question">
+                            <div class="question-number">Q13</div>
+                            <div class="question-text">Collisions are?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q13" value="0" required><span>Rare</span></label>
+                                <label class="option-label"><input type="radio" name="q13" value="1" required><span>More common than expected</span></label>
+                                <label class="option-label"><input type="radio" name="q13" value="2" required><span>Impossible</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q14</div>
+                            <div class="question-text">Hash table real-life use?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q14" value="0" required><span>Storing file system hierarchy with parent-child relationships</span></label>
+                                <label class="option-label"><input type="radio" name="q14" value="1" required><span>Fast contact name-to-phone-number lookup in your phone</span></label>
+                                <label class="option-label"><input type="radio" name="q14" value="2" required><span>Caching DNS records to speed up website name resolution</span></label>
+                            </div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <div class="question-number">Q15</div>
+                            <div class="question-text">Load factor 0.8 means?</div>
+                            <div class="options">
+                                <label class="option-label"><input type="radio" name="q15" value="0" required><span>80% full, should resize</span></label>
+                                <label class="option-label"><input type="radio" name="q15" value="1" required><span>8 items</span></label>
+                                <label class="option-label"><input type="radio" name="q15" value="2" required><span>80% empty</span></label>
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-quiz">Submit</button>
+                    </form>
+                    <div id="mcq-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <script>
         // Quiz Configuration
         const QUIZ_CONFIG = {
             'chapter12-mcq': {
@@ -530,13 +527,13 @@ html
             let resultClass, message;
             if (percentage >= 80) {
                 resultClass = 'excellent';
-                message = `🎉 Uitstekend! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
+                message = `🎉 Excellent! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
             } else if (percentage >= 60) {
                 resultClass = 'good';
-                message = `👍 Goed gedaan! ${correct}/${total} correct (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
+                message = `👍 Good job! ${correct}/${total} correct (${percentage.toFixed(0)}%). Review the concepts you missed.`;
             } else {
                 resultClass = 'needs-work';
-                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Bestudeer de dezelfdenvatting en probeer opnieuw!`;
+                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Study the summary and try again!`;
             }
             
             resultDiv.className = `quiz-result ${resultClass}`;
@@ -554,15 +551,5 @@ html
             }
         });
     </script>
-<div class="source-note" style="text-align:center;margin:30px auto;color:#6b7280;font-size:0.95rem;">Gebaseerd op de PA Samenvatting van Stephanie VDH.</div>
-
-<script>
-document.addEventListener('DOMContentLoaded',function(){
-  const btn=document.querySelector('.mobile-menu-toggle');
-  if(!btn) return;
-  btn.addEventListener('click',function(){document.body.classList.toggle('mobile-menu-open');btn.classList.toggle('is-open');});
-});
-</script>
-
 </body>
 </html>

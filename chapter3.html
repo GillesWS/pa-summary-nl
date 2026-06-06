@@ -1,11 +1,11 @@
-html
-<html lang="nl">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Hoofdstuk 3: Datastructuren - Programming Advanced</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Data Structures - Programming Advanced</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #2d3561; --secondary: #4a90e2; --accent: #ff6b6b; --success: #51cf66; --warning: #ffd93d; --bg: #f8f9fa; --card: #ffffff; --text: #2c3e50; --text-light: #7f8c8d; }
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
@@ -66,7 +66,7 @@ html
         }
 
         .option-label.incorrect::after {
-            content: '✗ Fout';
+            content: '✗ Incorrect';
             margin-left: auto;
             color: var(--accent);
             font-weight: 700;
@@ -116,227 +116,224 @@ html
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         @media (max-width: 768px) { .summary-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
     </style>
-<!-- MOBILE MENU PATCH -->
-
-<style>
-@media (max-width: 768px) {
-  .mobile-menu-toggle { display:flex!important; }
-  body.mobile-menu-open { overflow:hidden; }
-  .chapters-grid, .grid, .cards-grid { grid-template-columns: 1fr!important; }
-  table, pre { max-width:100%; overflow-x:auto; }
-}
-.mobile-menu-toggle{display:none;position:fixed;top:14px;right:14px;z-index:9999;width:48px;height:44px;border:1px solid rgba(255,255,255,.55);border-radius:12px;background:linear-gradient(135deg,#2f3f78,#4a90e2);box-shadow:0 8px 24px rgba(0,0,0,.22);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}.mobile-menu-toggle span{display:block;width:23px;height:3px;border-radius:999px;background:#fff;transition:.2s}.mobile-menu-toggle.is-open span:nth-child(1){transform:translateY(8px) rotate(45deg)}.mobile-menu-toggle.is-open span:nth-child(2){opacity:0}.mobile-menu-toggle.is-open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
-@media (max-width:768px){.chapter-header .back-btn,.back-btn{margin-right:58px}.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}.tab-button{white-space:nowrap}}
-</style>
-
 </head>
 <body>
-<button class="mobile-menu-toggle" type="button" aria-label="Menu openen"><span></span><span></span><span></span></button>
-<nav class="navbar">
-<div class="navbar-content">
-<div class="chapter-header">Hoofdstuk 3: Datastructuren</div>
-<a class="back-button" href="index.html">← Terug naar hoofdstukken</a>
-</div>
-</nav>
-<div class="container">
-</div>
-<div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
-<button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
-<button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-<button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
-</div>
-<div class="section-content active" id="summary">
-<div class="summary-grid">
-<div class="summary-card">
-<h3> What zijn Data Structures?</h3>
-<p><strong>Definitie:</strong> Ways naar organize en opslaan data voor efficiënt toegang en modification.</p>
-<h4>Waarom Learn Them?</h4>
-<ul>
-<li><strong>Understand fundamentals:</strong> Better tool usage</li>
-<li><strong>Know when naar gebruik what:</strong> Rechts structure voor rechts job</li>
-<li><strong>Performance awareness:</strong> Waarom some bewerkingen zijn fast/slow</li>
-<li><strong>Debug effectively:</strong> Know what's happening under de hood</li>
-</ul>
-<div class="highlight-box"><strong>Real-world:</strong> Gebruik built-in libraries (Stack<t>, Queue<t>, Lijst<t>). Don't reinvent de wheel!</t></t></t></div>
-</div>
-<div class="summary-card">
-<h3> Arrays</h3>
-<p><strong>Structure:</strong> Fixed-size, contiguous geheugen blocks</p>
-<h4>Complexiteit:</h4>
-<ul>
-<li><strong>Toegang door index:</strong> O(1)</li>
-<li><strong>Zoeken:</strong> O(n)</li>
-<li><strong>Insert/Delete:</strong> O(n) - vereist shifting</li>
-</ul>
-<h4>Characteristics:</h4>
-<ul>
-<li>Fixed grootte (must know grootte at creation)</li>
-<li>Snel: random toegang</li>
-<li>Elementen stored contiguously</li>
-<li>Cache-friendly</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Linked Lijsten</h3>
-<p><strong>Structure:</strong> Nodes connected door references/pointers</p>
-<h4>Node Components:</h4>
-<ul>
-<li><strong>Data:</strong> De waarde stored</li>
-<li><strong>Next:</strong> Reference naar next node</li>
-</ul>
-<h4>Complexiteit:</h4>
-<ul>
-<li><strong>Toegang:</strong> O(n) - must traverse van head</li>
-<li><strong>Zoeken:</strong> O(n)</li>
-<li><strong>Invoegen at head:</strong> O(1)</li>
-<li><strong>Verwijderen (if have reference):</strong> O(1)</li>
-</ul>
-<h4>Types:</h4>
-<ul>
-<li><strong>Singly:</strong> One-way references</li>
-<li><strong>Doubly:</strong> Two-way references (prev &amp; next)</li>
-<li><strong>Circular:</strong> Last node links naar first</li>
-</ul>
-<div class="highlight-box"><strong>Advantage:</strong> Dynamic grootte - grows/shrinks als needed!</div>
-</div>
-<div class="summary-card">
-<h3> Stacks (LIFO)</h3>
-<p><strong>Principle:</strong> Last In, First Out</p>
-<h4>Key Bewerkingen:</h4>
-<ul>
-<li><strong>Push:</strong> Add element naar top - O(1)</li>
-<li><strong>Pop:</strong> Remove element van top - O(1)</li>
-<li><strong>Peek:</strong> View top element - O(1)</li>
-</ul>
-<h4>Implementation:</h4>
-<p>Can gebruik array of linked lijst</p>
-<h4>Important Concepts:</h4>
-<ul>
-<li><strong>Stack Overflow:</strong> Push when stack is full</li>
-<li><strong>Stack Underflow:</strong> Pop when stack is empty</li>
-</ul>
-<h4>Real-Life Examples:</h4>
-<ul>
-<li>Browser back button</li>
-<li>Undo bewerkingen</li>
-<li>Functie call stack</li>
-<li>Backtracking algoritmes</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Queues (FIFO)</h3>
-<p><strong>Principle:</strong> First In, First Out</p>
-<h4>Key Bewerkingen:</h4>
-<ul>
-<li><strong>Enqueue:</strong> Add naar end - O(1)</li>
-<li><strong>Dequeue:</strong> Remove van front - O(1)</li>
-<li><strong>Peek:</strong> View front element - O(1)</li>
-</ul>
-<h4>Implementation:</h4>
-<p>Can gebruik array of linked lijst</p>
-<h4>Real-Life Examples:</h4>
-<ul>
-<li>Printer queue</li>
-<li>Customer service line</li>
-<li>Task scheduling</li>
-<li>Breadth-first zoeken</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Vergelijkingstabel</h3>
-<table class="comparison-table">
-<tr><th>Structure</th><th>Toegang</th><th>Zoeken</th><th>Invoegen</th><th>Verwijderen</th><th>Grootte</th></tr>
-<tr><td><strong>Array</strong></td><td>O(1)</td><td>O(n)</td><td>O(n)</td><td>O(n)</td><td>Fixed</td></tr>
-<tr><td><strong>Linked Lijst</strong></td><td>O(n)</td><td>O(n)</td><td>O(1)*</td><td>O(1)*</td><td>Dynamic</td></tr>
-<tr><td><strong>Stack</strong></td><td>O(n)</td><td>O(n)</td><td>O(1)</td><td>O(1)</td><td>Dynamic</td></tr>
-<tr><td><strong>Queue</strong></td><td>O(n)</td><td>O(n)</td><td>O(1)</td><td>O(1)</td><td>Dynamic</td></tr>
-</table>
-<p style="font-size: 0.85rem;">* At head/when have reference</p>
-</div>
-<div class="summary-card">
-<h3> Stack vs Queue</h3>
-<h4>Stack (LIFO):</h4>
-<ul>
-<li>Like een stack van plates - take van top</li>
-<li>Bewerkingen: push, pop, peek</li>
-<li>Gebruik when: volgorde matters (undo, recursie)</li>
-</ul>
-<h4>Queue (FIFO):</h4>
-<ul>
-<li>Like een line at opslaan - first person first served</li>
-<li>Bewerkingen: enqueue, dequeue, peek</li>
-<li>Gebruik when: fairness matters (printing, scheduling)</li>
-</ul>
-</div>
-<div class="summary-card">
-<h3> Belangrijkste inzichten</h3>
-<ul>
-<li>Arrays: Snel: toegang O(1), fixed grootte</li>
-<li>Linked Lijsten: Dynamic grootte, O(n) toegang</li>
-<li>Stacks: LIFO - last in, first out</li>
-<li>Queues: FIFO - first in, first out</li>
-<li>Choose based on your heeft nodig (toegang patronen, grootte changes)</li>
-<li>Gebruik built-in libraries in production</li>
-<li>Understanding fundamentals helps debug en optimize</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="section-content" id="flashcards">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>📇 Flashcards</h3>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What principle doet Stack follow?<span>▼</span></div><div class="flashcard-answer">LIFO - Last In, First Out</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What principle doet Queue follow?<span>▼</span></div><div class="flashcard-answer">FIFO - First In, First Out</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Tijdscomplexiteit van array toegang door index?<span>▼</span></div><div class="flashcard-answer">O(1) - constante tijd, direct toegang</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Tijdscomplexiteit van linked lijst toegang?<span>▼</span></div><div class="flashcard-answer">O(n) - must traverse van head</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Best data structure voor undo functionality?<span>▼</span></div><div class="flashcard-answer">Stack - LIFO allows reversing actions</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Advantage van Linked Lijst over Array?<span>▼</span></div><div class="flashcard-answer">Dynamic grootte - can grow/shrink als needed</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is een Node in Linked Lijst?<span>▼</span></div><div class="flashcard-answer">Object containing data en reference naar next node</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Stack bewerkingen?<span>▼</span></div><div class="flashcard-answer">Push (add naar top), Pop (remove van top), Peek (view top)</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Queue bewerkingen?<span>▼</span></div><div class="flashcard-answer">Enqueue (add naar end), Dequeue (remove van front), Peek (view front)</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is Stack Overflow?<span>▼</span></div><div class="flashcard-answer">Attempting naar push een element when stack is full</div></div>
-</div>
-</div>
-</div>
-<div class="section-content" id="quiz">
-<div class="quiz-container">
-<div class="quiz-section">
-<h3>✅ Quiz</h3>
-<form id="mcq-form">
-<div class="quiz-question"><div class="question-number">Vraag 1</div><div class="question-text">What principle doet een Stack follow?</div><div class="options">
-<label class="option-label"><input name="q1" required="" type="radio" value="0"/><span>FIFO</span></label>
-<label class="option-label"><input name="q1" required="" type="radio" value="1"/><span>LIFO</span></label>
-<label class="option-label"><input name="q1" required="" type="radio" value="2"/><span>Random</span></label>
-</div></div>
-<div class="quiz-question"><div class="question-number">Vraag 2</div><div class="question-text">Tijdscomplexiteit van accessing element in linked lijst?</div><div class="options">
-<label class="option-label"><input name="q2" required="" type="radio" value="0"/><span>O(1)</span></label>
-<label class="option-label"><input name="q2" required="" type="radio" value="1"/><span>O(n)</span></label>
-<label class="option-label"><input name="q2" required="" type="radio" value="2"/><span>O(log n)</span></label>
-</div></div>
-<div class="quiz-question"><div class="question-number">Vraag 3</div><div class="question-text">Best data structure voor undo functionality?</div><div class="options">
-<label class="option-label"><input name="q3" required="" type="radio" value="0"/><span>Queue</span></label>
-<label class="option-label"><input name="q3" required="" type="radio" value="1"/><span>Stack</span></label>
-<label class="option-label"><input name="q3" required="" type="radio" value="2"/><span>Array</span></label>
-</div></div>
-<div class="quiz-question"><div class="question-number">Vraag 4</div><div class="question-text">Queue follows which principle?</div><div class="options">
-<label class="option-label"><input name="q4" required="" type="radio" value="0"/><span>LIFO</span></label>
-<label class="option-label"><input name="q4" required="" type="radio" value="1"/><span>FIFO</span></label>
-<label class="option-label"><input name="q4" required="" type="radio" value="2"/><span>Random</span></label>
-</div></div>
-<div class="quiz-question"><div class="question-number">Vraag 5</div><div class="question-text">Advantage van Linked Lijst over Array?</div><div class="options">
-<label class="option-label"><input name="q5" required="" type="radio" value="0"/><span>Sneller toegang</span></label>
-<label class="option-label"><input name="q5" required="" type="radio" value="1"/><span>Dynamic grootte</span></label>
-<label class="option-label"><input name="q5" required="" type="radio" value="2"/><span>Less geheugen</span></label>
-</div></div>
-<button class="submit-quiz" type="submit">Indienen</button>
-</form>
-<div id="mcq-result"></div>
-</div>
-</div>
-</div>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="chapter-header">Chapter 3: Data Structures</div>
+            <a href="index.html" class="back-button">← Back to Chapters</a>
+        </div>
+    </nav>
+    <div class="container">
+        </div>
+        <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
+            <button class="section-tab active" onclick="switchSection('summary')">📚 Summary</button>
+            <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
+            <button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
+        </div>
 
-<script>
+        <div id="summary" class="section-content active">
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <h3> What are Data Structures?</h3>
+                    <p><strong>Definition:</strong> Ways to organize and store data for efficient access and modification.</p>
+                    <h4>Why Learn Them?</h4>
+                    <ul>
+                        <li><strong>Understand fundamentals:</strong> Better tool usage</li>
+                        <li><strong>Know when to use what:</strong> Right structure for right job</li>
+                        <li><strong>Performance awareness:</strong> Why some operations are fast/slow</li>
+                        <li><strong>Debug effectively:</strong> Know what's happening under the hood</li>
+                    </ul>
+                    <div class="highlight-box"><strong>Real-world:</strong> Use built-in libraries (Stack<T>, Queue<T>, List<T>). Don't reinvent the wheel!</div>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Arrays</h3>
+                    <p><strong>Structure:</strong> Fixed-size, contiguous memory blocks</p>
+                    <h4>Complexity:</h4>
+                    <ul>
+                        <li><strong>Access by index:</strong> O(1)</li>
+                        <li><strong>Search:</strong> O(n)</li>
+                        <li><strong>Insert/Delete:</strong> O(n) - requires shifting</li>
+                    </ul>
+                    <h4>Characteristics:</h4>
+                    <ul>
+                        <li>Fixed size (must know size at creation)</li>
+                        <li>Fast random access</li>
+                        <li>Elements stored contiguously</li>
+                        <li>Cache-friendly</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Linked Lists</h3>
+                    <p><strong>Structure:</strong> Nodes connected by references/pointers</p>
+                    <h4>Node Components:</h4>
+                    <ul>
+                        <li><strong>Data:</strong> The value stored</li>
+                        <li><strong>Next:</strong> Reference to next node</li>
+                    </ul>
+                    <h4>Complexity:</h4>
+                    <ul>
+                        <li><strong>Access:</strong> O(n) - must traverse from head</li>
+                        <li><strong>Search:</strong> O(n)</li>
+                        <li><strong>Insert at head:</strong> O(1)</li>
+                        <li><strong>Delete (if have reference):</strong> O(1)</li>
+                    </ul>
+                    <h4>Types:</h4>
+                    <ul>
+                        <li><strong>Singly:</strong> One-way references</li>
+                        <li><strong>Doubly:</strong> Two-way references (prev & next)</li>
+                        <li><strong>Circular:</strong> Last node links to first</li>
+                    </ul>
+                    <div class="highlight-box"><strong>Advantage:</strong> Dynamic size - grows/shrinks as needed!</div>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Stacks (LIFO)</h3>
+                    <p><strong>Principle:</strong> Last In, First Out</p>
+                    <h4>Key Operations:</h4>
+                    <ul>
+                        <li><strong>Push:</strong> Add element to top - O(1)</li>
+                        <li><strong>Pop:</strong> Remove element from top - O(1)</li>
+                        <li><strong>Peek:</strong> View top element - O(1)</li>
+                    </ul>
+                    <h4>Implementation:</h4>
+                    <p>Can use array or linked list</p>
+                    <h4>Important Concepts:</h4>
+                    <ul>
+                        <li><strong>Stack Overflow:</strong> Push when stack is full</li>
+                        <li><strong>Stack Underflow:</strong> Pop when stack is empty</li>
+                    </ul>
+                    <h4>Real-Life Examples:</h4>
+                    <ul>
+                        <li>Browser back button</li>
+                        <li>Undo operations</li>
+                        <li>Function call stack</li>
+                        <li>Backtracking algorithms</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Queues (FIFO)</h3>
+                    <p><strong>Principle:</strong> First In, First Out</p>
+                    <h4>Key Operations:</h4>
+                    <ul>
+                        <li><strong>Enqueue:</strong> Add to end - O(1)</li>
+                        <li><strong>Dequeue:</strong> Remove from front - O(1)</li>
+                        <li><strong>Peek:</strong> View front element - O(1)</li>
+                    </ul>
+                    <h4>Implementation:</h4>
+                    <p>Can use array or linked list</p>
+                    <h4>Real-Life Examples:</h4>
+                    <ul>
+                        <li>Printer queue</li>
+                        <li>Customer service line</li>
+                        <li>Task scheduling</li>
+                        <li>Breadth-first search</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Comparison Table</h3>
+                    <table class="comparison-table">
+                        <tr><th>Structure</th><th>Access</th><th>Search</th><th>Insert</th><th>Delete</th><th>Size</th></tr>
+                        <tr><td><strong>Array</strong></td><td>O(1)</td><td>O(n)</td><td>O(n)</td><td>O(n)</td><td>Fixed</td></tr>
+                        <tr><td><strong>Linked List</strong></td><td>O(n)</td><td>O(n)</td><td>O(1)*</td><td>O(1)*</td><td>Dynamic</td></tr>
+                        <tr><td><strong>Stack</strong></td><td>O(n)</td><td>O(n)</td><td>O(1)</td><td>O(1)</td><td>Dynamic</td></tr>
+                        <tr><td><strong>Queue</strong></td><td>O(n)</td><td>O(n)</td><td>O(1)</td><td>O(1)</td><td>Dynamic</td></tr>
+                    </table>
+                    <p style="font-size: 0.85rem;">* At head/when have reference</p>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Stack vs Queue</h3>
+                    <h4>Stack (LIFO):</h4>
+                    <ul>
+                        <li>Like a stack of plates - take from top</li>
+                        <li>Operations: push, pop, peek</li>
+                        <li>Use when: order matters (undo, recursion)</li>
+                    </ul>
+                    <h4>Queue (FIFO):</h4>
+                    <ul>
+                        <li>Like a line at store - first person first served</li>
+                        <li>Operations: enqueue, dequeue, peek</li>
+                        <li>Use when: fairness matters (printing, scheduling)</li>
+                    </ul>
+                </div>
+
+                <div class="summary-card">
+                    <h3> Key Takeaways</h3>
+                    <ul>
+                        <li>Arrays: Fast access O(1), fixed size</li>
+                        <li>Linked Lists: Dynamic size, O(n) access</li>
+                        <li>Stacks: LIFO - last in, first out</li>
+                        <li>Queues: FIFO - first in, first out</li>
+                        <li>Choose based on your needs (access patterns, size changes)</li>
+                        <li>Use built-in libraries in production</li>
+                        <li>Understanding fundamentals helps debug and optimize</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="flashcards" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>📇 Flashcards</h3>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What principle does Stack follow?<span>▼</span></div><div class="flashcard-answer">LIFO - Last In, First Out</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What principle does Queue follow?<span>▼</span></div><div class="flashcard-answer">FIFO - First In, First Out</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Time complexity of array access by index?<span>▼</span></div><div class="flashcard-answer">O(1) - constant time, direct access</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Time complexity of linked list access?<span>▼</span></div><div class="flashcard-answer">O(n) - must traverse from head</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Best data structure for undo functionality?<span>▼</span></div><div class="flashcard-answer">Stack - LIFO allows reversing actions</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Advantage of Linked List over Array?<span>▼</span></div><div class="flashcard-answer">Dynamic size - can grow/shrink as needed</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is a Node in Linked List?<span>▼</span></div><div class="flashcard-answer">Object containing data and reference to next node</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Stack operations?<span>▼</span></div><div class="flashcard-answer">Push (add to top), Pop (remove from top), Peek (view top)</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Queue operations?<span>▼</span></div><div class="flashcard-answer">Enqueue (add to end), Dequeue (remove from front), Peek (view front)</div></div>
+                    <div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">What is Stack Overflow?<span>▼</span></div><div class="flashcard-answer">Attempting to push an element when stack is full</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="section-content">
+            <div class="quiz-container">
+                <div class="quiz-section">
+                    <h3>✅ Quiz</h3>
+                    <form id="mcq-form">
+                        <div class="quiz-question"><div class="question-number">Q1</div><div class="question-text">What principle does a Stack follow?</div><div class="options">
+                            <label class="option-label"><input type="radio" name="q1" value="0" required><span>FIFO</span></label>
+                            <label class="option-label"><input type="radio" name="q1" value="1" required><span>LIFO</span></label>
+                            <label class="option-label"><input type="radio" name="q1" value="2" required><span>Random</span></label>
+                        </div></div>
+                        <div class="quiz-question"><div class="question-number">Q2</div><div class="question-text">Time complexity of accessing element in linked list?</div><div class="options">
+                            <label class="option-label"><input type="radio" name="q2" value="0" required><span>O(1)</span></label>
+                            <label class="option-label"><input type="radio" name="q2" value="1" required><span>O(n)</span></label>
+                            <label class="option-label"><input type="radio" name="q2" value="2" required><span>O(log n)</span></label>
+                        </div></div>
+                        <div class="quiz-question"><div class="question-number">Q3</div><div class="question-text">Best data structure for undo functionality?</div><div class="options">
+                            <label class="option-label"><input type="radio" name="q3" value="0" required><span>Queue</span></label>
+                            <label class="option-label"><input type="radio" name="q3" value="1" required><span>Stack</span></label>
+                            <label class="option-label"><input type="radio" name="q3" value="2" required><span>Array</span></label>
+                        </div></div>
+                        <div class="quiz-question"><div class="question-number">Q4</div><div class="question-text">Queue follows which principle?</div><div class="options">
+                            <label class="option-label"><input type="radio" name="q4" value="0" required><span>LIFO</span></label>
+                            <label class="option-label"><input type="radio" name="q4" value="1" required><span>FIFO</span></label>
+                            <label class="option-label"><input type="radio" name="q4" value="2" required><span>Random</span></label>
+                        </div></div>
+                        <div class="quiz-question"><div class="question-number">Q5</div><div class="question-text">Advantage of Linked List over Array?</div><div class="options">
+                            <label class="option-label"><input type="radio" name="q5" value="0" required><span>Faster access</span></label>
+                            <label class="option-label"><input type="radio" name="q5" value="1" required><span>Dynamic size</span></label>
+                            <label class="option-label"><input type="radio" name="q5" value="2" required><span>Less memory</span></label>
+                        </div></div>
+                        <button type="submit" class="submit-quiz">Submit</button>
+                    </form>
+                    <div id="mcq-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <script>
         // Quiz Configuration
         const QUIZ_CONFIG = {
             'chapter3-mcq': {
@@ -525,13 +522,13 @@ html
             let resultClass, message;
             if (percentage >= 80) {
                 resultClass = 'excellent';
-                message = `🎉 Uitstekend! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
+                message = `🎉 Excellent! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
             } else if (percentage >= 60) {
                 resultClass = 'good';
-                message = `👍 Goed gedaan! ${correct}/${total} correct (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
+                message = `👍 Good job! ${correct}/${total} correct (${percentage.toFixed(0)}%). Review the concepts you missed.`;
             } else {
                 resultClass = 'needs-work';
-                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Bestudeer de dezelfdenvatting en probeer opnieuw!`;
+                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Study the summary and try again!`;
             }
             
             resultDiv.className = `quiz-result ${resultClass}`;
@@ -549,15 +546,5 @@ html
             }
         });
     </script>
-<div class="source-note" style="text-align:center;margin:30px auto;color:#6b7280;font-size:0.95rem;">Gebaseerd op de PA Samenvatting van Stephanie VDH.</div>
-
-<script>
-document.addEventListener('DOMContentLoaded',function(){
-  const btn=document.querySelector('.mobile-menu-toggle');
-  if(!btn) return;
-  btn.addEventListener('click',function(){document.body.classList.toggle('mobile-menu-open');btn.classList.toggle('is-open');});
-});
-</script>
-
 </body>
 </html>
