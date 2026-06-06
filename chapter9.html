@@ -1,128 +1,800 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>09 - Weighted Graphs &amp; Dijkstra</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoofdstuk 9: Weighted Graphs &amp; Dijkstra - Programming Advanced</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d3561;
+            --secondary: #4a90e2;
+            --accent: #ff6b6b;
+            --success: #51cf66;
+            --warning: #ffd93d;
+            --bg: #f8f9fa;
+            --card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        .chapter-header {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .title-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-number {
+            font-family: 'Space Mono', monospace;
+            color: var(--secondary);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .section-tab {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: none;
+            border-bottom: 4px solid transparent;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-tab:hover {
+            color: var(--secondary);
+        }
+
+        .section-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+        }
+
+        .section-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        /* Summary Styles */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid var(--secondary);
+        }
+
+        .summary-card h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .summary-card h4 {
+            color: var(--secondary);
+            font-size: 1.2rem;
+            margin: 1.5rem 0 0.75rem;
+            font-weight: 600;
+        }
+
+        .summary-card p, .summary-card li {
+            color: var(--text);
+            line-height: 1.8;
+            margin-bottom: 0.75rem;
+        }
+
+        .summary-card ul {
+            margin-left: 1.5rem;
+        }
+
+        .summary-card strong {
+            color: var(--primary);
+        }
+
+        .code-block {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--accent);
+            overflow-x: auto;
+        }
+
+        .highlight-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--secondary);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table tr:hover {
+            background: #f5f5f5;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .quiz-section {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .quiz-section h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .quiz-question {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--bg);
+            border-radius: 10px;
+            border-left: 5px solid var(--warning);
+        }
+
+        .question-number {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option-label:hover {
+            border-color: var(--secondary);
+            background: #f0f7ff;
+            transform: translateX(5px);
+        }
+        .option-label.correct {
+            background: #d3f9d8;
+            border-color: var(--success);
+            border-width: 3px;
+        }
+
+        .option-label.incorrect {
+            background: #ffe3e3;
+            border-color: var(--accent);
+            border-width: 3px;
+        }
+
+        .option-label.correct::after {
+            content: '✓ Correct';
+            margin-left: auto;
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .option-label.incorrect::after {
+            content: '✗ Incorrect';
+            margin-left: auto;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .submit-quiz:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .reset-quiz {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--warning), #f59f00);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .reset-quiz:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 217, 61, 0.4);
+        }
+
+        .option-label input[type="radio"] {
+            margin-right: 1rem;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            accent-color: var(--secondary);
+        }
+
+        .flashcard {
+            margin-bottom: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .flashcard-question {
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .flashcard-question:hover {
+            background: var(--primary);
+        }
+
+        .flashcard-answer {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            display: none;
+            border-top: 2px solid var(--secondary);
+        }
+
+        .flashcard-answer.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .submit-quiz {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2rem;
+        }
+
+        .submit-quiz:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.4);
+        }
+
+        .quiz-result {
+            margin-top: 2rem;
+            padding: 1.25rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1.3rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .quiz-result.excellent {
+            background: linear-gradient(135deg, #d3f9d8, #b2f2bb);
+            color: #2b8a3e;
+            border: 3px solid var(--success);
+        }
+
+        .quiz-result.good {
+            background: linear-gradient(135deg, #fff3bf, #ffe066);
+            color: #e67700;
+            border: 3px solid var(--warning);
+        }
+
+        .quiz-result.needs-work {
+            background: linear-gradient(135deg, #ffe3e3, #ffc9c9);
+            color: #c92a2a;
+            border: 3px solid var(--accent);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .section-tabs {
+                overflow-x: auto;
+            }
+        }
+    </style>
 </head>
 <body>
-<header class="site-header">
-  <div>
-    <p class="eyebrow">Programming Advanced</p>
-    <h1>09. Weighted Graphs &amp; Dijkstra</h1>
-    <p class="subtitle">Gewichten, heuristics en kortste paden</p>
-  </div>
-</header>
-<nav class="topnav">
-<a href="index.html">Home</a>
-<a href="chapter1.html">01</a>
-<a href="chapter2.html">02</a>
-<a href="chapter3.html">03</a>
-<a href="chapter4.html">04</a>
-<a href="chapter5.html">05</a>
-<a href="chapter6.html">06</a>
-<a href="chapter7.html">07</a>
-<a href="chapter8.html">08</a>
-<a class="active" href="chapter9.html">09</a>
-<a href="chapter10.html">10</a>
-<a href="chapter11.html">11</a>
-<a href="chapter12.html">12</a>
-<a href="chapter13.html">13</a>
-</nav>
-<main class="container">
-  <section class="panel">
-    <h2>Samenvatting</h2>
-    <p>Een weighted graph heeft kosten of gewichten op edges. Daardoor zoek je niet alleen een pad, maar het goedkoopste of kortste pad.</p>
-<p>Heuristics zijn snelle vuistregels, maar garanderen niet altijd de optimale oplossing.</p>
-<p>Dijkstra berekent de kortste afstand vanaf één startnode naar andere nodes, zolang de gewichten niet negatief zijn.</p>
-  </section>
-
-  <section class="grid two">
-    <article class="panel">
-      <h2>Wat moet je begrijpen?</h2>
-      <ul><li>Weight: kost op een edge.</li>
-<li>Distance array: beste bekende afstand.</li>
-<li>Visited: node waarvan kortste afstand vastligt.</li>
-<li>Relaxation: afstand verbeteren via een buur.</li>
-<li>Predecessor array: nodig om pad te reconstrueren.</li></ul>
-    </article>
-    <article class="panel">
-      <h2>Big O & complexiteit</h2>
-      <ul><li>Eenvoudige Dijkstra met matrix/scannen: O(V²).</li>
-<li>Dijkstra met priority queue: O((V + E) log V).</li>
-<li>BFS voor unweighted shortest path: O(V + E).</li></ul>
-    </article>
-  </section>
-
-  <section class="panel">
-    <h2>C# voorbeeld</h2>
-    <pre><code>// Idee van relaxation:
-if (dist[u] != int.MaxValue &amp;&amp; dist[u] + weight &lt; dist[v])
-{
-    dist[v] = dist[u] + weight;
-    previous[v] = u;
-}</code></pre>
-  </section>
-
-  <section class="panel warning">
-    <h2>Typische valkuilen</h2>
-    <ul><li>Dijkstra gebruiken met negatieve gewichten.</li>
-<li>Alleen afstand berekenen maar predecessor vergeten als je het pad moet tonen.</li>
-<li>De lokale goedkoopste edge nemen en denken dat dit altijd Dijkstra is.</li>
-<li>BFS gebruiken voor weighted shortest path.</li></ul>
-  </section>
-
-  <section class="panel">
-    <h2>Flashcards</h2>
-    <p>Klik op een kaart om het antwoord te tonen.</p>
-    <div class="flash-grid"><div class="card flashcard" tabindex="0">
-<button class="flash-question">Waarvoor gebruik je Dijkstra?</button>
-<div class="flash-answer">Kortste paden in weighted graph met niet-negatieve gewichten.</div>
+<nav class="navbar"><div class="navbar-content"><div class="chapter-header">Hoofdstuk 9: Weighted Graphs &amp; Dijkstra</div><a href="index.html" class="back-button">← Terug naar hoofdstukken</a></div></nav>
+<div class="container"></div>
+<div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
+<button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
+<button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
+<button class="section-tab" onclick="switchSection('multiple-choice')">✅ Multiple Choice</button>
+<button class="section-tab" onclick="switchSection('true-false')">⭕ Waar/Niet waar</button>
+<button class="section-tab" onclick="switchSection('code-analysis')">💻 Code-analyse</button>
 </div>
-<div class="card flashcard" tabindex="0">
-<button class="flash-question">Wat is relaxation?</button>
-<div class="flash-answer">Een betere afstand naar een buur vinden en opslaan.</div>
-</div>
-<div class="card flashcard" tabindex="0">
-<button class="flash-question">Waarom predecessor bijhouden?</button>
-<div class="flash-answer">Om het kortste pad achteraf te reconstrueren.</div>
-</div>
-<div class="card flashcard" tabindex="0">
-<button class="flash-question">Wanneer is BFS genoeg?</button>
-<div class="flash-answer">Bij unweighted shortest path.</div>
+<div class="section-content active" id="summary"><div class="summary-grid">
+<div class="summary-card"><h3>⚖️ Weighted graphs</h3><p>Bij een weighted graph heeft elke edge een kost, zoals afstand, tijd, geld of risico.</p><p>Je zoekt dan niet zomaar een pad, maar het goedkoopste of kortste pad.</p></div>
+<div class="summary-card"><h3>🧭 Heuristics</h3><p>Een heuristic is een snelle vuistregel. Ze kan goed genoeg zijn, maar garandeert niet altijd de optimale oplossing.</p><ul><li>Voordeel: snel.</li><li>Nadeel: local optimum en tunnel vision.</li></ul></div>
+<div class="summary-card"><h3>🛣️ Dijkstra</h3><p>Dijkstra vindt kortste paden vanaf één startnode in een weighted graph met niet-negatieve gewichten.</p><ul><li>distances-array start op infinity.</li><li>visited houdt vaste nodes bij.</li><li>relaxation verbetert afstanden.</li><li>predecessor bewaart het pad.</li></ul></div>
+<div class="summary-card"><h3>⚠️ Valkuilen</h3><ul><li>Dijkstra werkt niet correct met negatieve weights.</li><li>BFS is voor unweighted shortest path.</li><li>Voor het pad zelf heb je predecessors nodig.</li></ul></div>
 </div></div>
-  </section>
-
-  <section class="panel">
-    <h2>Mini-quiz</h2>
-    <p>Klik op een antwoord. Je krijgt meteen feedback.</p>
-    <div class="quiz"><div class="quiz-question" data-answer="1">
-<p><strong>1. Dijkstra werkt correct bij:</strong></p>
-<button class="quiz-option" data-index="0">Negatieve gewichten</button><button class="quiz-option" data-index="1">Niet-negatieve gewichten</button><button class="quiz-option" data-index="2">Alleen strings</button>
-<p class="quiz-feedback"></p>
-</div>
-<div class="quiz-question" data-answer="0">
-<p><strong>2. Weighted graph heeft:</strong></p>
-<button class="quiz-option" data-index="0">Kosten op edges</button><button class="quiz-option" data-index="1">Geen nodes</button><button class="quiz-option" data-index="2">Alleen arrays</button>
-<p class="quiz-feedback"></p>
-</div>
-<div class="quiz-question" data-answer="0">
-<p><strong>3. Voor pad reconstrueren bewaar je:</strong></p>
-<button class="quiz-option" data-index="0">Predecessor</button><button class="quiz-option" data-index="1">Random index</button><button class="quiz-option" data-index="2">Alleen target</button>
-<p class="quiz-feedback"></p>
+<div class="section-content" id="flashcards"><div class="quiz-container"><div class="quiz-section"><h3>📇 Flashcards - klik om het antwoord te tonen</h3><div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Dijkstra werkt bij? <span>▼</span></div><div class="flashcard-answer">Niet-negatieve weights.</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is relaxation? <span>▼</span></div><div class="flashcard-answer">Een afstand verbeteren via een buur.</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is het kernidee van Weighted Graphs &amp; Dijkstra? <span>▼</span></div><div class="flashcard-answer">Dat je het probleemtype herkent en de juiste strategie of datastructuur kiest.</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Waarom is Big O belangrijk? <span>▼</span></div><div class="flashcard-answer">Omdat je moet kunnen uitleggen hoe runtime of geheugen groeit bij grotere input.</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat moet je op het examen altijd kunnen doen? <span>▼</span></div><div class="flashcard-answer">Output traceren, Big O berekenen en je algoritmische keuze verdedigen.</div></div></div></div></div>
+<div class="section-content" id="multiple-choice"><div class="quiz-container"><div class="quiz-section"><h3>✅ Multiple Choice Quiz</h3><form id="mcq-form">
+<div class="quiz-question">
+<div class="question-number">Vraag 1</div>
+<div class="question-text">Wat moet je bij Big O vooral beschrijven?</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="q1" value="0" required><span>Exacte seconden</span></label>
+<label class="option-label"><input type="radio" name="q1" value="1" required><span>Groeigedrag</span></label>
+<label class="option-label"><input type="radio" name="q1" value="2" required><span>Kleur van code</span></label>
+<label class="option-label"><input type="radio" name="q1" value="3" required><span>Aantal bestanden</span></label>
 </div></div>
-  </section>
-
-  <div class="pager">
-    <a href="chapter8.html">← Vorige</a>
-    <a href="chapter10.html">Volgende →</a>
-  </div>
-</main>
-<footer>
-  <p>Gebaseerd op de PA Summary van Stephanie VDH.</p>
-  <p>Eigen Nederlandstalige, examengerichte herwerking voor studiegebruik.</p>
-</footer>
-<script src="script.js"></script>
-</body>
-</html>
+<div class="quiz-question">
+<div class="question-number">Vraag 2</div>
+<div class="question-text">Welke aanpak probeert vaak eerst alles?</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="q2" value="0" required><span>Brute force</span></label>
+<label class="option-label"><input type="radio" name="q2" value="1" required><span>Hashing</span></label>
+<label class="option-label"><input type="radio" name="q2" value="2" required><span>BFS</span></label>
+<label class="option-label"><input type="radio" name="q2" value="3" required><span>Tree traversal</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 3</div>
+<div class="question-text">Welke complexiteit is meestal beter?</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="q3" value="0" required><span>O(n²)</span></label>
+<label class="option-label"><input type="radio" name="q3" value="1" required><span>O(n)</span></label>
+<label class="option-label"><input type="radio" name="q3" value="2" required><span>O(2^n)</span></label>
+<label class="option-label"><input type="radio" name="q3" value="3" required><span>O(n³)</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 4</div>
+<div class="question-text">Welke structuur past bij BFS?</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="q4" value="0" required><span>Stack</span></label>
+<label class="option-label"><input type="radio" name="q4" value="1" required><span>Queue</span></label>
+<label class="option-label"><input type="radio" name="q4" value="2" required><span>BST</span></label>
+<label class="option-label"><input type="radio" name="q4" value="3" required><span>Array sort</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 5</div>
+<div class="question-text">Wat moet je altijd testen?</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="q5" value="0" required><span>Alleen normale input</span></label>
+<label class="option-label"><input type="radio" name="q5" value="1" required><span>Randgevallen</span></label>
+<label class="option-label"><input type="radio" name="q5" value="2" required><span>Alleen grote input</span></label>
+<label class="option-label"><input type="radio" name="q5" value="3" required><span>Niets</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 6</div>
+<div class="question-text">Wat betekent pruning?</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="q6" value="0" required><span>Onnodig werk vermijden</span></label>
+<label class="option-label"><input type="radio" name="q6" value="1" required><span>Alles sorteren</span></label>
+<label class="option-label"><input type="radio" name="q6" value="2" required><span>Een array kopiëren</span></label>
+<label class="option-label"><input type="radio" name="q6" value="3" required><span>Een klasse verwijderen</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 7</div>
+<div class="question-text">Welke strategie gebruikt opgeslagen subresultaten?</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="q7" value="0" required><span>Greedy</span></label>
+<label class="option-label"><input type="radio" name="q7" value="1" required><span>DP</span></label>
+<label class="option-label"><input type="radio" name="q7" value="2" required><span>Selection sort</span></label>
+<label class="option-label"><input type="radio" name="q7" value="3" required><span>Linear search</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 8</div>
+<div class="question-text">Welke techniek gebruikt vaak undo?</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="q8" value="0" required><span>Backtracking</span></label>
+<label class="option-label"><input type="radio" name="q8" value="1" required><span>Binary search</span></label>
+<label class="option-label"><input type="radio" name="q8" value="2" required><span>Hashing</span></label>
+<label class="option-label"><input type="radio" name="q8" value="3" required><span>Queue</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 9</div>
+<div class="question-text">Wat is belangrijk bij theorievragen?</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="q9" value="0" required><span>Definitie memoriseren</span></label>
+<label class="option-label"><input type="radio" name="q9" value="1" required><span>Redeneren</span></label>
+<label class="option-label"><input type="radio" name="q9" value="2" required><span>Geen Big O</span></label>
+<label class="option-label"><input type="radio" name="q9" value="3" required><span>Geen code lezen</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 10</div>
+<div class="question-text">Wat doe je bij een algoritmische keuze?</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="q10" value="0" required><span>Niet uitleggen</span></label>
+<label class="option-label"><input type="radio" name="q10" value="1" required><span>Motiveer waarom</span></label>
+<label class="option-label"><input type="radio" name="q10" value="2" required><span>Altijd random</span></label>
+<label class="option-label"><input type="radio" name="q10" value="3" required><span>Altijd linked list</span></label>
+</div></div>
+<button type="submit" class="submit-quiz">Quiz indienen</button>
+</form>
+<div id="mcq-result"></div></div></div></div>
+<div class="section-content" id="true-false"><div class="quiz-container"><div class="quiz-section"><h3>⭕ Waar of niet waar</h3><form id="tf-form">
+<div class="quiz-question">
+<div class="question-number">Vraag 1</div>
+<div class="question-text">Big O gaat over groeigedrag, niet over exacte seconden.</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="tf1" value="0" required><span>Waar</span></label>
+<label class="option-label"><input type="radio" name="tf1" value="1" required><span>Niet waar</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 2</div>
+<div class="question-text">Een queue werkt volgens LIFO.</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="tf2" value="0" required><span>Waar</span></label>
+<label class="option-label"><input type="radio" name="tf2" value="1" required><span>Niet waar</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 3</div>
+<div class="question-text">Backtracking kan pruning gebruiken.</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="tf3" value="0" required><span>Waar</span></label>
+<label class="option-label"><input type="radio" name="tf3" value="1" required><span>Niet waar</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 4</div>
+<div class="question-text">DP is nuttig bij overlapping subproblems.</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="tf4" value="0" required><span>Waar</span></label>
+<label class="option-label"><input type="radio" name="tf4" value="1" required><span>Niet waar</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 5</div>
+<div class="question-text">Greedy is altijd optimaal.</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="tf5" value="0" required><span>Waar</span></label>
+<label class="option-label"><input type="radio" name="tf5" value="1" required><span>Niet waar</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 6</div>
+<div class="question-text">DFS kan met recursie worden geïmplementeerd.</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="tf6" value="0" required><span>Waar</span></label>
+<label class="option-label"><input type="radio" name="tf6" value="1" required><span>Niet waar</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 7</div>
+<div class="question-text">Een hash table heeft gemiddeld O(1) lookup.</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="tf7" value="0" required><span>Waar</span></label>
+<label class="option-label"><input type="radio" name="tf7" value="1" required><span>Niet waar</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 8</div>
+<div class="question-text">Binary search werkt correct op ongesorteerde data.</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="tf8" value="0" required><span>Waar</span></label>
+<label class="option-label"><input type="radio" name="tf8" value="1" required><span>Niet waar</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 9</div>
+<div class="question-text">Selection sort heeft best-case O(n).</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="tf9" value="0" required><span>Waar</span></label>
+<label class="option-label"><input type="radio" name="tf9" value="1" required><span>Niet waar</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 10</div>
+<div class="question-text">Visited is belangrijk bij graphs met cycles.</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="tf10" value="0" required><span>Waar</span></label>
+<label class="option-label"><input type="radio" name="tf10" value="1" required><span>Niet waar</span></label>
+</div></div>
+<button type="submit" class="submit-quiz">Quiz indienen</button>
+</form>
+<div id="tf-result"></div></div></div></div>
+<div class="section-content" id="code-analysis"><div class="quiz-container"><div class="quiz-section"><h3>💻 Code-analyse Quiz</h3><form id="code-form">
+<div class="quiz-question">
+<div class="question-number">Vraag 1</div>
+<div class="question-text">Wat is de time complexity?</div>
+<div class="code-block">for (int i = 0; i &lt; n; i++) {
+    Console.WriteLine(i);
+}</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="code1" value="0" required><span>O(1)</span></label>
+<label class="option-label"><input type="radio" name="code1" value="1" required><span>O(n)</span></label>
+<label class="option-label"><input type="radio" name="code1" value="2" required><span>O(n²)</span></label>
+<label class="option-label"><input type="radio" name="code1" value="3" required><span>O(log n)</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 2</div>
+<div class="question-text">Wat is de time complexity?</div>
+<div class="code-block">for (int i = 0; i &lt; n; i++) {
+  for (int j = 0; j &lt; n; j++) {
+    Console.WriteLine(i + j);
+  }
+}</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="code2" value="0" required><span>O(n)</span></label>
+<label class="option-label"><input type="radio" name="code2" value="1" required><span>O(n²)</span></label>
+<label class="option-label"><input type="radio" name="code2" value="2" required><span>O(log n)</span></label>
+<label class="option-label"><input type="radio" name="code2" value="3" required><span>O(1)</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 3</div>
+<div class="question-text">Wat is de time complexity?</div>
+<div class="code-block">while (n &gt; 1) {
+    n = n / 2;
+}</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="code3" value="0" required><span>O(n)</span></label>
+<label class="option-label"><input type="radio" name="code3" value="1" required><span>O(log n)</span></label>
+<label class="option-label"><input type="radio" name="code3" value="2" required><span>O(n²)</span></label>
+<label class="option-label"><input type="radio" name="code3" value="3" required><span>O(2^n)</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 4</div>
+<div class="question-text">Welke datastructuur herken je?</div>
+<div class="code-block">Queue&lt;int&gt; q = new Queue&lt;int&gt;();
+q.Enqueue(start);
+while(q.Count &gt; 0) { q.Dequeue(); }</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="code4" value="0" required><span>Stack</span></label>
+<label class="option-label"><input type="radio" name="code4" value="1" required><span>Queue/BFS</span></label>
+<label class="option-label"><input type="radio" name="code4" value="2" required><span>BST</span></label>
+<label class="option-label"><input type="radio" name="code4" value="3" required><span>Hash table</span></label>
+</div></div>
+<div class="quiz-question">
+<div class="question-number">Vraag 5</div>
+<div class="question-text">Wat is de gemiddelde lookup van deze structuur?</div>
+<div class="code-block">Dictionary&lt;string, int&gt; counts = new Dictionary&lt;string, int&gt;();
+counts[&quot;test&quot;] = 1;</div>
+<div class="options">
+<label class="option-label"><input type="radio" name="code5" value="0" required><span>O(1)</span></label>
+<label class="option-label"><input type="radio" name="code5" value="1" required><span>O(n²)</span></label>
+<label class="option-label"><input type="radio" name="code5" value="2" required><span>O(2^n)</span></label>
+<label class="option-label"><input type="radio" name="code5" value="3" required><span>O(n!)</span></label>
+</div></div>
+<button type="submit" class="submit-quiz">Quiz indienen</button>
+</form>
+<div id="code-result"></div></div></div></div>
+<footer style="text-align:center;color:#7f8c8d;padding:2rem;">Gebaseerd op de PA Summary van Stephanie VDH.</footer>
+<script>
+        const QUIZ_CONFIG = {"chapter9-mcq": {"answers": [1, 0, 1, 1, 1, 0, 1, 0, 1, 1], "total": 10}, "chapter9-tf": {"answers": [0, 1, 0, 0, 1, 0, 0, 1, 1, 0], "total": 10}, "chapter9-code": {"answers": [1, 1, 1, 1, 0], "total": 5}};
+        function saveQuizData(quizId, data) { localStorage.setItem(quizId, JSON.stringify(data)); }
+        function loadQuizData(quizId) { const data = localStorage.getItem(quizId); return data ? JSON.parse(data) : null; }
+        function switchSection(sectionName) {
+            const tabs = document.querySelectorAll('.section-tab');
+            const contents = document.querySelectorAll('.section-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            tabs.forEach(tab => { if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(sectionName)) tab.classList.add('active'); });
+            document.getElementById(sectionName).classList.add('active');
+        }
+        function toggleFlashcard(card) { card.querySelector('.flashcard-answer').classList.toggle('show'); }
+        function restoreAnswers(formId, quizId) {
+            const savedData = loadQuizData(quizId); if (!savedData || !savedData.userAnswers) return;
+            const form = document.getElementById(formId);
+            Object.entries(savedData.userAnswers).forEach(([questionName, value]) => {
+                const input = form.querySelector(`input[name="${questionName}"][value="${value}"]`); if (input) input.checked = true;
+            });
+            if (savedData.submitted) showAnswerFeedback(formId, quizId, savedData.userAnswers);
+        }
+        function showAnswerFeedback(formId, quizId, userAnswers) {
+            const form = document.getElementById(formId); const config = QUIZ_CONFIG[quizId];
+            const questionPrefix = quizId.includes('mcq') ? 'q' : quizId.includes('tf') ? 'tf' : 'code';
+            for (let i = 0; i < config.total; i++) {
+                const questionName = `${questionPrefix}${i + 1}`;
+                const userAnswer = parseInt(userAnswers[questionName]); const correctAnswer = config.answers[i];
+                form.querySelectorAll(`input[name="${questionName}"]`).forEach(input => {
+                    const label = input.closest('.option-label'); const value = parseInt(input.value);
+                    label.classList.remove('correct', 'incorrect');
+                    if (value === correctAnswer) label.classList.add('correct');
+                    else if (value === userAnswer && value !== correctAnswer) label.classList.add('incorrect');
+                    input.disabled = true;
+                });
+            }
+            const submitBtn = form.querySelector('.submit-quiz');
+            if (submitBtn) { submitBtn.disabled = true; submitBtn.style.display = 'none'; }
+            let resetBtn = form.querySelector('.reset-quiz');
+            if (!resetBtn) { resetBtn = document.createElement('button'); resetBtn.type = 'button'; resetBtn.className = 'reset-quiz'; resetBtn.textContent = '🔄 Reset Quiz'; resetBtn.onclick = function() { resetQuiz(formId, quizId); }; submitBtn.parentNode.insertBefore(resetBtn, submitBtn.nextSibling); }
+            resetBtn.style.display = 'block';
+        }
+        function resetQuiz(formId, quizId) {
+            const form = document.getElementById(formId); localStorage.removeItem(quizId); form.reset();
+            form.querySelectorAll('.option-label').forEach(label => label.classList.remove('correct', 'incorrect'));
+            form.querySelectorAll('input').forEach(input => input.disabled = false);
+            const resetBtn = form.querySelector('.reset-quiz'); const submitBtn = form.querySelector('.submit-quiz');
+            if (resetBtn) resetBtn.style.display = 'none'; if (submitBtn) { submitBtn.disabled = false; submitBtn.style.display = 'block'; }
+            const resultDiv = document.getElementById(formId.replace('-form', '-result')); if (resultDiv) { resultDiv.className = ''; resultDiv.textContent = ''; }
+        }
+        function handleQuizSubmit(e, formId, quizId) {
+            e.preventDefault(); const form = document.getElementById(formId); const config = QUIZ_CONFIG[quizId]; const formData = new FormData(form);
+            const questionPrefix = quizId.includes('mcq') ? 'q' : quizId.includes('tf') ? 'tf' : 'code';
+            let correct = 0; const userAnswers = {};
+            for (let i = 0; i < config.total; i++) { const questionName = `${questionPrefix}${i + 1}`; const selected = parseInt(formData.get(questionName)); userAnswers[questionName] = selected; if (selected === config.answers[i]) correct++; }
+            saveQuizData(quizId, { userAnswers, score: correct, total: config.total, submitted: true, timestamp: new Date().toISOString() });
+            showAnswerFeedback(formId, quizId, userAnswers); showResult(formId.replace('-form', '-result'), correct, config.total);
+        }
+        function showResult(elementId, correct, total) {
+            const percentage = (correct / total) * 100; const resultDiv = document.getElementById(elementId);
+            let resultClass, message;
+            if (percentage >= 80) { resultClass = 'excellent'; message = `🎉 Uitstekend! ${correct}/${total} correct (${percentage.toFixed(0)}%)`; }
+            else if (percentage >= 60) { resultClass = 'good'; message = `👍 Goed bezig! ${correct}/${total} correct (${percentage.toFixed(0)}%). Herhaal de gemiste concepten.`; }
+            else { resultClass = 'needs-work'; message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Lees de samenvatting opnieuw en probeer nog eens.`; }
+            resultDiv.className = `quiz-result ${resultClass}`; resultDiv.textContent = message; resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const mcqForm = document.getElementById('mcq-form'); if (mcqForm) { mcqForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'mcq-form', 'chapter9-mcq')); restoreAnswers('mcq-form', 'chapter9-mcq'); }
+            const tfForm = document.getElementById('tf-form'); if (tfForm) { tfForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'tf-form', 'chapter9-tf')); restoreAnswers('tf-form', 'chapter9-tf'); }
+            const codeForm = document.getElementById('code-form'); if (codeForm) { codeForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'code-form', 'chapter9-code')); restoreAnswers('code-form', 'chapter9-code'); }
+        });
+</script>
+</body></html>

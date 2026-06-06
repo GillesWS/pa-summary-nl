@@ -1,29 +1,13 @@
-# Programming Advanced - Nederlandse Samenvatting
+# PA Summary Nederlands - zelfde opmaak
 
-Een Nederlandstalige, examengerichte samenvattingswebsite voor Programming Advanced.
+Deze map bevat een Nederlandstalige versie met dezelfde algemene opmaak, tabs, kaarten, flashcards en quizwerking als de originele PA Summary-site.
 
-## Inhoud
+## GitHub Pages
+Upload alle bestanden naar de root van je repository en kies bij GitHub Pages:
 
-- `index.html`
-- `chapter1.html` t/m `chapter13.html`
-- `style.css`
-- `script.js`
-
-## Publiceren via GitHub Pages
-
-1. Maak een nieuwe repository aan, bijvoorbeeld `pa-summary-nl`.
-2. Upload alle bestanden uit deze map naar de root van de repository.
-3. Ga naar **Settings → Pages**.
-4. Kies **Deploy from a branch**.
-5. Selecteer branch `main` en folder `/root`.
-6. Je site verschijnt daarna op:
-
-```text
-https://jouwgebruikersnaam.github.io/pa-summary-nl/
-```
+- Source: Deploy from a branch
+- Branch: main
+- Folder: /root
 
 ## Bronvermelding
-
 Gebaseerd op de PA Summary van Stephanie VDH.
-
-Deze versie is een eigen Nederlandstalige, examengerichte herwerking voor studiegebruik.
