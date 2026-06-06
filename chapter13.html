@@ -1,296 +1,50 @@
-<!DOCTYPE html>
+html
 <html lang="nl">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hoofdstuk 13: Course Recap - Programming Advanced</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chapter 13: Recap - Programming Advanced</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #2d3561;
-            --secondary: #4a90e2;
-            --accent: #ff6b6b;
-            --success: #51cf66;
-            --warning: #ffd93d;
-            --bg: #f8f9fa;
-            --card: #ffffff;
-            --text: #2c3e50;
-            --text-light: #7f8c8d;
-        }
-
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        .navbar {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 1.5rem 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .navbar-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .back-button {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 0.6rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .back-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateX(-5px);
-        }
-
-        .chapter-header {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        .title-section {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .chapter-number {
-            font-family: 'Space Mono', monospace;
-            color: var(--secondary);
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .section-tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 3px solid var(--border);
-            flex-wrap: wrap;
-        }
-
-        .section-tab {
-            padding: 1rem 2rem;
-            background: transparent;
-            border: none;
-            border-bottom: 4px solid transparent;
-            cursor: pointer;
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-light);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .section-tab:hover {
-            color: var(--secondary);
-        }
-
-        .section-tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--accent);
-        }
-
-        .section-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .section-content.active {
-            display: block;
-        }
-
-        /* Summary Styles */
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .summary-card {
-            background: white;
-            padding: 1.25rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border-left: 5px solid var(--secondary);
-        }
-
-        .summary-card h3 {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-
-        .summary-card h4 {
-            color: var(--secondary);
-            font-size: 1.2rem;
-            margin: 1.5rem 0 0.75rem;
-            font-weight: 600;
-        }
-
-        .summary-card p, .summary-card li {
-            color: var(--text);
-            line-height: 1.8;
-            margin-bottom: 0.75rem;
-        }
-
-        .summary-card ul {
-            margin-left: 1.5rem;
-        }
-
-        .summary-card strong {
-            color: var(--primary);
-        }
-
-        .code-block {
-            background: #f5f5f5;
-            padding: 1rem;
-            border-radius: 8px;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.9rem;
-            margin: 1rem 0;
-            border-left: 4px solid var(--accent);
-            overflow-x: auto;
-        }
-
-        .highlight-box {
-            background: #e3f2fd;
-            border-left: 4px solid var(--secondary);
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 4px;
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .comparison-table th {
-            background: var(--primary);
-            color: white;
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .comparison-table td {
-            padding: 1rem;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .comparison-table tr:hover {
-            background: #f5f5f5;
-        }
-
-        /* Quiz Styles */
-        .quiz-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .quiz-section {
-            background: white;
-            padding: 1.25rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            margin-bottom: 2rem;
-        }
-
-        .quiz-section h3 {
-            color: var(--primary);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid var(--accent);
-        }
-
-        .quiz-question {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: var(--bg);
-            border-radius: 10px;
-            border-left: 5px solid var(--warning);
-        }
-
-        .question-number {
-            color: var(--secondary);
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .question-text {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .option-label {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .option-label:hover {
-            border-color: var(--secondary);
-            background: #f0f7ff;
-            transform: translateX(5px);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #2d3561; --secondary: #4a90e2; --accent: #ff6b6b; --success: #51cf66; --warning: #ffd93d; --bg: #f8f9fa; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: #2c3e50; line-height: 1.6; }
+        .navbar { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 1.5rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        .navbar-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .back-button { background: rgba(255,255,255,0.2); color: white; padding: 0.6rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s; border: 2px solid rgba(255,255,255,0.3); }
+        .back-button:hover { background: rgba(255,255,255,0.3); transform: translateX(-5px); }
+        .chapter-header { font-family: 'Space Mono', monospace; font-size: 1.5rem; font-weight: 700; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem 1.5rem 2rem; }
+        h1 { font-size: 3rem; color: var(--primary); margin-bottom: 0.5rem; text-align: center; }
+        .chapter-number { font-family: 'Space Mono', monospace; color: var(--secondary); font-size: 1.2rem; font-weight: 700; text-align: center; margin-bottom: 3rem; text-transform: uppercase; }
+        .section-tabs { display: flex; gap: 1rem; margin-bottom: 2rem; margin-top: 0; border-bottom: 3px solid #e0e6ed; flex-wrap: wrap; }
+        .section-tab { padding: 1rem 2rem; background: transparent; border: none; border-bottom: 4px solid transparent; cursor: pointer; font-size: 1.1rem; font-weight: 600; color: #7f8c8d; transition: all 0.3s; text-transform: uppercase; }
+        .section-tab:hover { color: var(--secondary); }
+        .section-tab.active { color: var(--primary); border-bottom-color: var(--accent); }
+        .section-content { display: none; animation: fadeIn 0.5s; }
+        .section-content.active { display: block; }
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 1.25rem; max-width: 100%; }
+        .summary-card { background: white; padding: 1.25rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid var(--secondary); }
+        .summary-card h3 { color: var(--primary); font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .summary-card h4 { color: var(--secondary); font-size: 1.1rem; margin: 1rem 0 0.5rem; }
+        .summary-card ul { margin-left: 1.5rem; line-height: 1.5; margin-bottom: 0.5rem; }
+        .summary-card p { line-height: 1.6; margin-bottom: 0.5rem; }
+        .summary-card strong { color: var(--primary); }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.75rem; border: 1px solid #e0e0e0; text-align: left; }
+        th { background: var(--primary); color: white; font-weight: 600; }
+        tr:nth-child(even) { background: #f8f9fa; }
+        .code-block { background: #f5f5f5; padding: 1rem; border-radius: 8px; font-family: 'Space Mono', monospace; font-size: 0.85rem; margin: 1rem 0; border-left: 4px solid var(--accent); white-space: pre-line; }
+        .highlight-box { background: #e3f2fd; border-left: 4px solid var(--secondary); padding: 1rem; margin: 1rem 0; border-radius: 4px; }
+        .quiz-container { max-width: 900px; margin: 0 auto; }
+        .quiz-section { background: white; padding: 2.5rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
+        .quiz-section h3 { color: var(--primary); font-size: 1.8rem; margin-bottom: 2rem; padding-bottom: 0.75rem; border-bottom: 3px solid var(--accent); }
+        .quiz-question { margin-bottom: 2rem; padding: 1.5rem; background: var(--bg); border-radius: 10px; border-left: 5px solid var(--warning); }
+        .question-number { color: var(--secondary); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .question-text { font-weight: 600; font-size: 1.05rem; margin-bottom: 0.5rem; color: var(--primary); line-height: 1.6; }
+        .options { display: flex; flex-direction: column; gap: 0.75rem; }
+        .option-label { display: flex; align-items: flex-start; padding: 1rem; background: white; border: 2px solid #e0e0e0; border-radius: 8px; cursor: pointer; transition: all 0.3s; }
+        .option-label:hover { border-color: var(--secondary); background: #f0f7ff; transform: translateX(5px); }
         .option-label.correct {
             background: #d3f9d8;
             border-color: var(--success);
@@ -311,7 +65,7 @@
         }
 
         .option-label.incorrect::after {
-            content: '✗ Incorrect';
+            content: '✗ Fout';
             margin-left: auto;
             color: var(--accent);
             font-weight: 700;
@@ -345,456 +99,547 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(255, 217, 61, 0.4);
         }
-
-        .option-label input[type="radio"] {
-            margin-right: 1rem;
-            cursor: pointer;
-            width: 20px;
-            height: 20px;
-            accent-color: var(--secondary);
-        }
-
-        .flashcard {
-            margin-bottom: 1.5rem;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-        }
-
-        .flashcard-question {
-            background: var(--secondary);
-            color: white;
-            padding: 1rem 1.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            user-select: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .flashcard-question:hover {
-            background: var(--primary);
-        }
-
-        .flashcard-answer {
-            padding: 1.5rem;
-            background: #f8f9fa;
-            display: none;
-            border-top: 2px solid var(--secondary);
-        }
-
-        .flashcard-answer.show {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-
-        .submit-quiz {
-            width: 100%;
-            padding: 1.2rem;
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 2rem;
-        }
-
-        .submit-quiz:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.4);
-        }
-
-        .quiz-result {
-            margin-top: 2rem;
-            padding: 1.25rem;
-            border-radius: 12px;
-            font-weight: 600;
-            text-align: center;
-            font-size: 1.3rem;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .quiz-result.excellent {
-            background: linear-gradient(135deg, #d3f9d8, #b2f2bb);
-            color: #2b8a3e;
-            border: 3px solid var(--success);
-        }
-
-        .quiz-result.good {
-            background: linear-gradient(135deg, #fff3bf, #ffe066);
-            color: #e67700;
-            border: 3px solid var(--warning);
-        }
-
-        .quiz-result.needs-work {
-            background: linear-gradient(135deg, #ffe3e3, #ffc9c9);
-            color: #c92a2a;
-            border: 3px solid var(--accent);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .summary-grid {
-                grid-template-columns: 1fr;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .section-tabs {
-                overflow-x: auto;
-            }
-        }
+        .option-label input { margin-right: 1rem; width: 20px; height: 20px; margin-top: 0.15rem; accent-color: var(--secondary); cursor: pointer; flex-shrink: 0; }
+        .option-label span { flex: 1; line-height: 1.5; }
+        .flashcard { margin-bottom: 1.5rem; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+        .flashcard-question { background: var(--secondary); color: white; padding: 1rem 1.5rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; user-select: none; }
+        .flashcard-question:hover { background: var(--primary); }
+        .flashcard-answer { padding: 1.5rem; background: #f8f9fa; display: none; border-top: 2px solid var(--secondary); line-height: 1.7; }
+        .flashcard-answer.show { display: block; animation: slideDown 0.3s; }
+        .submit-quiz { width: 100%; padding: 1.2rem; background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; margin-top: 2rem; }
+        .submit-quiz:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(74,144,226,0.4); }
+        .quiz-result { margin-top: 2rem; padding: 1.25rem; border-radius: 12px; font-weight: 600; text-align: center; font-size: 1.3rem; animation: fadeIn 0.5s; }
+        .quiz-result.excellent { background: linear-gradient(135deg, #d3f9d8, #b2f2bb); color: #2b8a3e; border: 3px solid var(--success); }
+        .quiz-result.good { background: linear-gradient(135deg, #fff3bf, #ffe066); color: #e67700; border: 3px solid var(--warning); }
+        .quiz-result.needs-work { background: linear-gradient(135deg, #ffe3e3, #ffc9c9); color: #c92a2a; border: 3px solid var(--accent); }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) { .summary-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } .quiz-section { padding: 1.5rem; } }
     </style>
+<!-- MOBILE MENU PATCH -->
+
+<style>
+@media (max-width: 768px) {
+  .mobile-menu-toggle { display:flex!important; }
+  body.mobile-menu-open { overflow:hidden; }
+  .chapters-grid, .grid, .cards-grid { grid-template-columns: 1fr!important; }
+  table, pre { max-width:100%; overflow-x:auto; }
+}
+.mobile-menu-toggle{display:none;position:fixed;top:14px;right:14px;z-index:9999;width:48px;height:44px;border:1px solid rgba(255,255,255,.55);border-radius:12px;background:linear-gradient(135deg,#2f3f78,#4a90e2);box-shadow:0 8px 24px rgba(0,0,0,.22);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}.mobile-menu-toggle span{display:block;width:23px;height:3px;border-radius:999px;background:#fff;transition:.2s}.mobile-menu-toggle.is-open span:nth-child(1){transform:translateY(8px) rotate(45deg)}.mobile-menu-toggle.is-open span:nth-child(2){opacity:0}.mobile-menu-toggle.is-open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+@media (max-width:768px){.chapter-header .back-btn,.back-btn{margin-right:58px}.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}.tab-button{white-space:nowrap}}
+</style>
+
 </head>
 <body>
-<nav class="navbar"><div class="navbar-content"><div class="chapter-header">Hoofdstuk 13: Course Recap</div><a href="index.html" class="back-button">← Terug naar hoofdstukken</a></div></nav>
-<div class="container"></div>
+<button class="mobile-menu-toggle" type="button" aria-label="Menu openen"><span></span><span></span><span></span></button>
+<nav class="navbar">
+<div class="navbar-content">
+<div class="chapter-header">Chapter 13: Recap</div>
+<a class="back-button" href="index.html">← Back</a>
+</div>
+</nav>
+<div class="container">
 <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
 <button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
 <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-<button class="section-tab" onclick="switchSection('multiple-choice')">✅ Multiple Choice</button>
-<button class="section-tab" onclick="switchSection('true-false')">⭕ Waar/Niet waar</button>
-<button class="section-tab" onclick="switchSection('code-analysis')">💻 Code-analyse</button>
+<button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
 </div>
-<div class="section-content active" id="summary"><div class="summary-grid">
-<div class="summary-card"><h3>🧰 Toolbox</h3><p>Programming Advanced draait om kiezen. Je moet kunnen uitleggen welke datastructuur en welke strategie past bij het probleem.</p></div>
-<div class="summary-card"><h3>🧠 Strategieën herkennen</h3><table class="comparison-table"><tr><th>Strategie</th><th>Gebruik wanneer</th></tr><tr><td>Brute force</td><td>Kleine input, alles proberen</td></tr><tr><td>Greedy</td><td>Lokale keuze werkt</td></tr><tr><td>Backtracking</td><td>Combinaties met regels</td></tr><tr><td>D&C</td><td>Probleem natuurlijk splitsbaar</td></tr><tr><td>DP</td><td>Overlapping subproblems</td></tr></table></div>
-<div class="summary-card"><h3>📌 Datastructuren kiezen</h3><ul><li>Veel lookups: Dictionary/hash table.</li><li>BFS: Queue.</li><li>DFS/backtracking: Stack of recursie.</li><li>Sorted output/range: BST of sorteren.</li><li>Graphprobleem: adjacency list/matrix.</li></ul></div>
-<div class="summary-card"><h3>✅ Examenaanpak</h3><ol><li>Lees input/output zeer goed.</li><li>Maak klein voorbeeld.</li><li>Start met brute force.</li><li>Zoek daarna betere strategie.</li><li>Test randgevallen.</li><li>Bereken Big O en verdedig je keuze.</li></ol></div>
-</div></div>
-<div class="section-content" id="flashcards"><div class="quiz-container"><div class="quiz-section"><h3>📇 Flashcards - klik om het antwoord te tonen</h3><div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Unweighted shortest path? <span>▼</span></div><div class="flashcard-answer">BFS.</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Overlapping subproblems? <span>▼</span></div><div class="flashcard-answer">DP.</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is het kernidee van Course Recap? <span>▼</span></div><div class="flashcard-answer">Dat je het probleemtype herkent en de juiste strategie of datastructuur kiest.</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Waarom is Big O belangrijk? <span>▼</span></div><div class="flashcard-answer">Omdat je moet kunnen uitleggen hoe runtime of geheugen groeit bij grotere input.</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat moet je op het examen altijd kunnen doen? <span>▼</span></div><div class="flashcard-answer">Output traceren, Big O berekenen en je algoritmische keuze verdedigen.</div></div></div></div></div>
-<div class="section-content" id="multiple-choice"><div class="quiz-container"><div class="quiz-section"><h3>✅ Multiple Choice Quiz</h3><form id="mcq-form">
+<div class="section-content active" id="summary">
+<div class="summary-grid">
+<div class="summary-card">
+<h3> Data Structures Samenvatting</h3>
+<table>
+<tr><th>Structure</th><th>Toegang</th><th>Zoeken</th><th>Best Voor</th></tr>
+<tr><td><strong>Array</strong></td><td>O(1)</td><td>O(n)</td><td>Fixed grootte, snel toegang</td></tr>
+<tr><td><strong>LinkedList</strong></td><td>O(n)</td><td>O(n)</td><td>Frequent insert/delete</td></tr>
+<tr><td><strong>Stack</strong></td><td>O(1)</td><td>-</td><td>LIFO, recursie</td></tr>
+<tr><td><strong>Queue</strong></td><td>O(1)</td><td>-</td><td>FIFO, BFS</td></tr>
+<tr><td><strong>Hash Tabel</strong></td><td>O(1)</td><td>O(1)</td><td>Key-value lookup</td></tr>
+<tr><td><strong>BST</strong></td><td>O(log n)</td><td>O(log n)</td><td>Gesorteerd data</td></tr>
+</table>
+</div>
+<div class="summary-card">
+<h3> Strategie Samenvatting</h3>
+<table>
+<tr><th>Strategie</th><th>Tijd</th><th>Gebruik Wanneer</th></tr>
+<tr><td><strong>Greedy</strong></td><td>O(n log n)</td><td>Local keuzes werkt</td></tr>
+<tr><td><strong>Backtracking</strong></td><td>Exponentieel</td><td>Constraint problemen</td></tr>
+<tr><td><strong>Divide &amp; Conquer</strong></td><td>O(n log n)</td><td>Recursief splitting</td></tr>
+<tr><td><strong>Dynamic Programming</strong></td><td>O(n²)</td><td>Overlapping subproblemen</td></tr>
+</table>
+</div>
+<div class="summary-card">
+<h3> Problem-Solving Framework</h3>
+<h4>1. Analysis:</h4>
+<ul><li>Input grootte?</li><li>Constraints?</li><li>Perfect oplossing needed?</li></ul>
+<h4>2. Strategie Selection:</h4>
+<ul><li>Overlapping subproblemen? → DP</li><li>Local keuzes optimal? → Greedy</li><li>Nodig hebben alle oplossingen? → Backtracking</li></ul>
+<h4>3. Data Structure Keuze:</h4>
+<ul><li>Frequent lookups? → HashMap</li><li>Must stay gesorteerd? → Tree</li><li>Many insert/delete? → LinkedList</li></ul>
+</div>
+<div class="summary-card">
+<h3> Knapsack Probleem Example</h3>
+<p><strong>Probleem:</strong> 4 items, capacity 10kg, maximize waarde</p>
+<h4>Approaches:</h4>
+<ul>
+<li><strong>Greedy:</strong> Snel: but suboptimal</li>
+<li><strong>Brute Force:</strong> O(2^n) - tries alle combinations</li>
+<li><strong>Backtracking:</strong> Prune invalid branches</li>
+<li><strong>DP:</strong> Optimal En efficiënt</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> Key Concepts</h3>
+<ul>
+<li><strong>Recursie:</strong> Implementation tool, not strategie</li>
+<li><strong>Pruning:</strong> Cut unnecessary branches</li>
+<li><strong>Complexiteit:</strong> Analyze tijd en geheugen</li>
+<li><strong>Trade-offs:</strong> Speed vs accuracy, geheugen vs tijd</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> Course Highlights</h3>
+<ul>
+<li>Data structures organize data efficiently</li>
+<li>Algoritmes oplossen problemen systematically</li>
+<li>Choose rechts tool voor de job</li>
+<li>Analyze before implementing</li>
+<li>Start simple, optimize when needed</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section-content" id="flashcards">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>📇 Flashcards</h3>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Best data structure voor lookups?<span>▼</span></div><div class="flashcard-answer">Hash Tabel - O(1)</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Best voor gesorteerde data?<span>▼</span></div><div class="flashcard-answer">Binary Zoeken Tree</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">LIFO data structure?<span>▼</span></div><div class="flashcard-answer">Stack</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">FIFO data structure?<span>▼</span></div><div class="flashcard-answer">Queue</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Wanneer gebruik DP?<span>▼</span></div><div class="flashcard-answer">Overlapping subproblemen + optimal substructure</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Wanneer gebruik Greedy?<span>▼</span></div><div class="flashcard-answer">Local optimal keuzes lead naar global optimum</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Wanneer gebruik Backtracking?<span>▼</span></div><div class="flashcard-answer">Constraint problemen, nodig hebben alle oplossingen</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Recursie is?<span>▼</span></div><div class="flashcard-answer">Implementation tool, not een strategie</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Array toegang tijd?<span>▼</span></div><div class="flashcard-answer">O(1) - constante tijd</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Binary Zoeken tijd?<span>▼</span></div><div class="flashcard-answer">O(log n)</div></div>
+</div>
+</div>
+</div>
+<div class="section-content" id="quiz">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>✅ Quiz</h3>
+<form id="mcq-form">
 <div class="quiz-question">
 <div class="question-number">Vraag 1</div>
-<div class="question-text">Wat moet je bij Big O vooral beschrijven?</div>
+<div class="question-text">Hash Tabel complexiteit?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q1" value="0" required><span>Exacte seconden</span></label>
-<label class="option-label"><input type="radio" name="q1" value="1" required><span>Groeigedrag</span></label>
-<label class="option-label"><input type="radio" name="q1" value="2" required><span>Kleur van code</span></label>
-<label class="option-label"><input type="radio" name="q1" value="3" required><span>Aantal bestanden</span></label>
-</div></div>
+<label class="option-label"><input name="q1" required="" type="radio" value="0"/><span>O(n)</span></label>
+<label class="option-label"><input name="q1" required="" type="radio" value="1"/><span>O(1)</span></label>
+<label class="option-label"><input name="q1" required="" type="radio" value="2"/><span>O(log n)</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 2</div>
-<div class="question-text">Welke aanpak probeert vaak eerst alles?</div>
+<div class="question-text">Best structure voor frequent insert/delete?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q2" value="0" required><span>Brute force</span></label>
-<label class="option-label"><input type="radio" name="q2" value="1" required><span>Hashing</span></label>
-<label class="option-label"><input type="radio" name="q2" value="2" required><span>BFS</span></label>
-<label class="option-label"><input type="radio" name="q2" value="3" required><span>Tree traversal</span></label>
-</div></div>
+<label class="option-label"><input name="q2" required="" type="radio" value="0"/><span>Array</span></label>
+<label class="option-label"><input name="q2" required="" type="radio" value="1"/><span>LinkedList</span></label>
+<label class="option-label"><input name="q2" required="" type="radio" value="2"/><span>Stack</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 3</div>
-<div class="question-text">Welke complexiteit is meestal beter?</div>
+<div class="question-text">LIFO structure?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q3" value="0" required><span>O(n²)</span></label>
-<label class="option-label"><input type="radio" name="q3" value="1" required><span>O(n)</span></label>
-<label class="option-label"><input type="radio" name="q3" value="2" required><span>O(2^n)</span></label>
-<label class="option-label"><input type="radio" name="q3" value="3" required><span>O(n³)</span></label>
-</div></div>
+<label class="option-label"><input name="q3" required="" type="radio" value="0"/><span>Queue</span></label>
+<label class="option-label"><input name="q3" required="" type="radio" value="1"/><span>Stack</span></label>
+<label class="option-label"><input name="q3" required="" type="radio" value="2"/><span>Tree</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 4</div>
-<div class="question-text">Welke structuur past bij BFS?</div>
+<div class="question-text">FIFO structure?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q4" value="0" required><span>Stack</span></label>
-<label class="option-label"><input type="radio" name="q4" value="1" required><span>Queue</span></label>
-<label class="option-label"><input type="radio" name="q4" value="2" required><span>BST</span></label>
-<label class="option-label"><input type="radio" name="q4" value="3" required><span>Array sort</span></label>
-</div></div>
+<label class="option-label"><input name="q4" required="" type="radio" value="0"/><span>Stack</span></label>
+<label class="option-label"><input name="q4" required="" type="radio" value="1"/><span>Queue</span></label>
+<label class="option-label"><input name="q4" required="" type="radio" value="2"/><span>Array</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 5</div>
-<div class="question-text">Wat moet je altijd testen?</div>
+<div class="question-text">BST zoeken complexiteit?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q5" value="0" required><span>Alleen normale input</span></label>
-<label class="option-label"><input type="radio" name="q5" value="1" required><span>Randgevallen</span></label>
-<label class="option-label"><input type="radio" name="q5" value="2" required><span>Alleen grote input</span></label>
-<label class="option-label"><input type="radio" name="q5" value="3" required><span>Niets</span></label>
-</div></div>
+<label class="option-label"><input name="q5" required="" type="radio" value="0"/><span>O(1)</span></label>
+<label class="option-label"><input name="q5" required="" type="radio" value="1"/><span>O(n)</span></label>
+<label class="option-label"><input name="q5" required="" type="radio" value="2"/><span>O(log n)</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 6</div>
-<div class="question-text">Wat betekent pruning?</div>
+<div class="question-text">Wanneer gebruik Dynamic Programming?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q6" value="0" required><span>Onnodig werk vermijden</span></label>
-<label class="option-label"><input type="radio" name="q6" value="1" required><span>Alles sorteren</span></label>
-<label class="option-label"><input type="radio" name="q6" value="2" required><span>Een array kopiëren</span></label>
-<label class="option-label"><input type="radio" name="q6" value="3" required><span>Een klasse verwijderen</span></label>
-</div></div>
+<label class="option-label"><input name="q6" required="" type="radio" value="0"/><span>Random problemen</span></label>
+<label class="option-label"><input name="q6" required="" type="radio" value="1"/><span>Overlapping subproblemen</span></label>
+<label class="option-label"><input name="q6" required="" type="radio" value="2"/><span>Gesorteerd data</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 7</div>
-<div class="question-text">Welke strategie gebruikt opgeslagen subresultaten?</div>
+<div class="question-text">Wanneer gebruik Greedy?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q7" value="0" required><span>Greedy</span></label>
-<label class="option-label"><input type="radio" name="q7" value="1" required><span>DP</span></label>
-<label class="option-label"><input type="radio" name="q7" value="2" required><span>Selection sort</span></label>
-<label class="option-label"><input type="radio" name="q7" value="3" required><span>Linear search</span></label>
-</div></div>
+<label class="option-label"><input name="q7" required="" type="radio" value="0"/><span>Altijd</span></label>
+<label class="option-label"><input name="q7" required="" type="radio" value="1"/><span>Local keuzes lead naar global optimum</span></label>
+<label class="option-label"><input name="q7" required="" type="radio" value="2"/><span>Nooit</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 8</div>
-<div class="question-text">Welke techniek gebruikt vaak undo?</div>
+<div class="question-text">Backtracking gebruikt?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q8" value="0" required><span>Backtracking</span></label>
-<label class="option-label"><input type="radio" name="q8" value="1" required><span>Binary search</span></label>
-<label class="option-label"><input type="radio" name="q8" value="2" required><span>Hashing</span></label>
-<label class="option-label"><input type="radio" name="q8" value="3" required><span>Queue</span></label>
-</div></div>
+<label class="option-label"><input name="q8" required="" type="radio" value="0"/><span>Iteration</span></label>
+<label class="option-label"><input name="q8" required="" type="radio" value="1"/><span>Recursie</span></label>
+<label class="option-label"><input name="q8" required="" type="radio" value="2"/><span>Sorteren</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 9</div>
-<div class="question-text">Wat is belangrijk bij theorievragen?</div>
+<div class="question-text">Array toegang tijd?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q9" value="0" required><span>Definitie memoriseren</span></label>
-<label class="option-label"><input type="radio" name="q9" value="1" required><span>Redeneren</span></label>
-<label class="option-label"><input type="radio" name="q9" value="2" required><span>Geen Big O</span></label>
-<label class="option-label"><input type="radio" name="q9" value="3" required><span>Geen code lezen</span></label>
-</div></div>
+<label class="option-label"><input name="q9" required="" type="radio" value="0"/><span>O(1)</span></label>
+<label class="option-label"><input name="q9" required="" type="radio" value="1"/><span>O(n)</span></label>
+<label class="option-label"><input name="q9" required="" type="radio" value="2"/><span>O(log n)</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 10</div>
-<div class="question-text">Wat doe je bij een algoritmische keuze?</div>
+<div class="question-text">Welke is NOT een strategie?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q10" value="0" required><span>Niet uitleggen</span></label>
-<label class="option-label"><input type="radio" name="q10" value="1" required><span>Motiveer waarom</span></label>
-<label class="option-label"><input type="radio" name="q10" value="2" required><span>Altijd random</span></label>
-<label class="option-label"><input type="radio" name="q10" value="3" required><span>Altijd linked list</span></label>
-</div></div>
-<button type="submit" class="submit-quiz">Quiz indienen</button>
+<label class="option-label"><input name="q10" required="" type="radio" value="0"/><span>Greedy</span></label>
+<label class="option-label"><input name="q10" required="" type="radio" value="1"/><span>Backtracking</span></label>
+<label class="option-label"><input name="q10" required="" type="radio" value="2"/><span>Recursie</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Q11</div>
+<div class="question-text">Knapsack: Greedy gives?</div>
+<div class="options">
+<label class="option-label"><input name="q11" required="" type="radio" value="0"/><span>Optimal oplossing</span></label>
+<label class="option-label"><input name="q11" required="" type="radio" value="1"/><span>Snel: but suboptimal</span></label>
+<label class="option-label"><input name="q11" required="" type="radio" value="2"/><span>Slowest oplossing</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Q12</div>
+<div class="question-text">Divide &amp; Conquer complexiteit?</div>
+<div class="options">
+<label class="option-label"><input name="q12" required="" type="radio" value="0"/><span>O(n)</span></label>
+<label class="option-label"><input name="q12" required="" type="radio" value="1"/><span>O(n log n)</span></label>
+<label class="option-label"><input name="q12" required="" type="radio" value="2"/><span>O(2^n)</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Q13</div>
+<div class="question-text">Best voor key-value pairs?</div>
+<div class="options">
+<label class="option-label"><input name="q13" required="" type="radio" value="0"/><span>Array</span></label>
+<label class="option-label"><input name="q13" required="" type="radio" value="1"/><span>Hash Tabel</span></label>
+<label class="option-label"><input name="q13" required="" type="radio" value="2"/><span>Stack</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Q14</div>
+<div class="question-text">In-Order traversal gives?</div>
+<div class="options">
+<label class="option-label"><input name="q14" required="" type="radio" value="0"/><span>Random volgorde</span></label>
+<label class="option-label"><input name="q14" required="" type="radio" value="1"/><span>Gesorteerd data</span></label>
+<label class="option-label"><input name="q14" required="" type="radio" value="2"/><span>Reverse volgorde</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Q15</div>
+<div class="question-text">Load factor &gt; 0.7 means?</div>
+<div class="options">
+<label class="option-label"><input name="q15" required="" type="radio" value="0"/><span>Verwijderen items</span></label>
+<label class="option-label"><input name="q15" required="" type="radio" value="1"/><span>Resize hash tabel</span></label>
+<label class="option-label"><input name="q15" required="" type="radio" value="2"/><span>Do nothing</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Q16</div>
+<div class="question-text">Pruning is?</div>
+<div class="options">
+<label class="option-label"><input name="q16" required="" type="radio" value="0"/><span>Adding branches</span></label>
+<label class="option-label"><input name="q16" required="" type="radio" value="1"/><span>Cutting unnecessary branches</span></label>
+<label class="option-label"><input name="q16" required="" type="radio" value="2"/><span>Sorteren</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Q17</div>
+<div class="question-text">Binary Zoeken vereist?</div>
+<div class="options">
+<label class="option-label"><input name="q17" required="" type="radio" value="0"/><span>Any array</span></label>
+<label class="option-label"><input name="q17" required="" type="radio" value="1"/><span>Gesorteerd array</span></label>
+<label class="option-label"><input name="q17" required="" type="radio" value="2"/><span>Hash tabel</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Q18</div>
+<div class="question-text">Naive Fibonacci complexiteit?</div>
+<div class="options">
+<label class="option-label"><input name="q18" required="" type="radio" value="0"/><span>O(n)</span></label>
+<label class="option-label"><input name="q18" required="" type="radio" value="1"/><span>O(2^n)</span></label>
+<label class="option-label"><input name="q18" required="" type="radio" value="2"/><span>O(log n)</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Q19</div>
+<div class="question-text">DP Fibonacci complexiteit?</div>
+<div class="options">
+<label class="option-label"><input name="q19" required="" type="radio" value="0"/><span>O(2^n)</span></label>
+<label class="option-label"><input name="q19" required="" type="radio" value="1"/><span>O(n)</span></label>
+<label class="option-label"><input name="q19" required="" type="radio" value="2"/><span>O(1)</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Q20</div>
+<div class="question-text">Main DP requirements?</div>
+<div class="options">
+<label class="option-label"><input name="q20" required="" type="radio" value="0"/><span>Recursief structure en memoization capability</span></label>
+<label class="option-label"><input name="q20" required="" type="radio" value="1"/><span>Overlapping subproblemen en optimal substructure</span></label>
+<label class="option-label"><input name="q20" required="" type="radio" value="2"/><span>Divide en conquer met independent subproblemen</span></label>
+</div>
+</div>
+<button class="submit-quiz" type="submit">Indienen Final Quiz</button>
 </form>
-<div id="mcq-result"></div></div></div></div>
-<div class="section-content" id="true-false"><div class="quiz-container"><div class="quiz-section"><h3>⭕ Waar of niet waar</h3><form id="tf-form">
-<div class="quiz-question">
-<div class="question-number">Vraag 1</div>
-<div class="question-text">Big O gaat over groeigedrag, niet over exacte seconden.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf1" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf1" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 2</div>
-<div class="question-text">Een queue werkt volgens LIFO.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf2" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf2" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 3</div>
-<div class="question-text">Backtracking kan pruning gebruiken.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf3" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf3" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 4</div>
-<div class="question-text">DP is nuttig bij overlapping subproblems.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf4" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf4" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 5</div>
-<div class="question-text">Greedy is altijd optimaal.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf5" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf5" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 6</div>
-<div class="question-text">DFS kan met recursie worden geïmplementeerd.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf6" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf6" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 7</div>
-<div class="question-text">Een hash table heeft gemiddeld O(1) lookup.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf7" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf7" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 8</div>
-<div class="question-text">Binary search werkt correct op ongesorteerde data.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf8" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf8" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 9</div>
-<div class="question-text">Selection sort heeft best-case O(n).</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf9" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf9" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 10</div>
-<div class="question-text">Visited is belangrijk bij graphs met cycles.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf10" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf10" value="1" required><span>Niet waar</span></label>
-</div></div>
-<button type="submit" class="submit-quiz">Quiz indienen</button>
-</form>
-<div id="tf-result"></div></div></div></div>
-<div class="section-content" id="code-analysis"><div class="quiz-container"><div class="quiz-section"><h3>💻 Code-analyse Quiz</h3><form id="code-form">
-<div class="quiz-question">
-<div class="question-number">Vraag 1</div>
-<div class="question-text">Wat is de time complexity?</div>
-<div class="code-block">for (int i = 0; i &lt; n; i++) {
-    Console.WriteLine(i);
-}</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="code1" value="0" required><span>O(1)</span></label>
-<label class="option-label"><input type="radio" name="code1" value="1" required><span>O(n)</span></label>
-<label class="option-label"><input type="radio" name="code1" value="2" required><span>O(n²)</span></label>
-<label class="option-label"><input type="radio" name="code1" value="3" required><span>O(log n)</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 2</div>
-<div class="question-text">Wat is de time complexity?</div>
-<div class="code-block">for (int i = 0; i &lt; n; i++) {
-  for (int j = 0; j &lt; n; j++) {
-    Console.WriteLine(i + j);
-  }
-}</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="code2" value="0" required><span>O(n)</span></label>
-<label class="option-label"><input type="radio" name="code2" value="1" required><span>O(n²)</span></label>
-<label class="option-label"><input type="radio" name="code2" value="2" required><span>O(log n)</span></label>
-<label class="option-label"><input type="radio" name="code2" value="3" required><span>O(1)</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 3</div>
-<div class="question-text">Wat is de time complexity?</div>
-<div class="code-block">while (n &gt; 1) {
-    n = n / 2;
-}</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="code3" value="0" required><span>O(n)</span></label>
-<label class="option-label"><input type="radio" name="code3" value="1" required><span>O(log n)</span></label>
-<label class="option-label"><input type="radio" name="code3" value="2" required><span>O(n²)</span></label>
-<label class="option-label"><input type="radio" name="code3" value="3" required><span>O(2^n)</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 4</div>
-<div class="question-text">Welke datastructuur herken je?</div>
-<div class="code-block">Queue&lt;int&gt; q = new Queue&lt;int&gt;();
-q.Enqueue(start);
-while(q.Count &gt; 0) { q.Dequeue(); }</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="code4" value="0" required><span>Stack</span></label>
-<label class="option-label"><input type="radio" name="code4" value="1" required><span>Queue/BFS</span></label>
-<label class="option-label"><input type="radio" name="code4" value="2" required><span>BST</span></label>
-<label class="option-label"><input type="radio" name="code4" value="3" required><span>Hash table</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 5</div>
-<div class="question-text">Wat is de gemiddelde lookup van deze structuur?</div>
-<div class="code-block">Dictionary&lt;string, int&gt; counts = new Dictionary&lt;string, int&gt;();
-counts[&quot;test&quot;] = 1;</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="code5" value="0" required><span>O(1)</span></label>
-<label class="option-label"><input type="radio" name="code5" value="1" required><span>O(n²)</span></label>
-<label class="option-label"><input type="radio" name="code5" value="2" required><span>O(2^n)</span></label>
-<label class="option-label"><input type="radio" name="code5" value="3" required><span>O(n!)</span></label>
-</div></div>
-<button type="submit" class="submit-quiz">Quiz indienen</button>
-</form>
-<div id="code-result"></div></div></div></div>
-<footer style="text-align:center;color:#7f8c8d;padding:2rem;">Gebaseerd op de PA Summary van Stephanie VDH.</footer>
+<div id="mcq-result"></div>
+</div>
+</div>
+</div>
+</div>
 <script>
-        const QUIZ_CONFIG = {"chapter13-mcq": {"answers": [1, 0, 1, 1, 1, 0, 1, 0, 1, 1], "total": 10}, "chapter13-tf": {"answers": [0, 1, 0, 0, 1, 0, 0, 1, 1, 0], "total": 10}, "chapter13-code": {"answers": [1, 1, 1, 1, 0], "total": 5}};
-        function saveQuizData(quizId, data) { localStorage.setItem(quizId, JSON.stringify(data)); }
-        function loadQuizData(quizId) { const data = localStorage.getItem(quizId); return data ? JSON.parse(data) : null; }
+        // Quiz Configuration
+        const QUIZ_CONFIG = {
+            'chapter13-mcq': {
+                answers: [1, 1, 1, 1, 2, 1, 1, 1, 0, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                total: 20
+            }
+        };
+
+        // Storage functions
+        function saveQuizData(quizId, data) {
+            localStorage.setItem(quizId, JSON.stringify(data));
+        }
+
+        function loadQuizData(quizId) {
+            const data = localStorage.getItem(quizId);
+            return data ? JSON.parse(data) : null;
+        }
+
+        // Switch between sections
         function switchSection(sectionName) {
             const tabs = document.querySelectorAll('.section-tab');
             const contents = document.querySelectorAll('.section-content');
+            
             tabs.forEach(tab => tab.classList.remove('active'));
             contents.forEach(content => content.classList.remove('active'));
-            tabs.forEach(tab => { if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(sectionName)) tab.classList.add('active'); });
+            
+            event.target.classList.add('active');
             document.getElementById(sectionName).classList.add('active');
         }
-        function toggleFlashcard(card) { card.querySelector('.flashcard-answer').classList.toggle('show'); }
+
+        // Flashcard toggle
+        function toggleFlashcard(card) {
+            const answer = card.querySelector('.flashcard-answer');
+            answer.classList.toggle('show');
+        }
+
+        // Restore saved answers for a quiz
         function restoreAnswers(formId, quizId) {
-            const savedData = loadQuizData(quizId); if (!savedData || !savedData.userAnswers) return;
+            const savedData = loadQuizData(quizId);
+            if (!savedData || !savedData.userAnswers) return;
+
             const form = document.getElementById(formId);
             Object.entries(savedData.userAnswers).forEach(([questionName, value]) => {
-                const input = form.querySelector(`input[name="${questionName}"][value="${value}"]`); if (input) input.checked = true;
+                const input = form.querySelector(`input[name="${questionName}"][value="${value}"]`);
+                if (input) {
+                    input.checked = true;
+                }
             });
-            if (savedData.submitted) showAnswerFeedback(formId, quizId, savedData.userAnswers);
+
+            if (savedData.submitted) {
+                showAnswerFeedback(formId, quizId, savedData.userAnswers);
+            }
         }
+
+        // Show feedback for each answer
         function showAnswerFeedback(formId, quizId, userAnswers) {
-            const form = document.getElementById(formId); const config = QUIZ_CONFIG[quizId];
+            const form = document.getElementById(formId);
+            const config = QUIZ_CONFIG[quizId];
             const questionPrefix = quizId.includes('mcq') ? 'q' : quizId.includes('tf') ? 'tf' : 'code';
+            
             for (let i = 0; i < config.total; i++) {
                 const questionName = `${questionPrefix}${i + 1}`;
-                const userAnswer = parseInt(userAnswers[questionName]); const correctAnswer = config.answers[i];
+                const userAnswer = parseInt(userAnswers[questionName]);
+                const correctAnswer = config.answers[i];
+                
                 form.querySelectorAll(`input[name="${questionName}"]`).forEach(input => {
-                    const label = input.closest('.option-label'); const value = parseInt(input.value);
+                    const label = input.closest('.option-label');
+                    const value = parseInt(input.value);
+                    
                     label.classList.remove('correct', 'incorrect');
-                    if (value === correctAnswer) label.classList.add('correct');
-                    else if (value === userAnswer && value !== correctAnswer) label.classList.add('incorrect');
+                    
+                    if (value === correctAnswer) {
+                        label.classList.add('correct');
+                    } else if (value === userAnswer && value !== correctAnswer) {
+                        label.classList.add('incorrect');
+                    }
+                    
                     input.disabled = true;
                 });
             }
+            
+            // Update submit button to show reset option
             const submitBtn = form.querySelector('.submit-quiz');
-            if (submitBtn) { submitBtn.disabled = true; submitBtn.style.display = 'none'; }
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.style.display = 'none';
+            }
+            
+            // Show or create reset button
             let resetBtn = form.querySelector('.reset-quiz');
-            if (!resetBtn) { resetBtn = document.createElement('button'); resetBtn.type = 'button'; resetBtn.className = 'reset-quiz'; resetBtn.textContent = '🔄 Reset Quiz'; resetBtn.onclick = function() { resetQuiz(formId, quizId); }; submitBtn.parentNode.insertBefore(resetBtn, submitBtn.nextSibling); }
+            if (!resetBtn) {
+                resetBtn = document.createElement('button');
+                resetBtn.type = 'button';
+                resetBtn.className = 'reset-quiz';
+                resetBtn.textContent = '🔄 Reset Quiz';
+                resetBtn.onclick = function() { resetQuiz(formId, quizId); };
+                submitBtn.parentNode.insertBefore(resetBtn, submitBtn.nextSibling);
+            }
             resetBtn.style.display = 'block';
         }
+
+        // Reset quiz function
         function resetQuiz(formId, quizId) {
-            const form = document.getElementById(formId); localStorage.removeItem(quizId); form.reset();
-            form.querySelectorAll('.option-label').forEach(label => label.classList.remove('correct', 'incorrect'));
-            form.querySelectorAll('input').forEach(input => input.disabled = false);
-            const resetBtn = form.querySelector('.reset-quiz'); const submitBtn = form.querySelector('.submit-quiz');
-            if (resetBtn) resetBtn.style.display = 'none'; if (submitBtn) { submitBtn.disabled = false; submitBtn.style.display = 'block'; }
-            const resultDiv = document.getElementById(formId.replace('-form', '-result')); if (resultDiv) { resultDiv.className = ''; resultDiv.textContent = ''; }
+            const form = document.getElementById(formId);
+            
+            // Clear saved data
+            localStorage.removeItem(quizId);
+            
+            // Reset form
+            form.reset();
+            
+            // Remove all feedback styling
+            form.querySelectorAll('.option-label').forEach(label => {
+                label.classList.remove('correct', 'incorrect');
+            });
+            
+            // Re-enable all inputs
+            form.querySelectorAll('input').forEach(input => {
+                input.disabled = false;
+            });
+            
+            // Hide reset button, show submit button
+            const resetBtn = form.querySelector('.reset-quiz');
+            const submitBtn = form.querySelector('.submit-quiz');
+            if (resetBtn) resetBtn.style.display = 'none';
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.style.display = 'block';
+            }
+            
+            // Clear result display
+            const resultId = formId.replace('-form', '-result');
+            const resultDiv = document.getElementById(resultId);
+            if (resultDiv) {
+                resultDiv.className = '';
+                resultDiv.textContent = '';
+            }
+            
+            // Scroll to top of quiz
+            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+
+        // Handle quiz submission
         function handleQuizSubmit(e, formId, quizId) {
-            e.preventDefault(); const form = document.getElementById(formId); const config = QUIZ_CONFIG[quizId]; const formData = new FormData(form);
+            e.preventDefault();
+            const form = document.getElementById(formId);
+            const config = QUIZ_CONFIG[quizId];
+            const formData = new FormData(form);
             const questionPrefix = quizId.includes('mcq') ? 'q' : quizId.includes('tf') ? 'tf' : 'code';
-            let correct = 0; const userAnswers = {};
-            for (let i = 0; i < config.total; i++) { const questionName = `${questionPrefix}${i + 1}`; const selected = parseInt(formData.get(questionName)); userAnswers[questionName] = selected; if (selected === config.answers[i]) correct++; }
-            saveQuizData(quizId, { userAnswers, score: correct, total: config.total, submitted: true, timestamp: new Date().toISOString() });
-            showAnswerFeedback(formId, quizId, userAnswers); showResult(formId.replace('-form', '-result'), correct, config.total);
+            
+            let correct = 0;
+            const userAnswers = {};
+            
+            for (let i = 0; i < config.total; i++) {
+                const questionName = `${questionPrefix}${i + 1}`;
+                const selected = parseInt(formData.get(questionName));
+                userAnswers[questionName] = selected;
+                
+                if (selected === config.answers[i]) {
+                    correct++;
+                }
+            }
+            
+            // Save results
+            saveQuizData(quizId, {
+                userAnswers: userAnswers,
+                score: correct,
+                total: config.total,
+                submitted: true,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Show feedback
+            showAnswerFeedback(formId, quizId, userAnswers);
+            
+            // Show result
+            const resultId = formId.replace('-form', '-result');
+            showResult(resultId, correct, config.total);
         }
+
+        // Show quiz result
         function showResult(elementId, correct, total) {
-            const percentage = (correct / total) * 100; const resultDiv = document.getElementById(elementId);
+            const percentage = (correct / total) * 100;
+            const resultDiv = document.getElementById(elementId);
+            
             let resultClass, message;
-            if (percentage >= 80) { resultClass = 'excellent'; message = `🎉 Uitstekend! ${correct}/${total} correct (${percentage.toFixed(0)}%)`; }
-            else if (percentage >= 60) { resultClass = 'good'; message = `👍 Goed bezig! ${correct}/${total} correct (${percentage.toFixed(0)}%). Herhaal de gemiste concepten.`; }
-            else { resultClass = 'needs-work'; message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Lees de samenvatting opnieuw en probeer nog eens.`; }
-            resultDiv.className = `quiz-result ${resultClass}`; resultDiv.textContent = message; resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            if (percentage >= 80) {
+                resultClass = 'excellent';
+                message = `🎉 Uitstekend! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
+            } else if (percentage >= 60) {
+                resultClass = 'good';
+                message = `👍 Goed gedaan! ${correct}/${total} correct (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
+            } else {
+                resultClass = 'needs-work';
+                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Bestudeer de dezelfdenvatting en probeer opnieuw!`;
+            }
+            
+            resultDiv.className = `quiz-result ${resultClass}`;
+            resultDiv.textContent = message;
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
+
+        // Initialize quizzes
         document.addEventListener('DOMContentLoaded', function() {
-            const mcqForm = document.getElementById('mcq-form'); if (mcqForm) { mcqForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'mcq-form', 'chapter13-mcq')); restoreAnswers('mcq-form', 'chapter13-mcq'); }
-            const tfForm = document.getElementById('tf-form'); if (tfForm) { tfForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'tf-form', 'chapter13-tf')); restoreAnswers('tf-form', 'chapter13-tf'); }
-            const codeForm = document.getElementById('code-form'); if (codeForm) { codeForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'code-form', 'chapter13-code')); restoreAnswers('code-form', 'chapter13-code'); }
+            // Multiple Choice Quiz
+            const mcqForm = document.getElementById('mcq-form');
+            if (mcqForm) {
+                mcqForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'mcq-form', 'chapter13-mcq'));
+                restoreAnswers('mcq-form', 'chapter13-mcq');
+            }
         });
+    </script>
+<div class="source-note" style="text-align:center;margin:30px auto;color:#6b7280;font-size:0.95rem;">Gebaseerd op de PA Samenvatting van Stephanie VDH.</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  const btn=document.querySelector('.mobile-menu-toggle');
+  if(!btn) return;
+  btn.addEventListener('click',function(){document.body.classList.toggle('mobile-menu-open');btn.classList.toggle('is-open');});
+});
 </script>
-</body></html>
+
+</body>
+</html>

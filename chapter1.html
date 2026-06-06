@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+html
 <html lang="nl">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Hoofdstuk 1: Introductie &amp; Searching - Programming Advanced</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <style>
         * {
             margin: 0;
@@ -138,7 +139,7 @@
             display: block;
         }
 
-        /* Summary Styles */
+        /* Samenvatting Styles */
         .summary-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -311,7 +312,7 @@
         }
 
         .option-label.incorrect::after {
-            content: '✗ Incorrect';
+            content: '✗ Fout';
             margin-left: auto;
             color: var(--accent);
             font-weight: 700;
@@ -470,331 +471,1082 @@
             }
         }
     </style>
+<!-- MOBILE MENU PATCH -->
+
+<style>
+@media (max-width: 768px) {
+  .mobile-menu-toggle { display:flex!important; }
+  body.mobile-menu-open { overflow:hidden; }
+  .chapters-grid, .grid, .cards-grid { grid-template-columns: 1fr!important; }
+  table, pre { max-width:100%; overflow-x:auto; }
+}
+.mobile-menu-toggle{display:none;position:fixed;top:14px;right:14px;z-index:9999;width:48px;height:44px;border:1px solid rgba(255,255,255,.55);border-radius:12px;background:linear-gradient(135deg,#2f3f78,#4a90e2);box-shadow:0 8px 24px rgba(0,0,0,.22);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}.mobile-menu-toggle span{display:block;width:23px;height:3px;border-radius:999px;background:#fff;transition:.2s}.mobile-menu-toggle.is-open span:nth-child(1){transform:translateY(8px) rotate(45deg)}.mobile-menu-toggle.is-open span:nth-child(2){opacity:0}.mobile-menu-toggle.is-open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+@media (max-width:768px){.chapter-header .back-btn,.back-btn{margin-right:58px}.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}.tab-button{white-space:nowrap}}
+</style>
+
 </head>
 <body>
-<nav class="navbar"><div class="navbar-content"><div class="chapter-header">Hoofdstuk 1: Introductie &amp; Searching</div><a href="index.html" class="back-button">← Terug naar hoofdstukken</a></div></nav>
-<div class="container"></div>
+<button class="mobile-menu-toggle" type="button" aria-label="Menu openen"><span></span><span></span><span></span></button>
+<nav class="navbar">
+<div class="navbar-content">
+<div class="chapter-header">Hoofdstuk 1: Introductie &amp; Searching</div>
+<a class="back-button" href="index.html">← Terug naar hoofdstukken</a>
+</div>
+</nav>
+<div class="container">
+</div>
 <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
 <button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
 <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-<button class="section-tab" onclick="switchSection('multiple-choice')">✅ Multiple Choice</button>
+<button class="section-tab" onclick="switchSection('multiple-choice')">✅ Meerkeuze</button>
 <button class="section-tab" onclick="switchSection('true-false')">⭕ Waar/Niet waar</button>
 <button class="section-tab" onclick="switchSection('code-analysis')">💻 Code-analyse</button>
 </div>
-<div class="section-content active" id="summary"><div class="summary-grid">
-<div class="summary-card"><h3>📚 Fundamenten van algoritmes</h3><p><strong>Definitie:</strong> Een algoritme is een stappenplan om een specifiek probleem op te lossen.</p><h4>Waarom algoritmekeuze belangrijk is:</h4><ul><li><strong>Efficiëntie:</strong> Hoe snel de oplossing werkt.</li><li><strong>Space:</strong> Hoeveel geheugen nodig is.</li><li><strong>Kost:</strong> Traag programma = meer serverkosten.</li><li><strong>User experience:</strong> Snelle apps voelen beter aan.</li><li><strong>Schaalbaarheid:</strong> Werkt het ook met heel veel data?</li></ul></div>
-<div class="summary-card"><h3>🔎 Zoekmethodes vergelijken</h3><table class="comparison-table"><tr><th>Methode</th><th>Tijd</th><th>Gesorteerd?</th></tr><tr><td><strong>Linear Search</strong></td><td>O(n)</td><td>Nee</td></tr><tr><td><strong>Binary Search</strong></td><td>O(log n)</td><td><strong>JA ✓</strong></td></tr></table><h4>Voor 1.000.000 elementen:</h4><ul><li>Linear: mogelijk 1.000.000 controles.</li><li>Binary: ongeveer 20 controles.</li></ul></div>
-<div class="summary-card"><h3>📈 Big O-hiërarchie</h3><div class="code-block">O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²) &lt; O(2^n)</div><h4>Veelvoorkomende complexiteiten:</h4><ul><li><strong>O(1):</strong> array access, simpele berekening.</li><li><strong>O(log n):</strong> binary search, telkens halveren.</li><li><strong>O(n):</strong> één loop, linear search.</li><li><strong>O(n²):</strong> geneste loops, bubble sort.</li></ul></div>
-<div class="summary-card"><h3>🧠 Exameninzicht</h3><p>Big O is geen exacte stopwatch. Het beschrijft hoe runtime of geheugen groeit wanneer de input groter wordt.</p><ul><li>Constanten vallen weg: O(2n + 5) wordt O(n).</li><li>Dominante term blijft over: O(n² + n) wordt O(n²).</li><li>Binary search mag niet op ongesorteerde data.</li></ul></div>
-</div></div>
-<div class="section-content" id="flashcards"><div class="quiz-container"><div class="quiz-section"><h3>📇 Flashcards - klik om het antwoord te tonen</h3><div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Precondition voor binary search? <span>▼</span></div><div class="flashcard-answer">De data moet gesorteerd zijn.</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Linear search Big O? <span>▼</span></div><div class="flashcard-answer">O(n).</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is het kernidee van Introductie &amp; Searching? <span>▼</span></div><div class="flashcard-answer">Dat je het probleemtype herkent en de juiste strategie of datastructuur kiest.</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Waarom is Big O belangrijk? <span>▼</span></div><div class="flashcard-answer">Omdat je moet kunnen uitleggen hoe runtime of geheugen groeit bij grotere input.</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat moet je op het examen altijd kunnen doen? <span>▼</span></div><div class="flashcard-answer">Output traceren, Big O berekenen en je algoritmische keuze verdedigen.</div></div></div></div></div>
-<div class="section-content" id="multiple-choice"><div class="quiz-container"><div class="quiz-section"><h3>✅ Multiple Choice Quiz</h3><form id="mcq-form">
+ SAMENVATTING SECTIE 
+<div class="section-content active" id="summary">
+<div class="summary-grid">
+<div class="summary-card">
+<h3> Algoritmes Fundamentals</h3>
+<p><strong>Definitie:</strong> Een reeks stap-voor-stap instructies om een specifiek probleem op te lossen.</p>
+<h4>Waarom de keuze van algoritme belangrijk is:</h4>
+<ul>
+<li><strong>Efficiency:</strong> Uitvoeringssnelheid</li>
+<li><strong>Geheugen:</strong> Geheugengebruik</li>
+<li><strong>Kost:</strong> Operationele kosten</li>
+<li><strong>User Experience:</strong> App-performance</li>
+<li><strong>Scalability:</strong> Schaalbaarheid/groeimogelijkheid</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> Vergelijking van zoekmethodes</h3>
+<table class="comparison-table">
+<tr>
+<th>Methode</th>
+<th>Tijd</th>
+<th>Gesorteerd?</th>
+</tr>
+<tr>
+<td><strong>Lineair zoeken</strong></td>
+<td>O(n)</td>
+<td>Nee</td>
+</tr>
+<tr>
+<td><strong>Binary search</strong></td>
+<td>O(log n)</td>
+<td><strong>JA ✓</strong></td>
+</tr>
+</table>
+<h4>Voor 1.000.000 elementen:</h4>
+<ul>
+<li>Lineair: 1.000.000 bewerkingen (17 min)</li>
+<li>Binary: 20 bewerkingen (20 ms)</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> Hiërarchie van Big O-notatie</h3>
+<div class="code-block">
+O(1) &lt; O(log n) &lt; O(n) &lt; O(n log n) &lt; O(n²) &lt; O(n³)
+ ↑       ↑         ↑         ↑           ↑        ↑
+Best  Uitstekend   Goed    Redelijk    Aanvaardbaar  Slecht
+                    </div>
+<h4>Veelvoorkomende complexiteiten:</h4>
+<ul>
+<li><strong>O(1):</strong> Array-toegang, wiskundige bewerkingen</li>
+<li><strong>O(log n):</strong> Binary search</li>
+<li><strong>O(n):</strong> Eén lus, lineair zoeken</li>
+<li><strong>O(n²):</strong> Geneste lussen, bubble sort</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> Snelle gids voor logaritmen</h3>
+<p><strong>Formule:</strong> log₂(x) = y ⟺ 2^y = x</p>
+<div class="highlight-box">
+<strong>Veelvoorkomende waarden:</strong><br/>
+                        log₂(8) = 3 (omdat 2³ = 8)<br/>
+                        log₂(16) = 4 (omdat 2⁴ = 16)<br/>
+                        log₂(1024) = 10 (omdat 2¹⁰ = 1024)
+                    </div>
+<p><strong>Waarom basis 2?</strong> In computerwetenschappen is alles binair!</p>
+</div>
+<div class="summary-card">
+<h3>⏱️ Tijdscomplexiteit vs geheugencomplexiteit</h3>
+<h4>Tijdscomplexiteit:</h4>
+<p>Hoe lang duurt het? Meet het aantal bewerkingen.</p>
+<h4>Geheugencomplexiteit:</h4>
+<p>Hoeveel geheugen gebruikt het? Meet de geheugenallocatie.</p>
+<div class="highlight-box">
+<strong>Time-space tradeoff:</strong> Het ene optimaliseren vergroot vaak het andere. Kies op basis van je constraints!
+                    </div>
+</div>
+<div class="summary-card">
+<h3> Regels om Big O te berekenen</h3>
+<h4>1. Laat constanten weg</h4>
+<div class="code-block">O(2n) → O(n)
+O(500) → O(1)</div>
+<h4>2. Laat lagere termen weg</h4>
+<div class="code-block">O(n² + n) → O(n²)
+O(n log n + n) → O(n log n)</div>
+<h4>3. Veelvoorkomende patronen</h4>
+<ul>
+<li>Eén lus → O(n)</li>
+<li>Geneste lussen → O(n²)</li>
+<li>Elke stap halveren → O(log n)</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> Binary search pseudocode</h3>
+<div class="code-block">Functie BinarySearch(array, doel):
+  low = 0
+  high = length(array) - 1
+  
+  WHILE low &lt;= high:
+    mid = (low + high) / 2
+    
+    IF array[mid] == doel THEN
+      RETURN mid
+    ELSE IF array[mid] &lt; doel THEN
+      low = mid + 1
+    ELSE
+      high = mid - 1
+    END IF
+  END WHILE
+  
+  RETURN -1
+END Functie</div>
+<p><strong>Vereiste:</strong> De array MOET gesorteerd zijn!</p>
+</div>
+<div class="summary-card">
+<h3> Belangrijkste inzichten</h3>
+<ul>
+<li>Binary search is VEEL sneller dan lineair zoeken (O(log n) vs O(n))</li>
+<li>Big O focust op groeisnelheid, niet op exacte tijd</li>
+<li>Binary search vereist gesorteerde data</li>
+<li>Voor 1 miljoen elementen: lineair = 17 min, binary = 20 ms</li>
+<li>Time-space tradeoffs bestaan in alle algoritmes</li>
+<li>Laat constanten en lagere termen weg in Big O</li>
+</ul>
+</div>
+</div>
+</div>
+ FLASHCARDS SECTIE 
+<div class="section-content" id="flashcards">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>📇 Flashcards - klik om het antwoord te tonen</h3>
+<div class="flashcard" onclick="toggleFlashcard(this)">
+<div class="flashcard-question">
+                            Wat is een algoritme?
+                            <span>▼</span>
+</div>
+<div class="flashcard-answer">
+                            Een reeks stap-voor-stap instructies om een specifiek probleem op te lossen
+                        </div>
+</div>
+<div class="flashcard" onclick="toggleFlashcard(this)">
+<div class="flashcard-question">
+                            Wat is de tijdscomplexiteit van binary search?
+                            <span>▼</span>
+</div>
+<div class="flashcard-answer">
+                            O(log n) - logaritmische tijd
+                        </div>
+</div>
+<div class="flashcard" onclick="toggleFlashcard(this)">
+<div class="flashcard-question">
+                            Wat is de belangrijkste voorwaarde voor binary search?
+                            <span>▼</span>
+</div>
+<div class="flashcard-answer">
+                            De lijst MOET gesorteerd zijn
+                        </div>
+</div>
+<div class="flashcard" onclick="toggleFlashcard(this)">
+<div class="flashcard-question">
+                            Waaraan is log₂(64) gelijk?
+                            <span>▼</span>
+</div>
+<div class="flashcard-answer">
+                            6 (omdat 2⁶ = 64)
+                        </div>
+</div>
+<div class="flashcard" onclick="toggleFlashcard(this)">
+<div class="flashcard-question">
+                            Wat is O(1)-complexiteit?
+                            <span>▼</span>
+</div>
+<div class="flashcard-answer">
+                            Constante tijd - hangt niet af van de inputgrootte. Voorbeeld: array[0]
+                        </div>
+</div>
+<div class="flashcard" onclick="toggleFlashcard(this)">
+<div class="flashcard-question">
+                            Wat is de tijdscomplexiteit van array-toegang via index?
+                            <span>▼</span>
+</div>
+<div class="flashcard-answer">
+                            O(1) - constante tijd
+                        </div>
+</div>
+<div class="flashcard" onclick="toggleFlashcard(this)">
+<div class="flashcard-question">
+                            Tijdscomplexiteit van twee geneste for-lussen (0 tot n)?
+                            <span>▼</span>
+</div>
+<div class="flashcard-answer">
+                            O(n²) - kwadratische tijd
+                        </div>
+</div>
+<div class="flashcard" onclick="toggleFlashcard(this)">
+<div class="flashcard-question">
+                            Waarom gebruiken we logaritmen met basis 2 in computerwetenschappen?
+                            <span>▼</span>
+</div>
+<div class="flashcard-answer">
+                            Alles in computerwetenschappen is binair (basis 2)
+                        </div>
+</div>
+<div class="flashcard" onclick="toggleFlashcard(this)">
+<div class="flashcard-question">
+                            Wat is een time-space tradeoff?
+                            <span>▼</span>
+</div>
+<div class="flashcard-answer">
+                            Het ene optimaliseren (tijd van geheugen) vergroot vaak het andere
+                        </div>
+</div>
+<div class="flashcard" onclick="toggleFlashcard(this)">
+<div class="flashcard-question">
+                            Vereenvoudig: O(5n² + 3n + 7)
+                            <span>▼</span>
+</div>
+<div class="flashcard-answer">
+                            O(n²) - laat constanten en lagere termen weg
+                        </div>
+</div>
+<div class="flashcard" onclick="toggleFlashcard(this)">
+<div class="flashcard-question">
+                            Hoeveel bewerkingen heeft binary search ongeveer nodig voor 1.000.000 elementen (worst-case)?
+                            <span>▼</span>
+</div>
+<div class="flashcard-answer">
+                            Ongeveer 20 bewerkingen (log₂(1,000,000) ≈ 20)
+                        </div>
+</div>
+<div class="flashcard" onclick="toggleFlashcard(this)">
+<div class="flashcard-question">
+                            Wat stelt Big O-notatie voor?
+                            <span>▼</span>
+</div>
+<div class="flashcard-answer">
+                            Een high-level inzicht in de complexiteit van een algoritme wanneer de inputgrootte groeit
+                        </div>
+</div>
+<div class="flashcard" onclick="toggleFlashcard(this)">
+<div class="flashcard-question">
+                            Wat is geheugencomplexiteit?
+                            <span>▼</span>
+</div>
+<div class="flashcard-answer">
+                            De hoeveelheid geheugen die een algoritme gebruikt in verhouding tot de inputgrootte
+                        </div>
+</div>
+<div class="flashcard" onclick="toggleFlashcard(this)">
+<div class="flashcard-question">
+                            Rangschik van snel naar traag: O(n), O(1), O(log n), O(n²)
+                            <span>▼</span>
+</div>
+<div class="flashcard-answer">
+                            O(1), O(log n), O(n), O(n²)
+                        </div>
+</div>
+<div class="flashcard" onclick="toggleFlashcard(this)">
+<div class="flashcard-question">
+                            Wat is een logaritme?
+                            <span>▼</span>
+</div>
+<div class="flashcard-answer">
+                            De inverse functie van machtsverheffing: log_b(x) = y ⟺ b^y = x
+                        </div>
+</div>
+</div>
+</div>
+</div>
+ MEERKEUZE SECTIE 
+<div class="section-content" id="multiple-choice">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>✅ Meerkeuzequiz</h3>
+<form id="mcq-form">
 <div class="quiz-question">
 <div class="question-number">Vraag 1</div>
-<div class="question-text">Wat moet je bij Big O vooral beschrijven?</div>
+<div class="question-text">Wat is de tijdscomplexiteit van binary search?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q1" value="0" required><span>Exacte seconden</span></label>
-<label class="option-label"><input type="radio" name="q1" value="1" required><span>Groeigedrag</span></label>
-<label class="option-label"><input type="radio" name="q1" value="2" required><span>Kleur van code</span></label>
-<label class="option-label"><input type="radio" name="q1" value="3" required><span>Aantal bestanden</span></label>
-</div></div>
+<label class="option-label">
+<input name="q1" required="" type="radio" value="0"/>
+<span>O(1)</span>
+</label>
+<label class="option-label">
+<input name="q1" required="" type="radio" value="1"/>
+<span>O(n)</span>
+</label>
+<label class="option-label">
+<input name="q1" required="" type="radio" value="2"/>
+<span>O(log n)</span>
+</label>
+<label class="option-label">
+<input name="q1" required="" type="radio" value="3"/>
+<span>O(n²)</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 2</div>
-<div class="question-text">Welke aanpak probeert vaak eerst alles?</div>
+<div class="question-text">Welke zoekmethode vereist dat de data gesorteerd is?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q2" value="0" required><span>Brute force</span></label>
-<label class="option-label"><input type="radio" name="q2" value="1" required><span>Hashing</span></label>
-<label class="option-label"><input type="radio" name="q2" value="2" required><span>BFS</span></label>
-<label class="option-label"><input type="radio" name="q2" value="3" required><span>Tree traversal</span></label>
-</div></div>
+<label class="option-label">
+<input name="q2" required="" type="radio" value="0"/>
+<span>Lineair zoeken</span>
+</label>
+<label class="option-label">
+<input name="q2" required="" type="radio" value="1"/>
+<span>Binary search</span>
+</label>
+<label class="option-label">
+<input name="q2" required="" type="radio" value="2"/>
+<span>Beide</span>
+</label>
+<label class="option-label">
+<input name="q2" required="" type="radio" value="3"/>
+<span>Geen van beide</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 3</div>
-<div class="question-text">Welke complexiteit is meestal beter?</div>
+<div class="question-text">Hoeveel vergelijkingen heeft binary search ongeveer nodig in het slechtste geval voor een array van 1.000.000 elementen?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q3" value="0" required><span>O(n²)</span></label>
-<label class="option-label"><input type="radio" name="q3" value="1" required><span>O(n)</span></label>
-<label class="option-label"><input type="radio" name="q3" value="2" required><span>O(2^n)</span></label>
-<label class="option-label"><input type="radio" name="q3" value="3" required><span>O(n³)</span></label>
-</div></div>
+<label class="option-label">
+<input name="q3" required="" type="radio" value="0"/>
+<span>10</span>
+</label>
+<label class="option-label">
+<input name="q3" required="" type="radio" value="1"/>
+<span>20</span>
+</label>
+<label class="option-label">
+<input name="q3" required="" type="radio" value="2"/>
+<span>1,000</span>
+</label>
+<label class="option-label">
+<input name="q3" required="" type="radio" value="3"/>
+<span>1,000,000</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 4</div>
-<div class="question-text">Welke structuur past bij BFS?</div>
+<div class="question-text">Wat is de tijdscomplexiteit van een element in een array opvragen via index?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q4" value="0" required><span>Stack</span></label>
-<label class="option-label"><input type="radio" name="q4" value="1" required><span>Queue</span></label>
-<label class="option-label"><input type="radio" name="q4" value="2" required><span>BST</span></label>
-<label class="option-label"><input type="radio" name="q4" value="3" required><span>Array sort</span></label>
-</div></div>
+<label class="option-label">
+<input name="q4" required="" type="radio" value="0"/>
+<span>O(1)</span>
+</label>
+<label class="option-label">
+<input name="q4" required="" type="radio" value="1"/>
+<span>O(n)</span>
+</label>
+<label class="option-label">
+<input name="q4" required="" type="radio" value="2"/>
+<span>O(log n)</span>
+</label>
+<label class="option-label">
+<input name="q4" required="" type="radio" value="3"/>
+<span>O(n²)</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 5</div>
-<div class="question-text">Wat moet je altijd testen?</div>
+<div class="question-text">Twee geneste for-lussen die elk van 0 tot n lopen hebben tijdscomplexiteit:</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q5" value="0" required><span>Alleen normale input</span></label>
-<label class="option-label"><input type="radio" name="q5" value="1" required><span>Randgevallen</span></label>
-<label class="option-label"><input type="radio" name="q5" value="2" required><span>Alleen grote input</span></label>
-<label class="option-label"><input type="radio" name="q5" value="3" required><span>Niets</span></label>
-</div></div>
+<label class="option-label">
+<input name="q5" required="" type="radio" value="0"/>
+<span>O(n)</span>
+</label>
+<label class="option-label">
+<input name="q5" required="" type="radio" value="1"/>
+<span>O(log n)</span>
+</label>
+<label class="option-label">
+<input name="q5" required="" type="radio" value="2"/>
+<span>O(n²)</span>
+</label>
+<label class="option-label">
+<input name="q5" required="" type="radio" value="3"/>
+<span>O(2n)</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 6</div>
-<div class="question-text">Wat betekent pruning?</div>
+<div class="question-text">Waaraan is log₂(64) gelijk?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q6" value="0" required><span>Onnodig werk vermijden</span></label>
-<label class="option-label"><input type="radio" name="q6" value="1" required><span>Alles sorteren</span></label>
-<label class="option-label"><input type="radio" name="q6" value="2" required><span>Een array kopiëren</span></label>
-<label class="option-label"><input type="radio" name="q6" value="3" required><span>Een klasse verwijderen</span></label>
-</div></div>
+<label class="option-label">
+<input name="q6" required="" type="radio" value="0"/>
+<span>4</span>
+</label>
+<label class="option-label">
+<input name="q6" required="" type="radio" value="1"/>
+<span>6</span>
+</label>
+<label class="option-label">
+<input name="q6" required="" type="radio" value="2"/>
+<span>8</span>
+</label>
+<label class="option-label">
+<input name="q6" required="" type="radio" value="3"/>
+<span>32</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 7</div>
-<div class="question-text">Welke strategie gebruikt opgeslagen subresultaten?</div>
+<div class="question-text">Welke tijdscomplexiteit is het snelst?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q7" value="0" required><span>Greedy</span></label>
-<label class="option-label"><input type="radio" name="q7" value="1" required><span>DP</span></label>
-<label class="option-label"><input type="radio" name="q7" value="2" required><span>Selection sort</span></label>
-<label class="option-label"><input type="radio" name="q7" value="3" required><span>Linear search</span></label>
-</div></div>
+<label class="option-label">
+<input name="q7" required="" type="radio" value="0"/>
+<span>O(n log n)</span>
+</label>
+<label class="option-label">
+<input name="q7" required="" type="radio" value="1"/>
+<span>O(n)</span>
+</label>
+<label class="option-label">
+<input name="q7" required="" type="radio" value="2"/>
+<span>O(log n)</span>
+</label>
+<label class="option-label">
+<input name="q7" required="" type="radio" value="3"/>
+<span>O(1)</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 8</div>
-<div class="question-text">Welke techniek gebruikt vaak undo?</div>
+<div class="question-text">Lineair zoeken heeft tijdscomplexiteit O(n). Dit betekent:</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q8" value="0" required><span>Backtracking</span></label>
-<label class="option-label"><input type="radio" name="q8" value="1" required><span>Binary search</span></label>
-<label class="option-label"><input type="radio" name="q8" value="2" required><span>Hashing</span></label>
-<label class="option-label"><input type="radio" name="q8" value="3" required><span>Queue</span></label>
-</div></div>
+<label class="option-label">
+<input name="q8" required="" type="radio" value="0"/>
+<span>Het duurt altijd n seconden</span>
+</label>
+<label class="option-label">
+<input name="q8" required="" type="radio" value="1"/>
+<span>De runtime groeit evenredig met de inputgrootte</span>
+</label>
+<label class="option-label">
+<input name="q8" required="" type="radio" value="2"/>
+<span>Het is sneller dan O(log n)</span>
+</label>
+<label class="option-label">
+<input name="q8" required="" type="radio" value="3"/>
+<span>Het vereist gesorteerde data</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 9</div>
-<div class="question-text">Wat is belangrijk bij theorievragen?</div>
+<div class="question-text">Wat is geheugencomplexiteit?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q9" value="0" required><span>Definitie memoriseren</span></label>
-<label class="option-label"><input type="radio" name="q9" value="1" required><span>Redeneren</span></label>
-<label class="option-label"><input type="radio" name="q9" value="2" required><span>Geen Big O</span></label>
-<label class="option-label"><input type="radio" name="q9" value="3" required><span>Geen code lezen</span></label>
-</div></div>
+<label class="option-label">
+<input name="q9" required="" type="radio" value="0"/>
+<span>Hoe lang een algoritme duurt</span>
+</label>
+<label class="option-label">
+<input name="q9" required="" type="radio" value="1"/>
+<span>Hoeveel geheugen een algoritme gebruikt</span>
+</label>
+<label class="option-label">
+<input name="q9" required="" type="radio" value="2"/>
+<span>Aantal regels code</span>
+</label>
+<label class="option-label">
+<input name="q9" required="" type="radio" value="3"/>
+<span>Grootte van de input</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 10</div>
-<div class="question-text">Wat doe je bij een algoritmische keuze?</div>
+<div class="question-text">Wat is de vereenvoudigde Big O van: O(5n² + 3n + 7)?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q10" value="0" required><span>Niet uitleggen</span></label>
-<label class="option-label"><input type="radio" name="q10" value="1" required><span>Motiveer waarom</span></label>
-<label class="option-label"><input type="radio" name="q10" value="2" required><span>Altijd random</span></label>
-<label class="option-label"><input type="radio" name="q10" value="3" required><span>Altijd linked list</span></label>
-</div></div>
-<button type="submit" class="submit-quiz">Quiz indienen</button>
+<label class="option-label">
+<input name="q10" required="" type="radio" value="0"/>
+<span>O(5n²)</span>
+</label>
+<label class="option-label">
+<input name="q10" required="" type="radio" value="1"/>
+<span>O(n²)</span>
+</label>
+<label class="option-label">
+<input name="q10" required="" type="radio" value="2"/>
+<span>O(n)</span>
+</label>
+<label class="option-label">
+<input name="q10" required="" type="radio" value="3"/>
+<span>O(8n²)</span>
+</label>
+</div>
+</div>
+<button class="submit-quiz" type="submit">Quiz indienen</button>
 </form>
-<div id="mcq-result"></div></div></div></div>
-<div class="section-content" id="true-false"><div class="quiz-container"><div class="quiz-section"><h3>⭕ Waar of niet waar</h3><form id="tf-form">
+<div id="mcq-result"></div>
+</div>
+</div>
+</div>
+ WAAR/NIET WAAR SECTIE 
+<div class="section-content" id="true-false">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>⭕ Waar of niet waar-quiz</h3>
+<form id="tf-form">
 <div class="quiz-question">
 <div class="question-number">Vraag 1</div>
-<div class="question-text">Big O gaat over groeigedrag, niet over exacte seconden.</div>
+<div class="question-text">Binary search werkt op zowel gesorteerde als ongesorteerde arrays.</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="tf1" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf1" value="1" required><span>Niet waar</span></label>
-</div></div>
+<label class="option-label">
+<input name="tf1" required="" type="radio" value="0"/>
+<span>Waar</span>
+</label>
+<label class="option-label">
+<input name="tf1" required="" type="radio" value="1"/>
+<span>Niet waar</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 2</div>
-<div class="question-text">Een queue werkt volgens LIFO.</div>
+<div class="question-text">O(log n) is sneller dan O(n).</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="tf2" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf2" value="1" required><span>Niet waar</span></label>
-</div></div>
+<label class="option-label">
+<input name="tf2" required="" type="radio" value="0"/>
+<span>Waar</span>
+</label>
+<label class="option-label">
+<input name="tf2" required="" type="radio" value="1"/>
+<span>Niet waar</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 3</div>
-<div class="question-text">Backtracking kan pruning gebruiken.</div>
+<div class="question-text">Big O-notatie vertelt de exacte runtime in seconden.</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="tf3" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf3" value="1" required><span>Niet waar</span></label>
-</div></div>
+<label class="option-label">
+<input name="tf3" required="" type="radio" value="0"/>
+<span>Waar</span>
+</label>
+<label class="option-label">
+<input name="tf3" required="" type="radio" value="1"/>
+<span>Niet waar</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 4</div>
-<div class="question-text">DP is nuttig bij overlapping subproblems.</div>
+<div class="question-text">Een array-element via index opvragen is O(1).</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="tf4" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf4" value="1" required><span>Niet waar</span></label>
-</div></div>
+<label class="option-label">
+<input name="tf4" required="" type="radio" value="0"/>
+<span>Waar</span>
+</label>
+<label class="option-label">
+<input name="tf4" required="" type="radio" value="1"/>
+<span>Niet waar</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 5</div>
-<div class="question-text">Greedy is altijd optimaal.</div>
+<div class="question-text">Geheugencomplexiteit meet hoeveel geheugen een algoritme gebruikt.</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="tf5" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf5" value="1" required><span>Niet waar</span></label>
-</div></div>
+<label class="option-label">
+<input name="tf5" required="" type="radio" value="0"/>
+<span>Waar</span>
+</label>
+<label class="option-label">
+<input name="tf5" required="" type="radio" value="1"/>
+<span>Niet waar</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 6</div>
-<div class="question-text">DFS kan met recursie worden geïmplementeerd.</div>
+<div class="question-text">Geneste lussen leiden altijd tot O(n²)-complexiteit.</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="tf6" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf6" value="1" required><span>Niet waar</span></label>
-</div></div>
+<label class="option-label">
+<input name="tf6" required="" type="radio" value="0"/>
+<span>Waar</span>
+</label>
+<label class="option-label">
+<input name="tf6" required="" type="radio" value="1"/>
+<span>Niet waar</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 7</div>
-<div class="question-text">Een hash table heeft gemiddeld O(1) lookup.</div>
+<div class="question-text">log₂(16) = 4</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="tf7" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf7" value="1" required><span>Niet waar</span></label>
-</div></div>
+<label class="option-label">
+<input name="tf7" required="" type="radio" value="0"/>
+<span>Waar</span>
+</label>
+<label class="option-label">
+<input name="tf7" required="" type="radio" value="1"/>
+<span>Niet waar</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 8</div>
-<div class="question-text">Binary search werkt correct op ongesorteerde data.</div>
+<div class="question-text">De brute-force methode probeert elke mogelijkheid.</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="tf8" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf8" value="1" required><span>Niet waar</span></label>
-</div></div>
+<label class="option-label">
+<input name="tf8" required="" type="radio" value="0"/>
+<span>Waar</span>
+</label>
+<label class="option-label">
+<input name="tf8" required="" type="radio" value="1"/>
+<span>Niet waar</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 9</div>
-<div class="question-text">Selection sort heeft best-case O(n).</div>
+<div class="question-text">Constanten weglaten in Big O betekent O(5n) becomes O(n).</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="tf9" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf9" value="1" required><span>Niet waar</span></label>
-</div></div>
+<label class="option-label">
+<input name="tf9" required="" type="radio" value="0"/>
+<span>Waar</span>
+</label>
+<label class="option-label">
+<input name="tf9" required="" type="radio" value="1"/>
+<span>Niet waar</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 10</div>
-<div class="question-text">Visited is belangrijk bij graphs met cycles.</div>
+<div class="question-text">Voor 1000 elementen, lineair zoeken slechtste case heeft nodig 1000 bewerkingen.</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="tf10" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf10" value="1" required><span>Niet waar</span></label>
-</div></div>
-<button type="submit" class="submit-quiz">Quiz indienen</button>
+<label class="option-label">
+<input name="tf10" required="" type="radio" value="0"/>
+<span>Waar</span>
+</label>
+<label class="option-label">
+<input name="tf10" required="" type="radio" value="1"/>
+<span>Niet waar</span>
+</label>
+</div>
+</div>
+<button class="submit-quiz" type="submit">Quiz indienen</button>
 </form>
-<div id="tf-result"></div></div></div></div>
-<div class="section-content" id="code-analysis"><div class="quiz-container"><div class="quiz-section"><h3>💻 Code-analyse Quiz</h3><form id="code-form">
+<div id="tf-result"></div>
+</div>
+</div>
+</div>
+ CODE-ANALYSE SECTIE 
+<div class="section-content" id="code-analysis">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>💻 Code-analysequiz</h3>
+<form id="code-form">
 <div class="quiz-question">
 <div class="question-number">Vraag 1</div>
-<div class="question-text">Wat is de time complexity?</div>
-<div class="code-block">for (int i = 0; i &lt; n; i++) {
-    Console.WriteLine(i);
+<div class="question-text">Wat is de tijdscomplexiteit van deze code?</div>
+<div class="code-block">int max = array[0];
+voor (int i = 1; i &lt; n; i++) {
+    if (array[i] &gt; max) {
+        max = array[i];
+    }
 }</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="code1" value="0" required><span>O(1)</span></label>
-<label class="option-label"><input type="radio" name="code1" value="1" required><span>O(n)</span></label>
-<label class="option-label"><input type="radio" name="code1" value="2" required><span>O(n²)</span></label>
-<label class="option-label"><input type="radio" name="code1" value="3" required><span>O(log n)</span></label>
-</div></div>
+<label class="option-label">
+<input name="code1" required="" type="radio" value="0"/>
+<span>O(1)</span>
+</label>
+<label class="option-label">
+<input name="code1" required="" type="radio" value="1"/>
+<span>O(n)</span>
+</label>
+<label class="option-label">
+<input name="code1" required="" type="radio" value="2"/>
+<span>O(n²)</span>
+</label>
+<label class="option-label">
+<input name="code1" required="" type="radio" value="3"/>
+<span>O(log n)</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 2</div>
-<div class="question-text">Wat is de time complexity?</div>
-<div class="code-block">for (int i = 0; i &lt; n; i++) {
-  for (int j = 0; j &lt; n; j++) {
-    Console.WriteLine(i + j);
-  }
+<div class="question-text">Wat is de tijdscomplexiteit van deze geneste lus?</div>
+<div class="code-block">voor (int i = 0; i &lt; n; i++) {
+    voor (int j = 0; j &lt; n; j++) {
+        System.out.println(i + j);
+    }
 }</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="code2" value="0" required><span>O(n)</span></label>
-<label class="option-label"><input type="radio" name="code2" value="1" required><span>O(n²)</span></label>
-<label class="option-label"><input type="radio" name="code2" value="2" required><span>O(log n)</span></label>
-<label class="option-label"><input type="radio" name="code2" value="3" required><span>O(1)</span></label>
-</div></div>
+<label class="option-label">
+<input name="code2" required="" type="radio" value="0"/>
+<span>O(n)</span>
+</label>
+<label class="option-label">
+<input name="code2" required="" type="radio" value="1"/>
+<span>O(n²)</span>
+</label>
+<label class="option-label">
+<input name="code2" required="" type="radio" value="2"/>
+<span>O(2n)</span>
+</label>
+<label class="option-label">
+<input name="code2" required="" type="radio" value="3"/>
+<span>O(log n)</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 3</div>
-<div class="question-text">Wat is de time complexity?</div>
-<div class="code-block">while (n &gt; 1) {
-    n = n / 2;
+<div class="question-text">Wat is de geheugencomplexiteit van een kopie van een array maken?</div>
+<div class="code-block">int[] copy = new int[n];
+voor (int i = 0; i &lt; n; i++) {
+    copy[i] = array[i];
 }</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="code3" value="0" required><span>O(n)</span></label>
-<label class="option-label"><input type="radio" name="code3" value="1" required><span>O(log n)</span></label>
-<label class="option-label"><input type="radio" name="code3" value="2" required><span>O(n²)</span></label>
-<label class="option-label"><input type="radio" name="code3" value="3" required><span>O(2^n)</span></label>
-</div></div>
+<label class="option-label">
+<input name="code3" required="" type="radio" value="0"/>
+<span>O(1)</span>
+</label>
+<label class="option-label">
+<input name="code3" required="" type="radio" value="1"/>
+<span>O(n)</span>
+</label>
+<label class="option-label">
+<input name="code3" required="" type="radio" value="2"/>
+<span>O(n²)</span>
+</label>
+<label class="option-label">
+<input name="code3" required="" type="radio" value="3"/>
+<span>O(log n)</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 4</div>
-<div class="question-text">Welke datastructuur herken je?</div>
-<div class="code-block">Queue&lt;int&gt; q = new Queue&lt;int&gt;();
-q.Enqueue(start);
-while(q.Count &gt; 0) { q.Dequeue(); }</div>
+<div class="question-text">Wat is de tijdscomplexiteit van deze lus?</div>
+<div class="code-block">voor (int i = 0; i &lt; n/2; i++) {
+    sum += array[i];
+}</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="code4" value="0" required><span>Stack</span></label>
-<label class="option-label"><input type="radio" name="code4" value="1" required><span>Queue/BFS</span></label>
-<label class="option-label"><input type="radio" name="code4" value="2" required><span>BST</span></label>
-<label class="option-label"><input type="radio" name="code4" value="3" required><span>Hash table</span></label>
-</div></div>
+<label class="option-label">
+<input name="code4" required="" type="radio" value="0"/>
+<span>O(n/2)</span>
+</label>
+<label class="option-label">
+<input name="code4" required="" type="radio" value="1"/>
+<span>O(n)</span>
+</label>
+<label class="option-label">
+<input name="code4" required="" type="radio" value="2"/>
+<span>O(1)</span>
+</label>
+<label class="option-label">
+<input name="code4" required="" type="radio" value="3"/>
+<span>O(log n)</span>
+</label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 5</div>
-<div class="question-text">Wat is de gemiddelde lookup van deze structuur?</div>
-<div class="code-block">Dictionary&lt;string, int&gt; counts = new Dictionary&lt;string, int&gt;();
-counts[&quot;test&quot;] = 1;</div>
+<div class="question-text">Wat is de tijdscomplexiteit van deze code?</div>
+<div class="code-block">int x = array[5];
+int y = x + 10;
+return y;</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="code5" value="0" required><span>O(1)</span></label>
-<label class="option-label"><input type="radio" name="code5" value="1" required><span>O(n²)</span></label>
-<label class="option-label"><input type="radio" name="code5" value="2" required><span>O(2^n)</span></label>
-<label class="option-label"><input type="radio" name="code5" value="3" required><span>O(n!)</span></label>
-</div></div>
-<button type="submit" class="submit-quiz">Quiz indienen</button>
+<label class="option-label">
+<input name="code5" required="" type="radio" value="0"/>
+<span>O(1)</span>
+</label>
+<label class="option-label">
+<input name="code5" required="" type="radio" value="1"/>
+<span>O(n)</span>
+</label>
+<label class="option-label">
+<input name="code5" required="" type="radio" value="2"/>
+<span>O(5)</span>
+</label>
+<label class="option-label">
+<input name="code5" required="" type="radio" value="3"/>
+<span>O(3)</span>
+</label>
+</div>
+</div>
+<button class="submit-quiz" type="submit">Quiz indienen</button>
 </form>
-<div id="code-result"></div></div></div></div>
-<footer style="text-align:center;color:#7f8c8d;padding:2rem;">Gebaseerd op de PA Summary van Stephanie VDH.</footer>
+<div id="code-result"></div>
+</div>
+</div>
+</div>
+
 <script>
-        const QUIZ_CONFIG = {"chapter1-mcq": {"answers": [1, 0, 1, 1, 1, 0, 1, 0, 1, 1], "total": 10}, "chapter1-tf": {"answers": [0, 1, 0, 0, 1, 0, 0, 1, 1, 0], "total": 10}, "chapter1-code": {"answers": [1, 1, 1, 1, 0], "total": 5}};
-        function saveQuizData(quizId, data) { localStorage.setItem(quizId, JSON.stringify(data)); }
-        function loadQuizData(quizId) { const data = localStorage.getItem(quizId); return data ? JSON.parse(data) : null; }
+        // Quiz Configuration
+        const QUIZ_CONFIG = {
+            'chapter1-mcq': {
+                answers: [2, 1, 1, 0, 2, 1, 3, 1, 1, 1],
+                total: 10
+            },            'chapter1-tf': {
+                answers: [1, 0, 1, 0, 0, 1, 0, 0, 0, 0],
+                total: 10
+            },            'chapter1-code': {
+                answers: [1, 1, 1, 1, 0],
+                total: 5
+            }
+        };
+
+        // Storage functions
+        function saveQuizData(quizId, data) {
+            localStorage.setItem(quizId, JSON.stringify(data));
+        }
+
+        function loadQuizData(quizId) {
+            const data = localStorage.getItem(quizId);
+            return data ? JSON.parse(data) : null;
+        }
+
+        // Switch between sections
         function switchSection(sectionName) {
             const tabs = document.querySelectorAll('.section-tab');
             const contents = document.querySelectorAll('.section-content');
+            
             tabs.forEach(tab => tab.classList.remove('active'));
             contents.forEach(content => content.classList.remove('active'));
-            tabs.forEach(tab => { if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(sectionName)) tab.classList.add('active'); });
+            
+            // Find and activate the tab that was clicked by matching the onclick attribute
+            tabs.forEach(tab => {
+                if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(sectionName)) {
+                    tab.classList.add('active');
+                }
+            });
+            
             document.getElementById(sectionName).classList.add('active');
         }
-        function toggleFlashcard(card) { card.querySelector('.flashcard-answer').classList.toggle('show'); }
+
+        // Flashcard toggle
+        function toggleFlashcard(card) {
+            const answer = card.querySelector('.flashcard-answer');
+            answer.classList.toggle('show');
+        }
+
+        // Restore saved answers for a quiz
         function restoreAnswers(formId, quizId) {
-            const savedData = loadQuizData(quizId); if (!savedData || !savedData.userAnswers) return;
+            const savedData = loadQuizData(quizId);
+            if (!savedData || !savedData.userAnswers) return;
+
             const form = document.getElementById(formId);
             Object.entries(savedData.userAnswers).forEach(([questionName, value]) => {
-                const input = form.querySelector(`input[name="${questionName}"][value="${value}"]`); if (input) input.checked = true;
+                const input = form.querySelector(`input[name="${questionName}"][value="${value}"]`);
+                if (input) {
+                    input.checked = true;
+                }
             });
-            if (savedData.submitted) showAnswerFeedback(formId, quizId, savedData.userAnswers);
+
+            if (savedData.submitted) {
+                showAnswerFeedback(formId, quizId, savedData.userAnswers);
+            }
         }
+
+        // Show feedback for each answer
         function showAnswerFeedback(formId, quizId, userAnswers) {
-            const form = document.getElementById(formId); const config = QUIZ_CONFIG[quizId];
+            const form = document.getElementById(formId);
+            const config = QUIZ_CONFIG[quizId];
             const questionPrefix = quizId.includes('mcq') ? 'q' : quizId.includes('tf') ? 'tf' : 'code';
+            
             for (let i = 0; i < config.total; i++) {
                 const questionName = `${questionPrefix}${i + 1}`;
-                const userAnswer = parseInt(userAnswers[questionName]); const correctAnswer = config.answers[i];
+                const userAnswer = parseInt(userAnswers[questionName]);
+                const correctAnswer = config.answers[i];
+                
                 form.querySelectorAll(`input[name="${questionName}"]`).forEach(input => {
-                    const label = input.closest('.option-label'); const value = parseInt(input.value);
+                    const label = input.closest('.option-label');
+                    const value = parseInt(input.value);
+                    
                     label.classList.remove('correct', 'incorrect');
-                    if (value === correctAnswer) label.classList.add('correct');
-                    else if (value === userAnswer && value !== correctAnswer) label.classList.add('incorrect');
+                    
+                    if (value === correctAnswer) {
+                        label.classList.add('correct');
+                    } else if (value === userAnswer && value !== correctAnswer) {
+                        label.classList.add('incorrect');
+                    }
+                    
                     input.disabled = true;
                 });
             }
+            
+            // Update submit button to show reset option
             const submitBtn = form.querySelector('.submit-quiz');
-            if (submitBtn) { submitBtn.disabled = true; submitBtn.style.display = 'none'; }
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.style.display = 'none';
+            }
+            
+            // Show or create reset button
             let resetBtn = form.querySelector('.reset-quiz');
-            if (!resetBtn) { resetBtn = document.createElement('button'); resetBtn.type = 'button'; resetBtn.className = 'reset-quiz'; resetBtn.textContent = '🔄 Reset Quiz'; resetBtn.onclick = function() { resetQuiz(formId, quizId); }; submitBtn.parentNode.insertBefore(resetBtn, submitBtn.nextSibling); }
+            if (!resetBtn) {
+                resetBtn = document.createElement('button');
+                resetBtn.type = 'button';
+                resetBtn.className = 'reset-quiz';
+                resetBtn.textContent = '🔄 Reset Quiz';
+                resetBtn.onclick = function() { resetQuiz(formId, quizId); };
+                submitBtn.parentNode.insertBefore(resetBtn, submitBtn.nextSibling);
+            }
             resetBtn.style.display = 'block';
         }
+
+        // Reset quiz function
         function resetQuiz(formId, quizId) {
-            const form = document.getElementById(formId); localStorage.removeItem(quizId); form.reset();
-            form.querySelectorAll('.option-label').forEach(label => label.classList.remove('correct', 'incorrect'));
-            form.querySelectorAll('input').forEach(input => input.disabled = false);
-            const resetBtn = form.querySelector('.reset-quiz'); const submitBtn = form.querySelector('.submit-quiz');
-            if (resetBtn) resetBtn.style.display = 'none'; if (submitBtn) { submitBtn.disabled = false; submitBtn.style.display = 'block'; }
-            const resultDiv = document.getElementById(formId.replace('-form', '-result')); if (resultDiv) { resultDiv.className = ''; resultDiv.textContent = ''; }
+            const form = document.getElementById(formId);
+            
+            // Clear saved data
+            localStorage.removeItem(quizId);
+            
+            // Reset form
+            form.reset();
+            
+            // Remove all feedback styling
+            form.querySelectorAll('.option-label').forEach(label => {
+                label.classList.remove('correct', 'incorrect');
+            });
+            
+            // Re-enable all inputs
+            form.querySelectorAll('input').forEach(input => {
+                input.disabled = false;
+            });
+            
+            // Hide reset button, show submit button
+            const resetBtn = form.querySelector('.reset-quiz');
+            const submitBtn = form.querySelector('.submit-quiz');
+            if (resetBtn) resetBtn.style.display = 'none';
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.style.display = 'block';
+            }
+            
+            // Clear result display
+            const resultId = formId.replace('-form', '-result');
+            const resultDiv = document.getElementById(resultId);
+            if (resultDiv) {
+                resultDiv.className = '';
+                resultDiv.textContent = '';
+            }
+            
+            // Scroll to top of quiz
+            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+
+        // Handle quiz submission
         function handleQuizSubmit(e, formId, quizId) {
-            e.preventDefault(); const form = document.getElementById(formId); const config = QUIZ_CONFIG[quizId]; const formData = new FormData(form);
+            e.preventDefault();
+            const form = document.getElementById(formId);
+            const config = QUIZ_CONFIG[quizId];
+            const formData = new FormData(form);
             const questionPrefix = quizId.includes('mcq') ? 'q' : quizId.includes('tf') ? 'tf' : 'code';
-            let correct = 0; const userAnswers = {};
-            for (let i = 0; i < config.total; i++) { const questionName = `${questionPrefix}${i + 1}`; const selected = parseInt(formData.get(questionName)); userAnswers[questionName] = selected; if (selected === config.answers[i]) correct++; }
-            saveQuizData(quizId, { userAnswers, score: correct, total: config.total, submitted: true, timestamp: new Date().toISOString() });
-            showAnswerFeedback(formId, quizId, userAnswers); showResult(formId.replace('-form', '-result'), correct, config.total);
+            
+            let correct = 0;
+            const userAnswers = {};
+            
+            for (let i = 0; i < config.total; i++) {
+                const questionName = `${questionPrefix}${i + 1}`;
+                const selected = parseInt(formData.get(questionName));
+                userAnswers[questionName] = selected;
+                
+                if (selected === config.answers[i]) {
+                    correct++;
+                }
+            }
+            
+            // Save results
+            saveQuizData(quizId, {
+                userAnswers: userAnswers,
+                score: correct,
+                total: config.total,
+                submitted: true,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Show feedback
+            showAnswerFeedback(formId, quizId, userAnswers);
+            
+            // Show result
+            const resultId = formId.replace('-form', '-result');
+            showResult(resultId, correct, config.total);
         }
+
+        // Show quiz result
         function showResult(elementId, correct, total) {
-            const percentage = (correct / total) * 100; const resultDiv = document.getElementById(elementId);
+            const percentage = (correct / total) * 100;
+            const resultDiv = document.getElementById(elementId);
+            
             let resultClass, message;
-            if (percentage >= 80) { resultClass = 'excellent'; message = `🎉 Uitstekend! ${correct}/${total} correct (${percentage.toFixed(0)}%)`; }
-            else if (percentage >= 60) { resultClass = 'good'; message = `👍 Goed bezig! ${correct}/${total} correct (${percentage.toFixed(0)}%). Herhaal de gemiste concepten.`; }
-            else { resultClass = 'needs-work'; message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Lees de samenvatting opnieuw en probeer nog eens.`; }
-            resultDiv.className = `quiz-result ${resultClass}`; resultDiv.textContent = message; resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            if (percentage >= 80) {
+                resultClass = 'excellent';
+                message = `🎉 Uitstekend! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
+            } else if (percentage >= 60) {
+                resultClass = 'good';
+                message = `👍 Goed gedaan! ${correct}/${total} correct (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
+            } else {
+                resultClass = 'needs-work';
+                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Bestudeer de dezelfdenvatting en probeer opnieuw!`;
+            }
+            
+            resultDiv.className = `quiz-result ${resultClass}`;
+            resultDiv.textContent = message;
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
+
+        // Initialize quizzes
         document.addEventListener('DOMContentLoaded', function() {
-            const mcqForm = document.getElementById('mcq-form'); if (mcqForm) { mcqForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'mcq-form', 'chapter1-mcq')); restoreAnswers('mcq-form', 'chapter1-mcq'); }
-            const tfForm = document.getElementById('tf-form'); if (tfForm) { tfForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'tf-form', 'chapter1-tf')); restoreAnswers('tf-form', 'chapter1-tf'); }
-            const codeForm = document.getElementById('code-form'); if (codeForm) { codeForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'code-form', 'chapter1-code')); restoreAnswers('code-form', 'chapter1-code'); }
+            // Multiple Choice Quiz
+            const mcqForm = document.getElementById('mcq-form');
+            if (mcqForm) {
+                mcqForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'mcq-form', 'chapter1-mcq'));
+                restoreAnswers('mcq-form', 'chapter1-mcq');
+            }
+            
+            // Waar/Niet waar Quiz
+            const tfForm = document.getElementById('tf-form');
+            if (tfForm) {
+                tfForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'tf-form', 'chapter1-tf'));
+                restoreAnswers('tf-form', 'chapter1-tf');
+            }
+            
+            // Code Analysis Quiz
+            const codeForm = document.getElementById('code-form');
+            if (codeForm) {
+                codeForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'code-form', 'chapter1-code'));
+                restoreAnswers('code-form', 'chapter1-code');
+            }
         });
+    </script>
+<div class="source-note" style="text-align:center;margin:30px auto;color:#6b7280;font-size:0.95rem;">Gebaseerd op de PA Samenvatting van Stephanie VDH.</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  const btn=document.querySelector('.mobile-menu-toggle');
+  if(!btn) return;
+  btn.addEventListener('click',function(){document.body.classList.toggle('mobile-menu-open');btn.classList.toggle('is-open');});
+});
 </script>
-</body></html>
+
+</body>
+</html>

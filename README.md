@@ -1,13 +1,8 @@
-# PA Summary Nederlands - zelfde opmaak
+# Programming Advanced - Nederlandse PA Summary
 
-Deze map bevat een Nederlandstalige versie met dezelfde algemene opmaak, tabs, kaarten, flashcards en quizwerking als de originele PA Summary-site.
+Deze map bevat de originele website-structuur van Stephanie’s PA Summary, omgezet naar Nederlands met dezelfde opmaak en hoofdstukindeling.
 
 ## GitHub Pages
-Upload alle bestanden naar de root van je repository en kies bij GitHub Pages:
+Upload de inhoud van deze map naar de root van je repository en activeer GitHub Pages via Settings → Pages → Deploy from branch → main → /root.
 
-- Source: Deploy from a branch
-- Branch: main
-- Folder: /root
-
-## Bronvermelding
 Gebaseerd op de PA Summary van Stephanie VDH.

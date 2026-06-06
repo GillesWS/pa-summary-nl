@@ -1,296 +1,47 @@
-<!DOCTYPE html>
+html
 <html lang="nl">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Hoofdstuk 6: Backtracking - Programming Advanced</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #2d3561;
-            --secondary: #4a90e2;
-            --accent: #ff6b6b;
-            --success: #51cf66;
-            --warning: #ffd93d;
-            --bg: #f8f9fa;
-            --card: #ffffff;
-            --text: #2c3e50;
-            --text-light: #7f8c8d;
-        }
-
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        .navbar {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 1.5rem 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .navbar-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .back-button {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 0.6rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .back-button:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateX(-5px);
-        }
-
-        .chapter-header {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-
-        .title-section {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .chapter-number {
-            font-family: 'Space Mono', monospace;
-            color: var(--secondary);
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .section-tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 3px solid var(--border);
-            flex-wrap: wrap;
-        }
-
-        .section-tab {
-            padding: 1rem 2rem;
-            background: transparent;
-            border: none;
-            border-bottom: 4px solid transparent;
-            cursor: pointer;
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-light);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .section-tab:hover {
-            color: var(--secondary);
-        }
-
-        .section-tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--accent);
-        }
-
-        .section-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .section-content.active {
-            display: block;
-        }
-
-        /* Summary Styles */
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .summary-card {
-            background: white;
-            padding: 1.25rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            border-left: 5px solid var(--secondary);
-        }
-
-        .summary-card h3 {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-
-        .summary-card h4 {
-            color: var(--secondary);
-            font-size: 1.2rem;
-            margin: 1.5rem 0 0.75rem;
-            font-weight: 600;
-        }
-
-        .summary-card p, .summary-card li {
-            color: var(--text);
-            line-height: 1.8;
-            margin-bottom: 0.75rem;
-        }
-
-        .summary-card ul {
-            margin-left: 1.5rem;
-        }
-
-        .summary-card strong {
-            color: var(--primary);
-        }
-
-        .code-block {
-            background: #f5f5f5;
-            padding: 1rem;
-            border-radius: 8px;
-            font-family: 'Space Mono', monospace;
-            font-size: 0.9rem;
-            margin: 1rem 0;
-            border-left: 4px solid var(--accent);
-            overflow-x: auto;
-        }
-
-        .highlight-box {
-            background: #e3f2fd;
-            border-left: 4px solid var(--secondary);
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 4px;
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-
-        .comparison-table th {
-            background: var(--primary);
-            color: white;
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .comparison-table td {
-            padding: 1rem;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .comparison-table tr:hover {
-            background: #f5f5f5;
-        }
-
-        /* Quiz Styles */
-        .quiz-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .quiz-section {
-            background: white;
-            padding: 1.25rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            margin-bottom: 2rem;
-        }
-
-        .quiz-section h3 {
-            color: var(--primary);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid var(--accent);
-        }
-
-        .quiz-question {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: var(--bg);
-            border-radius: 10px;
-            border-left: 5px solid var(--warning);
-        }
-
-        .question-number {
-            color: var(--secondary);
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .question-text {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary);
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .option-label {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .option-label:hover {
-            border-color: var(--secondary);
-            background: #f0f7ff;
-            transform: translateX(5px);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary: #2d3561; --secondary: #4a90e2; --accent: #ff6b6b; --success: #51cf66; --warning: #ffd93d; --bg: #f8f9fa; --card: #ffffff; --text: #2c3e50; --text-light: #7f8c8d; }
+        body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .navbar { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color: white; padding: 1.5rem 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        .navbar-content { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .back-button { background: rgba(255,255,255,0.2); color: white; padding: 0.6rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; transition: all 0.3s; border: 2px solid rgba(255,255,255,0.3); }
+        .back-button:hover { background: rgba(255,255,255,0.3); transform: translateX(-5px); }
+        .chapter-header { font-family: 'Space Mono', monospace; font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem 1.5rem 2rem; }
+        .title-section { text-align: center; margin-bottom: 3rem; }
+        h1 { font-size: 3rem; color: var(--primary); margin-bottom: 0.5rem; }
+        .chapter-number { font-family: 'Space Mono', monospace; color: var(--secondary); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+        .section-tabs { display: flex; gap: 1rem; margin-bottom: 2rem; margin-top: 0; border-bottom: 3px solid #e0e6ed; flex-wrap: wrap; }
+        .section-tab { padding: 1rem 2rem; background: transparent; border: none; border-bottom: 4px solid transparent; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 600; color: var(--text-light); transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .section-tab:hover { color: var(--secondary); }
+        .section-tab.active { color: var(--primary); border-bottom-color: var(--accent); }
+        .section-content { display: none; animation: fadeIn 0.5s; }
+        .section-content.active { display: block; }
+        .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 1.25rem; max-width: 100%; }
+        .summary-card { background: white; padding: 1.25rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-left: 5px solid var(--secondary); }
+        .summary-card h3 { color: var(--primary); font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 700; }
+        .summary-card h4 { color: var(--secondary); font-size: 1.1rem; margin: 1rem 0 0.5rem; font-weight: 600; }
+        .summary-card p, .summary-card li { color: var(--text); line-height: 1.6; margin-bottom: 0.75rem; }
+        .summary-card ul { margin-left: 1.5rem; }
+        .summary-card strong { color: var(--primary); }
+        .code-block { background: #f5f5f5; padding: 1rem; border-radius: 8px; font-family: 'Space Mono', monospace; font-size: 0.85rem; margin: 1rem 0; border-left: 4px solid var(--accent); overflow-x: auto; white-space: pre-line; }
+        .highlight-box { background: #e3f2fd; border-left: 4px solid var(--secondary); padding: 1rem; margin: 1rem 0; border-radius: 4px; }
+        .quiz-container { max-width: 900px; margin: 0 auto; }
+        .quiz-section { background: white; padding: 1.25rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 2rem; }
+        .quiz-section h3 { color: var(--primary); font-size: 1.8rem; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--accent); }
+        .quiz-question { margin-bottom: 2rem; padding: 1.5rem; background: var(--bg); border-radius: 10px; border-left: 5px solid var(--warning); }
+        .question-number { color: var(--secondary); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .question-text { font-weight: 600; font-size: 1.05rem; margin-bottom: 0.5rem; color: var(--primary); line-height: 1.6; }
+        .options { display: flex; flex-direction: column; gap: 0.75rem; }
+        .option-label { display: flex; align-items: center; padding: 1rem; background: white; border: 2px solid #e0e0e0; border-radius: 8px; cursor: pointer; transition: all 0.3s; }
+        .option-label:hover { border-color: var(--secondary); background: #f0f7ff; transform: translateX(5px); }
         .option-label.correct {
             background: #d3f9d8;
             border-color: var(--success);
@@ -311,7 +62,7 @@
         }
 
         .option-label.incorrect::after {
-            content: '✗ Incorrect';
+            content: '✗ Fout';
             margin-left: auto;
             color: var(--accent);
             font-weight: 700;
@@ -345,456 +96,582 @@
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(255, 217, 61, 0.4);
         }
-
-        .option-label input[type="radio"] {
-            margin-right: 1rem;
-            cursor: pointer;
-            width: 20px;
-            height: 20px;
-            accent-color: var(--secondary);
-        }
-
-        .flashcard {
-            margin-bottom: 1.5rem;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-        }
-
-        .flashcard-question {
-            background: var(--secondary);
-            color: white;
-            padding: 1rem 1.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            user-select: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .flashcard-question:hover {
-            background: var(--primary);
-        }
-
-        .flashcard-answer {
-            padding: 1.5rem;
-            background: #f8f9fa;
-            display: none;
-            border-top: 2px solid var(--secondary);
-        }
-
-        .flashcard-answer.show {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-
-        .submit-quiz {
-            width: 100%;
-            padding: 1.2rem;
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 2rem;
-        }
-
-        .submit-quiz:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.4);
-        }
-
-        .quiz-result {
-            margin-top: 2rem;
-            padding: 1.25rem;
-            border-radius: 12px;
-            font-weight: 600;
-            text-align: center;
-            font-size: 1.3rem;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .quiz-result.excellent {
-            background: linear-gradient(135deg, #d3f9d8, #b2f2bb);
-            color: #2b8a3e;
-            border: 3px solid var(--success);
-        }
-
-        .quiz-result.good {
-            background: linear-gradient(135deg, #fff3bf, #ffe066);
-            color: #e67700;
-            border: 3px solid var(--warning);
-        }
-
-        .quiz-result.needs-work {
-            background: linear-gradient(135deg, #ffe3e3, #ffc9c9);
-            color: #c92a2a;
-            border: 3px solid var(--accent);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .summary-grid {
-                grid-template-columns: 1fr;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .section-tabs {
-                overflow-x: auto;
-            }
-        }
+        .option-label input { margin-right: 1rem; width: 20px; height: 20px; accent-color: var(--secondary); cursor: pointer; flex-shrink: 0; }
+        .flashcard { margin-bottom: 1.5rem; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+        .flashcard-question { background: var(--secondary); color: white; padding: 1rem 1.5rem; font-weight: 600; cursor: pointer; user-select: none; display: flex; justify-content: space-between; align-items: center; }
+        .flashcard-question:hover { background: var(--primary); }
+        .flashcard-answer { padding: 1.5rem; background: #f8f9fa; display: none; border-top: 2px solid var(--secondary); line-height: 1.7; }
+        .flashcard-answer.show { display: block; animation: slideDown 0.3s; }
+        .submit-quiz { width: 100%; padding: 1.2rem; background: linear-gradient(135deg, var(--secondary), var(--primary)); color: white; border: none; border-radius: 10px; font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; margin-top: 2rem; }
+        .submit-quiz:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(74,144,226,0.4); }
+        .quiz-result { margin-top: 2rem; padding: 1.25rem; border-radius: 12px; font-weight: 600; text-align: center; font-size: 1.3rem; animation: fadeIn 0.5s; }
+        .quiz-result.excellent { background: linear-gradient(135deg, #d3f9d8, #b2f2bb); color: #2b8a3e; border: 3px solid var(--success); }
+        .quiz-result.good { background: linear-gradient(135deg, #fff3bf, #ffe066); color: #e67700; border: 3px solid var(--warning); }
+        .quiz-result.needs-work { background: linear-gradient(135deg, #ffe3e3, #ffc9c9); color: #c92a2a; border: 3px solid var(--accent); }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) { .summary-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
     </style>
+<!-- MOBILE MENU PATCH -->
+
+<style>
+@media (max-width: 768px) {
+  .mobile-menu-toggle { display:flex!important; }
+  body.mobile-menu-open { overflow:hidden; }
+  .chapters-grid, .grid, .cards-grid { grid-template-columns: 1fr!important; }
+  table, pre { max-width:100%; overflow-x:auto; }
+}
+.mobile-menu-toggle{display:none;position:fixed;top:14px;right:14px;z-index:9999;width:48px;height:44px;border:1px solid rgba(255,255,255,.55);border-radius:12px;background:linear-gradient(135deg,#2f3f78,#4a90e2);box-shadow:0 8px 24px rgba(0,0,0,.22);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}.mobile-menu-toggle span{display:block;width:23px;height:3px;border-radius:999px;background:#fff;transition:.2s}.mobile-menu-toggle.is-open span:nth-child(1){transform:translateY(8px) rotate(45deg)}.mobile-menu-toggle.is-open span:nth-child(2){opacity:0}.mobile-menu-toggle.is-open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+@media (max-width:768px){.chapter-header .back-btn,.back-btn{margin-right:58px}.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}.tab-button{white-space:nowrap}}
+</style>
+
 </head>
 <body>
-<nav class="navbar"><div class="navbar-content"><div class="chapter-header">Hoofdstuk 6: Backtracking</div><a href="index.html" class="back-button">← Terug naar hoofdstukken</a></div></nav>
-<div class="container"></div>
+<button class="mobile-menu-toggle" type="button" aria-label="Menu openen"><span></span><span></span><span></span></button>
+<nav class="navbar">
+<div class="navbar-content">
+<div class="chapter-header">Hoofdstuk 6: Backtracking</div>
+<a class="back-button" href="index.html">← Terug naar hoofdstukken</a>
+</div>
+</nav>
+<div class="container">
+</div>
 <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
 <button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
 <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-<button class="section-tab" onclick="switchSection('multiple-choice')">✅ Multiple Choice</button>
-<button class="section-tab" onclick="switchSection('true-false')">⭕ Waar/Niet waar</button>
-<button class="section-tab" onclick="switchSection('code-analysis')">💻 Code-analyse</button>
+<button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
 </div>
-<div class="section-content active" id="summary"><div class="summary-grid">
-<div class="summary-card"><h3>🔙 Wat is backtracking?</h3><p>Backtracking probeert keuzes uit. Als een keuze niet werkt, ga je terug en probeer je een andere keuze.</p><div class="code-block">kies → ga dieper → fout? → undo → volgende keuze</div></div>
-<div class="summary-card"><h3>🧠 Waarvoor gebruiken?</h3><ul><li>N-Queens</li><li>Sudoku</li><li>Mazes</li><li>Subsets en combinaties</li><li>Permutaties</li></ul></div>
-<div class="summary-card"><h3>📈 Complexiteit</h3><p>Backtracking is vaak exponentieel, bijvoorbeeld O(2^n) voor subsets of O(n!) voor permutaties. Pruning kan veel onnodige takken afkappen.</p></div>
-<div class="summary-card"><h3>⚠️ Valkuilen</h3><ul><li>Undo-stap vergeten.</li><li>Visited/state niet resetten.</li><li>Te vroeg prunen en geldige oplossingen verliezen.</li></ul></div>
-</div></div>
-<div class="section-content" id="flashcards"><div class="quiz-container"><div class="quiz-section"><h3>📇 Flashcards - klik om het antwoord te tonen</h3><div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Backtracking gebruikt vaak welke techniek? <span>▼</span></div><div class="flashcard-answer">Recursie.</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Waarom undo? <span>▼</span></div><div class="flashcard-answer">Om de keuze terug te draaien voor volgende paden.</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is het kernidee van Backtracking? <span>▼</span></div><div class="flashcard-answer">Dat je het probleemtype herkent en de juiste strategie of datastructuur kiest.</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Waarom is Big O belangrijk? <span>▼</span></div><div class="flashcard-answer">Omdat je moet kunnen uitleggen hoe runtime of geheugen groeit bij grotere input.</div></div>
-<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat moet je op het examen altijd kunnen doen? <span>▼</span></div><div class="flashcard-answer">Output traceren, Big O berekenen en je algoritmische keuze verdedigen.</div></div></div></div></div>
-<div class="section-content" id="multiple-choice"><div class="quiz-container"><div class="quiz-section"><h3>✅ Multiple Choice Quiz</h3><form id="mcq-form">
+<div class="section-content active" id="summary">
+<div class="summary-grid">
+<div class="summary-card">
+<h3> Wat is Backtracking?</h3>
+<p><strong>Definitie:</strong> Systematic trial-and-error approach naar explore alle mogelijk oplossingen.</p>
+<h4>Core Idea:</h4>
+<ul>
+<li>Try een keuze → if werkt, continue deeper</li>
+<li>If faalt → backtrack en try different keuze</li>
+<li>Explore alle possibilities until oplossing found</li>
+</ul>
+<div class="highlight-box"><strong>Key Insight:</strong> Systematic exploration met ability naar undo keuzes!</div>
+</div>
+<div class="summary-card">
+<h3> N-Queens Probleem</h3>
+<p><strong>Goal:</strong> Place N queens on N×N chessboard so no two queens threaten elke other.</p>
+<h4>Constraints:</h4>
+<ul>
+<li>Nee two queens in dezelfde row</li>
+<li>Nee two queens in dezelfde column</li>
+<li>Nee two queens on dezelfde diagonal</li>
+</ul>
+<h4>Algoritme:</h4>
+<div class="code-block">1. Start in leftmost column
+2. If alle queens placed → return waar
+3. Voor elke row in huidige column:
+   - If queen can be placed safely → mark it
+   - Recurse naar place remaining queens
+   - If leads naar oplossing → return waar
+   - Else → unmark (backtrack) en try next row</div>
+</div>
+<div class="summary-card">
+<h3> Subset Probleem</h3>
+<p><strong>Goal:</strong> Generate alle subsets van een given set.</p>
+<h4>Voorbeeld:</h4>
+<p>Input: [1, 2, 3]<br/>Output: {}, {1}, {2}, {3}, {1,2}, {1,3}, {2,3}, {1,2,3}</p>
+<h4>Backtracking Approach:</h4>
+<div class="code-block">1. Start met empty subset
+2. Voor elke element:
+   - Include element (recurse)
+   - Exclude element (backtrack)</div>
+<h4>Number van Subsets:</h4>
+<p>Voor n elementen: 2^n subsets (elke element: include of exclude)</p>
+</div>
+<div class="summary-card">
+<h3> Binary Approach (Subsets)</h3>
+<p><strong>Alternative:</strong> Gebruik binary representation</p>
+<div class="code-block">Voor [1,2,3]:
+000 → {}
+001 → {3}
+010 → {2}
+011 → {2,3}
+100 → {1}
+101 → {1,3}
+110 → {1,2}
+111 → {1,2,3}</div>
+<p>Elke bit stelt voor include (1) of exclude (0)</p>
+</div>
+<div class="summary-card">
+<h3> Backtracking Patroon</h3>
+<div class="code-block">Functie Backtrack(state):
+  IF is_solution(state) THEN
+    add_to_results(state)
+    RETURN
+  END IF
+  
+  Voor elke keuze in keuzes:
+    IF is_valid(keuze) THEN
+      make_choice(keuze)
+      Backtrack(new_state)
+      undo_choice(keuze)  // Backtrack!
+    END IF
+  END Voor
+END Functie</div>
+<h4>Key Components:</h4>
+<ul>
+<li><strong>Keuze:</strong> What options do we have?</li>
+<li><strong>Constraint:</strong> What makes keuze valid?</li>
+<li><strong>Goal:</strong> Wanneer have we found oplossing?</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> Wanneer naar Gebruik Backtracking</h3>
+<h4>Perfect Voor:</h4>
+<ul>
+<li><strong>Constraint problemen:</strong> Sudoku, N-Queens</li>
+<li><strong>Permutations/Combinations:</strong> Generate alle possibilities</li>
+<li><strong>Subset generation:</strong> Alle combinations van elementen</li>
+<li><strong>Pad finding:</strong> Mazes, puzzles</li>
+<li><strong>Game solving:</strong> Tic-tac-toe, chess moves</li>
+</ul>
+<h4>Characteristics:</h4>
+<ul>
+<li>Nee direct algoritme naar oplossing</li>
+<li>Must explore multiple possibilities</li>
+<li>Nodig hebben naar try en potentially undo keuzes</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> Optimalisatie: Pruning</h3>
+<p><strong>Idea:</strong> Cut branches dat can't lead naar valid oplossing</p>
+<h4>Benefits:</h4>
+<ul>
+<li>Avoid exploring invalid paths early</li>
+<li>Dramatically reduce zoeken geheugen</li>
+<li>Make backtracking practical</li>
+</ul>
+<h4>Example - N-Queens:</h4>
+<p>Check if queen placement is safe BEFORE recursing (don't place if threatens existing queens)</p>
+</div>
+<div class="summary-card">
+<h3> Belangrijkste inzichten</h3>
+<ul>
+<li>Backtracking = systematic trial en error</li>
+<li>Gebruikt recursie naar explore possibilities</li>
+<li>Make keuze → recurse → undo if faalt</li>
+<li>Essential voor constraint satisfaction problemen</li>
+<li>Pruning improves efficiency dramatically</li>
+<li>N-Queens: classic backtracking example</li>
+<li>Subsets: 2^n possibilities (include/exclude elke)</li>
+<li>Patroon: choose → explore → backtrack</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section-content" id="flashcards">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>📇 Flashcards</h3>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is backtracking?<span>▼</span></div><div class="flashcard-answer">Systematic trial-and-error approach: try keuze → if werkt continue, if faalt → undo en try different keuze</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">N-Queens constraints?<span>▼</span></div><div class="flashcard-answer">Nee two queens in dezelfde row, column, of diagonal</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">How many subsets voor n elementen?<span>▼</span></div><div class="flashcard-answer">2^n subsets (elke element: include of exclude)</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wat is pruning in backtracking?<span>▼</span></div><div class="flashcard-answer">Cutting branches dat can't lead naar valid oplossing early</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Wanneer naar gebruik backtracking?<span>▼</span></div><div class="flashcard-answer">Constraint problemen, permutations, combinations, pad finding, puzzles</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Backtracking patroon stappen?<span>▼</span></div><div class="flashcard-answer">1. Make keuze 2. Recurse 3. Undo keuze (backtrack)</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Subsets van [1,2]?<span>▼</span></div><div class="flashcard-answer">{}, {1}, {2}, {1,2} - total 2^2 = 4 subsets</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Backtracking gebruikt which technique?<span>▼</span></div><div class="flashcard-answer">Recursie - naar explore alle possibilities systematically</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">N-Queens voor 4×4 board?<span>▼</span></div><div class="flashcard-answer">2 oplossingen exist voor 4-Queens probleem</div></div>
+<div class="flashcard" onclick="toggleFlashcard(this)"><div class="flashcard-question">Key advantage van backtracking?<span>▼</span></div><div class="flashcard-answer">Explores alle possibilities systematically while avoiding unnecessary werkt through pruning</div></div>
+</div>
+</div>
+</div>
+<div class="section-content" id="quiz">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>✅ Quiz</h3>
+<form id="mcq-form">
 <div class="quiz-question">
 <div class="question-number">Vraag 1</div>
-<div class="question-text">Wat moet je bij Big O vooral beschrijven?</div>
+<div class="question-text">Wat is backtracking?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q1" value="0" required><span>Exacte seconden</span></label>
-<label class="option-label"><input type="radio" name="q1" value="1" required><span>Groeigedrag</span></label>
-<label class="option-label"><input type="radio" name="q1" value="2" required><span>Kleur van code</span></label>
-<label class="option-label"><input type="radio" name="q1" value="3" required><span>Aantal bestanden</span></label>
-</div></div>
+<label class="option-label"><input name="q1" required="" type="radio" value="0"/><span>Reversing een linked lijst</span></label>
+<label class="option-label"><input name="q1" required="" type="radio" value="1"/><span>Trial-and-error naar find oplossingen</span></label>
+<label class="option-label"><input name="q1" required="" type="radio" value="2"/><span>Sorteren algoritme</span></label>
+<label class="option-label"><input name="q1" required="" type="radio" value="3"/><span>Graph traversal methode</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 2</div>
-<div class="question-text">Welke aanpak probeert vaak eerst alles?</div>
+<div class="question-text">In N-Queens probleem, what must be waar?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q2" value="0" required><span>Brute force</span></label>
-<label class="option-label"><input type="radio" name="q2" value="1" required><span>Hashing</span></label>
-<label class="option-label"><input type="radio" name="q2" value="2" required><span>BFS</span></label>
-<label class="option-label"><input type="radio" name="q2" value="3" required><span>Tree traversal</span></label>
-</div></div>
+<label class="option-label"><input name="q2" required="" type="radio" value="0"/><span>Alle queens in dezelfde row</span></label>
+<label class="option-label"><input name="q2" required="" type="radio" value="1"/><span>Nee two queens threaten elke other</span></label>
+<label class="option-label"><input name="q2" required="" type="radio" value="2"/><span>Queens must be adjacent</span></label>
+<label class="option-label"><input name="q2" required="" type="radio" value="3"/><span>Board must be 8×8</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 3</div>
-<div class="question-text">Welke complexiteit is meestal beter?</div>
+<div class="question-text">How many subsets doet een set met 3 elementen have?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q3" value="0" required><span>O(n²)</span></label>
-<label class="option-label"><input type="radio" name="q3" value="1" required><span>O(n)</span></label>
-<label class="option-label"><input type="radio" name="q3" value="2" required><span>O(2^n)</span></label>
-<label class="option-label"><input type="radio" name="q3" value="3" required><span>O(n³)</span></label>
-</div></div>
+<label class="option-label"><input name="q3" required="" type="radio" value="0"/><span>3</span></label>
+<label class="option-label"><input name="q3" required="" type="radio" value="1"/><span>6</span></label>
+<label class="option-label"><input name="q3" required="" type="radio" value="2"/><span>8</span></label>
+<label class="option-label"><input name="q3" required="" type="radio" value="3"/><span>9</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 4</div>
-<div class="question-text">Welke structuur past bij BFS?</div>
+<div class="question-text">Wat is pruning in backtracking?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q4" value="0" required><span>Stack</span></label>
-<label class="option-label"><input type="radio" name="q4" value="1" required><span>Queue</span></label>
-<label class="option-label"><input type="radio" name="q4" value="2" required><span>BST</span></label>
-<label class="option-label"><input type="radio" name="q4" value="3" required><span>Array sort</span></label>
-</div></div>
+<label class="option-label"><input name="q4" required="" type="radio" value="0"/><span>Duplicaten verwijderen</span></label>
+<label class="option-label"><input name="q4" required="" type="radio" value="1"/><span>Cutting branches dat can't lead naar valid oplossing</span></label>
+<label class="option-label"><input name="q4" required="" type="radio" value="2"/><span>Sorteren results</span></label>
+<label class="option-label"><input name="q4" required="" type="radio" value="3"/><span>Optimizing geheugen</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 5</div>
-<div class="question-text">Wat moet je altijd testen?</div>
+<div class="question-text">Given deze backtracking pseudocode, what doet it do?<br/><br/>
+<div class="code-block">Functie Oplossen(row):
+  IF row == N THEN return waar
+  Voor col = 0 naar N-1:
+    IF isSafe(row, col):
+      place X at (row, col)
+      IF Oplossen(row + 1) THEN return waar
+      remove X van (row, col)
+  RETURN niet waar</div></div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q5" value="0" required><span>Alleen normale input</span></label>
-<label class="option-label"><input type="radio" name="q5" value="1" required><span>Randgevallen</span></label>
-<label class="option-label"><input type="radio" name="q5" value="2" required><span>Alleen grote input</span></label>
-<label class="option-label"><input type="radio" name="q5" value="3" required><span>Niets</span></label>
-</div></div>
+<label class="option-label"><input name="q5" required="" type="radio" value="0"/><span>Solves N-Queens probleem</span></label>
+<label class="option-label"><input name="q5" required="" type="radio" value="1"/><span>Generates subsets</span></label>
+<label class="option-label"><input name="q5" required="" type="radio" value="2"/><span>Solves Sudoku</span></label>
+<label class="option-label"><input name="q5" required="" type="radio" value="3"/><span>Finds pad in maze</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 6</div>
-<div class="question-text">Wat betekent pruning?</div>
+<div class="question-text">Backtracking gebruikt which programming technique?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q6" value="0" required><span>Onnodig werk vermijden</span></label>
-<label class="option-label"><input type="radio" name="q6" value="1" required><span>Alles sorteren</span></label>
-<label class="option-label"><input type="radio" name="q6" value="2" required><span>Een array kopiëren</span></label>
-<label class="option-label"><input type="radio" name="q6" value="3" required><span>Een klasse verwijderen</span></label>
-</div></div>
+<label class="option-label"><input name="q6" required="" type="radio" value="0"/><span>Iteration alleen</span></label>
+<label class="option-label"><input name="q6" required="" type="radio" value="1"/><span>Recursie</span></label>
+<label class="option-label"><input name="q6" required="" type="radio" value="2"/><span>Dynamic Programming</span></label>
+<label class="option-label"><input name="q6" required="" type="radio" value="3"/><span>Greedy approach</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 7</div>
-<div class="question-text">Welke strategie gebruikt opgeslagen subresultaten?</div>
+<div class="question-text">Voor set [Een, B], what zijn Alle subsets?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q7" value="0" required><span>Greedy</span></label>
-<label class="option-label"><input type="radio" name="q7" value="1" required><span>DP</span></label>
-<label class="option-label"><input type="radio" name="q7" value="2" required><span>Selection sort</span></label>
-<label class="option-label"><input type="radio" name="q7" value="3" required><span>Linear search</span></label>
-</div></div>
+<label class="option-label"><input name="q7" required="" type="radio" value="0"/><span>{}, {Een}, {B}, {Een,B}</span></label>
+<label class="option-label"><input name="q7" required="" type="radio" value="1"/><span>{Een}, {B}, {Een,B}</span></label>
+<label class="option-label"><input name="q7" required="" type="radio" value="2"/><span>{}, {Een,B}</span></label>
+<label class="option-label"><input name="q7" required="" type="radio" value="3"/><span>{Een}, {B}</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 8</div>
-<div class="question-text">Welke techniek gebruikt vaak undo?</div>
+<div class="question-text">In N-Queens, after placing een queen, what happens if no valid position exists voor next queen?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q8" value="0" required><span>Backtracking</span></label>
-<label class="option-label"><input type="radio" name="q8" value="1" required><span>Binary search</span></label>
-<label class="option-label"><input type="radio" name="q8" value="2" required><span>Hashing</span></label>
-<label class="option-label"><input type="radio" name="q8" value="3" required><span>Queue</span></label>
-</div></div>
+<label class="option-label"><input name="q8" required="" type="radio" value="0"/><span>Program crashes</span></label>
+<label class="option-label"><input name="q8" required="" type="radio" value="1"/><span>Remove queen en try different position</span></label>
+<label class="option-label"><input name="q8" required="" type="radio" value="2"/><span>Skip dat row</span></label>
+<label class="option-label"><input name="q8" required="" type="radio" value="3"/><span>Start over van beginning</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 9</div>
-<div class="question-text">Wat is belangrijk bij theorievragen?</div>
+<div class="question-text">Binary representation 101 voor set [1,2,3] stelt voor which subset?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q9" value="0" required><span>Definitie memoriseren</span></label>
-<label class="option-label"><input type="radio" name="q9" value="1" required><span>Redeneren</span></label>
-<label class="option-label"><input type="radio" name="q9" value="2" required><span>Geen Big O</span></label>
-<label class="option-label"><input type="radio" name="q9" value="3" required><span>Geen code lezen</span></label>
-</div></div>
+<label class="option-label"><input name="q9" required="" type="radio" value="0"/><span>{1,3}</span></label>
+<label class="option-label"><input name="q9" required="" type="radio" value="1"/><span>{2}</span></label>
+<label class="option-label"><input name="q9" required="" type="radio" value="2"/><span>{1,2}</span></label>
+<label class="option-label"><input name="q9" required="" type="radio" value="3"/><span>{1,2,3}</span></label>
+</div>
+</div>
 <div class="quiz-question">
 <div class="question-number">Vraag 10</div>
-<div class="question-text">Wat doe je bij een algoritmische keuze?</div>
+<div class="question-text">Welke probleem is NOT typically solved met backtracking?</div>
 <div class="options">
-<label class="option-label"><input type="radio" name="q10" value="0" required><span>Niet uitleggen</span></label>
-<label class="option-label"><input type="radio" name="q10" value="1" required><span>Motiveer waarom</span></label>
-<label class="option-label"><input type="radio" name="q10" value="2" required><span>Altijd random</span></label>
-<label class="option-label"><input type="radio" name="q10" value="3" required><span>Altijd linked list</span></label>
-</div></div>
-<button type="submit" class="submit-quiz">Quiz indienen</button>
+<label class="option-label"><input name="q10" required="" type="radio" value="0"/><span>Sudoku</span></label>
+<label class="option-label"><input name="q10" required="" type="radio" value="1"/><span>Binary search</span></label>
+<label class="option-label"><input name="q10" required="" type="radio" value="2"/><span>N-Queens</span></label>
+<label class="option-label"><input name="q10" required="" type="radio" value="3"/><span>Maze solving</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 11</div>
+<div class="question-text">Given deze code, how many subsets will be generated?<br/><br/>
+<div class="code-block">GenerateSubsets([5, 10, 15])</div></div>
+<div class="options">
+<label class="option-label"><input name="q11" required="" type="radio" value="0"/><span>3</span></label>
+<label class="option-label"><input name="q11" required="" type="radio" value="1"/><span>6</span></label>
+<label class="option-label"><input name="q11" required="" type="radio" value="2"/><span>8</span></label>
+<label class="option-label"><input name="q11" required="" type="radio" value="3"/><span>9</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 12</div>
+<div class="question-text">Wat is de key characteristic van backtracking?</div>
+<div class="options">
+<label class="option-label"><input name="q12" required="" type="radio" value="0"/><span>Altijd finds optimal oplossing</span></label>
+<label class="option-label"><input name="q12" required="" type="radio" value="1"/><span>Ability naar undo keuzes en try alternatives</span></label>
+<label class="option-label"><input name="q12" required="" type="radio" value="2"/><span>Gebruikt constant geheugen</span></label>
+<label class="option-label"><input name="q12" required="" type="radio" value="3"/><span>Lineair tijdscomplexiteit</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 13</div>
+<div class="question-text">What doet deze backtracking patroon do?<br/><br/>
+<div class="code-block">Functie Backtrack(huidige, remaining):
+  IF remaining is empty:
+    add huidige naar results
+  ELSE:
+    Backtrack(huidige + first, rest)  // Include
+    Backtrack(huidige, rest)           // Exclude</div></div>
+<div class="options">
+<label class="option-label"><input name="q13" required="" type="radio" value="0"/><span>Generates alle permutations</span></label>
+<label class="option-label"><input name="q13" required="" type="radio" value="1"/><span>Generates alle subsets</span></label>
+<label class="option-label"><input name="q13" required="" type="radio" value="2"/><span>Solves N-Queens</span></label>
+<label class="option-label"><input name="q13" required="" type="radio" value="3"/><span>Finds kortste pad</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">Vraag 14</div>
+<div class="question-text">How many subsets doet een empty set have?</div>
+<div class="options">
+<label class="option-label"><input name="q14" required="" type="radio" value="0"/><span>0</span></label>
+<label class="option-label"><input name="q14" required="" type="radio" value="1"/><span>1</span></label>
+<label class="option-label"><input name="q14" required="" type="radio" value="2"/><span>2</span></label>
+<label class="option-label"><input name="q14" required="" type="radio" value="3"/><span>Undefined</span></label>
+</div>
+</div>
+<button class="submit-quiz" type="submit">Quiz indienen</button>
 </form>
-<div id="mcq-result"></div></div></div></div>
-<div class="section-content" id="true-false"><div class="quiz-container"><div class="quiz-section"><h3>⭕ Waar of niet waar</h3><form id="tf-form">
-<div class="quiz-question">
-<div class="question-number">Vraag 1</div>
-<div class="question-text">Big O gaat over groeigedrag, niet over exacte seconden.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf1" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf1" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 2</div>
-<div class="question-text">Een queue werkt volgens LIFO.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf2" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf2" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 3</div>
-<div class="question-text">Backtracking kan pruning gebruiken.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf3" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf3" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 4</div>
-<div class="question-text">DP is nuttig bij overlapping subproblems.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf4" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf4" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 5</div>
-<div class="question-text">Greedy is altijd optimaal.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf5" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf5" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 6</div>
-<div class="question-text">DFS kan met recursie worden geïmplementeerd.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf6" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf6" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 7</div>
-<div class="question-text">Een hash table heeft gemiddeld O(1) lookup.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf7" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf7" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 8</div>
-<div class="question-text">Binary search werkt correct op ongesorteerde data.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf8" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf8" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 9</div>
-<div class="question-text">Selection sort heeft best-case O(n).</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf9" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf9" value="1" required><span>Niet waar</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 10</div>
-<div class="question-text">Visited is belangrijk bij graphs met cycles.</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="tf10" value="0" required><span>Waar</span></label>
-<label class="option-label"><input type="radio" name="tf10" value="1" required><span>Niet waar</span></label>
-</div></div>
-<button type="submit" class="submit-quiz">Quiz indienen</button>
-</form>
-<div id="tf-result"></div></div></div></div>
-<div class="section-content" id="code-analysis"><div class="quiz-container"><div class="quiz-section"><h3>💻 Code-analyse Quiz</h3><form id="code-form">
-<div class="quiz-question">
-<div class="question-number">Vraag 1</div>
-<div class="question-text">Wat is de time complexity?</div>
-<div class="code-block">for (int i = 0; i &lt; n; i++) {
-    Console.WriteLine(i);
-}</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="code1" value="0" required><span>O(1)</span></label>
-<label class="option-label"><input type="radio" name="code1" value="1" required><span>O(n)</span></label>
-<label class="option-label"><input type="radio" name="code1" value="2" required><span>O(n²)</span></label>
-<label class="option-label"><input type="radio" name="code1" value="3" required><span>O(log n)</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 2</div>
-<div class="question-text">Wat is de time complexity?</div>
-<div class="code-block">for (int i = 0; i &lt; n; i++) {
-  for (int j = 0; j &lt; n; j++) {
-    Console.WriteLine(i + j);
-  }
-}</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="code2" value="0" required><span>O(n)</span></label>
-<label class="option-label"><input type="radio" name="code2" value="1" required><span>O(n²)</span></label>
-<label class="option-label"><input type="radio" name="code2" value="2" required><span>O(log n)</span></label>
-<label class="option-label"><input type="radio" name="code2" value="3" required><span>O(1)</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 3</div>
-<div class="question-text">Wat is de time complexity?</div>
-<div class="code-block">while (n &gt; 1) {
-    n = n / 2;
-}</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="code3" value="0" required><span>O(n)</span></label>
-<label class="option-label"><input type="radio" name="code3" value="1" required><span>O(log n)</span></label>
-<label class="option-label"><input type="radio" name="code3" value="2" required><span>O(n²)</span></label>
-<label class="option-label"><input type="radio" name="code3" value="3" required><span>O(2^n)</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 4</div>
-<div class="question-text">Welke datastructuur herken je?</div>
-<div class="code-block">Queue&lt;int&gt; q = new Queue&lt;int&gt;();
-q.Enqueue(start);
-while(q.Count &gt; 0) { q.Dequeue(); }</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="code4" value="0" required><span>Stack</span></label>
-<label class="option-label"><input type="radio" name="code4" value="1" required><span>Queue/BFS</span></label>
-<label class="option-label"><input type="radio" name="code4" value="2" required><span>BST</span></label>
-<label class="option-label"><input type="radio" name="code4" value="3" required><span>Hash table</span></label>
-</div></div>
-<div class="quiz-question">
-<div class="question-number">Vraag 5</div>
-<div class="question-text">Wat is de gemiddelde lookup van deze structuur?</div>
-<div class="code-block">Dictionary&lt;string, int&gt; counts = new Dictionary&lt;string, int&gt;();
-counts[&quot;test&quot;] = 1;</div>
-<div class="options">
-<label class="option-label"><input type="radio" name="code5" value="0" required><span>O(1)</span></label>
-<label class="option-label"><input type="radio" name="code5" value="1" required><span>O(n²)</span></label>
-<label class="option-label"><input type="radio" name="code5" value="2" required><span>O(2^n)</span></label>
-<label class="option-label"><input type="radio" name="code5" value="3" required><span>O(n!)</span></label>
-</div></div>
-<button type="submit" class="submit-quiz">Quiz indienen</button>
-</form>
-<div id="code-result"></div></div></div></div>
-<footer style="text-align:center;color:#7f8c8d;padding:2rem;">Gebaseerd op de PA Summary van Stephanie VDH.</footer>
+<div id="mcq-result"></div>
+</div>
+</div>
+</div>
+
 <script>
-        const QUIZ_CONFIG = {"chapter6-mcq": {"answers": [1, 0, 1, 1, 1, 0, 1, 0, 1, 1], "total": 10}, "chapter6-tf": {"answers": [0, 1, 0, 0, 1, 0, 0, 1, 1, 0], "total": 10}, "chapter6-code": {"answers": [1, 1, 1, 1, 0], "total": 5}};
-        function saveQuizData(quizId, data) { localStorage.setItem(quizId, JSON.stringify(data)); }
-        function loadQuizData(quizId) { const data = localStorage.getItem(quizId); return data ? JSON.parse(data) : null; }
+        // Quiz Configuration
+        const QUIZ_CONFIG = {
+            'chapter6-mcq': {
+                answers: [1, 1, 2, 1, 0, 1, 0, 1, 0, 1, 2, 1, 1, 1],
+                total: 15
+            }
+        };
+
+        // Storage functions
+        function saveQuizData(quizId, data) {
+            localStorage.setItem(quizId, JSON.stringify(data));
+        }
+
+        function loadQuizData(quizId) {
+            const data = localStorage.getItem(quizId);
+            return data ? JSON.parse(data) : null;
+        }
+
+        // Switch between sections
         function switchSection(sectionName) {
             const tabs = document.querySelectorAll('.section-tab');
             const contents = document.querySelectorAll('.section-content');
+            
             tabs.forEach(tab => tab.classList.remove('active'));
             contents.forEach(content => content.classList.remove('active'));
-            tabs.forEach(tab => { if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes(sectionName)) tab.classList.add('active'); });
+            
+            event.target.classList.add('active');
             document.getElementById(sectionName).classList.add('active');
         }
-        function toggleFlashcard(card) { card.querySelector('.flashcard-answer').classList.toggle('show'); }
+
+        // Flashcard toggle
+        function toggleFlashcard(card) {
+            const answer = card.querySelector('.flashcard-answer');
+            answer.classList.toggle('show');
+        }
+
+        // Restore saved answers for a quiz
         function restoreAnswers(formId, quizId) {
-            const savedData = loadQuizData(quizId); if (!savedData || !savedData.userAnswers) return;
+            const savedData = loadQuizData(quizId);
+            if (!savedData || !savedData.userAnswers) return;
+
             const form = document.getElementById(formId);
             Object.entries(savedData.userAnswers).forEach(([questionName, value]) => {
-                const input = form.querySelector(`input[name="${questionName}"][value="${value}"]`); if (input) input.checked = true;
+                const input = form.querySelector(`input[name="${questionName}"][value="${value}"]`);
+                if (input) {
+                    input.checked = true;
+                }
             });
-            if (savedData.submitted) showAnswerFeedback(formId, quizId, savedData.userAnswers);
+
+            if (savedData.submitted) {
+                showAnswerFeedback(formId, quizId, savedData.userAnswers);
+            }
         }
+
+        // Show feedback for each answer
         function showAnswerFeedback(formId, quizId, userAnswers) {
-            const form = document.getElementById(formId); const config = QUIZ_CONFIG[quizId];
+            const form = document.getElementById(formId);
+            const config = QUIZ_CONFIG[quizId];
             const questionPrefix = quizId.includes('mcq') ? 'q' : quizId.includes('tf') ? 'tf' : 'code';
+            
             for (let i = 0; i < config.total; i++) {
                 const questionName = `${questionPrefix}${i + 1}`;
-                const userAnswer = parseInt(userAnswers[questionName]); const correctAnswer = config.answers[i];
+                const userAnswer = parseInt(userAnswers[questionName]);
+                const correctAnswer = config.answers[i];
+                
                 form.querySelectorAll(`input[name="${questionName}"]`).forEach(input => {
-                    const label = input.closest('.option-label'); const value = parseInt(input.value);
+                    const label = input.closest('.option-label');
+                    const value = parseInt(input.value);
+                    
                     label.classList.remove('correct', 'incorrect');
-                    if (value === correctAnswer) label.classList.add('correct');
-                    else if (value === userAnswer && value !== correctAnswer) label.classList.add('incorrect');
+                    
+                    if (value === correctAnswer) {
+                        label.classList.add('correct');
+                    } else if (value === userAnswer && value !== correctAnswer) {
+                        label.classList.add('incorrect');
+                    }
+                    
                     input.disabled = true;
                 });
             }
+            
+            // Update submit button to show reset option
             const submitBtn = form.querySelector('.submit-quiz');
-            if (submitBtn) { submitBtn.disabled = true; submitBtn.style.display = 'none'; }
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.style.display = 'none';
+            }
+            
+            // Show or create reset button
             let resetBtn = form.querySelector('.reset-quiz');
-            if (!resetBtn) { resetBtn = document.createElement('button'); resetBtn.type = 'button'; resetBtn.className = 'reset-quiz'; resetBtn.textContent = '🔄 Reset Quiz'; resetBtn.onclick = function() { resetQuiz(formId, quizId); }; submitBtn.parentNode.insertBefore(resetBtn, submitBtn.nextSibling); }
+            if (!resetBtn) {
+                resetBtn = document.createElement('button');
+                resetBtn.type = 'button';
+                resetBtn.className = 'reset-quiz';
+                resetBtn.textContent = '🔄 Reset Quiz';
+                resetBtn.onclick = function() { resetQuiz(formId, quizId); };
+                submitBtn.parentNode.insertBefore(resetBtn, submitBtn.nextSibling);
+            }
             resetBtn.style.display = 'block';
         }
+
+        // Reset quiz function
         function resetQuiz(formId, quizId) {
-            const form = document.getElementById(formId); localStorage.removeItem(quizId); form.reset();
-            form.querySelectorAll('.option-label').forEach(label => label.classList.remove('correct', 'incorrect'));
-            form.querySelectorAll('input').forEach(input => input.disabled = false);
-            const resetBtn = form.querySelector('.reset-quiz'); const submitBtn = form.querySelector('.submit-quiz');
-            if (resetBtn) resetBtn.style.display = 'none'; if (submitBtn) { submitBtn.disabled = false; submitBtn.style.display = 'block'; }
-            const resultDiv = document.getElementById(formId.replace('-form', '-result')); if (resultDiv) { resultDiv.className = ''; resultDiv.textContent = ''; }
+            const form = document.getElementById(formId);
+            
+            // Clear saved data
+            localStorage.removeItem(quizId);
+            
+            // Reset form
+            form.reset();
+            
+            // Remove all feedback styling
+            form.querySelectorAll('.option-label').forEach(label => {
+                label.classList.remove('correct', 'incorrect');
+            });
+            
+            // Re-enable all inputs
+            form.querySelectorAll('input').forEach(input => {
+                input.disabled = false;
+            });
+            
+            // Hide reset button, show submit button
+            const resetBtn = form.querySelector('.reset-quiz');
+            const submitBtn = form.querySelector('.submit-quiz');
+            if (resetBtn) resetBtn.style.display = 'none';
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.style.display = 'block';
+            }
+            
+            // Clear result display
+            const resultId = formId.replace('-form', '-result');
+            const resultDiv = document.getElementById(resultId);
+            if (resultDiv) {
+                resultDiv.className = '';
+                resultDiv.textContent = '';
+            }
+            
+            // Scroll to top of quiz
+            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+
+        // Handle quiz submission
         function handleQuizSubmit(e, formId, quizId) {
-            e.preventDefault(); const form = document.getElementById(formId); const config = QUIZ_CONFIG[quizId]; const formData = new FormData(form);
+            e.preventDefault();
+            const form = document.getElementById(formId);
+            const config = QUIZ_CONFIG[quizId];
+            const formData = new FormData(form);
             const questionPrefix = quizId.includes('mcq') ? 'q' : quizId.includes('tf') ? 'tf' : 'code';
-            let correct = 0; const userAnswers = {};
-            for (let i = 0; i < config.total; i++) { const questionName = `${questionPrefix}${i + 1}`; const selected = parseInt(formData.get(questionName)); userAnswers[questionName] = selected; if (selected === config.answers[i]) correct++; }
-            saveQuizData(quizId, { userAnswers, score: correct, total: config.total, submitted: true, timestamp: new Date().toISOString() });
-            showAnswerFeedback(formId, quizId, userAnswers); showResult(formId.replace('-form', '-result'), correct, config.total);
+            
+            let correct = 0;
+            const userAnswers = {};
+            
+            for (let i = 0; i < config.total; i++) {
+                const questionName = `${questionPrefix}${i + 1}`;
+                const selected = parseInt(formData.get(questionName));
+                userAnswers[questionName] = selected;
+                
+                if (selected === config.answers[i]) {
+                    correct++;
+                }
+            }
+            
+            // Save results
+            saveQuizData(quizId, {
+                userAnswers: userAnswers,
+                score: correct,
+                total: config.total,
+                submitted: true,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Show feedback
+            showAnswerFeedback(formId, quizId, userAnswers);
+            
+            // Show result
+            const resultId = formId.replace('-form', '-result');
+            showResult(resultId, correct, config.total);
         }
+
+        // Show quiz result
         function showResult(elementId, correct, total) {
-            const percentage = (correct / total) * 100; const resultDiv = document.getElementById(elementId);
+            const percentage = (correct / total) * 100;
+            const resultDiv = document.getElementById(elementId);
+            
             let resultClass, message;
-            if (percentage >= 80) { resultClass = 'excellent'; message = `🎉 Uitstekend! ${correct}/${total} correct (${percentage.toFixed(0)}%)`; }
-            else if (percentage >= 60) { resultClass = 'good'; message = `👍 Goed bezig! ${correct}/${total} correct (${percentage.toFixed(0)}%). Herhaal de gemiste concepten.`; }
-            else { resultClass = 'needs-work'; message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Lees de samenvatting opnieuw en probeer nog eens.`; }
-            resultDiv.className = `quiz-result ${resultClass}`; resultDiv.textContent = message; resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            if (percentage >= 80) {
+                resultClass = 'excellent';
+                message = `🎉 Uitstekend! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
+            } else if (percentage >= 60) {
+                resultClass = 'good';
+                message = `👍 Goed gedaan! ${correct}/${total} correct (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
+            } else {
+                resultClass = 'needs-work';
+                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Bestudeer de dezelfdenvatting en probeer opnieuw!`;
+            }
+            
+            resultDiv.className = `quiz-result ${resultClass}`;
+            resultDiv.textContent = message;
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
+
+        // Initialize quizzes
         document.addEventListener('DOMContentLoaded', function() {
-            const mcqForm = document.getElementById('mcq-form'); if (mcqForm) { mcqForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'mcq-form', 'chapter6-mcq')); restoreAnswers('mcq-form', 'chapter6-mcq'); }
-            const tfForm = document.getElementById('tf-form'); if (tfForm) { tfForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'tf-form', 'chapter6-tf')); restoreAnswers('tf-form', 'chapter6-tf'); }
-            const codeForm = document.getElementById('code-form'); if (codeForm) { codeForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'code-form', 'chapter6-code')); restoreAnswers('code-form', 'chapter6-code'); }
+            // Multiple Choice Quiz
+            const mcqForm = document.getElementById('mcq-form');
+            if (mcqForm) {
+                mcqForm.addEventListener('submit', (e) => handleQuizSubmit(e, 'mcq-form', 'chapter6-mcq'));
+                restoreAnswers('mcq-form', 'chapter6-mcq');
+            }
         });
+    </script>
+<div class="source-note" style="text-align:center;margin:30px auto;color:#6b7280;font-size:0.95rem;">Gebaseerd op de PA Samenvatting van Stephanie VDH.</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  const btn=document.querySelector('.mobile-menu-toggle');
+  if(!btn) return;
+  btn.addEventListener('click',function(){document.body.classList.toggle('mobile-menu-open');btn.classList.toggle('is-open');});
+});
 </script>
-</body></html>
+
+</body>
+</html>

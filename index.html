@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+html
 <html lang="nl">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Programming Advanced - Nederlandse Samenvatting</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Programming Advanced - Cursusoverzicht</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
 <style>
         * {
             margin: 0;
@@ -270,24 +271,198 @@
             }
         }
     </style>
+<!-- MOBILE MENU PATCH -->
+
+<style>
+@media (max-width: 768px) {
+  .mobile-menu-toggle { display:flex!important; }
+  body.mobile-menu-open { overflow:hidden; }
+  .chapters-grid, .grid, .cards-grid { grid-template-columns: 1fr!important; }
+  table, pre { max-width:100%; overflow-x:auto; }
+}
+.mobile-menu-toggle{display:none;position:fixed;top:14px;right:14px;z-index:9999;width:48px;height:44px;border:1px solid rgba(255,255,255,.55);border-radius:12px;background:linear-gradient(135deg,#2f3f78,#4a90e2);box-shadow:0 8px 24px rgba(0,0,0,.22);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px}.mobile-menu-toggle span{display:block;width:23px;height:3px;border-radius:999px;background:#fff;transition:.2s}.mobile-menu-toggle.is-open span:nth-child(1){transform:translateY(8px) rotate(45deg)}.mobile-menu-toggle.is-open span:nth-child(2){opacity:0}.mobile-menu-toggle.is-open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+@media (max-width:768px){.chapter-header .back-btn,.back-btn{margin-right:58px}.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}.tab-button{white-space:nowrap}}
+</style>
+
 </head>
 <body>
+<button class="mobile-menu-toggle" type="button" aria-label="Menu openen"><span></span><span></span><span></span></button>
 <div class="container">
-<header><h1>Programming Advanced</h1><p class="subtitle">Nederlandse examengerichte samenvatting</p></header>
-<div class="chapters-grid"><a href="chapter1.html" class="chapter-tile" style="animation-delay: 0.05s"><div class="chapter-number"><span>01</span></div><div class="chapter-info"><h2 class="chapter-title">Introductie &amp; Searching</h2><p class="chapter-subtitle">Algoritmes, Binary Search, Big O Notation</p></div></a>
-<a href="chapter2.html" class="chapter-tile" style="animation-delay: 0.1s"><div class="chapter-number"><span>02</span></div><div class="chapter-info"><h2 class="chapter-title">Sorting Algorithms</h2><p class="chapter-subtitle">Bubble, Selection, Merge, Quick Sort</p></div></a>
-<a href="chapter3.html" class="chapter-tile" style="animation-delay: 0.15000000000000002s"><div class="chapter-number"><span>03</span></div><div class="chapter-info"><h2 class="chapter-title">Data Structures</h2><p class="chapter-subtitle">Arrays, Linked Lists, Stacks, Queues</p></div></a>
-<a href="chapter4.html" class="chapter-tile" style="animation-delay: 0.2s"><div class="chapter-number"><span>04</span></div><div class="chapter-info"><h2 class="chapter-title">Recursion</h2><p class="chapter-subtitle">Base Cases, Recursive Patterns, Call Stack</p></div></a>
-<a href="chapter5.html" class="chapter-tile" style="animation-delay: 0.25s"><div class="chapter-number"><span>05</span></div><div class="chapter-info"><h2 class="chapter-title">Divide &amp; Conquer</h2><p class="chapter-subtitle">Breaking Problems, Merge Sort, Binary Search</p></div></a>
-<a href="chapter6.html" class="chapter-tile" style="animation-delay: 0.30000000000000004s"><div class="chapter-number"><span>06</span></div><div class="chapter-info"><h2 class="chapter-title">Backtracking</h2><p class="chapter-subtitle">Constraint Problems, N-Queens, Sudoku</p></div></a>
-<a href="chapter7.html" class="chapter-tile" style="animation-delay: 0.35000000000000003s"><div class="chapter-number"><span>07</span></div><div class="chapter-info"><h2 class="chapter-title">Dynamic Programming</h2><p class="chapter-subtitle">Memoization, Tabulation, Optimization</p></div></a>
-<a href="chapter8.html" class="chapter-tile" style="animation-delay: 0.4s"><div class="chapter-number"><span>08</span></div><div class="chapter-info"><h2 class="chapter-title">Graphs</h2><p class="chapter-subtitle">BFS, DFS, Graph Representations</p></div></a>
-<a href="chapter9.html" class="chapter-tile" style="animation-delay: 0.45s"><div class="chapter-number"><span>09</span></div><div class="chapter-info"><h2 class="chapter-title">Weighted Graphs &amp; Dijkstra</h2><p class="chapter-subtitle">Weights, Heuristics, Shortest Path</p></div></a>
-<a href="chapter10.html" class="chapter-tile" style="animation-delay: 0.5s"><div class="chapter-number"><span>10</span></div><div class="chapter-info"><h2 class="chapter-title">Greedy Algorithms</h2><p class="chapter-subtitle">Local Choices, Activity Selection, Coin Change</p></div></a>
-<a href="chapter11.html" class="chapter-tile" style="animation-delay: 0.55s"><div class="chapter-number"><span>11</span></div><div class="chapter-info"><h2 class="chapter-title">Trees</h2><p class="chapter-subtitle">Binary Trees, BST, Traversals</p></div></a>
-<a href="chapter12.html" class="chapter-tile" style="animation-delay: 0.6000000000000001s"><div class="chapter-number"><span>12</span></div><div class="chapter-info"><h2 class="chapter-title">Hash Tables</h2><p class="chapter-subtitle">Hash Functions, Collisions, Dictionaries</p></div></a>
-<a href="chapter13.html" class="chapter-tile" style="animation-delay: 0.65s"><div class="chapter-number"><span>13</span></div><div class="chapter-info"><h2 class="chapter-title">Course Recap</h2><p class="chapter-subtitle">Strategies, Data Structures, Exam Approach</p></div></a>
+<header>
+<h1>Programming Advanced</h1>
+</header>
+<div class="chapters-grid">
+<a class="chapter-tile" href="chapter1.html">
+<div class="chapter-number"><span>01</span></div>
+<div class="chapter-info">
+<div class="chapter-title">Introductie &amp; Searching</div>
+<div class="chapter-subtitle">Algoritmes, Binary Search, Big O-notatie</div>
 </div>
-<footer style="text-align:center;color:#7f8c8d;margin-top:2rem;">Gebaseerd op de PA Summary van Stephanie VDH.</footer>
+<div class="chapter-icon">→</div>
+</a>
+<a class="chapter-tile" href="chapter2.html">
+<div class="chapter-number"><span>02</span></div>
+<div class="chapter-info">
+<div class="chapter-title">Sorting Algorithms</div>
+<div class="chapter-subtitle">Bubble, Selection, Merge, Quick Sort</div>
 </div>
-</body></html>
+<div class="chapter-icon">→</div>
+</a>
+<a class="chapter-tile" href="chapter3.html">
+<div class="chapter-number"><span>03</span></div>
+<div class="chapter-info">
+<div class="chapter-title">Datastructuren</div>
+<div class="chapter-subtitle">Arrays, Linked Lists, Stacks, Queues</div>
+</div>
+<div class="chapter-icon">→</div>
+</a>
+<a class="chapter-tile" href="chapter4.html">
+<div class="chapter-number"><span>04</span></div>
+<div class="chapter-info">
+<div class="chapter-title">Recursie</div>
+<div class="chapter-subtitle">Base cases, recursieve patronen, call stack</div>
+</div>
+<div class="chapter-icon">→</div>
+</a>
+<a class="chapter-tile" href="chapter5.html">
+<div class="chapter-number"><span>05</span></div>
+<div class="chapter-info">
+<div class="chapter-title">Divide &amp; Conquer</div>
+<div class="chapter-subtitle">Problemen opsplitsen, Merge Sort, Binary Search</div>
+</div>
+<div class="chapter-icon">→</div>
+</a>
+<a class="chapter-tile" href="chapter6.html">
+<div class="chapter-number"><span>06</span></div>
+<div class="chapter-info">
+<div class="chapter-title">Backtracking</div>
+<div class="chapter-subtitle">Constraintproblemen, N-Queens, Sudoku</div>
+</div>
+<div class="chapter-icon">→</div>
+</a>
+<a class="chapter-tile" href="chapter7.html">
+<div class="chapter-number"><span>07</span></div>
+<div class="chapter-info">
+<div class="chapter-title">Dynamic Programming</div>
+<div class="chapter-subtitle">Memoization, tabulation, optimalisatie</div>
+</div>
+<div class="chapter-icon">→</div>
+</a>
+<a class="chapter-tile" href="chapter8.html">
+<div class="chapter-number"><span>08</span></div>
+<div class="chapter-info">
+<div class="chapter-title">Graphs</div>
+<div class="chapter-subtitle">BFS, DFS, graphrepresentaties</div>
+</div>
+<div class="chapter-icon">→</div>
+</a>
+<a class="chapter-tile" href="chapter9.html">
+<div class="chapter-number"><span>09</span></div>
+<div class="chapter-info">
+<div class="chapter-title">Weighted Graphs</div>
+<div class="chapter-subtitle">Dijkstra, kortste pad</div>
+</div>
+<div class="chapter-icon">→</div>
+</a>
+<a class="chapter-tile" href="chapter10.html">
+<div class="chapter-number"><span>10</span></div>
+<div class="chapter-info">
+<div class="chapter-title">Greedy Algorithms</div>
+<div class="chapter-subtitle">Lokaal optimum, activity selection</div>
+</div>
+<div class="chapter-icon">→</div>
+</a>
+<a class="chapter-tile" href="chapter11.html">
+<div class="chapter-number"><span>11</span></div>
+<div class="chapter-info">
+<div class="chapter-title">Trees</div>
+<div class="chapter-subtitle">Binary trees, traversals</div>
+</div>
+<div class="chapter-icon">→</div>
+</a>
+<a class="chapter-tile" href="chapter12.html">
+<div class="chapter-number"><span>12</span></div>
+<div class="chapter-info">
+<div class="chapter-title">Hash tables</div>
+<div class="chapter-subtitle">Hash functions, collisions, O(1)-lookup</div>
+</div>
+<div class="chapter-icon">→</div>
+</a>
+<a class="chapter-tile" href="chapter13.html">
+<div class="chapter-number"><span>13</span></div>
+<div class="chapter-info">
+<div class="chapter-title">Cursusrecap</div>
+<div class="chapter-subtitle">Herhaal alle concepten en strategieën</div>
+</div>
+<div class="chapter-icon">→</div>
+</a>
+</div>
+</div>
+<script>
+        // Progress tracking
+        function updateProgress() {
+            // Get visited chapters from localStorage
+            const visitedChapters = JSON.parse(localStorage.getItem('visitedChapters') || '[]');
+            const totalChapters = 13;
+            const completedCount = visitedChapters.length;
+            const percentage = Math.round((completedCount / totalChapters) * 100);
+
+            // Update UI
+            document.getElementById('completed-count').textContent = completedCount;
+            document.getElementById('progress-bar').style.width = percentage + '%';
+            document.getElementById('progress-percentage').textContent = percentage + '%';
+
+            // Update message based on progress
+            const messageEl = document.getElementById('progress-message');
+            if (completedCount === 0) {
+                messageEl.textContent = 'Start your journey by exploring the first chapter!';
+            } else if (completedCount < 5) {
+                messageEl.textContent = 'Great start! Keep going! 💪';
+            } else if (completedCount < 10) {
+                messageEl.textContent = 'You\'re making excellent progress! 🚀';
+            } else if (completedCount < 13) {
+                messageEl.textContent = 'Almost there! Just a few more chapters! 🎯';
+            } else {
+                messageEl.textContent = 'Congratulations! You\'ve completed all chapters! 🎉';
+            }
+
+            // Mark visited chapters with a checkmark
+            visitedChapters.forEach(chapterNum => {
+                const tile = document.querySelector(`a[href="chapter${chapterNum}.html"]`);
+                if (tile && !tile.classList.contains('visited')) {
+                    tile.classList.add('visited');
+                    const checkmark = document.createElement('div');
+                    checkmark.className = 'chapter-checkmark';
+                    checkmark.textContent = '✓';
+                    tile.appendChild(checkmark);
+                }
+            });
+        }
+
+        // Track chapter visits
+        document.querySelectorAll('.chapter-tile').forEach((tile, index) => {
+            tile.addEventListener('click', function() {
+                const visitedChapters = JSON.parse(localStorage.getItem('visitedChapters') || '[]');
+                const chapterNum = index + 1;
+                if (!visitedChapters.includes(chapterNum)) {
+                    visitedChapters.push(chapterNum);
+                    localStorage.setItem('visitedChapters', JSON.stringify(visitedChapters));
+                }
+            });
+        });
+
+        // Update progress on page load
+        updateProgress();
+    </script>
+<div class="source-note" style="text-align:center;margin:30px auto;color:#6b7280;font-size:0.95rem;">Gebaseerd op de PA Samenvatting van Stephanie VDH.</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  const btn=document.querySelector('.mobile-menu-toggle');
+  if(!btn) return;
+  btn.addEventListener('click',function(){document.body.classList.toggle('mobile-menu-open');btn.classList.toggle('is-open');});
+});
+</script>
+
+</body>
+</html>
