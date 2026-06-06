@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 13: Recap - Programming Advanced</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hoofdstuk 13: Herhaling - Programming Advanced</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;family=Outfit:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary: #2d3561; --secondary: #4a90e2; --accent: #ff6b6b; --success: #51cf66; --warning: #ffd93d; --bg: #f8f9fa; }
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: #2c3e50; line-height: 1.6; }
@@ -117,385 +118,60 @@
         @media (max-width: 768px) { .summary-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } .quiz-section { padding: 1.5rem; } }
     
 
-        /* Mobielvriendelijke navigatie */
-        .menu-toggle {
-            display: none;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border: 2px solid rgba(255, 255, 255, 0.35);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.18);
-            color: white;
-            font-size: 1.6rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-
-        .menu-toggle:hover,
-        .menu-toggle:focus-visible {
-            background: rgba(255, 255, 255, 0.3);
-            outline: none;
-        }
-
-        .mobile-menu {
-            display: none;
-            max-width: 1400px;
-            margin: 1rem auto 0;
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 16px;
-            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
-            overflow: hidden;
-        }
-
-        .mobile-menu.open {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 0.25rem;
-            padding: 0.75rem;
-            animation: slideDown 0.2s ease;
-        }
-
-        .mobile-menu a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-            padding: 0.9rem 1rem;
-            border-radius: 10px;
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
-
-        .mobile-menu a:hover,
-        .mobile-menu a:focus-visible,
-        .mobile-menu a.current {
-            background: #eef5ff;
-            outline: none;
-        }
-
-        .mobile-menu a.current {
-            color: var(--secondary);
-        }
-
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 0.8rem 1rem;
-            }
-
-            .navbar-content {
-                gap: 0.75rem;
-            }
-
-            .chapter-header {
-                font-size: 1rem !important;
-                line-height: 1.25;
-                max-width: calc(100vw - 90px);
-            }
-
-            .back-button {
-                display: none;
-            }
-
-            .menu-toggle {
-                display: inline-flex;
-                flex: 0 0 auto;
-            }
-
-            .mobile-menu.open {
-                grid-template-columns: 1fr;
-                max-height: calc(100vh - 82px);
-                overflow-y: auto;
-            }
-
-            .container {
-                padding-left: 1rem !important;
-                padding-right: 1rem !important;
-            }
-
-            .summary-grid {
-                grid-template-columns: 1fr !important;
-                gap: 1rem;
-            }
-
-            .summary-card,
-            .quiz-section,
-            .quiz-question {
-                padding: 1rem !important;
-            }
-
-            .section-tabs {
-                top: 68px !important;
-                overflow-x: auto;
-                flex-wrap: nowrap !important;
-                gap: 0.4rem !important;
-                padding: 0.55rem 0.25rem !important;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: thin;
-            }
-
-            .section-tab {
-                flex: 0 0 auto;
-                white-space: nowrap;
-                padding: 0.7rem 0.85rem !important;
-                font-size: 0.8rem !important;
-                letter-spacing: 0 !important;
-            }
-
-            .comparison-table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-                -webkit-overflow-scrolling: touch;
-            }
-
-            .code-block {
-                font-size: 0.78rem !important;
-                overflow-x: auto;
-            }
-
-            .option-label {
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
-
-            .option-label input[type="radio"] {
-                flex: 0 0 auto;
-                margin-top: 0.2rem;
-            }
-        }
-
-    
-
-        /* Telefoonvriendelijke verbeteringen */
-        body.menu-open {
-            overflow: hidden;
-        }
+        /* Mobiele hoofdstuknavigatie */
+        .menu-toggle { display: none; align-items: center; justify-content: center; gap: .45rem; min-width: 44px; height: 42px; padding: 0 .8rem; border: 2px solid rgba(255,255,255,.35); border-radius: 10px; background: rgba(255,255,255,.18); color: white; font-weight: 700; cursor: pointer; transition: all .25s ease; }
+        .menu-toggle:hover, .menu-toggle:focus-visible { background: rgba(255,255,255,.3); outline: none; }
+        .menu-icon { font-size: 1.25rem; line-height: 1; }
+        .menu-label { font-size: .95rem; font-weight: 700; }
+        .mobile-menu { display: none; max-width: 1400px; margin: 1rem auto 0; background: rgba(255,255,255,.98); border-radius: 16px; box-shadow: 0 14px 36px rgba(0,0,0,.18); overflow: hidden; }
+        .mobile-menu.open { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .25rem; padding: .75rem; animation: slideDown .2s ease; }
+        .mobile-menu a { color: var(--primary); text-decoration: none; font-weight: 700; padding: .9rem 1rem; border-radius: 10px; transition: background .2s ease; }
+        .mobile-menu a:hover, .mobile-menu a:focus-visible, .mobile-menu a.current { background: #eef5ff; outline: none; }
+        .mobile-menu a.current { color: var(--secondary); }
+        body.menu-open { overflow: hidden; }
 
         @media (max-width: 900px) {
-            .navbar {
-                padding: 0.75rem 1rem !important;
-            }
-
-            .navbar-content {
-                display: grid !important;
-                grid-template-columns: minmax(0, 1fr) auto;
-                align-items: center;
-                gap: 0.75rem;
-            }
-
-            .chapter-header {
-                font-size: 0.95rem !important;
-                line-height: 1.3 !important;
-                max-width: none !important;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .back-button {
-                display: none !important;
-            }
-
-            .menu-toggle {
-                display: inline-flex !important;
-                gap: 0.45rem;
-                width: auto !important;
-                min-width: 44px;
-                height: 42px;
-                padding: 0 0.8rem;
-                font-size: 1rem;
-                flex: 0 0 auto;
-            }
-
-            .menu-icon {
-                font-size: 1.25rem;
-                line-height: 1;
-            }
-
-            .menu-label {
-                font-size: 0.95rem;
-                font-weight: 700;
-            }
-
-            .mobile-menu-backdrop {
-                position: fixed;
-                inset: 0;
-                background: rgba(22, 29, 37, 0.42);
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.25s ease;
-                z-index: 140;
-            }
-
-            body.menu-open .mobile-menu-backdrop {
-                opacity: 1;
-                pointer-events: auto;
-            }
-
-            .mobile-menu {
-                display: block !important;
-                position: fixed;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                width: min(86vw, 340px);
-                height: 100vh;
-                margin: 0 !important;
-                padding: 4.75rem 0.9rem 1rem !important;
-                border-radius: 18px 0 0 18px;
-                box-shadow: -10px 0 32px rgba(0, 0, 0, 0.18);
-                background: rgba(255, 255, 255, 0.99);
-                overflow-y: auto;
-                transform: translateX(100%);
-                transition: transform 0.25s ease;
-                z-index: 150;
-            }
-
-            .mobile-menu.open {
-                display: block !important;
-                transform: translateX(0);
-            }
-
-            .mobile-menu a {
-                display: block;
-                padding: 0.9rem 1rem;
-                margin-bottom: 0.35rem;
-                border-radius: 12px;
-            }
-
-            .container {
-                padding: 1rem !important;
-            }
-
-            .section-tabs {
-                top: 64px !important;
-                margin: 0 -1rem 1rem !important;
-                padding: 0.7rem 1rem !important;
-                border-bottom: none !important;
-                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
-                background: rgba(255, 255, 255, 0.96) !important;
-                backdrop-filter: blur(8px);
-                gap: 0.5rem !important;
-                flex-wrap: nowrap !important;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-            }
-
-            .section-tabs::-webkit-scrollbar {
-                display: none;
-            }
-
-            .section-tab {
-                flex: 0 0 auto;
-                white-space: nowrap;
-                padding: 0.7rem 0.95rem !important;
-                font-size: 0.86rem !important;
-                letter-spacing: 0 !important;
-                text-transform: none !important;
-                border: 1px solid #e2e8f0;
-                border-bottom: none !important;
-                border-radius: 999px;
-                background: #f3f6fb;
-                color: var(--primary);
-            }
-
-            .section-tab.active {
-                background: var(--primary);
-                color: white;
-                border-color: var(--primary);
-            }
-
-            .summary-grid {
-                grid-template-columns: 1fr !important;
-                gap: 1rem !important;
-            }
-
-            .summary-card,
-            .quiz-section,
-            .quiz-question {
-                padding: 1rem !important;
-                border-radius: 14px;
-            }
-
-            .summary-card h3 {
-                font-size: 1.3rem !important;
-            }
-
-            .comparison-table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-                border-radius: 12px;
-            }
-
-            .comparison-table th,
-            .comparison-table td {
-                padding: 0.8rem !important;
-            }
-
-            .code-block {
-                font-size: 0.78rem !important;
-                padding: 0.85rem !important;
-            }
-
-            .flashcard-question,
-            .flashcard-answer {
-                padding: 1rem !important;
-            }
-
-            .option-label {
-                padding: 0.9rem !important;
-                align-items: flex-start !important;
-            }
-
-            .option-label.correct::after,
-            .option-label.incorrect::after {
-                display: block;
-                margin-left: 0;
-                margin-top: 0.5rem;
-            }
+            .navbar { padding: .75rem 1rem !important; }
+            .navbar-content { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: .75rem; }
+            .chapter-header { font-size: .95rem !important; line-height: 1.3 !important; max-width: none !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+            .back-button { display: none !important; }
+            .menu-toggle { display: inline-flex !important; }
+            .mobile-menu-backdrop { position: fixed; inset: 0; background: rgba(22,29,37,.42); opacity: 0; pointer-events: none; transition: opacity .25s ease; z-index: 140; }
+            body.menu-open .mobile-menu-backdrop { opacity: 1; pointer-events: auto; }
+            .mobile-menu { display: block !important; position: fixed; top: 0; right: 0; bottom: 0; width: min(86vw, 340px); height: 100vh; margin: 0 !important; padding: 4.75rem .9rem 1rem !important; border-radius: 18px 0 0 18px; box-shadow: -10px 0 32px rgba(0,0,0,.18); background: rgba(255,255,255,.99); overflow-y: auto; transform: translateX(100%); transition: transform .25s ease; z-index: 150; }
+            .mobile-menu.open { display: block !important; transform: translateX(0); }
+            .mobile-menu a { display: block; padding: .9rem 1rem; margin-bottom: .35rem; border-radius: 12px; }
+            .container { padding: 1rem !important; }
+            .section-tabs { top: 64px !important; margin: 0 -1rem 1rem !important; padding: .7rem 1rem !important; border-bottom: none !important; box-shadow: 0 2px 12px rgba(0,0,0,.04); background: rgba(255,255,255,.96) !important; backdrop-filter: blur(8px); gap: .5rem !important; flex-wrap: nowrap !important; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+            .section-tabs::-webkit-scrollbar { display: none; }
+            .section-tab { flex: 0 0 auto; white-space: nowrap; padding: .7rem .95rem !important; font-size: .86rem !important; letter-spacing: 0 !important; text-transform: none !important; border: 1px solid #e2e8f0 !important; border-bottom: none !important; border-radius: 999px !important; background: #f3f6fb !important; color: var(--primary) !important; }
+            .section-tab.active { background: var(--primary) !important; color: white !important; border-color: var(--primary) !important; }
+            .summary-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+            .summary-card, .quiz-section, .quiz-question { padding: 1rem !important; border-radius: 14px; }
+            .summary-card h3 { font-size: 1.3rem !important; }
+            .comparison-table, table { display: block; overflow-x: auto; white-space: nowrap; border-radius: 12px; }
+            th, td, .comparison-table th, .comparison-table td { padding: .8rem !important; }
+            .code-block { font-size: .78rem !important; padding: .85rem !important; overflow-x: auto; }
+            .flashcard-question, .flashcard-answer { padding: 1rem !important; }
+            .option-label { padding: .9rem !important; align-items: flex-start !important; }
         }
-
         @media (max-width: 480px) {
-            .chapter-header {
-                font-size: 0.88rem !important;
-            }
-
-            .menu-label {
-                display: none;
-            }
-
-            .menu-toggle {
-                padding: 0 0.7rem;
-            }
-
-            .container {
-                padding: 0.85rem !important;
-            }
-
-            .section-tabs {
-                top: 60px !important;
-                margin: 0 -0.85rem 1rem !important;
-                padding: 0.65rem 0.85rem !important;
-            }
-
-            .section-tab {
-                font-size: 0.82rem !important;
-                padding: 0.65rem 0.85rem !important;
-            }
+            .chapter-header { font-size: .88rem !important; }
+            .menu-label { display: none; }
+            .menu-toggle { padding: 0 .7rem; }
+            .container { padding: .85rem !important; }
+            .section-tabs { top: 60px !important; margin: 0 -.85rem 1rem !important; padding: .65rem .85rem !important; }
+            .section-tab { font-size: .82rem !important; padding: .65rem .85rem !important; }
         }
 
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-content">
-            <div class="chapter-header">Chapter 13: Recap</div>
-            <button class="menu-toggle" type="button" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-menu"><span class="menu-icon">☰</span><span class="menu-label">Menu</span></button>
-            <a href="index.html" class="back-button">← Back</a>
-        </div>
+<nav class="navbar">
+<div class="navbar-content">
+<div class="chapter-header">Hoofdstuk 13: Herhaling</div>
+<a class="back-button" href="index.html">← Terug</a>
+</div>
         <div id="mobile-menu" class="mobile-menu" aria-label="Hoofdstuknavigatie">
             <a href="index.html">🏠 Overzicht</a>
             <a href="chapter1.html">01 Introductie & zoeken</a>
@@ -513,295 +189,288 @@
             <a href="chapter13.html" class="current">13 Cursusherhaling</a>
         </div>
     </nav>
-    <div class="container">
-        <div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
-            <button class="section-tab active" onclick="switchSection('summary')">📚 Summary</button>
-            <button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
-            <button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
-        </div>
-
-        <div id="summary" class="section-content active">
-            <div class="summary-grid">
-                <div class="summary-card">
-                    <h3> Data Structures Summary</h3>
-                    <table>
-                        <tr><th>Structure</th><th>Access</th><th>Search</th><th>Best For</th></tr>
-                        <tr><td><strong>Array</strong></td><td>O(1)</td><td>O(n)</td><td>Fixed size, fast access</td></tr>
-                        <tr><td><strong>LinkedList</strong></td><td>O(n)</td><td>O(n)</td><td>Frequent insert/delete</td></tr>
-                        <tr><td><strong>Stack</strong></td><td>O(1)</td><td>-</td><td>LIFO, recursion</td></tr>
-                        <tr><td><strong>Queue</strong></td><td>O(1)</td><td>-</td><td>FIFO, BFS</td></tr>
-                        <tr><td><strong>Hash Table</strong></td><td>O(1)</td><td>O(1)</td><td>Key-value lookup</td></tr>
-                        <tr><td><strong>BST</strong></td><td>O(log n)</td><td>O(log n)</td><td>Sorted data</td></tr>
-                    </table>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Strategy Summary</h3>
-                    <table>
-                        <tr><th>Strategy</th><th>Time</th><th>Use When</th></tr>
-                        <tr><td><strong>Greedy</strong></td><td>O(n log n)</td><td>Local choices work</td></tr>
-                        <tr><td><strong>Backtracking</strong></td><td>Exponential</td><td>Constraint problems</td></tr>
-                        <tr><td><strong>Divide & Conquer</strong></td><td>O(n log n)</td><td>Recursive splitting</td></tr>
-                        <tr><td><strong>Dynamic Programming</strong></td><td>O(n²)</td><td>Overlapping subproblems</td></tr>
-                    </table>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Problem-Solving Framework</h3>
-                    <h4>1. Analysis:</h4>
-                    <ul><li>Input size?</li><li>Constraints?</li><li>Perfect solution needed?</li></ul>
-                    <h4>2. Strategy Selection:</h4>
-                    <ul><li>Overlapping subproblems? → DP</li><li>Local choices optimal? → Greedy</li><li>Need all solutions? → Backtracking</li></ul>
-                    <h4>3. Data Structure Choice:</h4>
-                    <ul><li>Frequent lookups? → HashMap</li><li>Must stay sorted? → Tree</li><li>Many insert/delete? → LinkedList</li></ul>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Knapsack Problem Example</h3>
-                    <p><strong>Problem:</strong> 4 items, capacity 10kg, maximize value</p>
-                    <h4>Approaches:</h4>
-                    <ul>
-                        <li><strong>Greedy:</strong> Fast but suboptimal</li>
-                        <li><strong>Brute Force:</strong> O(2^n) - tries all combinations</li>
-                        <li><strong>Backtracking:</strong> Prune invalid branches</li>
-                        <li><strong>DP:</strong> Optimal AND efficient</li>
-                    </ul>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Key Concepts</h3>
-                    <ul>
-                        <li><strong>Recursion:</strong> Implementation tool, not strategy</li>
-                        <li><strong>Pruning:</strong> Cut unnecessary branches</li>
-                        <li><strong>Complexity:</strong> Analyze time and space</li>
-                        <li><strong>Trade-offs:</strong> Speed vs accuracy, space vs time</li>
-                    </ul>
-                </div>
-
-                <div class="summary-card">
-                    <h3> Course Highlights</h3>
-                    <ul>
-                        <li>Data structures organize data efficiently</li>
-                        <li>Algorithms solve problems systematically</li>
-                        <li>Choose right tool for the job</li>
-                        <li>Analyze before implementing</li>
-                        <li>Start simple, optimize when needed</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div id="flashcards" class="section-content">
-            <div class="quiz-container">
-                <div class="quiz-section">
-                    <h3>📇 Flashcards</h3>
-                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Best data structure for lookups?<span>▼</span></div><div class="flashcard-answer">Hash Table - O(1)</div></div>
-                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Best for sorted data?<span>▼</span></div><div class="flashcard-answer">Binary Search Tree</div></div>
-                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">LIFO data structure?<span>▼</span></div><div class="flashcard-answer">Stack</div></div>
-                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">FIFO data structure?<span>▼</span></div><div class="flashcard-answer">Queue</div></div>
-                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">When use DP?<span>▼</span></div><div class="flashcard-answer">Overlapping subproblems + optimal substructure</div></div>
-                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">When use Greedy?<span>▼</span></div><div class="flashcard-answer">Local optimal choices lead to global optimum</div></div>
-                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">When use Backtracking?<span>▼</span></div><div class="flashcard-answer">Constraint problems, need all solutions</div></div>
-                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Recursion is?<span>▼</span></div><div class="flashcard-answer">Implementation tool, not a strategy</div></div>
-                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Array access time?<span>▼</span></div><div class="flashcard-answer">O(1) - constant time</div></div>
-                    <div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Binary Search time?<span>▼</span></div><div class="flashcard-answer">O(log n)</div></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="quiz" class="section-content">
-            <div class="quiz-container">
-                <div class="quiz-section">
-                    <h3>✅ Quiz</h3>
-                    <form id="mcq-form">
-                        <div class="quiz-question">
-                            <div class="question-number">Q1</div>
-                            <div class="question-text">Hash Table complexity?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q1" value="0" required><span>O(n)</span></label>
-                                <label class="option-label"><input type="radio" name="q1" value="1" required><span>O(1)</span></label>
-                                <label class="option-label"><input type="radio" name="q1" value="2" required><span>O(log n)</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q2</div>
-                            <div class="question-text">Best structure for frequent insert/delete?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q2" value="0" required><span>Array</span></label>
-                                <label class="option-label"><input type="radio" name="q2" value="1" required><span>LinkedList</span></label>
-                                <label class="option-label"><input type="radio" name="q2" value="2" required><span>Stack</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q3</div>
-                            <div class="question-text">LIFO structure?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q3" value="0" required><span>Queue</span></label>
-                                <label class="option-label"><input type="radio" name="q3" value="1" required><span>Stack</span></label>
-                                <label class="option-label"><input type="radio" name="q3" value="2" required><span>Tree</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q4</div>
-                            <div class="question-text">FIFO structure?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q4" value="0" required><span>Stack</span></label>
-                                <label class="option-label"><input type="radio" name="q4" value="1" required><span>Queue</span></label>
-                                <label class="option-label"><input type="radio" name="q4" value="2" required><span>Array</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q5</div>
-                            <div class="question-text">BST search complexity?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q5" value="0" required><span>O(1)</span></label>
-                                <label class="option-label"><input type="radio" name="q5" value="1" required><span>O(n)</span></label>
-                                <label class="option-label"><input type="radio" name="q5" value="2" required><span>O(log n)</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q6</div>
-                            <div class="question-text">When use Dynamic Programming?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q6" value="0" required><span>Random problems</span></label>
-                                <label class="option-label"><input type="radio" name="q6" value="1" required><span>Overlapping subproblems</span></label>
-                                <label class="option-label"><input type="radio" name="q6" value="2" required><span>Sorted data</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q7</div>
-                            <div class="question-text">When use Greedy?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q7" value="0" required><span>Always</span></label>
-                                <label class="option-label"><input type="radio" name="q7" value="1" required><span>Local choices lead to global optimum</span></label>
-                                <label class="option-label"><input type="radio" name="q7" value="2" required><span>Never</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q8</div>
-                            <div class="question-text">Backtracking uses?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q8" value="0" required><span>Iteration</span></label>
-                                <label class="option-label"><input type="radio" name="q8" value="1" required><span>Recursion</span></label>
-                                <label class="option-label"><input type="radio" name="q8" value="2" required><span>Sorting</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q9</div>
-                            <div class="question-text">Array access time?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q9" value="0" required><span>O(1)</span></label>
-                                <label class="option-label"><input type="radio" name="q9" value="1" required><span>O(n)</span></label>
-                                <label class="option-label"><input type="radio" name="q9" value="2" required><span>O(log n)</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q10</div>
-                            <div class="question-text">Which is NOT a strategy?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q10" value="0" required><span>Greedy</span></label>
-                                <label class="option-label"><input type="radio" name="q10" value="1" required><span>Backtracking</span></label>
-                                <label class="option-label"><input type="radio" name="q10" value="2" required><span>Recursion</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q11</div>
-                            <div class="question-text">Knapsack: Greedy gives?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q11" value="0" required><span>Optimal solution</span></label>
-                                <label class="option-label"><input type="radio" name="q11" value="1" required><span>Fast but suboptimal</span></label>
-                                <label class="option-label"><input type="radio" name="q11" value="2" required><span>Slowest solution</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q12</div>
-                            <div class="question-text">Divide & Conquer complexity?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q12" value="0" required><span>O(n)</span></label>
-                                <label class="option-label"><input type="radio" name="q12" value="1" required><span>O(n log n)</span></label>
-                                <label class="option-label"><input type="radio" name="q12" value="2" required><span>O(2^n)</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q13</div>
-                            <div class="question-text">Best for key-value pairs?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q13" value="0" required><span>Array</span></label>
-                                <label class="option-label"><input type="radio" name="q13" value="1" required><span>Hash Table</span></label>
-                                <label class="option-label"><input type="radio" name="q13" value="2" required><span>Stack</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q14</div>
-                            <div class="question-text">In-Order traversal gives?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q14" value="0" required><span>Random order</span></label>
-                                <label class="option-label"><input type="radio" name="q14" value="1" required><span>Sorted data</span></label>
-                                <label class="option-label"><input type="radio" name="q14" value="2" required><span>Reverse order</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q15</div>
-                            <div class="question-text">Load factor > 0.7 means?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q15" value="0" required><span>Delete items</span></label>
-                                <label class="option-label"><input type="radio" name="q15" value="1" required><span>Resize hash table</span></label>
-                                <label class="option-label"><input type="radio" name="q15" value="2" required><span>Do nothing</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q16</div>
-                            <div class="question-text">Pruning is?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q16" value="0" required><span>Adding branches</span></label>
-                                <label class="option-label"><input type="radio" name="q16" value="1" required><span>Cutting unnecessary branches</span></label>
-                                <label class="option-label"><input type="radio" name="q16" value="2" required><span>Sorting</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q17</div>
-                            <div class="question-text">Binary Search requires?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q17" value="0" required><span>Any array</span></label>
-                                <label class="option-label"><input type="radio" name="q17" value="1" required><span>Sorted array</span></label>
-                                <label class="option-label"><input type="radio" name="q17" value="2" required><span>Hash table</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q18</div>
-                            <div class="question-text">Naive Fibonacci complexity?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q18" value="0" required><span>O(n)</span></label>
-                                <label class="option-label"><input type="radio" name="q18" value="1" required><span>O(2^n)</span></label>
-                                <label class="option-label"><input type="radio" name="q18" value="2" required><span>O(log n)</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q19</div>
-                            <div class="question-text">DP Fibonacci complexity?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q19" value="0" required><span>O(2^n)</span></label>
-                                <label class="option-label"><input type="radio" name="q19" value="1" required><span>O(n)</span></label>
-                                <label class="option-label"><input type="radio" name="q19" value="2" required><span>O(1)</span></label>
-                            </div>
-                        </div>
-                        <div class="quiz-question">
-                            <div class="question-number">Q20</div>
-                            <div class="question-text">Main DP requirements?</div>
-                            <div class="options">
-                                <label class="option-label"><input type="radio" name="q20" value="0" required><span>Recursive structure and memoization capability</span></label>
-                                <label class="option-label"><input type="radio" name="q20" value="1" required><span>Overlapping subproblems and optimal substructure</span></label>
-                                <label class="option-label"><input type="radio" name="q20" value="2" required><span>Divide and conquer with independent subproblems</span></label>
-                            </div>
-                        </div>
-                        <button type="submit" class="submit-quiz">Submit Final Quiz</button>
-                    </form>
-                    <div id="mcq-result"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-        <script>
+    <div id="mobile-menu-backdrop" class="mobile-menu-backdrop"></div>
+<div class="container">
+<div class="section-tabs" style="position: sticky; top: 80px; z-index: 90; background: white; padding-top: 0; padding-bottom: 0; margin-top: 0;">
+<button class="section-tab active" onclick="switchSection('summary')">📚 Samenvatting</button>
+<button class="section-tab" onclick="switchSection('flashcards')">🗂️ Flashcards</button>
+<button class="section-tab" onclick="switchSection('quiz')">✅ Quiz</button>
+</div>
+<div class="section-content active" id="summary">
+<div class="summary-grid">
+<div class="summary-card">
+<h3> Samenvatting datastructuren</h3>
+<table>
+<tr><th>Structuur</th><th>Toegang</th><th>Zoeken</th><th>Best voor</th></tr>
+<tr><td><strong>Array</strong></td><td>O(1)</td><td>O(n)</td><td>Vaste grootte, snelle toegang</td></tr>
+<tr><td><strong>LinkedList</strong></td><td>O(n)</td><td>O(n)</td><td>Vaak invoegen/verwijderen</td></tr>
+<tr><td><strong>Stack</strong></td><td>O(1)</td><td>-</td><td>LIFO, recursie</td></tr>
+<tr><td><strong>Wachtrij</strong></td><td>O(1)</td><td>-</td><td>FIFO, BFS</td></tr>
+<tr><td><strong>Hashtabel</strong></td><td>O(1)</td><td>O(1)</td><td>Key-value lookup</td></tr>
+<tr><td><strong>BST</strong></td><td>O(log n)</td><td>O(log n)</td><td>Gesorteerde data</td></tr>
+</table>
+</div>
+<div class="summary-card">
+<h3> Strategie-overzicht</h3>
+<table>
+<tr><th>Strategie</th><th>Tijd</th><th>Gebruik wanneer</th></tr>
+<tr><td><strong>Greedy</strong></td><td>O(n log n)</td><td>Lokale keuzes werken</td></tr>
+<tr><td><strong>Backtracking</strong></td><td>Exponentieel</td><td>Constraintproblemen</td></tr>
+<tr><td><strong>Verdeel en heers</strong></td><td>O(n log n)</td><td>Recursief opsplitsen</td></tr>
+<tr><td><strong>Dynamisch programmeren</strong></td><td>O(n²)</td><td>Overlappende deelproblemen</td></tr>
+</table>
+</div>
+<div class="summary-card">
+<h3> Probleemoplossingskader</h3>
+<h4>1. Analyse:</h4>
+<ul><li>Invoergrootte?</li><li>Beperkingen?</li><li>Perfecte oplossing nodig?</li></ul>
+<h4>2. Strategie kiezen:</h4>
+<ul><li>Overlappende deelproblemen? → DP</li><li>Lokale keuzes optimaal? → Greedy</li><li>Alle oplossingen nodig? → Backtracking</li></ul>
+<h4>3. Datastructuur kiezen:</h4>
+<ul><li>Vaak lookups? → HashMap</li><li>Moet gesorteerd blijven? → boom</li><li>Veel invoegen/verwijderen? → LinkedList</li></ul>
+</div>
+<div class="summary-card">
+<h3> Voorbeeld knapsackprobleem</h3>
+<p><strong>Probleem:</strong> 4 items, capaciteit 10 kg, maximaliseer waarde</p>
+<h4>Aanpakken:</h4>
+<ul>
+<li><strong>Greedy:</strong> Snel maar suboptimaal</li>
+<li><strong>Brute force:</strong> O(2^n) - probeert alle combinaties</li>
+<li><strong>Backtracking:</strong> Snoei ongeldige takken</li>
+<li><strong>DP:</strong> Optimaal EN efficiënt</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> Belangrijke concepten</h3>
+<ul>
+<li><strong>Recursie:</strong> Implementatietool, geen strategie</li>
+<li><strong>Pruning:</strong> Snoei onnodige takken</li>
+<li><strong>Complexiteit:</strong> Analyseer tijd en ruimte</li>
+<li><strong>Afwegingen:</strong> Snelheid versus nauwkeurigheid, ruimte versus tijd</li>
+</ul>
+</div>
+<div class="summary-card">
+<h3> Hoogtepunten van de cursus</h3>
+<ul>
+<li>Datastructuren organiseren data efficiënt</li>
+<li>Algoritmen lossen problemen systematisch op</li>
+<li>Kies de juiste tool voor de taak</li>
+<li>Analyseer vóór je implementeert</li>
+<li>Begin eenvoudig, optimaliseer wanneer nodig</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section-content" id="flashcards">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>📇 Flashcards</h3>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Beste datastructuur voor lookups?<span>▼</span></div><div class="flashcard-answer">Hashtabel - O(1)</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Beste voor gesorteerde data?<span>▼</span></div><div class="flashcard-answer">Binaire zoekboom</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">LIFO-datastructuur?<span>▼</span></div><div class="flashcard-answer">Stack</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">FIFO-datastructuur?<span>▼</span></div><div class="flashcard-answer">Wachtrij</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Wanneer gebruik je DP?<span>▼</span></div><div class="flashcard-answer">Overlappende deelproblemen + optimale substructuur</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Wanneer gebruik je greedy?<span>▼</span></div><div class="flashcard-answer">Lokale optimale keuzes leiden tot globaal optimum</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Wanneer gebruik je backtracking?<span>▼</span></div><div class="flashcard-answer">Constraintproblemen, alle oplossingen nodig</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Recursie is?<span>▼</span></div><div class="flashcard-answer">Implementatietool, geen strategie</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Toegangstijd van array?<span>▼</span></div><div class="flashcard-answer">O(1) - constante tijd</div></div>
+<div class="flashcard" onclick="toggle(this)"><div class="flashcard-question">Tijd van binair zoeken?<span>▼</span></div><div class="flashcard-answer">O(log n)</div></div>
+</div>
+</div>
+</div>
+<div class="section-content" id="quiz">
+<div class="quiz-container">
+<div class="quiz-section">
+<h3>✅ Quiz</h3>
+<form id="mcq-form">
+<div class="quiz-question">
+<div class="question-number">V1</div>
+<div class="question-text">Complexiteit van hashtabel?</div>
+<div class="options">
+<label class="option-label"><input name="q1" required="" type="radio" value="0"/><span>O(n)</span></label>
+<label class="option-label"><input name="q1" required="" type="radio" value="1"/><span>O(1)</span></label>
+<label class="option-label"><input name="q1" required="" type="radio" value="2"/><span>O(log n)</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V2</div>
+<div class="question-text">Beste structuur voor vaak invoegen/verwijderen?</div>
+<div class="options">
+<label class="option-label"><input name="q2" required="" type="radio" value="0"/><span>Array</span></label>
+<label class="option-label"><input name="q2" required="" type="radio" value="1"/><span>LinkedList</span></label>
+<label class="option-label"><input name="q2" required="" type="radio" value="2"/><span>Stack</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V3</div>
+<div class="question-text">LIFO-structuur?</div>
+<div class="options">
+<label class="option-label"><input name="q3" required="" type="radio" value="0"/><span>Wachtrij</span></label>
+<label class="option-label"><input name="q3" required="" type="radio" value="1"/><span>Stack</span></label>
+<label class="option-label"><input name="q3" required="" type="radio" value="2"/><span>Boom</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V4</div>
+<div class="question-text">FIFO-structuur?</div>
+<div class="options">
+<label class="option-label"><input name="q4" required="" type="radio" value="0"/><span>Stack</span></label>
+<label class="option-label"><input name="q4" required="" type="radio" value="1"/><span>Wachtrij</span></label>
+<label class="option-label"><input name="q4" required="" type="radio" value="2"/><span>Array</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V5</div>
+<div class="question-text">Complexiteit van zoeken in BST?</div>
+<div class="options">
+<label class="option-label"><input name="q5" required="" type="radio" value="0"/><span>O(1)</span></label>
+<label class="option-label"><input name="q5" required="" type="radio" value="1"/><span>O(n)</span></label>
+<label class="option-label"><input name="q5" required="" type="radio" value="2"/><span>O(log n)</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V6</div>
+<div class="question-text">Wanneer gebruik je dynamisch programmeren?</div>
+<div class="options">
+<label class="option-label"><input name="q6" required="" type="radio" value="0"/><span>Willekeurige problemen</span></label>
+<label class="option-label"><input name="q6" required="" type="radio" value="1"/><span>Overlappende deelproblemen</span></label>
+<label class="option-label"><input name="q6" required="" type="radio" value="2"/><span>Gesorteerde data</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V7</div>
+<div class="question-text">Wanneer gebruik je greedy?</div>
+<div class="options">
+<label class="option-label"><input name="q7" required="" type="radio" value="0"/><span>Altijd</span></label>
+<label class="option-label"><input name="q7" required="" type="radio" value="1"/><span>Lokale keuzes leiden tot globaal optimum</span></label>
+<label class="option-label"><input name="q7" required="" type="radio" value="2"/><span>Nooit</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V8</div>
+<div class="question-text">Backtracking gebruikt?</div>
+<div class="options">
+<label class="option-label"><input name="q8" required="" type="radio" value="0"/><span>Iteratie</span></label>
+<label class="option-label"><input name="q8" required="" type="radio" value="1"/><span>Recursie</span></label>
+<label class="option-label"><input name="q8" required="" type="radio" value="2"/><span>Sorteren</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V9</div>
+<div class="question-text">Toegangstijd van array?</div>
+<div class="options">
+<label class="option-label"><input name="q9" required="" type="radio" value="0"/><span>O(1)</span></label>
+<label class="option-label"><input name="q9" required="" type="radio" value="1"/><span>O(n)</span></label>
+<label class="option-label"><input name="q9" required="" type="radio" value="2"/><span>O(log n)</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V10</div>
+<div class="question-text">Wat is GEEN strategie?</div>
+<div class="options">
+<label class="option-label"><input name="q10" required="" type="radio" value="0"/><span>Greedy</span></label>
+<label class="option-label"><input name="q10" required="" type="radio" value="1"/><span>Backtracking</span></label>
+<label class="option-label"><input name="q10" required="" type="radio" value="2"/><span>Recursie</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V11</div>
+<div class="question-text">Knapsack: wat geeft greedy?</div>
+<div class="options">
+<label class="option-label"><input name="q11" required="" type="radio" value="0"/><span>Optimale oplossing</span></label>
+<label class="option-label"><input name="q11" required="" type="radio" value="1"/><span>Snel maar suboptimaal</span></label>
+<label class="option-label"><input name="q11" required="" type="radio" value="2"/><span>Traagste oplossing</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V12</div>
+<div class="question-text">Complexiteit van verdeel en heers?</div>
+<div class="options">
+<label class="option-label"><input name="q12" required="" type="radio" value="0"/><span>O(n)</span></label>
+<label class="option-label"><input name="q12" required="" type="radio" value="1"/><span>O(n log n)</span></label>
+<label class="option-label"><input name="q12" required="" type="radio" value="2"/><span>O(2^n)</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V13</div>
+<div class="question-text">Beste voor key-value pairs?</div>
+<div class="options">
+<label class="option-label"><input name="q13" required="" type="radio" value="0"/><span>Array</span></label>
+<label class="option-label"><input name="q13" required="" type="radio" value="1"/><span>Hashtabel</span></label>
+<label class="option-label"><input name="q13" required="" type="radio" value="2"/><span>Stack</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V14</div>
+<div class="question-text">In-order traversal geeft?</div>
+<div class="options">
+<label class="option-label"><input name="q14" required="" type="radio" value="0"/><span>Willekeurige volgorde</span></label>
+<label class="option-label"><input name="q14" required="" type="radio" value="1"/><span>Gesorteerde data</span></label>
+<label class="option-label"><input name="q14" required="" type="radio" value="2"/><span>Omgekeerde volgorde</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V15</div>
+<div class="question-text">Load factor &gt; 0,7 betekent?</div>
+<div class="options">
+<label class="option-label"><input name="q15" required="" type="radio" value="0"/><span>Items verwijderen</span></label>
+<label class="option-label"><input name="q15" required="" type="radio" value="1"/><span>Hashtabel resizen</span></label>
+<label class="option-label"><input name="q15" required="" type="radio" value="2"/><span>Niets doen</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V16</div>
+<div class="question-text">Pruning is?</div>
+<div class="options">
+<label class="option-label"><input name="q16" required="" type="radio" value="0"/><span>Takken toevoegen</span></label>
+<label class="option-label"><input name="q16" required="" type="radio" value="1"/><span>Onnodige takken wegknippen</span></label>
+<label class="option-label"><input name="q16" required="" type="radio" value="2"/><span>Sorteren</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V17</div>
+<div class="question-text">Binair zoeken vereist?</div>
+<div class="options">
+<label class="option-label"><input name="q17" required="" type="radio" value="0"/><span>Elke array</span></label>
+<label class="option-label"><input name="q17" required="" type="radio" value="1"/><span>Gesorteerde array</span></label>
+<label class="option-label"><input name="q17" required="" type="radio" value="2"/><span>Hashtabel</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V18</div>
+<div class="question-text">Complexiteit van naïeve Fibonacci?</div>
+<div class="options">
+<label class="option-label"><input name="q18" required="" type="radio" value="0"/><span>O(n)</span></label>
+<label class="option-label"><input name="q18" required="" type="radio" value="1"/><span>O(2^n)</span></label>
+<label class="option-label"><input name="q18" required="" type="radio" value="2"/><span>O(log n)</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V19</div>
+<div class="question-text">Complexiteit van DP-Fibonacci?</div>
+<div class="options">
+<label class="option-label"><input name="q19" required="" type="radio" value="0"/><span>O(2^n)</span></label>
+<label class="option-label"><input name="q19" required="" type="radio" value="1"/><span>O(n)</span></label>
+<label class="option-label"><input name="q19" required="" type="radio" value="2"/><span>O(1)</span></label>
+</div>
+</div>
+<div class="quiz-question">
+<div class="question-number">V20</div>
+<div class="question-text">Belangrijkste DP-vereisten?</div>
+<div class="options">
+<label class="option-label"><input name="q20" required="" type="radio" value="0"/><span>Recursieve structuur en memoization-mogelijkheid</span></label>
+<label class="option-label"><input name="q20" required="" type="radio" value="1"/><span>Overlappende deelproblemen en optimale substructuur</span></label>
+<label class="option-label"><input name="q20" required="" type="radio" value="2"/><span>Verdeel en heers met onafhankelijke deelproblemen</span></label>
+</div>
+</div>
+<button class="submit-quiz" type="submit">Eindquiz indienen</button>
+</form>
+<div id="mcq-result"></div>
+</div>
+</div>
+</div>
+</div>
+<script>
         // Quiz Configuration
         const QUIZ_CONFIG = {
             'chapter13-mcq': {
@@ -865,18 +534,18 @@
             for (let i = 0; i < config.total; i++) {
                 const questionName = `${questionPrefix}${i + 1}`;
                 const userAnswer = parseInt(userAnswers[questionName]);
-                const correctAnswer = config.answers[i];
+                const juistAnswer = config.answers[i];
                 
                 form.querySelectorAll(`input[name="${questionName}"]`).forEach(input => {
                     const label = input.closest('.option-label');
                     const value = parseInt(input.value);
                     
-                    label.classList.remove('correct', 'incorrect');
+                    label.classList.remove('juist', 'injuist');
                     
-                    if (value === correctAnswer) {
-                        label.classList.add('correct');
-                    } else if (value === userAnswer && value !== correctAnswer) {
-                        label.classList.add('incorrect');
+                    if (value === juistAnswer) {
+                        label.classList.add('juist');
+                    } else if (value === userAnswer && value !== juistAnswer) {
+                        label.classList.add('injuist');
                     }
                     
                     input.disabled = true;
@@ -896,7 +565,7 @@
                 resetBtn = document.createElement('button');
                 resetBtn.type = 'button';
                 resetBtn.className = 'reset-quiz';
-                resetBtn.textContent = '🔄 Reset Quiz';
+                resetBtn.textContent = '🔄 Quiz opnieuw starten';
                 resetBtn.onclick = function() { resetQuiz(formId, quizId); };
                 submitBtn.parentNode.insertBefore(resetBtn, submitBtn.nextSibling);
             }
@@ -915,7 +584,7 @@
             
             // Remove all feedback styling
             form.querySelectorAll('.option-label').forEach(label => {
-                label.classList.remove('correct', 'incorrect');
+                label.classList.remove('juist', 'injuist');
             });
             
             // Re-enable all inputs
@@ -952,7 +621,7 @@
             const formData = new FormData(form);
             const questionPrefix = quizId.includes('mcq') ? 'q' : quizId.includes('tf') ? 'tf' : 'code';
             
-            let correct = 0;
+            let juist = 0;
             const userAnswers = {};
             
             for (let i = 0; i < config.total; i++) {
@@ -961,14 +630,14 @@
                 userAnswers[questionName] = selected;
                 
                 if (selected === config.answers[i]) {
-                    correct++;
+                    juist++;
                 }
             }
             
             // Save results
             saveQuizData(quizId, {
                 userAnswers: userAnswers,
-                score: correct,
+                score: juist,
                 total: config.total,
                 submitted: true,
                 timestamp: new Date().toISOString()
@@ -979,24 +648,24 @@
             
             // Show result
             const resultId = formId.replace('-form', '-result');
-            showResult(resultId, correct, config.total);
+            showResult(resultId, juist, config.total);
         }
 
         // Show quiz result
-        function showResult(elementId, correct, total) {
-            const percentage = (correct / total) * 100;
+        function showResult(elementId, juist, total) {
+            const percentage = (juist / total) * 100;
             const resultDiv = document.getElementById(elementId);
             
             let resultClass, message;
             if (percentage >= 80) {
                 resultClass = 'excellent';
-                message = `🎉 Excellent! ${correct}/${total} correct (${percentage.toFixed(0)}%)`;
+                message = `🎉 Uitstekend! ${juist}/${total} juist (${percentage.toFixed(0)}%)`;
             } else if (percentage >= 60) {
                 resultClass = 'good';
-                message = `👍 Good job! ${correct}/${total} correct (${percentage.toFixed(0)}%). Review the concepts you missed.`;
+                message = `👍 Goed gedaan! ${juist}/${total} juist (${percentage.toFixed(0)}%). Herhaal de concepten die je gemist hebt.`;
             } else {
                 resultClass = 'needs-work';
-                message = `📚 ${correct}/${total} correct (${percentage.toFixed(0)}%). Study the summary and try again!`;
+                message = `📚 ${juist}/${total} juist (${percentage.toFixed(0)}%). Bestudeer de samenvatting en probeer opnieuw!`;
             }
             
             resultDiv.className = `quiz-result ${resultClass}`;
@@ -1015,7 +684,6 @@
         });
     </script>
 
-
 <script>
         // Verbeterd mobiel menu
         (function () {
@@ -1023,53 +691,16 @@
             const menu = document.getElementById('mobile-menu');
             const backdrop = document.getElementById('mobile-menu-backdrop');
             if (!toggle || !menu) return;
-
             const icon = toggle.querySelector('.menu-icon') || toggle;
-
-            function openMenu() {
-                menu.classList.add('open');
-                document.body.classList.add('menu-open');
-                toggle.setAttribute('aria-expanded', 'true');
-                if (icon) icon.textContent = '×';
-            }
-
-            function closeMenu() {
-                menu.classList.remove('open');
-                document.body.classList.remove('menu-open');
-                toggle.setAttribute('aria-expanded', 'false');
-                if (icon) icon.textContent = '☰';
-            }
-
-            toggle.addEventListener('click', function () {
-                if (menu.classList.contains('open')) {
-                    closeMenu();
-                } else {
-                    openMenu();
-                }
-            });
-
-            if (backdrop) {
-                backdrop.addEventListener('click', closeMenu);
-            }
-
-            menu.querySelectorAll('a').forEach(function (link) {
-                link.addEventListener('click', closeMenu);
-            });
-
-            document.addEventListener('keydown', function (event) {
-                if (event.key === 'Escape') {
-                    closeMenu();
-                }
-            });
-
-            window.addEventListener('resize', function () {
-                if (window.innerWidth > 900) {
-                    closeMenu();
-                }
-            });
+            function openMenu() { menu.classList.add('open'); document.body.classList.add('menu-open'); toggle.setAttribute('aria-expanded','true'); icon.textContent='×'; }
+            function closeMenu() { menu.classList.remove('open'); document.body.classList.remove('menu-open'); toggle.setAttribute('aria-expanded','false'); icon.textContent='☰'; }
+            toggle.addEventListener('click', () => menu.classList.contains('open') ? closeMenu() : openMenu());
+            if (backdrop) backdrop.addEventListener('click', closeMenu);
+            menu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+            document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
+            window.addEventListener('resize', () => { if (window.innerWidth > 900) closeMenu(); });
         })();
 </script>
-
 
 </body>
 </html>
